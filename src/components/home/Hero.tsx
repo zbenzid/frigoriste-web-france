@@ -1,10 +1,11 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Hero = () => {
   const videoContainerRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Load Vimeo Player API script
@@ -21,14 +22,24 @@ const Hero = () => {
   return <div className="relative bg-gray-900 overflow-hidden">
       {/* Video background with overlay */}
       <div ref={videoContainerRef} className="absolute inset-0 z-0 bg-black">
-        <div style={{padding:'56.25% 0 0 0', position:'relative', height: '100%'}}>
-          <iframe 
-            src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
-            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-            style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} 
-            title="Le Frigoriste Background Video"
-            frameBorder="0"
-          />
+        <div style={{padding: isMobile ? '75% 0 0 0' : '56.25% 0 0 0', position:'relative', height: '100%'}}>
+          {isMobile ? (
+            <iframe 
+              src="https://player.vimeo.com/video/1075116330?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} 
+              title="Le Frigoriste Mobile Background Video"
+              frameBorder="0"
+            />
+          ) : (
+            <iframe 
+              src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} 
+              title="Le Frigoriste Background Video"
+              frameBorder="0"
+            />
+          )}
         </div>
       </div>
       
