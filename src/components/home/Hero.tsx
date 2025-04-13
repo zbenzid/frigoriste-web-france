@@ -25,11 +25,21 @@ const Hero = () => {
       <div ref={videoContainerRef} className="absolute inset-0 z-0 bg-black">
         {isMobile ? (
           // Mobile vertical video (9:16 aspect ratio)
-          <div style={{padding:'177.78% 0 0 0', position:'relative', height: '100%'}}>
+          <div style={{padding:'177.78% 0 0 0', position:'relative', height: '100%', overflow: 'hidden'}}>
             <iframe 
               src="https://player.vimeo.com/video/1075116330?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
               allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-              style={{position:'absolute', top:0, left:0, width:'100%', height:'100%', objectFit: 'cover'}} 
+              style={{
+                position:'absolute', 
+                top: '50%', 
+                left: '50%', 
+                width: '100%', 
+                height: '100%', 
+                transform: 'translate(-50%, -50%)',
+                minWidth: '120%', 
+                minHeight: '120%',
+                objectFit: 'cover'
+              }} 
               title="Le Frigoriste Background Video Mobile"
               frameBorder="0"
             />
