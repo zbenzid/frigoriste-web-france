@@ -1,19 +1,13 @@
-
 import React from 'react';
 import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const Hero = () => {
-  return (
-    <div className="relative bg-gray-900 overflow-hidden">
+  return <div className="relative bg-gray-900 overflow-hidden">
       {/* Background image with overlay */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center z-0"
-        style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')",
-          filter: "brightness(0.4)"
-        }}
-      ></div>
+      <div className="absolute inset-0 bg-cover bg-center z-0" style={{
+      backgroundImage: "url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80')",
+      filter: "brightness(0.4)"
+    }}></div>
 
       <div className="container-custom relative z-10 py-24 md:py-32 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -21,7 +15,7 @@ const Hero = () => {
             <span className="inline-block px-4 py-2 rounded-full bg-emergency/20 text-white font-semibold text-sm mb-6 backdrop-blur-sm">
               Service d'urgence 24/7
             </span>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold mb-6 leading-tight md:text-6xl">
               Dépannage frigorifique et climatisation professionnel
             </h1>
             <p className="text-xl mb-8 opacity-90 max-w-xl">
@@ -75,8 +69,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Hero;
