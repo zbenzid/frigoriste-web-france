@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, CheckCircle, AlertCircle, Building, Store, ShoppingCart } from 'lucide-react';
+import { MapPin, Clock, CheckCircle, AlertCircle, Building, Store, ShoppingCart, Phone } from 'lucide-react';
 
 // Carte stylisée d'Île-de-France
 const IleDeFranceMap = () => {
@@ -192,7 +191,7 @@ const ZoneIntervention = () => {
               <p className="text-gray-600 mb-4">
                 Notre siège social étant basé aux Mureaux, nous intervenons très rapidement dans cette ville et ses environs immédiats.
               </p>
-              <div className="bg-emergency bg-opacity-5 border border-emergency border-opacity-20 rounded-md p-4">
+              <div className="bg-emergency bg-opacity-5 border border-emergency border-opacity-20 rounded-md p-2 text-sm">
                 <p className="font-semibold text-emergency">Zone avec intervention garantie en 45 minutes maximum</p>
               </div>
             </div>
