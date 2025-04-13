@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, BarChart3, Tool, Check, Lightbulb } from 'lucide-react';
+import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, BarChart3, Check, Lightbulb, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -170,7 +169,7 @@ const Services = () => {
                 
                 <div className="flex items-start">
                   <div className="shrink-0 bg-primary/10 p-2 rounded-full mr-4">
-                    <Tool className="h-5 w-5 text-primary" />
+                    <Wrench className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-bold text-gray-800">Installation clé en main</h4>
