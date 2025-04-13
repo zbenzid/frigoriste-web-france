@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Clock, Award, Tool, ThumbsUp } from 'lucide-react';
+import { Clock, Award, Wrench, ThumbsUp } from 'lucide-react';
 
 const WhyChooseUs = () => {
   const reasons = [
@@ -15,7 +15,7 @@ const WhyChooseUs = () => {
       description: "Techniciens certifiés et formés aux dernières technologies en froid commercial et climatisation."
     },
     {
-      icon: <Tool size={36} className="text-secondary" />,
+      icon: <Wrench size={36} className="text-secondary" />,
       title: "Solutions sur-mesure",
       description: "Nos solutions sont adaptées à vos besoins spécifiques, à votre espace et à votre budget."
     },
