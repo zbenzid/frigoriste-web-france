@@ -1,27 +1,18 @@
-
 import React, { useState } from 'react';
-import { 
-  Phone, Mail, MapPin, Clock, Calendar, CheckCircle, AlertCircle, 
-  Facebook, Instagram, Linkedin, Send, FileText, Info, CreditCard
-} from 'lucide-react';
-import { 
-  Card, CardContent, CardHeader, CardTitle, CardDescription 
-} from '@/components/ui/card';
+import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, AlertCircle, Facebook, Instagram, Linkedin, Send, FileText, Info, CreditCard } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
-import { 
-  Select, SelectContent, SelectItem, SelectTrigger, SelectValue 
-} from '@/components/ui/select';
-import { 
-  Accordion, AccordionContent, AccordionItem, AccordionTrigger 
-} from '@/components/ui/accordion';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useToast } from '@/hooks/use-toast';
-
 const Contact = () => {
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -33,32 +24,30 @@ const Contact = () => {
     message: '',
     gdprConsent: false
   });
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
+    const {
+      name,
+      value
+    } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
-
   const handleSelectChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
       requestType: value
     }));
   };
-
   const handleCheckboxChange = (checked: boolean) => {
     setFormData(prev => ({
       ...prev,
       gdprConsent: checked
     }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     if (!formData.gdprConsent) {
       toast({
         title: "Consentement requis",
@@ -67,15 +56,14 @@ const Contact = () => {
       });
       return;
     }
-    
+
     // Simulate form submission
     console.log('Form submitted:', formData);
-    
     toast({
       title: "Message envoyé",
-      description: "Nous vous contacterons dans les plus brefs délais.",
+      description: "Nous vous contacterons dans les plus brefs délais."
     });
-    
+
     // Reset form
     setFormData({
       name: '',
@@ -89,9 +77,7 @@ const Contact = () => {
       gdprConsent: false
     });
   };
-
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       {/* Bannière */}
       <div className="bg-primary text-white py-16 px-4">
         <div className="container-custom">
@@ -135,17 +121,7 @@ const Contact = () => {
                   </div>
                   
                   {/* Téléphone urgence */}
-                  <div className="flex items-start space-x-3 p-4 bg-emergency bg-opacity-5 border border-emergency border-opacity-20 rounded-md">
-                    <AlertCircle className="h-5 w-5 text-emergency mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-emergency">Urgence 24h/24</h3>
-                      <p className="text-gray-700">01 85 50 02 84</p>
-                      <a href="tel:0185500284" className="btn-emergency mt-2 text-sm py-2 animate-pulse-emergency">
-                        <Phone className="h-4 w-4" />
-                        Appel d'urgence
-                      </a>
-                    </div>
-                  </div>
+                  
                   
                   {/* Email */}
                   <div className="flex items-start space-x-3">
@@ -205,14 +181,7 @@ const Contact = () => {
                       <label htmlFor="name" className="block text-sm font-medium mb-1">
                         Nom et prénom *
                       </label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        placeholder="Votre nom complet"
-                        required
-                      />
+                      <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" required />
                     </div>
                     
                     {/* Email et téléphone */}
@@ -221,29 +190,13 @@ const Contact = () => {
                         <label htmlFor="email" className="block text-sm font-medium mb-1">
                           Email *
                         </label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          placeholder="votre-email@exemple.com"
-                          required
-                        />
+                        <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="votre-email@exemple.com" required />
                       </div>
                       <div>
                         <label htmlFor="phone" className="block text-sm font-medium mb-1">
                           Téléphone *
                         </label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          placeholder="01 XX XX XX XX"
-                          required
-                        />
+                        <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="01 XX XX XX XX" required />
                       </div>
                     </div>
                     
@@ -272,13 +225,7 @@ const Contact = () => {
                       <label htmlFor="address" className="block text-sm font-medium mb-1">
                         Adresse d'intervention
                       </label>
-                      <Input
-                        id="address"
-                        name="address"
-                        value={formData.address}
-                        onChange={handleChange}
-                        placeholder="Numéro et nom de rue"
-                      />
+                      <Input id="address" name="address" value={formData.address} onChange={handleChange} placeholder="Numéro et nom de rue" />
                     </div>
                     
                     {/* Code postal et ville */}
@@ -287,25 +234,13 @@ const Contact = () => {
                         <label htmlFor="postalCode" className="block text-sm font-medium mb-1">
                           Code postal
                         </label>
-                        <Input
-                          id="postalCode"
-                          name="postalCode"
-                          value={formData.postalCode}
-                          onChange={handleChange}
-                          placeholder="Code postal"
-                        />
+                        <Input id="postalCode" name="postalCode" value={formData.postalCode} onChange={handleChange} placeholder="Code postal" />
                       </div>
                       <div>
                         <label htmlFor="city" className="block text-sm font-medium mb-1">
                           Ville
                         </label>
-                        <Input
-                          id="city"
-                          name="city"
-                          value={formData.city}
-                          onChange={handleChange}
-                          placeholder="Votre ville"
-                        />
+                        <Input id="city" name="city" value={formData.city} onChange={handleChange} placeholder="Votre ville" />
                       </div>
                     </div>
                     
@@ -314,24 +249,12 @@ const Contact = () => {
                       <label htmlFor="message" className="block text-sm font-medium mb-1">
                         Message détaillé *
                       </label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Décrivez votre besoin, équipement concerné, problème rencontré..."
-                        rows={5}
-                        required
-                      />
+                      <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Décrivez votre besoin, équipement concerné, problème rencontré..." rows={5} required />
                     </div>
                     
                     {/* RGPD */}
                     <div className="flex items-start space-x-2">
-                      <Checkbox 
-                        id="gdprConsent"
-                        checked={formData.gdprConsent}
-                        onCheckedChange={handleCheckboxChange}
-                      />
+                      <Checkbox id="gdprConsent" checked={formData.gdprConsent} onCheckedChange={handleCheckboxChange} />
                       <label htmlFor="gdprConsent" className="text-sm text-gray-600">
                         J'accepte que mes informations soient utilisées pour me recontacter. Pour en savoir plus sur la gestion de vos données et vos droits, consultez notre politique de confidentialité. *
                       </label>
@@ -357,14 +280,7 @@ const Contact = () => {
         <div className="container-custom">
           <h2 className="text-3xl font-bold text-primary mb-8 text-center">Notre localisation</h2>
           <div className="relative w-full h-96 rounded-lg overflow-hidden shadow-md">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2621.8575789782576!2d1.9094878159255505!3d48.97764997929842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6908815aa7e3d%3A0xe4edf3bc9553c9a5!2s8%20Rue%20Levassor%2C%2078130%20Les%20Mureaux!5e0!3m2!1sfr!2sfr!4v1649782523555!5m2!1sfr!2sfr" 
-              className="absolute inset-0 w-full h-full border-0"
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Localisation du siège social de LeFrigoriste.fr"
-            ></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2621.8575789782576!2d1.9094878159255505!3d48.97764997929842!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6908815aa7e3d%3A0xe4edf3bc9553c9a5!2s8%20Rue%20Levassor%2C%2078130%20Les%20Mureaux!5e0!3m2!1sfr!2sfr!4v1649782523555!5m2!1sfr!2sfr" className="absolute inset-0 w-full h-full border-0" allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" title="Localisation du siège social de LeFrigoriste.fr"></iframe>
           </div>
         </div>
       </div>
@@ -503,8 +419,6 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
