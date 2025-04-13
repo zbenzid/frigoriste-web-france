@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Clock, Award, Wrench, ThumbsUp } from 'lucide-react';
+import { Card, CardContent } from "@/components/ui/card";
 
 const WhyChooseUs = () => {
   const reasons = [
@@ -27,24 +28,32 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="section-padding bg-white">
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container-custom">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-primary mb-4">Pourquoi nous choisir</h2>
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Pourquoi nous choisir</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             LeFrigoriste.fr se démarque par son expertise, sa réactivité et son service client exceptionnel.
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => (
-            <div key={index} className="bg-gray-50 p-6 rounded-lg shadow-sm text-center">
-              <div className="flex justify-center mb-4">
-                {reason.icon}
-              </div>
-              <h3 className="font-bold text-xl mb-3 text-gray-800">{reason.title}</h3>
-              <p className="text-gray-600">{reason.description}</p>
-            </div>
+            <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+              <div className={`h-2 w-full ${
+                index === 0 ? "bg-emergency" : 
+                index === 1 ? "bg-primary" : 
+                index === 2 ? "bg-secondary" : 
+                "bg-maintenance"
+              }`}></div>
+              <CardContent className="p-8">
+                <div className="mb-6 group-hover:scale-110 transition-transform duration-300 flex justify-center">
+                  {reason.icon}
+                </div>
+                <h3 className="font-bold text-xl mb-3 text-gray-800">{reason.title}</h3>
+                <p className="text-gray-600">{reason.description}</p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
