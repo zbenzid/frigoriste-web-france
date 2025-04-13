@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, CheckCircle, AlertCircle, Building, Store, ShoppingCart, Phone } from 'lucide-react';
+import InterventionMap from "@/components/intervention/InterventionMap";
 
 // Carte stylisée d'Île-de-France
 const IleDeFranceMap = () => {
@@ -172,7 +173,7 @@ const ZoneIntervention = () => {
               </div>
             </div>
             <div>
-              <IleDeFranceMap />
+              <InterventionMap />
             </div>
           </div>
         </div>
@@ -446,7 +447,7 @@ const ZoneIntervention = () => {
                 <div className="w-8 h-8 rounded-full bg-emergency text-white flex items-center justify-center mr-4 mt-1 flex-shrink-0">4</div>
                 <div>
                   <h4 className="font-bold mb-1">Suivi et rapport</h4>
-                  <p className="text-gray-600">Compte-rendu détaillé de l'intervention et recommandations pour éviter de futures pannes.</p>
+                  <p className="text-gray-600">Compte-rendu d��taillé de l'intervention et recommandations pour éviter de futures pannes.</p>
                 </div>
               </div>
             </div>
