@@ -44,8 +44,8 @@ const Hero = () => {
         </div>
       </div>
       
-      {/* Dark overlay to improve text readability */}
-      <div className="absolute inset-0 bg-black opacity-60 z-1"></div>
+      {/* Blue gradient overlay to improve text readability */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/60 z-1"></div>
 
       <div className="container-custom relative z-10 py-24 md:py-32 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
