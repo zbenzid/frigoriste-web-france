@@ -32,7 +32,7 @@ const Hero = () => {
                 <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600 to-emergency opacity-0 group-hover:opacity-100 transition-opacity"></span>
                 <span className="relative flex items-center">
                   <Phone size={24} className="mr-2" />
-                  Appel d'urgence : 01 85 50 02 84
+                  01 85 50 02 84
                 </span>
               </a>
               <Link to="/contact" className="group btn-secondary text-lg relative overflow-hidden">
