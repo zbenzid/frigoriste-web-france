@@ -32,11 +32,13 @@ const InterventionMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [mapboxKey, setMapboxKey] = useState<string>('');
+  
+  // Set the Mapbox API key directly
+  const mapboxKey = "pk.eyJ1IjoiemFra3ZpZSIsImEiOiJjbTlnMjI1d2wwb2xlMnFzY2dnYTU0cDNzIn0.QORR16K0VOfDEhaO4xaMAw";
 
   // Function to initialize the map
   const initializeMap = () => {
-    if (!mapContainer.current || !mapboxKey) return;
+    if (!mapContainer.current) return;
     
     mapboxgl.accessToken = mapboxKey;
     
@@ -220,7 +222,7 @@ const InterventionMap = () => {
         el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${color}" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`;
         
         new mapboxgl.Marker(el)
-          .setLngLat(city.coords)
+          .setLngLat(city.coords as [number, number]) // Fixed the TypeScript error by type assertion
           .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3 class="font-bold">${city.name}</h3>`))
           .addTo(map.current);
       });
@@ -275,35 +277,13 @@ const InterventionMap = () => {
   };
 
   useEffect(() => {
+    // Initialize map on component mount
+    initializeMap();
+    
     return () => {
       map.current?.remove();
     };
   }, []);
-
-  if (!mapboxKey) {
-    return (
-      <div className="w-full max-w-2xl mx-auto h-96 bg-gray-50 rounded-lg overflow-hidden shadow-md flex flex-col items-center justify-center p-6">
-        <h3 className="text-lg font-bold mb-4">Configuration Mapbox requise</h3>
-        <p className="text-sm text-gray-600 mb-4">Pour afficher la carte des zones d'intervention, veuillez entrer votre clé publique Mapbox.</p>
-        <input 
-          type="text" 
-          placeholder="Clé publique Mapbox" 
-          className="px-4 py-2 border rounded-md w-full max-w-md mb-4"
-          value={mapboxKey}
-          onChange={(e) => setMapboxKey(e.target.value)}
-        />
-        <button 
-          className="bg-primary text-white px-4 py-2 rounded-md"
-          onClick={initializeMap}
-        >
-          Charger la carte
-        </button>
-        <p className="text-xs text-gray-500 mt-4">
-          Vous pouvez obtenir une clé publique gratuite sur <a href="https://www.mapbox.com/" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">mapbox.com</a>
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="relative w-full max-w-2xl mx-auto h-96 bg-gray-50 rounded-lg overflow-hidden shadow-md">
