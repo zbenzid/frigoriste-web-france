@@ -2,11 +2,9 @@
 import React, { useEffect, useRef } from 'react';
 import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 const Hero = () => {
   const videoContainerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     // Load Vimeo Player API script
@@ -23,29 +21,19 @@ const Hero = () => {
   return <div className="relative bg-gray-900 overflow-hidden">
       {/* Video background with overlay */}
       <div ref={videoContainerRef} className="absolute inset-0 z-0 bg-black">
-        <div style={{position: 'relative', height: '100%', overflow: 'hidden'}}>
+        <div style={{padding:'56.25% 0 0 0', position:'relative', height: '100%'}}>
           <iframe 
             src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
             allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-            style={{
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              width: isMobile ? 'auto' : '100%',
-              height: isMobile ? '100%' : 'auto',
-              minWidth: '100%', 
-              minHeight: '100%',
-              transform: 'translate(-50%, -50%)',
-              objectFit: 'cover'
-            }} 
+            style={{position:'absolute', top:0, left:0, width:'100%', height:'100%'}} 
             title="Le Frigoriste Background Video"
             frameBorder="0"
           />
         </div>
       </div>
       
-      {/* Blue gradient overlay to improve text readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/60 z-1"></div>
+      {/* Dark overlay to improve text readability */}
+      <div className="absolute inset-0 bg-black opacity-60 z-1"></div>
 
       <div className="container-custom relative z-10 py-24 md:py-32 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
