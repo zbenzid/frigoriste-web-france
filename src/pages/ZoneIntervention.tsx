@@ -1,151 +1,57 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, CheckCircle, AlertCircle, Building, Store, ShoppingCart, Phone, Home } from 'lucide-react';
+import { MapPin, Clock, CheckCircle, AlertCircle, Building, Store, ShoppingCart, Phone } from 'lucide-react';
 
-// Carte stylisée d'Île-de-France améliorée
+// Carte stylisée d'Île-de-France
 const IleDeFranceMap = () => {
   return (
-    <div className="relative w-full max-w-2xl mx-auto h-[500px] bg-white rounded-lg overflow-hidden shadow-lg">
-      <div className="absolute inset-0">
-        <svg viewBox="0 0 400 400" className="w-full h-full" style={{ filter: 'drop-shadow(0px 3px 3px rgba(0,0,0,0.2))' }}>
-          {/* Fond de carte avec contours des départements */}
-          
+    <div className="relative w-full max-w-2xl mx-auto h-96 bg-gray-100 rounded-lg overflow-hidden shadow-md">
+      <div className="absolute inset-0 bg-white">
+        <svg viewBox="0 0 400 300" className="w-full h-full">
+          {/* Fond de carte simplifié */}
+          <path d="M100,150 L120,100 L180,80 L250,90 L300,130 L280,200 L220,220 L150,210 L100,150" 
+                fill="#f1f1f1" stroke="#e0e0e0" strokeWidth="2" />
+                
           {/* Grande couronne (bleu) */}
-          <g className="grande-couronne">
-            {/* Val d'Oise (95) */}
-            <path d="M110,90 L140,70 L180,80 L195,105 L180,120 L160,115 L140,125 L120,120 L110,90" 
-                  fill="rgba(11, 83, 148, 0.2)" stroke="#0B5394" strokeWidth="1.5" />
-            <text x="150" y="100" fontSize="12" fontFamily="Arial" fontWeight="bold" fill="#0B5394">95</text>
-            
-            {/* Seine-et-Marne (77) */}
-            <path d="M210,105 L250,90 L280,110 L290,150 L270,190 L240,200 L220,180 L200,170 L190,140 L210,105" 
-                  fill="rgba(11, 83, 148, 0.2)" stroke="#0B5394" strokeWidth="1.5" />
-            <text x="245" y="150" fontSize="12" fontFamily="Arial" fontWeight="bold" fill="#0B5394">77</text>
-            
-            {/* Essonne (91) */}
-            <path d="M130,190 L170,205 L200,170 L190,140 L170,150 L150,180 L130,190" 
-                  fill="rgba(11, 83, 148, 0.2)" stroke="#0B5394" strokeWidth="1.5" />
-            <text x="170" y="180" fontSize="12" fontFamily="Arial" fontWeight="bold" fill="#0B5394">91</text>
-            
-            {/* Yvelines ouest (78) - hors zone prioritaire */}
-            <path d="M70,120 L100,160 L120,170 L125,145 L120,120 L110,90" 
-                  fill="rgba(11, 83, 148, 0.2)" stroke="#0B5394" strokeWidth="1.5" />
-          </g>
-          
+          <path d="M100,150 L120,100 L180,80 L250,90 L300,130 L280,200 L220,220 L150,210 L100,150" 
+                fill="rgba(11, 83, 148, 0.3)" stroke="#0B5394" strokeWidth="2" />
+                
           {/* Petite couronne (orange) */}
-          <g className="petite-couronne">
-            {/* Paris (75) */}
-            <path d="M170,125 L190,125 L190,145 L170,145 L170,125" 
-                  fill="rgba(255, 153, 0, 0.4)" stroke="#FF9900" strokeWidth="1.5" />
-            <text x="180" y="138" fontSize="11" fontFamily="Arial" fontWeight="bold" fill="#FF9900">75</text>
-            
-            {/* Hauts-de-Seine (92) */}
-            <path d="M155,115 L170,125 L170,145 L155,155 L150,135 L155,115" 
-                  fill="rgba(255, 153, 0, 0.4)" stroke="#FF9900" strokeWidth="1.5" />
-            <text x="158" y="138" fontSize="10" fontFamily="Arial" fontWeight="bold" fill="#FF9900">92</text>
-            
-            {/* Seine-Saint-Denis (93) */}
-            <path d="M190,125 L210,115 L210,135 L195,150 L190,145 L190,125" 
-                  fill="rgba(255, 153, 0, 0.4)" stroke="#FF9900" strokeWidth="1.5" />
-            <text x="198" y="135" fontSize="10" fontFamily="Arial" fontWeight="bold" fill="#FF9900">93</text>
-            
-            {/* Val-de-Marne (94) */}
-            <path d="M190,145 L195,150 L210,155 L205,170 L185,165 L170,145 L190,145" 
-                  fill="rgba(255, 153, 0, 0.4)" stroke="#FF9900" strokeWidth="1.5" />
-            <text x="190" y="158" fontSize="10" fontFamily="Arial" fontWeight="bold" fill="#FF9900">94</text>
-          </g>
-          
+          <path d="M140,150 L160,120 L200,110 L230,120 L250,150 L230,180 L200,190 L160,180 L140,150" 
+                fill="rgba(255, 153, 0, 0.6)" stroke="#FF9900" strokeWidth="2" />
+                
           {/* Yvelines/zone prioritaire (rouge) */}
-          <path d="M125,115 L155,115 L150,135 L155,155 L150,180 L130,190 L100,160 L120,170 L125,145 L125,115" 
-                fill="rgba(204, 0, 0, 0.3)" stroke="#CC0000" strokeWidth="1.5" />
-          <text x="135" y="150" fontSize="12" fontFamily="Arial" fontWeight="bold" fill="#CC0000">78</text>
+          <path d="M120,140 L140,120 L165,130 L170,150 L150,170 L130,160 L120,140" 
+                fill="rgba(204, 0, 0, 0.6)" stroke="#CC0000" strokeWidth="2" />
+                
+          {/* Point pour Les Mureaux */}
+          <circle cx="140" cy="145" r="5" fill="#CC0000" />
+          <text x="120" y="130" fontSize="10" fill="#000000" fontWeight="bold">Les Mureaux</text>
           
-          {/* Villes principales */}
-          {/* Les Mureaux (siège) */}
-          <g>
-            <circle cx="130" cy="135" r="4" fill="#CC0000" />
-            <Home cx="130" cy="135" width="8" height="8" fill="#FFFFFF" stroke="#FFFFFF" />
-            <text x="136" y="139" fontSize="10" fontFamily="Arial" fontWeight="bold" fill="#000000">Les Mureaux</text>
-          </g>
+          {/* Points pour d'autres villes importantes */}
+          <circle cx="155" cy="160" r="3" fill="#CC0000" />
+          <text x="160" y="160" fontSize="8" fill="#000000">Poissy</text>
           
-          {/* Autres villes des Yvelines */}
-          <g>
-            <circle cx="120" cy="155" r="3" fill="#CC0000" />
-            <text x="124" y="155" fontSize="9" fontFamily="Arial" fill="#000000">Mantes-la-Jolie</text>
-          </g>
+          <circle cx="130" cy="160" r="3" fill="#CC0000" />
+          <text x="105" y="165" fontSize="8" fill="#000000">Mantes-la-Jolie</text>
           
-          <g>
-            <circle cx="140" cy="145" r="3" fill="#CC0000" />
-            <text x="144" y="145" fontSize="9" fontFamily="Arial" fill="#000000">Poissy</text>
-          </g>
+          <circle cx="170" cy="145" r="3" fill="#CC0000" />
+          <text x="175" y="145" fontSize="8" fill="#000000">St-Germain</text>
           
-          <g>
-            <circle cx="145" cy="135" r="3" fill="#CC0000" />
-            <text x="149" y="135" fontSize="9" fontFamily="Arial" fill="#000000">St-Germain</text>
-          </g>
-          
-          <g>
-            <circle cx="145" cy="160" r="3" fill="#CC0000" />
-            <text x="149" y="160" fontSize="9" fontFamily="Arial" fill="#000000">Versailles</text>
-          </g>
-          
-          {/* Paris */}
-          <g>
-            <circle cx="180" cy="138" r="3" fill="#FF9900" />
-            <text x="165" y="130" fontSize="9" fontFamily="Arial" fontWeight="bold" fill="#000000">Paris</text>
-          </g>
-          
-          {/* Autres villes importantes */}
-          <g>
-            <circle cx="155" cy="125" r="2" fill="#FF9900" />
-            <text x="140" y="125" fontSize="8" fontFamily="Arial" fill="#333333">Nanterre</text>
-          </g>
-          
-          <g>
-            <circle cx="200" cy="130" r="2" fill="#FF9900" />
-            <text x="203" y="130" fontSize="8" fontFamily="Arial" fill="#333333">St-Denis</text>
-          </g>
-          
-          <g>
-            <circle cx="195" cy="160" r="2" fill="#FF9900" />
-            <text x="198" y="160" fontSize="8" fontFamily="Arial" fill="#333333">Créteil</text>
-          </g>
-          
-          <g>
-            <circle cx="160" cy="90" r="2" fill="#0B5394" />
-            <text x="163" y="90" fontSize="8" fontFamily="Arial" fill="#333333">Cergy</text>
-          </g>
-          
-          <g>
-            <circle cx="230" cy="140" r="2" fill="#0B5394" />
-            <text x="233" y="140" fontSize="8" fontFamily="Arial" fill="#333333">Meaux</text>
-          </g>
-          
-          <g>
-            <circle cx="155" cy="190" r="2" fill="#0B5394" />
-            <text x="158" y="190" fontSize="8" fontFamily="Arial" fill="#333333">Évry</text>
-          </g>
+          <circle cx="200" cy="150" r="4" fill="#FF9900" />
+          <text x="205" y="150" fontSize="9" fill="#000000" fontWeight="bold">Paris</text>
           
           {/* Légende */}
-          <g transform="translate(20, 240)">
-            <rect x="0" y="0" width="15" height="15" fill="rgba(204, 0, 0, 0.3)" stroke="#CC0000" strokeWidth="1.5" rx="2" />
-            <text x="25" y="12" fontSize="10" fontFamily="Arial" fill="#000000">Zone prioritaire (45min)</text>
-            
-            <rect x="0" y="25" width="15" height="15" fill="rgba(255, 153, 0, 0.4)" stroke="#FF9900" strokeWidth="1.5" rx="2" />
-            <text x="25" y="37" fontSize="10" fontFamily="Arial" fill="#000000">Paris et petite couronne (1h)</text>
-            
-            <rect x="0" y="50" width="15" height="15" fill="rgba(11, 83, 148, 0.2)" stroke="#0B5394" strokeWidth="1.5" rx="2" />
-            <text x="25" y="62" fontSize="10" fontFamily="Arial" fill="#000000">Grande couronne (2h)</text>
-            
-            <g transform="translate(0, 80)">
-              <circle cx="7.5" cy="7.5" r="4" fill="#CC0000" />
-              <Home cx="7.5" cy="7.5" width="8" height="8" fill="#FFFFFF" stroke="#FFFFFF" />
-              <text x="25" y="12" fontSize="10" fontFamily="Arial" fill="#000000">Siège social (Les Mureaux)</text>
-            </g>
-          </g>
+          <rect x="10" y="10" width="15" height="15" fill="rgba(204, 0, 0, 0.6)" stroke="#CC0000" />
+          <text x="30" y="22" fontSize="9" fill="#000000">Zone prioritaire (45min)</text>
+          
+          <rect x="10" y="30" width="15" height="15" fill="rgba(255, 153, 0, 0.6)" stroke="#FF9900" />
+          <text x="30" y="42" fontSize="9" fill="#000000">Paris et petite couronne (1h)</text>
+          
+          <rect x="10" y="50" width="15" height="15" fill="rgba(11, 83, 148, 0.3)" stroke="#0B5394" />
+          <text x="30" y="62" fontSize="9" fill="#000000">Grande couronne (2h)</text>
         </svg>
       </div>
     </div>
