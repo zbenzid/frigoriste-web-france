@@ -84,16 +84,18 @@ const Contact = () => {
   };
 
   return <div className="min-h-screen">
-      {/* Bannière améliorée */}
-      <div className="bg-primary text-white py-16 px-4 relative overflow-hidden">
-        {/* Image d'arrière-plan avec opacité réduite */}
-        <div className="absolute inset-0 bg-black/30">
-          <img 
-            src="/technicien-frigoriste.jpg" 
-            alt="Technicien frigoriste en intervention" 
-            className="w-full h-full object-cover opacity-15 mix-blend-overlay"
-          />
-        </div>
+      {/* Bannière améliorée avec image de fond visible */}
+      <div className="bg-primary text-white py-16 px-4 relative">
+        {/* Image d'arrière-plan avec opacité ajustée */}
+        <div 
+          className="absolute inset-0 z-0" 
+          style={{
+            backgroundImage: "url('/technicien-frigoriste.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.3
+          }}
+        ></div>
         <div className="container-custom relative z-10">
           <h1 className="text-4xl md:text-5xl font-extrabold mb-6">Contactez notre équipe de frigoristes</h1>
           <div className="flex items-center">
