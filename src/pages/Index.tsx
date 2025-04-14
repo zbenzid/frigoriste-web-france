@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
@@ -29,9 +28,9 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl font-bold text-primary mb-4">
-                Demandez un devis ou une <span className="relative">
+                Demandez un devis ou une <span className="relative inline-block">
                   intervention
-                  <span className="absolute -bottom-1 left-0 w-full h-1.5 bg-gradient-to-r from-secondary to-primary rounded-full"></span>
+                  <span className="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
                 </span>
               </h2>
               <p className="text-gray-600 mb-6">

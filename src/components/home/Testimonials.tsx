@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star } from 'lucide-react';
 
@@ -44,9 +43,9 @@ const Testimonials = () => {
       <div className="container-custom">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-primary mb-4">
-            Ce que disent nos <span className="relative">
+            Ce que disent nos <span className="relative inline-block">
               clients
-              <span className="absolute -bottom-1 left-0 w-full h-1.5 bg-gradient-to-r from-secondary to-primary rounded-full"></span>
+              <span className="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
             </span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
