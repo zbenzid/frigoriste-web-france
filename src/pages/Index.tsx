@@ -28,7 +28,12 @@ const Index = () => {
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-primary mb-4">Demandez un devis ou une intervention</h2>
+              <h2 className="text-3xl font-bold text-primary mb-4">
+                Demandez un devis ou une <span className="relative">
+                  intervention
+                  <span className="absolute -bottom-1 left-0 w-full h-1.5 bg-gradient-to-r from-secondary to-primary rounded-full"></span>
+                </span>
+              </h2>
               <p className="text-gray-600 mb-6">
                 Besoin d'une intervention urgente ou d'un devis pour l'installation d'un équipement frigorifique ou de climatisation ? Notre équipe est à votre disposition pour répondre à toutes vos questions.
               </p>
