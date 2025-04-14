@@ -28,10 +28,18 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container-custom">
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white relative">
+      <div className="absolute inset-0 bg-cover bg-center opacity-15" 
+           style={{ backgroundImage: "url('/lovable-uploads/edfb9b8d-372a-412d-95bf-78d9fa9bb79e.png')", zIndex: 0 }}>
+      </div>
+      <div className="container-custom relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Pourquoi nous choisir</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+            Pourquoi nous <span className="relative inline-block">
+              choisir
+              <span className="absolute -bottom-1 left-0 right-0 h-3 bg-secondary/20 rounded-full -z-10"></span>
+            </span>
+          </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             LeFrigoriste.fr se démarque par son expertise, sa réactivité et son service client exceptionnel.
           </p>
