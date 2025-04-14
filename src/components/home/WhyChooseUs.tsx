@@ -12,7 +12,7 @@ const WhyChooseUs = () => {
     },
     {
       icon: <Award size={36} className="text-primary" />,
-      title: "Expertise et certification",
+      title: "Experts certifiés",
       description: "Techniciens certifiés et formés aux dernières technologies en froid commercial et climatisation."
     },
     {
