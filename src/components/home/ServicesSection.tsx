@@ -21,7 +21,10 @@ const ServicesSection = () => {
             Nos services
           </span>
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 leading-tight">
-            Solutions complètes en <span className="relative inline-block">réfrigération<span className="absolute bottom-1 left-0 w-full h-1 bg-secondary/30 -z-10 rounded-full"></span></span>
+            Solutions complètes en <span className="relative inline-block">
+              réfrigération
+              <span className="absolute bottom-1 left-0 w-full h-1 bg-secondary/30 -z-10 rounded-full"></span>
+            </span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Nous proposons une gamme complète de services en réfrigération et climatisation pour répondre à tous vos besoins professionnels.
