@@ -43,10 +43,7 @@ const Testimonials = () => {
     <section className="section-padding bg-gray-50">
       <div className="container-custom">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-primary mb-4 relative inline-block">
-            Ce que disent nos clients
-            <span className="absolute bottom-1 left-0 w-full h-1 bg-secondary/30 -z-10 rounded-full"></span>
-          </h2>
+          <h2 className="text-3xl font-bold text-primary mb-4">Ce que disent nos clients</h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             Découvrez les témoignages de nos clients satisfaits de nos services en réfrigération et climatisation.
           </p>

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
@@ -10,22 +11,24 @@ import { Link } from 'react-router-dom';
 const Index = () => {
   return (
     <div className="min-h-screen">
+      {/* Hero Section */}
       <Hero />
       
+      {/* Services Section */}
       <ServicesSection />
       
+      {/* Why Choose Us Section */}
       <WhyChooseUs />
       
+      {/* Testimonials Section */}
       <Testimonials />
       
+      {/* Contact Form Section */}
       <section className="section-padding bg-primary bg-opacity-5">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-3xl font-bold text-primary mb-4 relative inline-block">
-                Demandez un devis ou une intervention
-                <span className="absolute bottom-1 left-0 w-full h-1 bg-secondary/30 -z-10 rounded-full"></span>
-              </h2>
+              <h2 className="text-3xl font-bold text-primary mb-4">Demandez un devis ou une intervention</h2>
               <p className="text-gray-600 mb-6">
                 Besoin d'une intervention urgente ou d'un devis pour l'installation d'un équipement frigorifique ou de climatisation ? Notre équipe est à votre disposition pour répondre à toutes vos questions.
               </p>
