@@ -9,6 +9,7 @@ import { Separator } from '@/components/ui/separator';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useToast } from '@/hooks/use-toast';
+
 const Contact = () => {
   const {
     toast
@@ -24,6 +25,7 @@ const Contact = () => {
     message: '',
     gdprConsent: false
   });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {
       name,
@@ -34,18 +36,21 @@ const Contact = () => {
       [name]: value
     }));
   };
+
   const handleSelectChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
       requestType: value
     }));
   };
+
   const handleCheckboxChange = (checked: boolean) => {
     setFormData(prev => ({
       ...prev,
       gdprConsent: checked
     }));
   };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.gdprConsent) {
@@ -77,12 +82,24 @@ const Contact = () => {
       gdprConsent: false
     });
   };
+
   return <div className="min-h-screen">
-      {/* Bannière */}
-      <div className="bg-primary text-white py-16 px-4">
-        <div className="container-custom">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contactez notre équipe de frigoristes</h1>
-          <p className="text-xl md:text-2xl font-light">À votre service 24h/24 et 7j/7 en Île-de-France</p>
+      {/* Bannière améliorée */}
+      <div className="bg-primary text-white py-16 px-4 relative overflow-hidden">
+        {/* Image d'arrière-plan avec opacité réduite */}
+        <div className="absolute inset-0 bg-black/30">
+          <img 
+            src="/technicien-frigoriste.jpg" 
+            alt="Technicien frigoriste en intervention" 
+            className="w-full h-full object-cover opacity-15 mix-blend-overlay"
+          />
+        </div>
+        <div className="container-custom relative z-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold mb-6">Contactez notre équipe de frigoristes</h1>
+          <div className="flex items-center">
+            <Clock className="h-6 w-6 mr-2 text-white animate-pulse-emergency" />
+            <p className="text-xl md:text-2xl font-light">À votre service 24h/24 et 7j/7 en Île-de-France</p>
+          </div>
         </div>
       </div>
 
@@ -421,4 +438,5 @@ const Contact = () => {
       </div>
     </div>;
 };
+
 export default Contact;
