@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Clock, Award, Wrench, ThumbsUp } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -33,7 +34,7 @@ const WhyChooseUs = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
             Pourquoi nous <span className="relative inline-block">
               choisir
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
+              <span className="absolute bottom-1 left-0 w-full h-1 bg-secondary/30 -z-10 rounded-full"></span>
             </span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">

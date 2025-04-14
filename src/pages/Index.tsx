@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
@@ -30,7 +31,7 @@ const Index = () => {
               <h2 className="text-3xl font-bold text-primary mb-4">
                 Demandez un devis ou une <span className="relative inline-block">
                   intervention
-                  <span className="absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full"></span>
+                  <span className="absolute bottom-1 left-0 w-full h-1 bg-secondary/30 -z-10 rounded-full"></span>
                 </span>
               </h2>
               <p className="text-gray-600 mb-6">
