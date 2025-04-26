@@ -1,7 +1,8 @@
 
 import React, { useEffect, useState } from 'react';
-import { Clock, Users, MapPin, Building } from 'lucide-react';
+import { Clock, Users, MapPin, Star } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { cn } from '@/lib/utils';
 
 type MetricProps = {
   icon: React.ReactNode;
@@ -14,7 +15,7 @@ const Metric = ({ icon, value, description }: MetricProps) => {
   const numericValue = parseInt(value.replace(/\D/g, ''));
   
   useEffect(() => {
-    const duration = 2000; // ms
+    const duration = 2000;
     const frameDuration = 1000 / 60;
     const totalFrames = Math.round(duration / frameDuration);
     let frame = 0;
@@ -33,14 +34,16 @@ const Metric = ({ icon, value, description }: MetricProps) => {
   }, [numericValue]);
   
   return (
-    <div className="flex flex-col items-center text-center p-4">
-      <div className="rounded-full bg-primary/10 p-3 mb-2">
+    <div className="flex items-center gap-3 p-2">
+      <div className="rounded-lg bg-primary/5 p-2">
         {icon}
       </div>
-      <div className="font-bold text-xl md:text-2xl text-primary">
-        {isNaN(numericValue) ? value : count.toLocaleString() + (value.includes('+') ? '+' : '')}
+      <div className="flex flex-col">
+        <div className="font-montserrat font-semibold text-primary">
+          {isNaN(numericValue) ? value : count.toLocaleString() + (value.includes('+') ? '+' : '')}
+        </div>
+        <p className="text-xs text-gray-600">{description}</p>
       </div>
-      <p className="text-sm text-gray-600">{description}</p>
     </div>
   );
 };
@@ -61,35 +64,38 @@ const KeyMetricsStrip = () => {
     }
   }, [isMobile]);
   
-  const stickyClass = isSticky && !isMobile ? "fixed top-0 left-0 right-0 shadow-md z-30" : "";
-  
   const metrics: MetricProps[] = [
     {
-      icon: <Clock size={24} className="text-primary" />,
-      value: "15",
-      description: "minutes temps moyen d'envoi"
+      icon: <Clock size={20} className="text-primary" />,
+      value: "45",
+      description: "min délai max Yvelines"
     },
     {
-      icon: <Users size={24} className="text-primary" />,
-      value: "2000+",
-      description: "interventions par an"
+      icon: <MapPin size={20} className="text-primary" />,
+      value: "2h",
+      description: "délai max IDF"
     },
     {
-      icon: <MapPin size={24} className="text-primary" />,
-      value: "45-120",
-      description: "min délai selon zone"
+      icon: <Star size={20} className="text-primary" />,
+      value: "4.9",
+      description: "note Google Reviews"
     },
     {
-      icon: <Building size={24} className="text-primary" />,
-      value: "100%",
-      description: "clients professionnels"
+      icon: <Users size={20} className="text-primary" />,
+      value: "500+",
+      description: "clients satisfaits"
     }
   ];
 
   return (
-    <section className={`bg-white py-4 ${stickyClass}`}>
+    <section 
+      className={cn(
+        "bg-white/95 backdrop-blur-sm py-2 transition-all duration-300 border-b z-30",
+        isSticky && !isMobile ? "fixed top-0 left-0 right-0 shadow-sm" : ""
+      )}
+    >
       <div className="container-custom">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4">
           {metrics.map((metric, index) => (
             <Metric 
               key={index}
