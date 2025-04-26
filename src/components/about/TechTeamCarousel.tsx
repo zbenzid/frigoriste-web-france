@@ -38,7 +38,9 @@ const TechnicianCard = ({ name, role, experience, certifications, image }: Techn
         </div>
         <div className="p-4">
           <div className="flex justify-between items-center mb-3">
-            <span className="text-sm text-gray-600">{experience} ans d'expérience</span>
+            <span className="text-sm text-gray-600 font-medium">
+              {experience} {experience === 1 ? 'année' : 'années'} d'expertise
+            </span>
             <div className="flex gap-1">
               {certifications.map((cert, index) => (
                 <Badge key={index} variant="secondary" className="text-xs">
