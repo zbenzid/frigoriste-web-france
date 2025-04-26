@@ -1,7 +1,5 @@
-
 import React, { useEffect, useState } from 'react';
 import { Clock, Users, MapPin, Star } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 
 type MetricProps = {
@@ -49,21 +47,6 @@ const Metric = ({ icon, value, description }: MetricProps) => {
 };
 
 const KeyMetricsStrip = () => {
-  const isMobile = useIsMobile();
-  const [isSticky, setIsSticky] = useState(false);
-  
-  useEffect(() => {
-    if (typeof window !== 'undefined' && !isMobile) {
-      const handleScroll = () => {
-        const scrollTop = window.scrollY;
-        setIsSticky(scrollTop > 300);
-      };
-      
-      window.addEventListener('scroll', handleScroll);
-      return () => window.removeEventListener('scroll', handleScroll);
-    }
-  }, [isMobile]);
-  
   const metrics: MetricProps[] = [
     {
       icon: <Clock size={20} className="text-primary" />,
@@ -88,12 +71,7 @@ const KeyMetricsStrip = () => {
   ];
 
   return (
-    <section 
-      className={cn(
-        "bg-white/95 backdrop-blur-sm py-2 transition-all duration-300 border-b z-30",
-        isSticky && !isMobile ? "fixed top-0 left-0 right-0 shadow-sm" : ""
-      )}
-    >
+    <section className="bg-white/95 backdrop-blur-sm py-2 border-b">
       <div className="container-custom">
         <div className="grid grid-cols-2 md:grid-cols-4">
           {metrics.map((metric, index) => (
