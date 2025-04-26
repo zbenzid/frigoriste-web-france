@@ -1,11 +1,14 @@
+
 import React, { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Phone, Map } from 'lucide-react';
+
 const CoverageMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const popupRef = useRef<mapboxgl.Popup | null>(null);
+  
   useEffect(() => {
     if (!mapContainer.current) return;
 
@@ -192,6 +195,42 @@ const CoverageMap = () => {
       map.current?.remove();
     };
   }, []);
-  return;
+  
+  // Fixed the component by adding a return statement with JSX
+  return (
+    <section className="py-12 md:py-16 bg-gray-50">
+      <div className="container-custom">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-montserrat font-bold text-center mb-6">
+            Zone d'intervention en Île-de-France
+          </h2>
+          <p className="text-center mb-8 text-gray-600">
+            Nous intervenons dans toute l'Île-de-France avec des délais garantis selon votre localisation.
+          </p>
+          <div className="relative w-full h-[400px] rounded-xl shadow-md overflow-hidden">
+            <div ref={mapContainer} className="absolute inset-0"></div>
+            <div className="absolute bottom-4 left-4 bg-white p-3 rounded-lg shadow-md z-10">
+              <h4 className="text-sm font-bold mb-2">Délais d'intervention</h4>
+              <div className="space-y-1 text-xs">
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-primary opacity-70 mr-2"></div>
+                  <span>Yvelines (45 min)</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-secondary opacity-70 mr-2"></div>
+                  <span>Paris (1 heure)</span>
+                </div>
+                <div className="flex items-center">
+                  <div className="w-3 h-3 bg-blue-100 opacity-70 mr-2"></div>
+                  <span>Grande couronne (2 heures)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
+
 export default CoverageMap;
