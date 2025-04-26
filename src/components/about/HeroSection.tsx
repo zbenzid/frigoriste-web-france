@@ -6,35 +6,27 @@ import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
-    <section className="relative h-[60vh] overflow-hidden">
-      {/* Vidéo ou image de fond avec overlay */}
+    <section className="relative min-h-[80vh] overflow-hidden">
+      {/* Image de fond avec overlay optimisé */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
-        {/* Fallback image qui sera toujours présente */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40 z-10"></div>
         <img 
-          src="https://images.unsplash.com/photo-1581093196277-9f608732de47?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80" 
-          alt="Technicien frigoriste en intervention" 
-          className="object-cover h-full w-full"
+          src="/lovable-uploads/84505439-0fa2-4c70-867b-9f949bcbdb1f.png"
+          alt="Technicien LeFrigoriste devant nos véhicules d'intervention" 
+          className="object-cover h-full w-full scale-105 animate-ken-burns"
         />
-        {/* Vidéo qui sera chargée par-dessus si possible */}
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          className="absolute inset-0 object-cover w-full h-full hidden md:block"
-        >
-          <source src="#" type="video/mp4" />
-        </video>
       </div>
       
-      {/* Contenu du hero */}
-      <div className="container-custom relative z-20 h-full flex flex-col justify-center text-white">
+      {/* Contenu du hero avec nouvelle mise en page */}
+      <div className="container-custom relative z-20 h-full flex flex-col justify-center text-white py-24">
         <div className="max-w-3xl">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-            Experts en froid 24h/24 pour les professionnels d'Île-de-France
+          <span className="inline-block px-4 py-2 rounded-full bg-primary/20 text-white font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
+            Service d'urgence 24/7
+          </span>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            Le spécialiste du froid<br />en Île-de-France
           </h1>
-          <p className="text-lg md:text-xl mb-8 text-white/90 max-w-2xl">
+          <p className="text-xl mb-8 text-white/90 max-w-2xl leading-relaxed">
             Intervention garantie en 45 minutes dans les Yvelines, 1h à Paris et 2h en grande couronne pour tous vos besoins en réfrigération.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
@@ -44,7 +36,7 @@ const HeroSection = () => {
                 Appeler l'urgence 01 85 50 02 84
               </Link>
             </Button>
-            <Button asChild variant="secondary" size="lg">
+            <Button asChild variant="secondary" size="lg" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm">
               <Link to="/contact" className="flex items-center gap-2">
                 <FileText className="h-5 w-5" />
                 Demander un devis
@@ -53,6 +45,9 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Ajout d'un effet de dégradé en bas */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
     </section>
   );
 };
