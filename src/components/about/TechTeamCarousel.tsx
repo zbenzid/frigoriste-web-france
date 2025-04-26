@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Carousel,
@@ -36,18 +35,13 @@ const TechnicianCard = ({ name, role, experience, certifications, image }: Techn
             <p className="text-white/80 text-sm">{role}</p>
           </div>
         </div>
-        <div className="p-4">
-          <div className="flex justify-between items-center mb-3">
-            <span className="text-sm text-gray-600 font-medium">
-              {experience} {experience === 1 ? 'année' : 'années'} d'expertise
-            </span>
-            <div className="flex gap-1">
-              {certifications.map((cert, index) => (
-                <Badge key={index} variant="secondary" className="text-xs">
-                  {cert}
-                </Badge>
-              ))}
-            </div>
+        <div className="p-4 flex flex-col gap-2">
+          <div className="flex flex-wrap gap-2">
+            {certifications.map((cert, index) => (
+              <Badge key={index} variant="secondary" className="text-xs">
+                {cert}
+              </Badge>
+            ))}
           </div>
         </div>
       </CardContent>
