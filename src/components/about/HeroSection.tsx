@@ -13,7 +13,7 @@ const HeroSection = () => {
         <img 
           src="/lovable-uploads/84505439-0fa2-4c70-867b-9f949bcbdb1f.png"
           alt="Technicien LeFrigoriste devant nos véhicules d'intervention" 
-          className="object-cover h-full w-full scale-105 animate-ken-burns"
+          className="object-cover h-full w-full" // Removed animate-ken-burns
         />
       </div>
       

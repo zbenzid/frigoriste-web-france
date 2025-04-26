@@ -100,17 +100,12 @@ export default {
         'pulse-emergency': {
           '0%, 100%': { opacity: '1' },
           '50%': { opacity: '0.6' }
-        },
-        'ken-burns': {
-          '0%': { transform: 'scale(1)' },
-          '100%': { transform: 'scale(1.05)' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'pulse-emergency': 'pulse-emergency 1.5s infinite',
-        'ken-burns': 'ken-burns 20s ease infinite alternate'
+        'pulse-emergency': 'pulse-emergency 1.5s infinite'
       }
     }
   },
