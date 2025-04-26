@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-export default {
+const config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
@@ -98,16 +98,18 @@ export default {
           }
         },
         'pulse-emergency': {
-          '0%, 100%': { opacity: '1' },
-          '50%': { opacity: '0.8' }
+          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+          '50%': { opacity: '0.9', transform: 'scale(1.02)' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'pulse-emergency': 'pulse-emergency 3s ease-in-out infinite'
+        'pulse-emergency': 'pulse-emergency 5s ease-in-out infinite'
       }
     }
   },
   plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+}
+
+export default config;
