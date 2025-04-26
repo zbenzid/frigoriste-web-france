@@ -1,11 +1,14 @@
+
 import React, { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Phone, Map } from 'lucide-react';
+
 const CoverageMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const popupRef = useRef<mapboxgl.Popup | null>(null);
+  
   useEffect(() => {
     if (!mapContainer.current) return;
 
@@ -192,6 +195,51 @@ const CoverageMap = () => {
       map.current?.remove();
     };
   }, []);
-  return;
+  
+  // Add the return statement with JSX element
+  return (
+    <section className="section-padding bg-white">
+      <div className="container-custom">
+        <div className="flex flex-col items-center mb-8">
+          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
+            <Map size={24} className="text-primary" />
+          </div>
+          <h2 className="text-2xl md:text-3xl font-bold text-primary text-center">Zones d'intervention</h2>
+          <p className="text-gray-600 text-center max-w-2xl mx-auto">
+            Nos équipes sont mobilisées pour intervenir rapidement dans toute l'Île-de-France selon nos délais garantis
+          </p>
+        </div>
+        
+        <div className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-md mb-6">
+          <div ref={mapContainer} className="absolute inset-0" />
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+            <h4 className="font-bold text-primary flex items-center gap-2 mb-2">
+              <span className="inline-block w-3 h-3 rounded-sm bg-primary"></span>
+              Yvelines
+            </h4>
+            <p className="text-sm text-gray-700">Intervention garantie en <span className="font-semibold">45 minutes</span></p>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+            <h4 className="font-bold text-primary-600 flex items-center gap-2 mb-2">
+              <span className="inline-block w-3 h-3 rounded-sm bg-[#4A86E8]"></span>
+              Paris
+            </h4>
+            <p className="text-sm text-gray-700">Intervention garantie en <span className="font-semibold">1 heure</span></p>
+          </div>
+          <div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+            <h4 className="font-bold text-primary-300 flex items-center gap-2 mb-2">
+              <span className="inline-block w-3 h-3 rounded-sm bg-[#A4C2F4]"></span>
+              Grande Couronne
+            </h4>
+            <p className="text-sm text-gray-700">Intervention garantie en <span className="font-semibold">2 heures</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
+
 export default CoverageMap;
