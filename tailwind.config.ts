@@ -96,16 +96,11 @@ const config = {
           to: {
             height: '0'
           }
-        },
-        'pulse-emergency': {
-          '0%, 100%': { opacity: '1', transform: 'scale(1)' },
-          '50%': { opacity: '0.9', transform: 'scale(1.02)' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-        'pulse-emergency': 'pulse-emergency 5s ease-in-out infinite'
+        'accordion-up': 'accordion-up 0.2s ease-out'
       }
     }
   },

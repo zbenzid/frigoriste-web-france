@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Menu } from 'lucide-react';
@@ -93,7 +94,7 @@ const Header = () => {
             >
               <Button 
                 variant="destructive" 
-                className="bg-[#CC0000] hover:bg-[#CC0000]/90 animate-pulse-emergency"
+                className="bg-[#CC0000] hover:bg-[#CC0000]/90"
               >
                 <Phone className="mr-2 h-4 w-4" />
                 <span className="hidden sm:inline">01 85 50 02 84</span>
