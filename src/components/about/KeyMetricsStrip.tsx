@@ -87,9 +87,9 @@ const KeyMetricsStrip = () => {
   ];
 
   return (
-    <section className={`bg-white py-4 ${stickyClass}`}>
+    <section className={`bg-white py-4 md:py-6 ${stickyClass}`}>
       <div className="container-custom">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
           {metrics.map((metric, index) => (
             <Metric 
               key={index}
