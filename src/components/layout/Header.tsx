@@ -1,10 +1,35 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Phone, Menu } from 'lucide-react';
+import { Phone, Menu, Clock, MapPin, Mail } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-const TopInfoBar = () => {};
+
+const TopInfoBar = () => {
+  return (
+    <div className="bg-primary text-white py-2 hidden md:block">
+      <div className="container-custom flex items-center justify-between">
+        <div className="flex items-center space-x-6 text-xs">
+          <div className="flex items-center">
+            <Clock className="h-3.5 w-3.5 mr-1.5" />
+            <span>Service 24h/24 et 7j/7</span>
+          </div>
+          <div className="flex items-center">
+            <MapPin className="h-3.5 w-3.5 mr-1.5" />
+            <span>Paris et Île-de-France</span>
+          </div>
+        </div>
+        <div className="flex items-center space-x-4">
+          <a href="mailto:contact@lefrigoriste.fr" className="flex items-center text-xs hover:text-secondary transition-colors">
+            <Mail className="h-3.5 w-3.5 mr-1.5" />
+            <span>contact@lefrigoriste.fr</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const MainNav = ({
   className,
   isMobile = false
@@ -42,6 +67,7 @@ const MainNav = ({
     })}
     </nav>;
 };
+
 const Header = () => {
   return <header role="banner">
       <TopInfoBar />
@@ -88,4 +114,5 @@ const Header = () => {
       </div>
     </header>;
 };
+
 export default Header;
