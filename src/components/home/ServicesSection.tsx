@@ -30,7 +30,6 @@ const ServicesSection = () => {
             <span className="relative">
               Solutions complètes 
               <span className="text-primary"> en réfrigération</span>
-              <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 w-16 bg-gradient-to-r from-primary to-secondary rounded-full"></span>
             </span>
           </h2>
           <p className="text-gray-600 font-opensans max-w-2xl mx-auto">
