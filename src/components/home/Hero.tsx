@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import { Phone, ArrowRight, ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -16,6 +15,8 @@ const Hero = () => {
   const isMobile = useIsMobile();
   const [isMainCtaVisible, setIsMainCtaVisible] = useState(true);
   const mainCtaRef = useRef<HTMLAnchorElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [emblaApi, setEmblaApi] = useState<any>(null);
 
   useEffect(() => {
     // Load Vimeo Player API script
@@ -48,6 +49,21 @@ const Hero = () => {
       }
     };
   }, []);
+
+  // Auto-scroll for carousel
+  useEffect(() => {
+    if (!emblaApi) return;
+
+    const interval = setInterval(() => {
+      if (emblaApi.canScrollNext()) {
+        emblaApi.scrollNext();
+      } else {
+        emblaApi.scrollTo(0);
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [emblaApi]);
 
   return <div className="relative bg-gray-900 overflow-hidden min-h-[80vh]">
       {/* Video background with overlay */}
@@ -130,10 +146,9 @@ const Hero = () => {
                 opts={{ 
                   align: "start",
                   loop: true,
-                  dragFree: true,
-                  autoplay: true,
-                  interval: 5000
+                  dragFree: true
                 }}
+                setApi={setEmblaApi}
                 className="w-full"
               >
                 <CarouselContent className="-ml-2 md:-ml-4">
@@ -166,27 +181,6 @@ const Hero = () => {
                   </CarouselItem>
                   <CarouselItem className="pl-2 md:pl-4 basis-1/3 md:basis-1/4 lg:basis-1/6">
                     <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg flex items-center justify-center h-16">
-                      <svg className="w-full h-8 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition" viewBox="0 0 300 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M222.7 23.5L225.9 35.6H219.6L222.7 23.5ZM219.3 19.9L211.3 49.5H218L219.4 43.5H226L227.4 49.5H234L226 19.9H219.3ZM195.8 31.9C197.9 31.9 199 33.1 199 35.2C199 37.3 197.9 38.4 195.8 38.4H191.4V31.9H195.8ZM184.8 49.5H191.4V43.7H196C202.5 43.7 205.8 40.2 205.8 35.1C205.8 30 202.5 26.6 196 26.6H184.8V49.5ZM169.1 32.9C171.1 32.9 172.2 34 172.2 35.9C172.2 38 171.2 39 169.1 39H164.7V32.9H169.1ZM169.1 26.6H158V49.5H164.7V44.2H169.1C175 44.2 178.8 41 178.8 35.4C178.8 29.8 175.1 26.6 169.1 26.6ZM145.5 35L143.1 30.9C142.6 29.9 142.2 28.5 142.2 28.5H142.1C142.1 28.5 141.7 29.8 141.2 30.9L138.8 35H145.5ZM151.6 49.5L146.9 40.6H137.3L132.7 49.5H125.6L140.9 19.9H143.4L158.7 49.5H151.6ZM124.4 19.9H113.7V49.5H120.3V42.8H124.4C130.9 42.8 134.6 38.9 134.6 31.3C134.6 23.7 130.9 19.9 124.4 19.9ZM124 38.2H120.3V24.4H124C126.6 24.4 127.8 26.6 127.8 31.3C127.8 36 126.6 38.2 124 38.2ZM98.2 19.9V49.5H111.3V44.8H104.8V19.9H98.2ZM91 19.9H84.4V49.5H91V19.9ZM71.9 35.7C70.8 38.9 68.9 39.5 66.7 39.5H63.1V26.6H66.7C68.9 26.6 70.8 27.1 71.9 30.4C72.2 31.6 72.4 32.6 72.4 33.1C72.4 33.5 72.2 34.6 71.9 35.7ZM79.3 21.6C76.2 20.3 72.3 19.9 66.8 19.9H56.5V49.5H66.8C72.4 49.5 76.3 49.1 79.3 47.8C84.8 45.5 86.2 40.9 86.2 34.8V34.7C86.2 28.5 84.7 23.9 79.3 21.6Z" fill="currentColor"/>
-                      </svg>
-                    </div>
-                    <span className="sr-only">Client — Carrefour City logo</span>
-                  </CarouselItem>
-                  <CarouselItem className="pl-2 md:pl-4 basis-1/3 md:basis-1/4 lg:basis-1/6">
-                    <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg flex items-center justify-center h-16">
-                      <svg className="w-full h-8 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M48.9 24.1C46.5 24.1 44.7 25.9 44.7 28.3C44.7 30.7 46.5 32.5 48.9 32.5C51.3 32.5 53.1 30.7 53.1 28.3C53.1 25.9 51.3 24.1 48.9 24.1Z" fill="currentColor"/>
-                        <path d="M89.2 24.1C86.8 24.1 85 25.9 85 28.3C85 30.7 86.8 32.5 89.2 32.5C91.6 32.5 93.4 30.7 93.4 28.3C93.4 25.9 91.6 24.1 89.2 24.1Z" fill="currentColor"/>
-                        <path d="M79.4 38.8H59.3V14.8H16.6V45.6H59.3V41.8H79.4V38.8Z" fill="currentColor"/>
-                        <path d="M63.7 36.1H75L77.7 28.3L75 20.5H63.7L61 28.3L63.7 36.1ZM66.4 24.1H72.3L74.1 28.3L72.3 32.5H66.4L64.6 28.3L66.4 24.1Z" fill="currentColor"/>
-                        <path d="M34.4 36.1H45.7L48.4 28.3L45.7 20.5H34.4L31.7 28.3L34.4 36.1ZM37.1 24.1H43L44.8 28.3L43 32.5H37.1L35.3 28.3L37.1 24.1Z" fill="currentColor"/>
-                        <path d="M104 36.1H115.3L118 28.3L115.3 20.5H104L101.3 28.3L104 36.1ZM106.7 24.1H112.6L114.4 28.3L112.6 32.5H106.7L104.9 28.3L106.7 24.1Z" fill="currentColor"/>
-                      </svg>
-                    </div>
-                    <span className="sr-only">Client — Boulangerie Paul logo</span>
-                  </CarouselItem>
-                  <CarouselItem className="pl-2 md:pl-4 basis-1/3 md:basis-1/4 lg:basis-1/6">
-                    <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg flex items-center justify-center h-16">
                       <svg className="w-full h-8 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M40 14C36.1 14 33 17.1 33 21C33 24.9 36.1 28 40 28C43.9 28 47 24.9 47 21C47 17.1 43.9 14 40 14Z" fill="currentColor"/>
                         <path d="M166.8 14.5H157.1V27.3H166.8C171.5 27.3 174.9 23.9 174.9 20.9C174.9 17.9 171.5 14.5 166.8 14.5Z" fill="currentColor"/>
@@ -208,59 +202,26 @@ const Hero = () => {
                     </div>
                     <span className="sr-only">Client — Picard logo</span>
                   </CarouselItem>
-                </CarouselContent>
-              </Carousel>
-              <p className="text-center text-white/80 text-sm mt-3">2 000+ interventions par an</p>
-            </div>
-          </div>
-          
-          <div className="backdrop-blur-sm bg-white/10 p-8 rounded-xl shadow-lg hidden md:block border border-white/20">
-            <div className="text-white">
-              <h2 className="text-2xl font-bold mb-6 text-center">Intervention express</h2>
-              <div className="space-y-5">
-                <div className="flex items-center justify-between border-b border-white/20 pb-4">
-                  <span className="font-semibold">Paris & petite couronne</span>
-                  <Badge variant="destructive" className="px-4 py-2 text-sm font-bold motion-safe:animate-slide-up [animation-delay:200ms]">
-                    1h
-                  </Badge>
-                </div>
-                <div className="flex items-center justify-between border-b border-white/20 pb-4">
-                  <span className="font-semibold">Yvelines (78)</span>
-                  <Badge variant="destructive" className="px-4 py-2 text-sm font-bold motion-safe:animate-slide-up [animation-delay:400ms]">
-                    45min
-                  </Badge>
-                </div>
-                <div className="flex items-center justify-between border-b border-white/20 pb-4">
-                  <span className="font-semibold">Grande couronne</span>
-                  <Badge variant="destructive" className="px-4 py-2 text-sm font-bold motion-safe:animate-slide-up [animation-delay:600ms]">
-                    2h
-                  </Badge>
-                </div>
-                <p className="text-center italic text-sm pt-3">
-                  Délais moyens d'intervention en urgence
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Scroll cue (requirement #6) */}
-      <Link to="#services" aria-label="Découvrir nos services" className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
-        <Button variant="ghost" size="icon" className="rounded-full bg-white/10 backdrop-blur-sm animate-bounce">
-          <ArrowDown className="text-white" size={20} />
-        </Button>
-      </Link>
-
-      {/* Mobile floating tel button (requirement #4) */}
-      {!isMainCtaVisible && (
-        <a href="tel:0185500284" aria-label="Appeler LeFrigoriste.fr">
-          <Button size="icon" variant="destructive" className="fixed bottom-6 right-6 lg:hidden shadow-lg z-50 h-14 w-14 animate-pulse delay-[10000ms]">
-            <Phone size={24} />
-          </Button>
-        </a>
-      )}
-    </div>;
-};
-
-export default Hero;
+                  <CarouselItem className="pl-2 md:pl-4 basis-1/3 md:basis-1/4 lg:basis-1/6">
+                    <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg flex items-center justify-center h-16">
+                      <svg className="w-full h-8 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M37.5 8.3C40.2 8.3 42.7 9.3 44.6 11.2C46.5 13.1 47.5 15.6 47.5 18.3C47.5 21 46.5 23.5 44.6 25.4C42.7 27.3 40.2 28.3 37.5 28.3H18.7V38.3H27.5C28.6 38.3 29.6 39.2 29.8 40.3C29.9 41.7 28.9 42.9 27.5 42.9H8.3C7.2 42.9 6.2 42 6 40.9C5.9 39.5 6.9 38.3 8.3 38.3H13.8V12.9H8.3C7.2 12.9 6.2 12 6 10.9C5.9 9.5 6.9 8.3 8.3 8.3H37.5ZM37.5 23.7C38.9 23.7 40.2 23.2 41.1 22.2C42.1 21.3 42.6 20 42.6 18.6C42.6 17.2 42.1 15.9 41.1 15C40.2 14.1 38.9 13.5 37.5 13.5H18.8V23.8H37.5V23.7Z" fill="currentColor"/>
+                        <path d="M60.8 42.9C57.6 42.9 54.6 41.7 52.3 39.5C50 37.2 48.7 34.2 48.7 31.1C48.7 27.9 50 24.9 52.3 22.7C54.6 20.4 57.6 19.2 60.8 19.2C64 19.2 67 20.5 69.3 22.7C71.6 25 72.9 28 72.9 31.1C72.9 34.3 71.6 37.3 69.3 39.5C67 41.7 64 42.9 60.8 42.9ZM60.8 24.4C59.1 24.4 57.6 25.1 56.4 26.2C55.3 27.4 54.5 28.9 54.5 30.6C54.5 32.3 55.2 33.8 56.4 35C57.6 36.1 59.1 36.9 60.8 36.9C62.5 36.9 64 36.2 65.2 35C66.3 33.8 67.1 32.3 67.1 30.6C67.1 28.9 66.4 27.4 65.2 26.2C64.1 25 62.5 24.4 60.8 24.4Z" fill="currentColor"/>
+                        <path d="M96.2 19.7C97.3 19.7 98.3 20.6 98.5 21.7C98.6 23.1 97.6 24.3 96.2 24.3H90.8V38.8C90.8 40 89.9 41 88.8 41.2C87.4 41.3 86.2 40.3 86.2 38.9V24.3H80.8C79.7 24.3 78.7 23.4 78.5 22.3C78.4 20.9 79.4 19.7 80.8 19.7H96.2Z" fill="currentColor"/>
+                        <path d="M110.4 23.3V38.3H115.8C116.9 38.3 117.9 39.2 118.1 40.3C118.2 41.7 117.2 42.9 115.8 42.9H104.6C103.5 42.9 102.5 42 102.3 40.9C102.2 39.5 103.2 38.3 104.6 38.3H105.4V24.4H104.6C103.5 24.4 102.5 23.5 102.3 22.4C102.2 21 103.2 19.8 104.6 19.8H110C111.1 19.8 112.1 20.7 112.3 21.8C112.5 22.3 112.5 22.8 112.2 23.3H110.4Z" fill="currentColor"/>
+                        <path d="M139.2 19.5C140.3 19.5 141.3 20.4 141.5 21.5C141.6 22.9 140.6 24.1 139.2 24.1H131.7V38.3H139.2C140.3 38.3 141.3 39.2 141.5 40.3C141.6 41.7 140.6 42.9 139.2 42.9H126.7C125.6 42.9 124.6 42 124.4 40.9C124.3 39.5 125.3 38.3 126.7 38.3V24.1C125.6 24.1 124.6 23.2 124.4 22.1C124.3 20.7 125.3 19.5 126.7 19.5H139.2V19.5Z" fill="currentColor"/>
+                        <path d="M165 31.1C165 34.3 163.7 37.3 161.4 39.5C159.2 41.8 156.1 43 153 43C149.9 43 146.8 41.7 144.6 39.5C142.3 37.2 141 34.2 141 31.1C141 27.9 142.3 24.9 144.6 22.7C146.9 20.4 149.9 19.2 153 19.2C156.2 19.2 159.2 20.5 161.4 22.7C163.7 25 165 28 165 31.1ZM159.7 31.1C159.7 29.4 159 27.9 157.8 26.7C156.7 25.6 155.1 24.9 153.5 24.9C151.8 24.9 150.3 25.6 149.1 26.7C148 27.9 147.2 29.4 147.2 31.1C147.2 32.8 147.9 34.3 149.1 35.5C150.3 36.6 151.8 37.4 153.5 37.4C155.2 37.4 156.7 36.7 157.8 35.5C159 34.4 159.7 32.8 159.7 31.1Z" fill="currentColor"/>
+                        <path d="M196.7 22.1C196.7 23.5 195.7 24.5 194.3 24.5C192.9 24.5 191.9 23.5 191.9 22.1C191.9 20.7 192.9 19.7 194.3 19.7C195.7 19.7 196.7 20.8 196.7 22.1Z" fill="currentColor"/>
+                        <path d="M187.9 31.1C187.9 34.3 186.6 37.3 184.3 39.5C182 41.8 179 43 175.8 43C172.6 43 169.6 41.7 167.3 39.5C165 37.2 163.7 34.2 163.7 31.1C163.7 27.9 165 24.9 167.3 22.7C169.6 20.4 172.6 19.2 175.8 19.2C179 19.2 182 20.5 184.3 22.7C186.6 25 187.9 28 187.9 31.1ZM182.1 31.1C182.1 29.4 181.4 27.9 180.2 26.7C179 25.6 177.5 24.9 175.8 24.9C174.1 24.9 172.6 25.6 171.4 26.7C170.3 27.9 169.5 29.4 169.5 31.1C169.5 32.8 170.2 34.3 171.4 35.5C172.6 36.6 174.1 37.4 175.8 37.4C177.5 37.4 179 36.7 180.2 35.5C181.4 34.4 182.1 32.8 182.1 31.1Z" fill="currentColor"/>
+                        <path d="M192.2 38.9V31.1C192.2 29.4 191.5 27.9 190.3 26.7C189.1 25.6 187.6 24.9 185.9 24.9C184.8 24.9 183.8 24 183.6 22.9C183.5 21.5 184.5 20.3 185.9 20.3C189.1 20.3 192.1 21.6 194.4 23.8C196.7 26.1 198 29.1 198 32.2V38.8C198 40 197.1 41 196 41.2C194.6 41.3 193.4 40.3 193.4 38.9H192.2Z" fill="currentColor"/>
+                      </svg>
+                    </div>
+                    <span className="sr-only">Client — Franprix logo</span>
+                  </CarouselItem>
+                  <CarouselItem className="pl-2 md:pl-4 basis-1/3 md:basis-1/4 lg:basis-1/6">
+                    <div className="bg-white/10 backdrop-blur-sm p-4 rounded-lg flex items-center justify-center h-16">
+                      <svg className="w-full h-8 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition" viewBox="0 0 120 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M27.9 12.4H21.2C20.2 12.4 19.3 12.8 18.6 13.5C17.9 14.2 17.5 15.1 17.5 16.1V26.5C17.5 27.5 17.9 28.4 18.6 29.1C19.3 29.8 20.2 30.2 21.2 30.2H27.9C28.9 30.2 29.8 29.8 30.5 29.1C31.2 28.4 31.6 27.5 31.6 26.5V16.1C31.6 15.1 31.2 14.2 30.5 13.5C29.8 12.7 29 12.4 27.9 12.4Z" fill="currentColor"/>
+                        <path d="M47.3 12.4H40.6C39.6 12.4 38.7 12.8 38 13.5C37.3 14.2 36.9 15.1 36.9 16.1V26.5C36.9 27.5 37.3 28.4 38 29.1C38.7 29.8 39.6 30.2 40.6 30.2H47.3C48.3 30.2 49.2 29.8 49.9 29.1C50.6 28.4 51 27.5 51 26.5V16.1C51 15.1 50.6 14.2 49.9 13.5C49.2 12.7 48.4 12.4 47.3 12.4Z" fill="currentColor"/>
+                        <path d="M66.7 12.4H60C59 12.4 58.1 12.8 57.4 13.5C56.7 14.2 56.3 15.1 56.3 16.1V26.5C56.3 27.5 56.7 28.4 57.4 29.1C58.1 29.8 59 30.2 60 30.2H66.7C67.7 30.2 68.6 29.8 69.3 29.1C70 28.4 70.4 27.5 70.4 26.5V16.1C70.4 15.1 70 14.2 69.3 13.5C68.6 12.7 67.8 12.4 66.7 12.4Z" fill="currentColor"/>
+                        <path d="M86.1 12.4H79.4C78.4 12.4 77.5
