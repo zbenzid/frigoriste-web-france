@@ -1,9 +1,128 @@
-import React from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import { Clock, Award, Wrench, Shield, MapPin } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
 const WhyChooseUs = () => {
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const map = useRef<mapboxgl.Map | null>(null);
+  
+  useEffect(() => {
+    if (!mapContainer.current || map.current) return;
+    
+    mapboxgl.accessToken = 'pk.eyJ1IjoiemFra3ZpZSIsImEiOiJjbTlnMjI1d2wwb2xlMnFzY2dnYTU0cDNzIn0.QORR16K0VOfDEhaO4xaMAw';
+    
+    map.current = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [2.1, 48.8], // Paris coordinates
+      zoom: 8,
+      attributionControl: false,
+      interactive: false // Disable interactions for simplified display
+    });
+
+    map.current.on('load', () => {
+      if (!map.current) return;
+
+      // Add simplified coverage areas
+      map.current.addSource('coverage', {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: [
+            // Yvelines (45min) - closest
+            {
+              type: 'Feature',
+              properties: { color: '#0B5394' },
+              geometry: {
+                type: 'Polygon',
+                coordinates: [[[1.5, 48.7], [1.5, 49.1], [2.1, 49.1], [2.1, 48.7], [1.5, 48.7]]]
+              }
+            },
+            // Paris (1h) - middle
+            {
+              type: 'Feature',
+              properties: { color: '#4A86E8' },
+              geometry: {
+                type: 'Polygon',
+                coordinates: [[[2.1, 48.7], [2.1, 49.1], [2.5, 49.1], [2.5, 48.7], [2.1, 48.7]]]
+              }
+            },
+            // Grande Couronne (2h) - furthest
+            {
+              type: 'Feature',
+              properties: { color: '#A4C2F4' },
+              geometry: {
+                type: 'Polygon',
+                coordinates: [[[1.5, 48.3], [1.5, 49.3], [3.0, 49.3], [3.0, 48.3], [1.5, 48.3]]]
+              }
+            }
+          ]
+        }
+      });
+
+      // Add all zones with different colors
+      map.current.addLayer({
+        id: 'grande-couronne',
+        type: 'fill',
+        source: 'coverage',
+        filter: ['==', ['get', 'color'], '#A4C2F4'],
+        paint: {
+          'fill-color': '#A4C2F4',
+          'fill-opacity': 0.3
+        }
+      });
+
+      map.current.addLayer({
+        id: 'paris',
+        type: 'fill',
+        source: 'coverage',
+        filter: ['==', ['get', 'color'], '#4A86E8'],
+        paint: {
+          'fill-color': '#4A86E8',
+          'fill-opacity': 0.4
+        }
+      });
+
+      map.current.addLayer({
+        id: 'yvelines',
+        type: 'fill',
+        source: 'coverage',
+        filter: ['==', ['get', 'color'], '#0B5394'],
+        paint: {
+          'fill-color': '#0B5394',
+          'fill-opacity': 0.5
+        }
+      });
+
+      // Add outline for all zones
+      map.current.addLayer({
+        id: 'coverage-outline',
+        type: 'line',
+        source: 'coverage',
+        paint: {
+          'line-color': ['get', 'color'],
+          'line-width': 1
+        }
+      });
+
+      // Add headquarters marker
+      const headquarters = new mapboxgl.Marker({
+        color: '#0B5394'
+      }).setLngLat([1.91, 48.99]) // Les Mureaux coordinates
+      .addTo(map.current);
+    });
+
+    return () => {
+      map.current?.remove();
+      map.current = null;
+    };
+  }, []);
+
   const reasons = [{
     icon: <Clock size={36} className="text-primary" />,
     title: "Intervention Express 24/7",
@@ -17,10 +136,11 @@ const WhyChooseUs = () => {
     title: "Garantie Satisfaction",
     description: "Service client exceptionnel avec une note Google de 4.9/5, nous nous engageons à résoudre vos problèmes dès la première intervention."
   }, {
-    icon: <MapPin size={36} className="text-primary" />,
-    title: "Couverture Île-de-France",
-    description: "Notre service couvre toute l'Île-de-France avec des délais d'intervention optimisés : 45 min Yvelines, 1h Paris, 2h grande couronne."
+    icon: <Wrench size={36} className="text-primary" />,
+    title: "Solutions Sur-Mesure",
+    description: "Nos spécialistes conçoivent des solutions adaptées à vos besoins spécifiques, que ce soit pour le dépannage, l'installation ou la maintenance."
   }];
+
   return <section className="py-20 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 z-0">
@@ -54,24 +174,43 @@ const WhyChooseUs = () => {
               </CardContent>
             </Card>)}
 
-          {/* Carte centrale plus grande avec un accent bleu profond */}
-          <Card className="border-0 bg-primary text-white col-span-1 md:col-span-2 rounded-xl overflow-hidden shadow-lg">
-            <CardContent className="p-8 relative overflow-hidden">
-              {/* Subtle pattern overlay */}
-              <div className="absolute inset-0 opacity-10 bg-pattern"></div>
-              
-              <div className="mb-6 flex items-center justify-center relative z-10">
-                <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center">
-                  <Wrench size={36} className="text-white" />
+          {/* Carte centrale avec la carte de couverture */}
+          <Card className="border-0 bg-white col-span-1 md:col-span-2 rounded-xl overflow-hidden shadow-lg">
+            <CardContent className="p-6 relative">
+              <div className="mb-4 flex items-center justify-center">
+                <div className="w-14 h-14 rounded-full border-2 border-primary flex items-center justify-center">
+                  <MapPin size={36} className="text-primary" />
                 </div>
               </div>
-              <h3 className="font-montserrat font-bold mb-4 text-center relative z-10 text-xl">Solutions Sur-Mesure</h3>
-              <p className="mb-6 text-center font-opensans relative z-10">
-                Chez LeFrigoriste.fr, nous comprenons l'importance vitale de vos équipements frigorifiques pour votre activité. C'est pourquoi notre équipe propose des solutions adaptées à vos besoins spécifiques.
-              </p>
-              <div className="flex justify-center relative z-10">
-                <Button variant="outline" size="lg" className="bg-white/10 border-white text-white hover:bg-white hover:text-primary rounded-full">
-                  <Link to="/contact">Demander un devis</Link>
+              <h3 className="font-montserrat font-semibold text-lg mb-4 text-center">Couverture Île-de-France</h3>
+              
+              {/* Mini map container */}
+              <div className="relative h-[200px] w-full mb-4 rounded-xl overflow-hidden border border-gray-100">
+                <div ref={mapContainer} className="absolute inset-0"></div>
+              </div>
+              
+              {/* Délais d'intervention */}
+              <div className="grid grid-cols-3 gap-2 mt-4">
+                <div className="text-center">
+                  <div className="inline-block w-3 h-3 bg-[#0B5394] rounded-full mb-1"></div>
+                  <p className="text-xs font-semibold">Yvelines</p>
+                  <p className="text-xs">45 min</p>
+                </div>
+                <div className="text-center">
+                  <div className="inline-block w-3 h-3 bg-[#4A86E8] rounded-full mb-1"></div>
+                  <p className="text-xs font-semibold">Paris</p>
+                  <p className="text-xs">1 heure</p>
+                </div>
+                <div className="text-center">
+                  <div className="inline-block w-3 h-3 bg-[#A4C2F4] rounded-full mb-1"></div>
+                  <p className="text-xs font-semibold">Grande couronne</p>
+                  <p className="text-xs">2 heures</p>
+                </div>
+              </div>
+              
+              <div className="flex justify-center mt-4">
+                <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white rounded-full">
+                  <Link to="/zone-intervention">En savoir plus</Link>
                 </Button>
               </div>
             </CardContent>
