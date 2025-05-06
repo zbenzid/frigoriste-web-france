@@ -66,12 +66,12 @@ const Testimonials = () => {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-50/30 via-transparent to-transparent"></div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-secondary/5 via-transparent to-transparent"></div>
       
-      <div className="container-custom relative z-10">
+      <div className="container-custom relative z-10 px-[16px]">
         <div className="text-center mb-12">
           <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
             AVIS CLIENTS
           </div>
-          <h2 className="font-montserrat font-bold mb-4 text-[#212121] md:text-4xl text-2xl">
+          <h2 className="font-montserrat font-bold mb-4 text-[#212121] md:text-4xl text-2xl px-[8px]">
             Nos clients <span className="text-primary">témoignent</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto font-opensans">Découvrez pourquoi nos clients professionnels nous font confiance pour leurs équipements de réfrigération et climatisation.</p>
@@ -79,7 +79,7 @@ const Testimonials = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map(testimonial => <Card key={testimonial.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100/50 hover:-translate-y-1">
-              <div className="p-6">
+              <div className="p-6 px-[16px]">
                 <div className="flex mb-3">
                   {[...Array(5)].map((_, i) => <Star key={i} size={18} className={i < testimonial.rating ? "text-amber-500 fill-amber-500" : "text-gray-200"} />)}
                 </div>

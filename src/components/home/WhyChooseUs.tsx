@@ -34,7 +34,7 @@ const WhyChooseUs = () => {
           <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
             POURQUOI NOUS CHOISIR
           </div>
-          <h2 className="font-montserrat font-bold mb-4 text-[#212121] text-2xl md:text-4xl">
+          <h2 className="font-montserrat font-bold mb-4 text-[#212121] text-2xl md:text-4xl px-[8px]">
             Pourquoi <span className="text-primary">LeFrigoriste.fr</span> est le choix idéal pour vous
           </h2>
         </div>
@@ -79,7 +79,7 @@ const WhyChooseUs = () => {
 
           {/* Dernière rangée de cartes */}
           {reasons.slice(2, 4).map((reason, index) => <Card key={index + 2} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
-              <CardContent className="p-6">
+              <CardContent className="p-6 px-[16px]">
                 <div className="mb-4 flex items-center justify-center">
                   <div className="w-14 h-14 rounded-full border-2 border-primary flex items-center justify-center">
                     {reason.icon}

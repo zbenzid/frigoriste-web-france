@@ -1,49 +1,42 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import ServiceCard from './ServiceCard';
 import { Snowflake, Wind, Hammer, Wrench } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Progress } from "@/components/ui/progress";
-
 const ServicesSection = () => {
   const isMobile = useIsMobile();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [progress, setProgress] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const carouselApiRef = useRef<any>(null);
-  
+
   // Service card data
-  const services = [
-    {
-      title: "Dépannage frigorifique",
-      description: "Intervention rapide 24h/24 et 7j/7 pour tous vos équipements frigorifiques en panne.",
-      icon: Snowflake,
-      link: "/services#depannage",
-      color: "emergency" as const
-    },
-    {
-      title: "Installation climatisation",
-      description: "Installation sur-mesure de systèmes de climatisation pour tous types de locaux professionnels.",
-      icon: Wind,
-      link: "/services#climatisation",
-      color: "secondary" as const
-    },
-    {
-      title: "Installation chambres froides",
-      description: "Conception et installation de chambres froides adaptées à vos besoins spécifiques.",
-      icon: Hammer,
-      link: "/services#chambres-froides",
-      color: "primary" as const
-    },
-    {
-      title: "Maintenance préventive",
-      description: "Contrats de maintenance pour garantir la longévité et l'efficacité de vos installations.",
-      icon: Wrench,
-      link: "/services#maintenance",
-      color: "maintenance" as const
-    }
-  ];
+  const services = [{
+    title: "Dépannage frigorifique",
+    description: "Intervention rapide 24h/24 et 7j/7 pour tous vos équipements frigorifiques en panne.",
+    icon: Snowflake,
+    link: "/services#depannage",
+    color: "emergency" as const
+  }, {
+    title: "Installation climatisation",
+    description: "Installation sur-mesure de systèmes de climatisation pour tous types de locaux professionnels.",
+    icon: Wind,
+    link: "/services#climatisation",
+    color: "secondary" as const
+  }, {
+    title: "Installation chambres froides",
+    description: "Conception et installation de chambres froides adaptées à vos besoins spécifiques.",
+    icon: Hammer,
+    link: "/services#chambres-froides",
+    color: "primary" as const
+  }, {
+    title: "Maintenance préventive",
+    description: "Contrats de maintenance pour garantir la longévité et l'efficacité de vos installations.",
+    icon: Wrench,
+    link: "/services#maintenance",
+    color: "maintenance" as const
+  }];
 
   // Handle auto sliding with timer
   useEffect(() => {
@@ -60,11 +53,11 @@ const ServicesSection = () => {
       let elapsedTime = 0;
       timerRef.current = setInterval(() => {
         elapsedTime += tickInterval;
-        const newProgress = (elapsedTime / slideInterval) * 100;
-        
+        const newProgress = elapsedTime / slideInterval * 100;
+
         // Update progress with smoother animation
         setProgress(newProgress);
-        
+
         // Move to next slide when progress reaches 100%
         if (newProgress >= 100) {
           carouselApiRef.current.scrollNext();
@@ -75,7 +68,6 @@ const ServicesSection = () => {
           setCurrentSlide(nextSlide);
         }
       }, tickInterval);
-
       return () => {
         if (timerRef.current) {
           clearInterval(timerRef.current);
@@ -83,9 +75,7 @@ const ServicesSection = () => {
       };
     }
   }, [isMobile, currentSlide, services.length]);
-
-  return (
-    <section id="services" className="py-20 relative overflow-hidden">
+  return <section id="services" className="py-20 relative overflow-hidden">
       {/* Fond moderne avec dégradé sophistiqué */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/30 z-0">
         {/* Effet glacé avec motifs subtils */}
@@ -106,7 +96,7 @@ const ServicesSection = () => {
           <span className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
             NOS SERVICES
           </span>
-          <h2 className="font-bold font-montserrat mb-5 leading-tight text-[#212121] md:text-4xl text-2xl">
+          <h2 className="font-bold font-montserrat mb-5 leading-tight text-[#212121] md:text-4xl text-2xl px-[8px]">
             Solutions complètes 
             <span className="text-primary"> en réfrigération</span>
           </h2>
@@ -116,79 +106,43 @@ const ServicesSection = () => {
         </div>
         
         {/* Render carousel for mobile view and grid for desktop */}
-        {isMobile ? (
-          <div className="px-4">
-            <Carousel
-              opts={{
-                align: "center",
-                loop: true,
-                dragFree: false,
-                containScroll: "trimSnaps",
-                duration: 30, // Even smoother animation with faster response
-                skipSnaps: false, // Don't skip snaps for precise slide-by-slide navigation
-              }}
-              className="w-full"
-              setApi={(api) => {
-                carouselApiRef.current = api;
-                api.on('select', () => {
-                  // Reset progress when slide changes manually
-                  setProgress(0);
-                  // Update current slide index
-                  if (api.selectedScrollSnap) {
-                    const index = api.selectedScrollSnap();
-                    setCurrentSlide(index);
-                  }
-                });
-              }}
-            >
+        {isMobile ? <div className="px-4">
+            <Carousel opts={{
+          align: "center",
+          loop: true,
+          dragFree: false,
+          containScroll: "trimSnaps",
+          duration: 30,
+          // Even smoother animation with faster response
+          skipSnaps: false // Don't skip snaps for precise slide-by-slide navigation
+        }} className="w-full" setApi={api => {
+          carouselApiRef.current = api;
+          api.on('select', () => {
+            // Reset progress when slide changes manually
+            setProgress(0);
+            // Update current slide index
+            if (api.selectedScrollSnap) {
+              const index = api.selectedScrollSnap();
+              setCurrentSlide(index);
+            }
+          });
+        }}>
               <CarouselContent>
-                {services.map((service, index) => (
-                  <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                    <ServiceCard 
-                      title={service.title}
-                      description={service.description}
-                      icon={service.icon}
-                      link={service.link}
-                      color={service.color}
-                    />
-                  </CarouselItem>
-                ))}
+                {services.map((service, index) => <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                    <ServiceCard title={service.title} description={service.description} icon={service.icon} link={service.link} color={service.color} />
+                  </CarouselItem>)}
               </CarouselContent>
               <div className="flex flex-col items-center mt-6 gap-2">
-                <Progress 
-                  value={progress} 
-                  className="w-32 h-1 bg-gray-200 rounded-full" 
-                />
+                <Progress value={progress} className="w-32 h-1 bg-gray-200 rounded-full" />
                 <div className="flex gap-1.5 mt-2">
-                  {services.map((_, index) => (
-                    <div 
-                      key={index} 
-                      className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                        index === currentSlide ? 'bg-primary' : 'bg-gray-300'
-                      }`}
-                    />
-                  ))}
+                  {services.map((_, index) => <div key={index} className={`w-2 h-2 rounded-full transition-colors duration-300 ${index === currentSlide ? 'bg-primary' : 'bg-gray-300'}`} />)}
                 </div>
               </div>
             </Carousel>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-[16px]">
-            {services.map((service, index) => (
-              <ServiceCard
-                key={index}
-                title={service.title}
-                description={service.description}
-                icon={service.icon}
-                link={service.link}
-                color={service.color}
-              />
-            ))}
-          </div>
-        )}
+          </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-[16px]">
+            {services.map((service, index) => <ServiceCard key={index} title={service.title} description={service.description} icon={service.icon} link={service.link} color={service.color} />)}
+          </div>}
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ServicesSection;
