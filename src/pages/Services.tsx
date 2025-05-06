@@ -8,18 +8,40 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 const Services = () => {
   return (
     <div className="min-h-screen">
-      {/* Services Hero Banner */}
-      <div className="relative bg-primary overflow-hidden py-20">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-90 z-0"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80')] bg-cover bg-center mix-blend-overlay"></div>
+      {/* Services Hero Banner - Modernized with glassmorphism and rounded corners */}
+      <div className="relative bg-primary overflow-hidden py-20 md:py-32 md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
+        {/* Background image with proper overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-80 z-0"></div>
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80')] bg-cover bg-center mix-blend-multiply"></div>
+        
+        {/* Decorative elements */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-primary/20 blur-3xl"></div>
+        
         <div className="container-custom relative z-10 px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block px-4 py-1 rounded-full bg-white/20 text-white font-semibold text-sm mb-4 backdrop-blur-sm">
+          <span className="inline-block px-4 py-2 rounded-full bg-white/20 text-white font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
             Expertise professionnelle
           </span>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Nos Services</h1>
-          <p className="text-lg text-white/90 max-w-3xl mx-auto mb-8">
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-montserrat">Nos Services</h1>
+          <p className="text-lg text-white/90 max-w-3xl mx-auto mb-8 font-opensans">
             Solutions complètes en réfrigération et climatisation pour tous vos besoins professionnels, avec une garantie d'intervention rapide 24h/7j.
           </p>
+          
+          {/* Premium call-to-action */}
+          <div className="flex flex-wrap justify-center gap-4 mt-10">
+            <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl">
+              <span className="relative flex items-center justify-center">
+                <Phone size={20} className="mr-2" />
+                01 85 50 02 84
+              </span>
+            </a>
+            <Link to="/contact" className="group relative overflow-hidden rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-white/20 hover:shadow-xl border border-white/20">
+              <span className="relative flex items-center justify-center">
+                Demander un devis
+                <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+          </div>
         </div>
       </div>
 
