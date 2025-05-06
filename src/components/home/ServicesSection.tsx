@@ -48,8 +48,8 @@ const ServicesSection = () => {
   // Handle auto sliding with timer
   useEffect(() => {
     if (isMobile && carouselApiRef.current) {
-      const slideInterval = 5000; // 5 seconds per slide
-      const tickInterval = 50; // Update progress every 50ms for smooth animation
+      const slideInterval = 8000; // 8 seconds per slide (increased from 5s)
+      const tickInterval = 40; // Update progress more frequently for smoother animation
 
       // Reset any existing timer
       if (timerRef.current) {
@@ -62,7 +62,7 @@ const ServicesSection = () => {
         elapsedTime += tickInterval;
         const newProgress = (elapsedTime / slideInterval) * 100;
         
-        // Update progress
+        // Update progress with smoother animation
         setProgress(newProgress);
         
         // Move to next slide when progress reaches 100%
@@ -122,6 +122,8 @@ const ServicesSection = () => {
               opts={{
                 align: "start",
                 loop: true,
+                dragFree: true,
+                duration: 60, // Slower, smoother animation (milliseconds)
               }}
               className="w-full"
               setApi={(api) => {
