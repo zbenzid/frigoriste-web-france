@@ -28,23 +28,19 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Fond moderne avec dégradé sophistiqué */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50/40 to-blue-100/30 z-0">
-        {/* Le motif de cristaux a été retiré */}
-      </div>
-
-      {/* Effet de vague glacée */}
-      <div className="absolute bottom-0 w-full h-40 bg-gradient-to-t from-blue-100/40 to-transparent"></div>
-
-      {/* Bulles glacées */}
-      <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-gradient-to-bl from-blue-200/30 to-transparent blur-3xl"></div>
-      <div className="absolute bottom-10 left-1/4 w-60 h-60 rounded-full bg-gradient-to-tr from-blue-100/40 to-transparent blur-2xl"></div>
+    <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-blue-50/40 via-white to-blue-50/30">
+      {/* Fond avec subtiles vagues */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100/20 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-blue-100/20 via-transparent to-transparent"></div>
       
-      {/* Grands flocons stylisés */}
-      <Snowflake className="absolute top-32 left-20 w-20 h-20 text-blue-200/20" strokeWidth={0.5} />
-      <Snowflake className="absolute bottom-40 right-32 w-16 h-16 text-blue-300/25" strokeWidth={0.5} />
-      <Snowflake className="absolute top-60 right-1/4 w-14 h-14 text-blue-100/20" strokeWidth={0.5} />
+      {/* Subtils éléments décoratifs */}
+      <div className="absolute top-0 right-0 w-1/2 h-48 bg-gradient-to-b from-blue-100/20 to-transparent opacity-50"></div>
+      <div className="absolute bottom-0 left-0 w-1/2 h-48 bg-gradient-to-t from-blue-100/20 to-transparent opacity-50"></div>
+      
+      {/* Flocons stylisés subtils */}
+      <Snowflake className="absolute top-20 right-[10%] w-16 h-16 text-blue-200/15" strokeWidth={0.5} />
+      <Snowflake className="absolute bottom-20 left-[10%] w-12 h-12 text-blue-200/10" strokeWidth={0.5} />
+      <Snowflake className="absolute top-1/3 left-1/4 w-8 h-8 text-blue-100/10" strokeWidth={0.5} />
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-16">

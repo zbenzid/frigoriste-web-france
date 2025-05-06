@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Star, MessageSquare, Snowflake } from 'lucide-react';
+import { Star, MessageSquare } from 'lucide-react';
 
 interface Testimonial {
   id: number;
@@ -40,21 +40,19 @@ const Testimonials = () => {
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden">
-      {/* Fond avec dégradé sophistiqué */}
-      <div className="absolute inset-0 bg-gradient-to-b from-blue-50/30 via-white to-gray-50/50 z-0">
-        {/* Motifs glacés subtils */}
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiM0QTg2RTgiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NEgwdjJoNHY0aDJWNmg0VjQtNHpNNiAzNHYtNEg0djRIMHYyaDR2NGgydi00aDR2LTJINnptMC0zMFYwSDR2NEgwdjJoNHY0aDJWNmg0VjRINnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
-      </div>
+    <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-white via-gray-50/50 to-blue-50/20">
+      {/* Fond avec subtils dégradés */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-50/30 via-transparent to-transparent"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-secondary/5 via-transparent to-transparent"></div>
       
-      {/* Éléments décoratifs glacés */}
-      <div className="absolute -bottom-20 right-1/3 w-96 h-96 rounded-full bg-gradient-to-bl from-blue-100 to-transparent opacity-20 blur-3xl"></div>
-      <div className="absolute top-1/3 left-10 w-40 h-40 rounded-full bg-gradient-to-tr from-blue-200 to-transparent opacity-10 blur-2xl"></div>
+      {/* Subtils éléments décoratifs */}
+      <div className="absolute top-0 left-0 w-1/2 h-40 bg-gradient-to-r from-blue-50/30 to-transparent opacity-60"></div>
+      <div className="absolute bottom-0 right-0 w-1/2 h-40 bg-gradient-to-l from-blue-50/30 to-transparent opacity-60"></div>
       
-      {/* Flocons stylisés */}
-      <Snowflake className="absolute bottom-20 right-20 w-14 h-14 text-blue-100/20" strokeWidth={0.5} />
-      <Snowflake className="absolute top-32 left-1/4 w-12 h-12 text-blue-200/15" strokeWidth={0.5} />
-      <MessageSquare className="absolute top-1/2 right-1/4 w-10 h-10 text-secondary/10" strokeWidth={0.5} />
+      {/* Éléments de citation stylisés */}
+      <MessageSquare className="absolute top-20 right-[15%] w-16 h-16 text-secondary/10" strokeWidth={0.5} />
+      <MessageSquare className="absolute bottom-32 left-[10%] w-12 h-12 text-primary/10" strokeWidth={0.5} />
+      <MessageSquare className="absolute top-1/2 left-1/4 w-8 h-8 text-secondary/5" strokeWidth={0.5} />
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-12">
@@ -71,27 +69,29 @@ const Testimonials = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100/50 group hover:-translate-y-1">
-              <div className="flex mb-3">
-                {[...Array(5)].map((_, i) => (
-                  <Star 
-                    key={i} 
-                    size={20} 
-                    className={i < testimonial.rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"} 
-                  />
-                ))}
-              </div>
-              <p className="text-gray-600 italic mb-6">"{testimonial.testimonial}"</p>
-              <div className="flex items-center">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
-                  {testimonial.name.charAt(0)}
+            <div key={testimonial.id} className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden group hover:-translate-y-1 border border-gray-100/50">
+              <div className="p-6">
+                <div className="flex mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <Star 
+                      key={i} 
+                      size={20} 
+                      className={i < testimonial.rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"} 
+                    />
+                  ))}
                 </div>
-                <div className="ml-3">
-                  <p className="font-bold text-gray-800">{testimonial.name}</p>
-                  <p className="text-gray-600 text-sm">{testimonial.position}, {testimonial.business}</p>
+                <p className="text-gray-600 italic mb-6">"{testimonial.testimonial}"</p>
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                    {testimonial.name.charAt(0)}
+                  </div>
+                  <div className="ml-3">
+                    <p className="font-bold text-gray-800">{testimonial.name}</p>
+                    <p className="text-gray-600 text-sm">{testimonial.position}, {testimonial.business}</p>
+                  </div>
                 </div>
               </div>
-              <div className="absolute -bottom-1 -right-1 w-20 h-20 rounded-br-xl bg-gradient-to-tl from-blue-50 to-transparent opacity-50 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="h-1 w-full bg-gradient-to-r from-primary via-secondary to-blue-100 opacity-80 transform origin-left transition-all duration-300 group-hover:opacity-100"></div>
             </div>
           ))}
         </div>
