@@ -1,9 +1,11 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Menu, Clock, MapPin, Mail } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const TopInfoBar = () => {
   return (
@@ -69,10 +71,15 @@ const MainNav = ({
 };
 
 const Header = () => {
+  const isMobile = useIsMobile();
+
   return <header role="banner">
       <TopInfoBar />
       
-      <div className="sticky top-0 z-50 bg-white/90 backdrop-blur shadow-sm">
+      <div className={cn(
+        "sticky top-0 z-50 backdrop-blur-md transition-all duration-300",
+        isMobile ? "bg-white/75" : "bg-white/90"
+      )}>
         <div className="container-custom h-20 lg:h-24">
           <div className="flex items-center justify-between h-full">
             {/* Logo */}
