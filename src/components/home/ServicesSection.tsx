@@ -5,37 +5,35 @@ import { Snowflake, Wind, Hammer, Wrench } from 'lucide-react';
 
 const ServicesSection = () => {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-20 relative overflow-hidden">
       {/* Fond moderne avec dégradé sophistiqué */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/50 z-0">
-        {/* Effet glacé avec motifs de cristaux de glace */}
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwQjUzOTQiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NGgtNHYyaDR2NGgyVjZoNFY0aC00ek02IDM0di00SDR2NEgwdjJoNHY0aDJ2LTRoNHYtMkg2ek02IDRWMEg0djRIMHYyaDR2NGgyVjZoNFY0SDZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
-        
-        {/* Éléments décoratifs glacés */}
-        <div className="absolute -top-20 left-1/4 w-40 h-40 rounded-full bg-gradient-to-br from-blue-100 to-transparent opacity-30 blur-2xl"></div>
-        <div className="absolute top-1/3 right-1/5 w-72 h-72 rounded-full bg-gradient-to-bl from-blue-200 to-transparent opacity-20 blur-3xl"></div>
-        <div className="absolute bottom-0 left-1/3 w-96 h-80 rounded-full bg-gradient-to-tr from-blue-100 to-transparent opacity-30 blur-3xl"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/30 z-0">
+        {/* Effet glacé avec motifs subtils */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwQjUzOTQiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NEgwdjJoNHY0aDJWNmg0VjRoLTR6TTYgMzR2LTRINHY0SDB2Mmg0djRoMnYtNGg0di0ySDZ6TTYgNFYwSDR2NEgwdjJoNHY0aDJWNmg0VjRINnoiLz48L2c+PC9nPjwvc3ZnPg==')] z-10"></div>
       </div>
       
-      {/* Bulles glacées qui flottent lentement (effet froid) */}
-      <div className="absolute left-10 top-1/4 w-8 h-8 rounded-full bg-blue-100 opacity-40 blur-sm"></div>
-      <div className="absolute right-1/4 top-1/3 w-6 h-6 rounded-full bg-blue-50 opacity-60 blur-sm"></div>
-      <div className="absolute left-1/3 bottom-1/4 w-10 h-10 rounded-full bg-blue-100 opacity-30 blur-md"></div>
+      {/* Éléments décoratifs glacés */}
+      <div className="absolute -top-10 left-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-blue-100/20 to-transparent opacity-30 blur-3xl"></div>
+      <div className="absolute top-1/3 right-20 w-80 h-80 rounded-full bg-gradient-to-bl from-blue-200/20 to-transparent opacity-20 blur-3xl"></div>
+      <div className="absolute bottom-0 left-1/3 w-96 h-80 rounded-full bg-gradient-to-tr from-blue-100/20 to-transparent opacity-30 blur-3xl"></div>
       
-      {/* Grands flocons stylisés */}
-      <Snowflake className="absolute top-20 right-20 w-20 h-20 text-blue-100/20" strokeWidth={0.5} />
-      <Snowflake className="absolute bottom-32 left-20 w-16 h-16 text-blue-200/15" strokeWidth={0.5} />
-      <Snowflake className="absolute top-1/3 left-1/4 w-10 h-10 text-blue-100/10" strokeWidth={0.5} />
+      {/* Éléments de décoration discrets */}
+      <Snowflake className="absolute top-20 right-20 w-16 h-16 text-blue-100/15" strokeWidth={0.5} />
+      <Snowflake className="absolute bottom-32 left-20 w-12 h-12 text-blue-200/10" strokeWidth={0.5} />
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">
+          <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-montserrat text-sm font-semibold mb-4">
             Nos services
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Solutions complètes en réfrigération</span>
+          <h2 className="text-3xl md:text-4xl font-bold font-montserrat mb-5 leading-tight">
+            <span className="relative">
+              Solutions complètes 
+              <span className="text-primary"> en réfrigération</span>
+              <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 h-1 w-16 bg-gradient-to-r from-primary to-secondary rounded-full"></span>
+            </span>
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
+          <p className="text-gray-600 font-opensans max-w-2xl mx-auto">
             Nous proposons une gamme complète de services en réfrigération et climatisation pour répondre à tous vos besoins professionnels.
           </p>
         </div>
