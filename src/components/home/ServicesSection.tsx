@@ -1,11 +1,17 @@
-import React from 'react';
+
+import React, { useEffect, useState, useRef } from 'react';
 import ServiceCard from './ServiceCard';
 import { Snowflake, Wind, Hammer, Wrench } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import { Progress } from "@/components/ui/progress";
 
 const ServicesSection = () => {
   const isMobile = useIsMobile();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const carouselApiRef = useRef<any>(null);
   
   // Service card data
   const services = [
@@ -38,6 +44,45 @@ const ServicesSection = () => {
       color: "maintenance" as const
     }
   ];
+
+  // Handle auto sliding with timer
+  useEffect(() => {
+    if (isMobile && carouselApiRef.current) {
+      const slideInterval = 5000; // 5 seconds per slide
+      const tickInterval = 50; // Update progress every 50ms for smooth animation
+
+      // Reset any existing timer
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+
+      // Start a new timer
+      let elapsedTime = 0;
+      timerRef.current = setInterval(() => {
+        elapsedTime += tickInterval;
+        const newProgress = (elapsedTime / slideInterval) * 100;
+        
+        // Update progress
+        setProgress(newProgress);
+        
+        // Move to next slide when progress reaches 100%
+        if (newProgress >= 100) {
+          carouselApiRef.current.scrollNext();
+          elapsedTime = 0;
+          setProgress(0);
+          // Update current slide
+          const nextSlide = (currentSlide + 1) % services.length;
+          setCurrentSlide(nextSlide);
+        }
+      }, tickInterval);
+
+      return () => {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+        }
+      };
+    }
+  }, [isMobile, currentSlide, services.length]);
 
   return (
     <section id="services" className="py-20 relative overflow-hidden">
@@ -79,6 +124,18 @@ const ServicesSection = () => {
                 loop: true,
               }}
               className="w-full"
+              setApi={(api) => {
+                carouselApiRef.current = api;
+                api.on('select', () => {
+                  // Reset progress when slide changes manually
+                  setProgress(0);
+                  // Update current slide index
+                  if (api.selectedScrollSnap) {
+                    const index = api.selectedScrollSnap();
+                    setCurrentSlide(index);
+                  }
+                });
+              }}
             >
               <CarouselContent>
                 {services.map((service, index) => (
@@ -93,9 +150,21 @@ const ServicesSection = () => {
                   </CarouselItem>
                 ))}
               </CarouselContent>
-              <div className="flex justify-center gap-2 mt-6">
-                <CarouselPrevious className="relative static left-0 right-auto translate-y-0" />
-                <CarouselNext className="relative static right-0 left-auto translate-y-0" />
+              <div className="flex flex-col items-center mt-6 gap-2">
+                <Progress 
+                  value={progress} 
+                  className="w-32 h-1 bg-gray-200 rounded-full" 
+                />
+                <div className="flex gap-1.5 mt-2">
+                  {services.map((_, index) => (
+                    <div 
+                      key={index} 
+                      className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                        index === currentSlide ? 'bg-primary' : 'bg-gray-300'
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </Carousel>
           </div>
