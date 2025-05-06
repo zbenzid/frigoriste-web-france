@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Menu, Clock, MapPin, Mail } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -72,13 +72,27 @@ const MainNav = ({
 
 const Header = () => {
   const isMobile = useIsMobile();
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      setIsScrolled(scrollPosition > 10);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
-  return <header role="banner">
+  return (
+    <header role="banner" className="w-full">
       <TopInfoBar />
       
       <div className={cn(
-        "sticky top-0 z-50 backdrop-blur-md transition-all duration-300",
-        isMobile ? "bg-white/75" : "bg-white/90"
+        "fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300",
+        isScrolled 
+          ? (isMobile ? "bg-white/75 shadow-sm" : "bg-white/90 shadow-sm") 
+          : (isMobile ? "bg-white/65" : "bg-white/80")
       )}>
         <div className="container-custom h-20 lg:h-24">
           <div className="flex items-center justify-between h-full">
@@ -119,7 +133,11 @@ const Header = () => {
           </div>
         </div>
       </div>
-    </header>;
+      
+      {/* Spacer to prevent content from being hidden under the fixed header */}
+      <div className={`h-20 lg:h-24 ${!isMobile && "mt-2"}`}></div>
+    </header>
+  );
 };
 
 export default Header;
