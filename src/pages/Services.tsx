@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, BarChart3, Check, Lightbulb, Phone, Info, Award, Shield, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -9,38 +10,62 @@ const Services = () => {
   const isMobile = useIsMobile();
   
   return <div className="min-h-screen">
-      {/* Services Hero Banner - Modernisé avec un design plus premium et minimaliste */}
-      <div className="relative bg-primary overflow-hidden py-20 md:py-32 md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
-        {/* Filtre moderne, minimaliste et premium */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/50 to-primary/60 z-10"></div>
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png')] bg-cover bg-center"></div>
-        
-        {/* Léger effet de vignettage pour un aspect plus premium */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20 z-0"></div>
-        
-        <div className="container-custom relative z-20 px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block px-4 py-2 rounded-full bg-white/10 text-white font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
-            Expertise professionnelle
-          </span>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-montserrat">Nos Services</h1>
-          <p className="text-lg text-white/90 max-w-3xl mx-auto mb-8 font-opensans">
-            Solutions complètes en réfrigération et climatisation pour tous vos besoins professionnels, avec une garantie d'intervention rapide 24h/7j.
-          </p>
-          
-          {/* Premium call-to-action */}
-          <div className="flex flex-wrap justify-center gap-4 mt-10">
-            <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl">
-              <span className="relative flex items-center justify-center">
-                <Phone size={20} className="mr-2" />
-                01 85 50 02 84
+      {/* Services Hero Banner - Design premium à deux colonnes */}
+      <div className="relative overflow-hidden md:py-16 md:my-6">
+        {/* Conteneur de la section hero à deux colonnes */}
+        <div className="container-custom px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Colonne de gauche - Contenu textuel */}
+            <div className="relative z-10 py-12 md:py-0">
+              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
+                Expertise professionnelle
               </span>
-            </a>
-            <Link to="/contact" className="group relative overflow-hidden rounded-full bg-white/10 backdrop-blur-sm hover:bg-white/20 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-white/20 hover:shadow-xl border border-white/20">
-              <span className="relative flex items-center justify-center">
-                Demander un devis
-                <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </Link>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-montserrat">Nos Services</h1>
+              <p className="text-lg text-gray-600 mb-8 font-opensans">
+                Solutions complètes en réfrigération et climatisation pour tous vos besoins professionnels, avec une garantie d'intervention rapide 24h/7j.
+              </p>
+              
+              {/* Premium call-to-action */}
+              <div className="flex flex-wrap gap-4 mt-10">
+                <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl">
+                  <span className="relative flex items-center justify-center">
+                    <Phone size={20} className="mr-2" />
+                    01 85 50 02 84
+                  </span>
+                </a>
+                <Link to="/contact" className="group relative overflow-hidden rounded-full bg-primary hover:bg-primary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl">
+                  <span className="relative flex items-center justify-center">
+                    Demander un devis
+                    <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+            
+            {/* Colonne de droite - Image mise en valeur */}
+            <div className="relative">
+              {/* Conteneur de l'image avec cadre esthétique */}
+              <div className="overflow-hidden rounded-2xl shadow-xl relative aspect-[4/3] md:aspect-[16/9] h-full">
+                {/* Fond dégradé pour l'effet premium */}
+                <div className="absolute inset-0 bg-gradient-to-br from-black/50 to-primary/60 mix-blend-multiply z-10"></div>
+                
+                {/* Image principale */}
+                <img 
+                  src="/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png" 
+                  alt="Nos services de réfrigération" 
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Léger vignettage pour aspect premium */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20 z-20"></div>
+                
+                {/* Élément décoratif - Badge ou indication de service 24/7 */}
+                <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white font-bold text-sm border border-white/20 shadow-lg z-30 flex items-center">
+                  <Clock size={16} className="mr-2" />
+                  Service 24/7
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
