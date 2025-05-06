@@ -72,16 +72,14 @@ const Hero = () => {
               Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
             </p>
             <div className="flex flex-col sm:flex-row gap-5">
-              <a href="tel:0185500284" className="group btn-emergency text-lg relative overflow-hidden">
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-red-600 to-emergency opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                <span className="relative flex items-center">
+              <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emergency to-emergency/80 hover:from-emergency/90 hover:to-emergency text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl">
+                <span className="relative flex items-center justify-center">
                   <Phone size={24} className="mr-2" />
                   01 85 50 02 84
                 </span>
               </a>
-              <Link to="/contact" className="group btn-secondary text-lg relative overflow-hidden">
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500 to-secondary opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                <span className="relative flex items-center">
+              <Link to="/contact" className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl">
+                <span className="relative flex items-center justify-center">
                   Demander un devis
                   <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
