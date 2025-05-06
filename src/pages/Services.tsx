@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, BarChart3, Check, Lightbulb, Phone, Info, Award, Shield, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -10,18 +9,17 @@ const Services = () => {
   const isMobile = useIsMobile();
   
   return <div className="min-h-screen">
-      {/* Services Hero Banner - Modernized with glassmorphism and rounded corners */}
+      {/* Services Hero Banner - Modernisé avec un design plus premium et minimaliste */}
       <div className="relative bg-primary overflow-hidden py-20 md:py-32 md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
-        {/* Background image with proper overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-80 z-0"></div>
-        <div className="absolute inset-0 bg-[url('/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png')] bg-cover bg-center mix-blend-multiply"></div>
+        {/* Filtre moderne, minimaliste et premium */}
+        <div className="absolute inset-0 bg-gradient-to-br from-black/50 to-primary/60 z-10"></div>
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png')] bg-cover bg-center"></div>
         
-        {/* Decorative elements */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full bg-primary/20 blur-3xl"></div>
+        {/* Léger effet de vignettage pour un aspect plus premium */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20 z-0"></div>
         
-        <div className="container-custom relative z-10 px-4 sm:px-6 lg:px-8 text-center">
-          <span className="inline-block px-4 py-2 rounded-full bg-white/20 text-white font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
+        <div className="container-custom relative z-20 px-4 sm:px-6 lg:px-8 text-center">
+          <span className="inline-block px-4 py-2 rounded-full bg-white/10 text-white font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
             Expertise professionnelle
           </span>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-6 font-montserrat">Nos Services</h1>
@@ -413,7 +411,7 @@ const Services = () => {
             </div>
             
             <div className="order-1 lg:order-2 overflow-hidden rounded-2xl shadow-xl">
-              <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Chambre froide professionnelle" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
+              <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1738&q=80" alt="Chambre froide professionnelle" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
             </div>
           </div>
         </div>
