@@ -8,8 +8,7 @@ import { ArrowRight, Phone, Mail, Clock, Shield, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
-  return (
-    <div className="min-h-screen max-w-screen overflow-hidden">
+  return <div className="min-h-screen">
       {/* Hero Section */}
       <Hero />
       
@@ -108,8 +107,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
