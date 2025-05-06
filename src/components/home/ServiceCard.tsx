@@ -32,8 +32,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon: Ico
         </div>
       </div>
       <CardContent className="p-6 border border-transparent group-hover:border-gray-100 transition-colors duration-300 bg-white">
-        {/* Typography using Montserrat for headings and Open Sans for body text */}
-        <h3 className="font-montserrat font-bold text-xl mb-3 text-gray-800 group-hover:text-primary transition-colors duration-300">{title}</h3>
+        {/* Typography using Montserrat for headings and Open Sans for body text - changed from font-bold to font-semibold */}
+        <h3 className="font-montserrat font-semibold text-xl mb-3 text-gray-800 group-hover:text-primary transition-colors duration-300">{title}</h3>
         <p className="font-opensans text-gray-600 mb-5">{description}</p>
         <HoverCard>
           <HoverCardTrigger>
