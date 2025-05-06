@@ -34,7 +34,7 @@ const WhyChooseUs = () => {
           <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
             POURQUOI NOUS CHOISIR
           </div>
-          <h2 className="text-3xl md:text-4xl font-montserrat font-bold mb-4 text-[#212121]">
+          <h2 className="text-3xl font-montserrat font-bold mb-4 text-[#212121] md:text-4xl">
             Pourquoi <span className="text-primary">LeFrigoriste.fr</span> est le choix idéal pour vous
           </h2>
         </div>

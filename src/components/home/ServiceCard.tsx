@@ -1,11 +1,9 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
-
 interface ServiceCardProps {
   title: string;
   description: string;
@@ -13,17 +11,20 @@ interface ServiceCardProps {
   link: string;
   color: 'primary' | 'secondary' | 'emergency' | 'maintenance';
 }
-
-const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon: Icon, link, color }) => {
+const ServiceCard: React.FC<ServiceCardProps> = ({
+  title,
+  description,
+  icon: Icon,
+  link,
+  color
+}) => {
   const colorClasses = {
     primary: 'from-primary/90 to-primary',
     secondary: 'from-secondary/90 to-secondary',
     emergency: 'from-emergency/90 to-emergency',
     maintenance: 'from-maintenance/90 to-maintenance'
   };
-
-  return (
-    <Card className="group overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 h-full hover:-translate-y-1 rounded-xl">
+  return <Card className="group overflow-hidden border-none shadow-lg hover:shadow-xl transition-all duration-300 h-full hover:-translate-y-1 rounded-xl">
       <div className={`bg-gradient-to-r ${colorClasses[color]} p-8 flex items-center justify-center relative overflow-hidden`}>
         <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
         {/* Enhanced icon area with frost effect */}
@@ -33,15 +34,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon: Ico
       </div>
       <CardContent className="p-6 border border-transparent group-hover:border-gray-100 transition-colors duration-300 bg-white">
         {/* Typography using Montserrat for headings and Open Sans for body text - changed from font-bold to font-semibold */}
-        <h3 className="font-montserrat font-semibold text-xl mb-3 text-gray-800 group-hover:text-primary transition-colors duration-300">{title}</h3>
+        <h3 className="font-montserrat font-semibold mb-3 transition-colors duration-300 text-lg text-gray-800">{title}</h3>
         <p className="font-opensans text-gray-600 mb-5">{description}</p>
         <HoverCard>
           <HoverCardTrigger>
-            <Link 
-              to={link} 
-              className="flex items-center text-primary font-semibold hover:text-secondary transition-colors group/link font-opensans"
-              aria-label={`En savoir plus sur ${title}`}
-            >
+            <Link to={link} className="flex items-center text-primary font-semibold hover:text-secondary transition-colors group/link font-opensans" aria-label={`En savoir plus sur ${title}`}>
               En savoir plus <ChevronRight size={16} className="ml-1 group-hover/link:translate-x-1 transition-transform duration-300" />
             </Link>
           </HoverCardTrigger>
@@ -54,8 +51,6 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon: Ico
           </HoverCardContent>
         </HoverCard>
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
-
 export default ServiceCard;
