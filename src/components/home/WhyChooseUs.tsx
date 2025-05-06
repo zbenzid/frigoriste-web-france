@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Clock, Award, Wrench, ThumbsUp } from 'lucide-react';
+import { Clock, Award, Wrench, ThumbsUp, Snowflake } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 
 const WhyChooseUs = () => {
@@ -28,10 +28,29 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container-custom">
+    <section className="py-24 relative overflow-hidden">
+      {/* Fond moderne avec dégradé sophistiqué */}
+      <div className="absolute inset-0 bg-gradient-to-b from-white via-gray-50 to-blue-50/30 z-0">
+        {/* Effet glacé avec motifs de cristaux */}
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwQjUzOTQiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NEgwdjJoNHY0aDJWNmg0VjQtNHpNNiAzNHYtNEg0djRIMHYyaDR2NGgydi00aDR2LTJINnptMC0zMFYwSDR2NEgwdjJoNHY0aDJWNmg0VjRINnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+      </div>
+
+      {/* Éléments décoratifs glacés */}
+      <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-gradient-to-bl from-blue-200 to-transparent opacity-20 blur-3xl"></div>
+      <div className="absolute bottom-10 left-1/4 w-60 h-60 rounded-full bg-gradient-to-tr from-blue-100 to-transparent opacity-30 blur-2xl"></div>
+      
+      {/* Grands flocons stylisés */}
+      <Snowflake className="absolute top-32 left-20 w-20 h-20 text-blue-100/20" strokeWidth={0.5} />
+      <Snowflake className="absolute bottom-40 right-32 w-16 h-16 text-blue-200/15" strokeWidth={0.5} />
+      
+      <div className="container-custom relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Pourquoi nous choisir</h2>
+          <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">
+            Pourquoi nous choisir
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
+            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">L'expertise frigorifique à votre service</span>
+          </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
             LeFrigoriste.fr se démarque par son expertise, sa réactivité et son service client exceptionnel.
           </p>
@@ -39,7 +58,7 @@ const WhyChooseUs = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => (
-            <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
+            <Card key={index} className="border-none shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group bg-white/80 backdrop-blur-sm">
               <div className={`h-2 w-full ${
                 index === 0 ? "bg-emergency" : 
                 index === 1 ? "bg-primary" : 
