@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Menu, Clock, MapPin, Mail } from 'lucide-react';
@@ -6,10 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
-
 const TopInfoBar = () => {
-  return (
-    <div className="bg-primary text-white py-2 hidden md:block">
+  return <div className="bg-primary text-white py-2 hidden md:block">
       <div className="container-custom flex items-center justify-between">
         <div className="flex items-center space-x-6 text-xs">
           <div className="flex items-center">
@@ -28,10 +25,8 @@ const TopInfoBar = () => {
           </a>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 const MainNav = ({
   className,
   isMobile = false
@@ -69,33 +64,23 @@ const MainNav = ({
     })}
     </nav>;
 };
-
 const Header = () => {
   const isMobile = useIsMobile();
   const [isScrolled, setIsScrolled] = useState(false);
-  
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 10);
     };
-    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  return (
-    <header role="banner" className="w-full">
+  return <header role="banner" className="w-full">
       <TopInfoBar />
       
-      <div className={cn(
-        "fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300",
-        isScrolled 
-          ? (isMobile ? "bg-white/75 shadow-sm" : "bg-white/90 shadow-sm") 
-          : (isMobile ? "bg-white/65" : "bg-white/80")
-      )}>
+      <div className={cn("fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300", isScrolled ? isMobile ? "bg-white/75 shadow-sm" : "bg-white/90 shadow-sm" : isMobile ? "bg-white/65" : "bg-white/80")}>
         <div className="container-custom h-20 lg:h-24">
-          <div className="flex items-center justify-between h-full">
+          <div className="flex items-center justify-between h-full px-[16px]">
             {/* Logo */}
             <Link to="/" className="text-2xl font-bold text-primary" aria-label="LeFrigoriste.fr - Retour à l'accueil">
               <span className="text-secondary">Le</span>
@@ -136,8 +121,6 @@ const Header = () => {
       
       {/* Spacer to prevent content from being hidden under the fixed header */}
       <div className={`h-20 lg:h-24 ${!isMobile && "mt-2"}`}></div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;
