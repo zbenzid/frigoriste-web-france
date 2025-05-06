@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Star, User } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -106,7 +107,9 @@ const Testimonials = () => {
         <div className="mt-12 text-center">
           <div className="inline-flex items-center bg-white px-6 py-3 rounded-full shadow-sm">
             <div className="text-primary flex">
-              {'★'.repeat(5)}
+              {'★'.repeat(5).split('').map((star, index) => (
+                <span key={index} className="text-2xl">★</span>
+              ))}
             </div>
             <span className="ml-2 text-gray-700 font-opensans">4.9/5 basé sur plus de 50 avis clients Google</span>
           </div>
