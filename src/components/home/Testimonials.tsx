@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Star, MessageSquare } from 'lucide-react';
 
@@ -56,8 +55,8 @@ const Testimonials = () => {
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1 rounded-full bg-secondary/10 text-secondary font-semibold text-sm mb-4">
-            Avis clients
+          <span className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
+            AVIS CLIENTS
           </span>
           <h2 className="text-3xl md:text-4xl font-bold mb-4 leading-tight">
             <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Ce que disent nos clients</span>
