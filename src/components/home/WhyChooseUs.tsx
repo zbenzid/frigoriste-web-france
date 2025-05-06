@@ -30,8 +30,14 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-[#F1F1F1]">
-      <div className="container-custom">
+    <section className="py-20 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-blue-100/30 blur-3xl"></div>
+        <div className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-blue-50/40 blur-3xl"></div>
+      </div>
+      
+      <div className="container-custom relative z-10">
         {/* En-tête de section */}
         <div className="mb-12 text-center">
           <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
@@ -46,7 +52,7 @@ const WhyChooseUs = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Première rangée de cartes */}
           {reasons.slice(0, 2).map((reason, index) => (
-            <Card key={index} className="border border-gray-100 bg-white hover:bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
+            <Card key={index} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="mb-4 flex items-center justify-center">
                   <div className="w-14 h-14 rounded-full border-2 border-primary flex items-center justify-center">
@@ -60,18 +66,21 @@ const WhyChooseUs = () => {
           ))}
 
           {/* Carte centrale plus grande avec un accent bleu profond */}
-          <Card className="border-0 bg-primary text-white col-span-1 md:col-span-2 rounded-xl overflow-hidden">
-            <CardContent className="p-8">
-              <div className="mb-6 flex items-center justify-center">
+          <Card className="border-0 bg-primary text-white col-span-1 md:col-span-2 rounded-xl overflow-hidden shadow-lg">
+            <CardContent className="p-8 relative overflow-hidden">
+              {/* Subtle pattern overlay */}
+              <div className="absolute inset-0 opacity-10 bg-pattern"></div>
+              
+              <div className="mb-6 flex items-center justify-center relative z-10">
                 <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center">
                   <Wrench size={36} className="text-white" />
                 </div>
               </div>
-              <h3 className="font-montserrat font-bold text-2xl mb-4 text-center">Solutions Sur-Mesure</h3>
-              <p className="mb-6 text-center font-opensans">
+              <h3 className="font-montserrat font-bold text-2xl mb-4 text-center relative z-10">Solutions Sur-Mesure</h3>
+              <p className="mb-6 text-center font-opensans relative z-10">
                 Chez LeFrigoriste.fr, nous comprenons l'importance vitale de vos équipements frigorifiques pour votre activité. C'est pourquoi notre équipe propose des solutions adaptées à vos besoins spécifiques.
               </p>
-              <div className="flex justify-center">
+              <div className="flex justify-center relative z-10">
                 <Button variant="outline" size="lg" className="bg-white/10 border-white text-white hover:bg-white hover:text-primary rounded-full">
                   <Link to="/contact">Demander un devis</Link>
                 </Button>
@@ -81,7 +90,7 @@ const WhyChooseUs = () => {
 
           {/* Dernière rangée de cartes */}
           {reasons.slice(2, 4).map((reason, index) => (
-            <Card key={index + 2} className="border border-gray-100 bg-white hover:bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
+            <Card key={index + 2} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="mb-4 flex items-center justify-center">
                   <div className="w-14 h-14 rounded-full border-2 border-primary flex items-center justify-center">
@@ -97,7 +106,7 @@ const WhyChooseUs = () => {
 
         {/* Citation Google Reviews */}
         <div className="mt-12 text-center">
-          <div className="inline-flex items-center">
+          <div className="inline-flex items-center bg-white px-6 py-3 rounded-full shadow-sm">
             <div className="text-yellow-400 flex">
               {'★'.repeat(5)}
             </div>
