@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Clock, Award, Wrench, Shield, MapPin } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -89,16 +90,6 @@ const WhyChooseUs = () => {
                 <p className="text-gray-600 font-opensans text-center">{reason.description}</p>
               </CardContent>
             </Card>)}
-        </div>
-
-        {/* Citation Google Reviews */}
-        <div className="mt-12 text-center">
-          <div className="inline-flex items-center bg-white px-6 py-3 rounded-full shadow-sm">
-            <div className="text-yellow-400 flex">
-              {'★'.repeat(5)}
-            </div>
-            <span className="ml-2 text-gray-700 font-opensans">4.9/5 basé sur plus de 50 avis clients Google</span>
-          </div>
         </div>
       </div>
     </section>;
