@@ -19,8 +19,8 @@ const WhyChooseUs = () => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v11',
-      center: [2.1, 48.8], // Paris coordinates
-      zoom: 8,
+      center: [1.91, 48.9], // Centre sur Les Mureaux
+      zoom: 9,
       attributionControl: false,
       interactive: false // Disable interactions for simplified display
     });
@@ -28,19 +28,19 @@ const WhyChooseUs = () => {
     map.current.on('load', () => {
       if (!map.current) return;
 
-      // Add simplified coverage areas
+      // Add simplified coverage areas with better defined zones
       map.current.addSource('coverage', {
         type: 'geojson',
         data: {
           type: 'FeatureCollection',
           features: [
-            // Yvelines (45min) - closest
+            // Grande Couronne (2h) - furthest
             {
               type: 'Feature',
-              properties: { color: '#0B5394' },
+              properties: { color: '#A4C2F4' },
               geometry: {
                 type: 'Polygon',
-                coordinates: [[[1.5, 48.7], [1.5, 49.1], [2.1, 49.1], [2.1, 48.7], [1.5, 48.7]]]
+                coordinates: [[[1.4, 48.3], [1.4, 49.3], [3.0, 49.3], [3.0, 48.3], [1.4, 48.3]]]
               }
             },
             // Paris (1h) - middle
@@ -49,23 +49,23 @@ const WhyChooseUs = () => {
               properties: { color: '#4A86E8' },
               geometry: {
                 type: 'Polygon',
-                coordinates: [[[2.1, 48.7], [2.1, 49.1], [2.5, 49.1], [2.5, 48.7], [2.1, 48.7]]]
+                coordinates: [[[2.1, 48.7], [2.1, 49.1], [2.7, 49.1], [2.7, 48.7], [2.1, 48.7]]]
               }
             },
-            // Grande Couronne (2h) - furthest
+            // Yvelines (45min) - closest
             {
               type: 'Feature',
-              properties: { color: '#A4C2F4' },
+              properties: { color: '#0B5394' },
               geometry: {
                 type: 'Polygon',
-                coordinates: [[[1.5, 48.3], [1.5, 49.3], [3.0, 49.3], [3.0, 48.3], [1.5, 48.3]]]
+                coordinates: [[[1.5, 48.7], [1.5, 49.1], [2.1, 49.1], [2.1, 48.7], [1.5, 48.7]]]
               }
             }
           ]
         }
       });
 
-      // Add all zones with different colors
+      // Add all zones with different colors (from furthest to closest for better rendering)
       map.current.addLayer({
         id: 'grande-couronne',
         type: 'fill',
@@ -84,7 +84,7 @@ const WhyChooseUs = () => {
         filter: ['==', ['get', 'color'], '#4A86E8'],
         paint: {
           'fill-color': '#4A86E8',
-          'fill-opacity': 0.4
+          'fill-opacity': 0.5
         }
       });
 
@@ -95,7 +95,7 @@ const WhyChooseUs = () => {
         filter: ['==', ['get', 'color'], '#0B5394'],
         paint: {
           'fill-color': '#0B5394',
-          'fill-opacity': 0.5
+          'fill-opacity': 0.6
         }
       });
 
@@ -106,15 +106,55 @@ const WhyChooseUs = () => {
         source: 'coverage',
         paint: {
           'line-color': ['get', 'color'],
-          'line-width': 1
+          'line-width': 2
         }
       });
 
-      // Add headquarters marker
+      // Add headquarters marker with prominent styling
       const headquarters = new mapboxgl.Marker({
-        color: '#0B5394'
+        color: '#CC0000', // Rouge d'urgence pour attirer l'attention
+        scale: 1.2
       }).setLngLat([1.91, 48.99]) // Les Mureaux coordinates
       .addTo(map.current);
+      
+      // Add department labels for better geographical context
+      const departmentLabels = [
+        { id: '78', name: '78', coordinates: [1.85, 48.9], fontSize: 16 },
+        { id: '75', name: '75', coordinates: [2.35, 48.85], fontSize: 14 },
+        { id: '91', name: '91', coordinates: [2.25, 48.5], fontSize: 12 },
+        { id: '95', name: '95', coordinates: [2.15, 49.05], fontSize: 12 }
+      ];
+
+      departmentLabels.forEach(dept => {
+        map.current?.addSource(`dept-${dept.id}`, {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'Point',
+              coordinates: dept.coordinates
+            }
+          }
+        });
+
+        map.current?.addLayer({
+          id: `dept-${dept.id}`,
+          type: 'symbol',
+          source: `dept-${dept.id}`,
+          layout: {
+            'text-field': dept.name,
+            'text-size': dept.fontSize,
+            'text-font': ['Open Sans Bold'],
+            'text-anchor': 'center'
+          },
+          paint: {
+            'text-color': '#555',
+            'text-halo-color': '#fff',
+            'text-halo-width': 1.5
+          }
+        });
+      });
     });
 
     return () => {
@@ -166,7 +206,7 @@ const WhyChooseUs = () => {
         
         {/* Disposition des cartes en grille - Changed grid layout for better card arrangement */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-[16px]">
-          {/* Première rangée de cartes */}
+          {/* Premières cartes */}
           {reasons.slice(0, 2).map((reason, index) => <Card key={index} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="mb-4 flex items-center justify-center">
@@ -179,7 +219,7 @@ const WhyChooseUs = () => {
               </CardContent>
             </Card>)}
 
-          {/* Carte centrale avec la carte de couverture - Modified to span 2 rows and make it stand out */}
+          {/* Carte centrale avec la carte de couverture */}
           <Card className="border-0 bg-gradient-to-br from-blue-50 to-white row-span-2 col-span-1 md:col-span-2 rounded-xl overflow-hidden shadow-xl">
             <CardContent className="p-6 relative h-full flex flex-col">
               <div className="mb-4 flex items-center justify-center">
@@ -187,7 +227,10 @@ const WhyChooseUs = () => {
                   <MapPin size={40} className="text-primary" />
                 </div>
               </div>
-              <h3 className="font-montserrat font-semibold text-xl mb-4 text-center">Couverture Île-de-France</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-2 text-center">Couverture Île-de-France</h3>
+              <p className="text-gray-600 text-center mb-4">
+                Intervention rapide garantie dans toute l'Île-de-France avec délais optimisés selon votre département. Notre siège aux Mureaux (78) nous permet d'intervenir en priorité dans les Yvelines.
+              </p>
               
               {/* Mini map container - Made larger since the card spans 2 rows */}
               <div className="relative h-[300px] w-full mb-4 rounded-xl overflow-hidden border border-gray-100 shadow-inner flex-grow bg-white">
@@ -195,21 +238,21 @@ const WhyChooseUs = () => {
               </div>
               
               {/* Délais d'intervention - Enhanced styling */}
-              <div className="grid grid-cols-3 gap-4 mt-6 bg-white bg-opacity-70 p-4 rounded-lg border border-gray-100 shadow-sm">
+              <div className="grid grid-cols-3 gap-4 mt-4 bg-white bg-opacity-70 p-4 rounded-lg border border-gray-100 shadow-sm">
                 <div className="text-center">
-                  <div className="inline-block w-4 h-4 bg-[#0B5394] rounded-full mb-2"></div>
+                  <div className="inline-block w-5 h-5 bg-[#0B5394] rounded-full mb-2"></div>
                   <p className="text-sm font-semibold">Yvelines</p>
-                  <p className="text-sm font-light">45 min</p>
+                  <p className="text-sm font-medium text-primary">45 min</p>
                 </div>
                 <div className="text-center">
-                  <div className="inline-block w-4 h-4 bg-[#4A86E8] rounded-full mb-2"></div>
+                  <div className="inline-block w-5 h-5 bg-[#4A86E8] rounded-full mb-2"></div>
                   <p className="text-sm font-semibold">Paris</p>
-                  <p className="text-sm font-light">1 heure</p>
+                  <p className="text-sm font-medium text-primary">1 heure</p>
                 </div>
                 <div className="text-center">
-                  <div className="inline-block w-4 h-4 bg-[#A4C2F4] rounded-full mb-2"></div>
+                  <div className="inline-block w-5 h-5 bg-[#A4C2F4] rounded-full mb-2"></div>
                   <p className="text-sm font-semibold">Grande couronne</p>
-                  <p className="text-sm font-light">2 heures</p>
+                  <p className="text-sm font-medium text-primary">2 heures</p>
                 </div>
               </div>
               
@@ -221,7 +264,7 @@ const WhyChooseUs = () => {
             </CardContent>
           </Card>
 
-          {/* Dernière rangée de cartes */}
+          {/* Dernières cartes */}
           {reasons.slice(2, 4).map((reason, index) => <Card key={index + 2} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
               <CardContent className="p-6 px-[16px]">
                 <div className="mb-4 flex items-center justify-center">
