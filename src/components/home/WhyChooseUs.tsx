@@ -123,23 +123,28 @@ const WhyChooseUs = () => {
     };
   }, []);
 
-  const reasons = [{
-    icon: <Clock size={36} className="text-primary" />,
-    title: "Intervention Express 24/7",
-    description: "Notre équipe est disponible jour et nuit pour intervenir en urgence sur vos équipements frigorifiques avec des délais garantis par zone."
-  }, {
-    icon: <Award size={36} className="text-primary" />,
-    title: "Techniciens Certifiés",
-    description: "Nos experts sont certifiés RGE et QualiPAC avec plus de 15 ans d'expérience dans le domaine du froid commercial et de la climatisation."
-  }, {
-    icon: <Shield size={36} className="text-primary" />,
-    title: "Garantie Satisfaction",
-    description: "Service client exceptionnel avec une note Google de 4.9/5, nous nous engageons à résoudre vos problèmes dès la première intervention."
-  }, {
-    icon: <Wrench size={36} className="text-primary" />,
-    title: "Solutions Sur-Mesure",
-    description: "Nos spécialistes conçoivent des solutions adaptées à vos besoins spécifiques, que ce soit pour le dépannage, l'installation ou la maintenance."
-  }];
+  const reasons = [
+    {
+      icon: <Wrench size={36} className="text-primary" />,
+      title: "Solutions Sur-Mesure",
+      description: "Nos spécialistes conçoivent des solutions adaptées à vos besoins spécifiques, que ce soit pour le dépannage, l'installation ou la maintenance."
+    },
+    {
+      icon: <Clock size={36} className="text-primary" />,
+      title: "Intervention Express 24/7",
+      description: "Notre équipe est disponible jour et nuit pour intervenir en urgence sur vos équipements frigorifiques avec des délais garantis par zone."
+    },
+    {
+      icon: <Award size={36} className="text-primary" />,
+      title: "Techniciens Certifiés",
+      description: "Nos experts sont certifiés RGE et QualiPAC avec plus de 15 ans d'expérience dans le domaine du froid commercial et de la climatisation."
+    },
+    {
+      icon: <Shield size={36} className="text-primary" />,
+      title: "Garantie Satisfaction",
+      description: "Service client exceptionnel avec une note Google de 4.9/5, nous nous engageons à résoudre vos problèmes dès la première intervention."
+    }
+  ];
 
   return <section className="py-20 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
       {/* Background decorative elements */}
@@ -159,7 +164,7 @@ const WhyChooseUs = () => {
           </h2>
         </div>
         
-        {/* Disposition des cartes en grille */}
+        {/* Disposition des cartes en grille - Changed grid layout for better card arrangement */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-[16px]">
           {/* Première rangée de cartes */}
           {reasons.slice(0, 2).map((reason, index) => <Card key={index} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
@@ -174,41 +179,41 @@ const WhyChooseUs = () => {
               </CardContent>
             </Card>)}
 
-          {/* Carte centrale avec la carte de couverture */}
-          <Card className="border-0 bg-white col-span-1 md:col-span-2 rounded-xl overflow-hidden shadow-lg">
-            <CardContent className="p-6 relative">
+          {/* Carte centrale avec la carte de couverture - Modified to span 2 rows and make it stand out */}
+          <Card className="border-0 bg-gradient-to-br from-blue-50 to-white row-span-2 col-span-1 md:col-span-2 rounded-xl overflow-hidden shadow-xl">
+            <CardContent className="p-6 relative h-full flex flex-col">
               <div className="mb-4 flex items-center justify-center">
-                <div className="w-14 h-14 rounded-full border-2 border-primary flex items-center justify-center">
-                  <MapPin size={36} className="text-primary" />
+                <div className="w-16 h-16 rounded-full border-2 border-primary flex items-center justify-center bg-white shadow-md">
+                  <MapPin size={40} className="text-primary" />
                 </div>
               </div>
-              <h3 className="font-montserrat font-semibold text-lg mb-4 text-center">Couverture Île-de-France</h3>
+              <h3 className="font-montserrat font-semibold text-xl mb-4 text-center">Couverture Île-de-France</h3>
               
-              {/* Mini map container */}
-              <div className="relative h-[200px] w-full mb-4 rounded-xl overflow-hidden border border-gray-100">
+              {/* Mini map container - Made larger since the card spans 2 rows */}
+              <div className="relative h-[300px] w-full mb-4 rounded-xl overflow-hidden border border-gray-100 shadow-inner flex-grow bg-white">
                 <div ref={mapContainer} className="absolute inset-0"></div>
               </div>
               
-              {/* Délais d'intervention */}
-              <div className="grid grid-cols-3 gap-2 mt-4">
+              {/* Délais d'intervention - Enhanced styling */}
+              <div className="grid grid-cols-3 gap-4 mt-6 bg-white bg-opacity-70 p-4 rounded-lg border border-gray-100 shadow-sm">
                 <div className="text-center">
-                  <div className="inline-block w-3 h-3 bg-[#0B5394] rounded-full mb-1"></div>
-                  <p className="text-xs font-semibold">Yvelines</p>
-                  <p className="text-xs">45 min</p>
+                  <div className="inline-block w-4 h-4 bg-[#0B5394] rounded-full mb-2"></div>
+                  <p className="text-sm font-semibold">Yvelines</p>
+                  <p className="text-sm font-light">45 min</p>
                 </div>
                 <div className="text-center">
-                  <div className="inline-block w-3 h-3 bg-[#4A86E8] rounded-full mb-1"></div>
-                  <p className="text-xs font-semibold">Paris</p>
-                  <p className="text-xs">1 heure</p>
+                  <div className="inline-block w-4 h-4 bg-[#4A86E8] rounded-full mb-2"></div>
+                  <p className="text-sm font-semibold">Paris</p>
+                  <p className="text-sm font-light">1 heure</p>
                 </div>
                 <div className="text-center">
-                  <div className="inline-block w-3 h-3 bg-[#A4C2F4] rounded-full mb-1"></div>
-                  <p className="text-xs font-semibold">Grande couronne</p>
-                  <p className="text-xs">2 heures</p>
+                  <div className="inline-block w-4 h-4 bg-[#A4C2F4] rounded-full mb-2"></div>
+                  <p className="text-sm font-semibold">Grande couronne</p>
+                  <p className="text-sm font-light">2 heures</p>
                 </div>
               </div>
               
-              <div className="flex justify-center mt-4">
+              <div className="flex justify-center mt-6">
                 <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white rounded-full">
                   <Link to="/zone-intervention">En savoir plus</Link>
                 </Button>
