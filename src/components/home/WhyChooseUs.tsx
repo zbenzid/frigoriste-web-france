@@ -19,121 +19,211 @@ const WhyChooseUs = () => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mapbox/light-v11',
-      center: [1.91, 48.9], // Centre sur Les Mureaux
-      zoom: 9,
+      center: [2.1, 48.85], // Centered on Paris region
+      zoom: 8.5,
       attributionControl: false,
-      interactive: false // Disable interactions for simplified display
+      interactive: true // Enable interactions for better UX
     });
 
     map.current.on('load', () => {
       if (!map.current) return;
 
-      // Add simplified coverage areas with better defined zones
-      map.current.addSource('coverage', {
+      // Define polygon coordinates for better shaped coverage areas
+      const yvelinesCoords = [
+        [1.5, 48.9], [1.6, 48.7], [1.9, 48.6], 
+        [2.2, 48.65], [2.3, 48.8], [2.1, 49.0], 
+        [1.8, 49.05], [1.5, 48.9]
+      ];
+      
+      const petiteCouronneCoords = [
+        [2.2, 48.95], [2.5, 48.9], [2.6, 48.8],
+        [2.5, 48.7], [2.2, 48.6], [2.0, 48.7],
+        [1.9, 48.8], [2.0, 48.9], [2.2, 48.95]
+      ];
+      
+      const grandeCouronneCoords = [
+        [1.4, 49.1], [2.1, 49.2], [2.8, 49.0],
+        [3.0, 48.7], [2.9, 48.3], [2.5, 48.2],
+        [1.9, 48.3], [1.5, 48.5], [1.3, 48.8],
+        [1.4, 49.1]
+      ];
+
+      // Add coverage zones with better colors and shapes (from furthest to closest for better layering)
+      // Grande Couronne (2h) - furthest
+      map.current.addSource('grande-couronne', {
         type: 'geojson',
         data: {
-          type: 'FeatureCollection',
-          features: [
-            // Grande Couronne (2h) - furthest
-            {
-              type: 'Feature',
-              properties: { color: '#A4C2F4' },
-              geometry: {
-                type: 'Polygon',
-                coordinates: [[[1.4, 48.3], [1.4, 49.3], [3.0, 49.3], [3.0, 48.3], [1.4, 48.3]]]
-              }
-            },
-            // Paris (1h) - middle
-            {
-              type: 'Feature',
-              properties: { color: '#4A86E8' },
-              geometry: {
-                type: 'Polygon',
-                coordinates: [[[2.1, 48.7], [2.1, 49.1], [2.7, 49.1], [2.7, 48.7], [2.1, 48.7]]]
-              }
-            },
-            // Yvelines (45min) - closest
-            {
-              type: 'Feature',
-              properties: { color: '#0B5394' },
-              geometry: {
-                type: 'Polygon',
-                coordinates: [[[1.5, 48.7], [1.5, 49.1], [2.1, 49.1], [2.1, 48.7], [1.5, 48.7]]]
-              }
-            }
-          ]
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Polygon',
+            coordinates: [grandeCouronneCoords]
+          }
         }
       });
-
-      // Add all zones with different colors (from furthest to closest for better rendering)
+      
       map.current.addLayer({
-        id: 'grande-couronne',
+        id: 'grande-couronne-fill',
         type: 'fill',
-        source: 'coverage',
-        filter: ['==', ['get', 'color'], '#A4C2F4'],
+        source: 'grande-couronne',
+        layout: {},
         paint: {
           'fill-color': '#A4C2F4',
-          'fill-opacity': 0.3
+          'fill-opacity': 0.4
+        }
+      });
+      
+      map.current.addLayer({
+        id: 'grande-couronne-border',
+        type: 'line',
+        source: 'grande-couronne',
+        layout: {},
+        paint: {
+          'line-color': '#0B5394',
+          'line-width': 1
         }
       });
 
+      // Paris and petite couronne (1h) - middle
+      map.current.addSource('petite-couronne', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Polygon',
+            coordinates: [petiteCouronneCoords]
+          }
+        }
+      });
+      
       map.current.addLayer({
-        id: 'paris',
+        id: 'petite-couronne-fill',
         type: 'fill',
-        source: 'coverage',
-        filter: ['==', ['get', 'color'], '#4A86E8'],
+        source: 'petite-couronne',
+        layout: {},
         paint: {
-          'fill-color': '#4A86E8',
+          'fill-color': '#FF9900',
           'fill-opacity': 0.5
         }
       });
-
+      
       map.current.addLayer({
-        id: 'yvelines',
-        type: 'fill',
-        source: 'coverage',
-        filter: ['==', ['get', 'color'], '#0B5394'],
+        id: 'petite-couronne-border',
+        type: 'line',
+        source: 'petite-couronne',
+        layout: {},
         paint: {
-          'fill-color': '#0B5394',
-          'fill-opacity': 0.6
+          'line-color': '#FF9900',
+          'line-width': 1
         }
       });
 
-      // Add outline for all zones
+      // Yvelines (45min) - closest, on top
+      map.current.addSource('yvelines', {
+        type: 'geojson',
+        data: {
+          type: 'Feature',
+          properties: {},
+          geometry: {
+            type: 'Polygon',
+            coordinates: [yvelinesCoords]
+          }
+        }
+      });
+      
       map.current.addLayer({
-        id: 'coverage-outline',
-        type: 'line',
-        source: 'coverage',
+        id: 'yvelines-fill',
+        type: 'fill',
+        source: 'yvelines',
+        layout: {},
         paint: {
-          'line-color': ['get', 'color'],
-          'line-width': 2
+          'fill-color': '#CC0000',
+          'fill-opacity': 0.5
+        }
+      });
+      
+      map.current.addLayer({
+        id: 'yvelines-border',
+        type: 'line',
+        source: 'yvelines',
+        layout: {},
+        paint: {
+          'line-color': '#CC0000',
+          'line-width': 1
         }
       });
 
       // Add headquarters marker with prominent styling
-      const headquarters = new mapboxgl.Marker({
-        color: '#CC0000', // Rouge d'urgence pour attirer l'attention
-        scale: 1.2
-      }).setLngLat([1.91, 48.99]) // Les Mureaux coordinates
-      .addTo(map.current);
+      const lesMureauxMarker = document.createElement('div');
+      lesMureauxMarker.className = 'flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md';
+      lesMureauxMarker.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="1"/><path d="M9 18v3"/><path d="M15 18v3"/><path d="M9 6V3"/><path d="M15 6V3"/><path d="M14 10h2"/><path d="M14 14h2"/><path d="M8 10h2"/><path d="M8 14h2"/></svg>';
       
+      new mapboxgl.Marker(lesMureauxMarker)
+        .setLngLat([1.91, 48.98]) // Les Mureaux coordinates
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h3 class="font-bold">Les Mureaux</h3><p>Siège social</p>'))
+        .addTo(map.current);
+
+      // Add city markers with different colors based on zones
+      const cities = [
+        { name: 'Paris', coords: [2.35, 48.85], zone: 'petite' },
+        { name: 'Versailles', coords: [2.13, 48.80], zone: 'prioritaire' },
+        { name: 'Mantes-la-Jolie', coords: [1.70, 48.99], zone: 'prioritaire' },
+        { name: 'Saint-Germain', coords: [2.08, 48.90], zone: 'prioritaire' },
+        { name: 'Cergy', coords: [2.07, 49.03], zone: 'grande' },
+        { name: 'Évry', coords: [2.45, 48.63], zone: 'grande' },
+        { name: 'Créteil', coords: [2.47, 48.78], zone: 'petite' },
+        { name: 'Nanterre', coords: [2.20, 48.89], zone: 'petite' }
+      ];
+      
+      cities.forEach(city => {
+        const el = document.createElement('div');
+        el.className = 'flex items-center justify-center';
+        
+        let color;
+        switch(city.zone) {
+          case 'prioritaire':
+            color = '#CC0000';
+            break;
+          case 'petite':
+            color = '#FF9900';
+            break;
+          case 'grande':
+            color = '#0B5394';
+            break;
+          default:
+            color = '#333333';
+        }
+        
+        el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${color}" stroke="${color}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3" fill="white"/></svg>`;
+        
+        new mapboxgl.Marker(el)
+          .setLngLat(city.coords)
+          .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3 class="font-bold">${city.name}</h3>`))
+          .addTo(map.current);
+      });
+
       // Add department labels for better geographical context
-      const departmentLabels = [
-        { id: '78', name: '78', coordinates: [1.85, 48.9], fontSize: 16 },
-        { id: '75', name: '75', coordinates: [2.35, 48.85], fontSize: 14 },
-        { id: '91', name: '91', coordinates: [2.25, 48.5], fontSize: 12 },
-        { id: '95', name: '95', coordinates: [2.15, 49.05], fontSize: 12 }
+      const departments = [
+        { id: '78', name: '78', coords: [1.85, 48.82], fontSize: 20, color: '#CC0000' },
+        { id: '75', name: '75', coords: [2.35, 48.86], fontSize: 16, color: '#FF9900' },
+        { id: '92', name: '92', coords: [2.23, 48.83], fontSize: 14, color: '#FF9900' },
+        { id: '93', name: '93', coords: [2.45, 48.91], fontSize: 14, color: '#FF9900' },
+        { id: '94', name: '94', coords: [2.47, 48.77], fontSize: 14, color: '#FF9900' },
+        { id: '91', name: '91', coords: [2.25, 48.52], fontSize: 14, color: '#0B5394' },
+        { id: '95', name: '95', coords: [2.15, 49.05], fontSize: 14, color: '#0B5394' },
+        { id: '77', name: '77', coords: [2.95, 48.60], fontSize: 14, color: '#0B5394' }
       ];
 
-      departmentLabels.forEach(dept => {
+      departments.forEach(dept => {
         map.current?.addSource(`dept-${dept.id}`, {
           type: 'geojson',
           data: {
             type: 'Feature',
-            properties: {},
+            properties: { name: dept.name },
             geometry: {
               type: 'Point',
-              coordinates: dept.coordinates
+              coordinates: dept.coords
             }
           }
         });
@@ -149,12 +239,15 @@ const WhyChooseUs = () => {
             'text-anchor': 'center'
           },
           paint: {
-            'text-color': '#555',
+            'text-color': dept.color,
             'text-halo-color': '#fff',
             'text-halo-width': 1.5
           }
         });
       });
+
+      // Add navigation control
+      map.current.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
     });
 
     return () => {
@@ -229,30 +322,39 @@ const WhyChooseUs = () => {
               </div>
               <h3 className="font-montserrat font-semibold text-xl mb-2 text-center">Couverture Île-de-France</h3>
               <p className="text-gray-600 text-center mb-4">
-                Intervention rapide garantie dans toute l'Île-de-France avec délais optimisés selon votre département. Notre siège aux Mureaux (78) nous permet d'intervenir en priorité dans les Yvelines.
+                Nos équipes de techniciens certifiés sont positionnées stratégiquement en Île-de-France pour vous garantir des délais d'intervention rapides, adaptés à l'urgence de votre situation.
               </p>
               
               {/* Mini map container - Made larger since the card spans 2 rows */}
-              <div className="relative h-[300px] w-full mb-4 rounded-xl overflow-hidden border border-gray-100 shadow-inner flex-grow bg-white">
+              <div className="relative h-[320px] w-full mb-4 rounded-xl overflow-hidden border border-gray-100 shadow-inner flex-grow bg-white">
                 <div ref={mapContainer} className="absolute inset-0"></div>
               </div>
               
-              {/* Délais d'intervention - Enhanced styling */}
-              <div className="grid grid-cols-3 gap-4 mt-4 bg-white bg-opacity-70 p-4 rounded-lg border border-gray-100 shadow-sm">
-                <div className="text-center">
-                  <div className="inline-block w-5 h-5 bg-[#0B5394] rounded-full mb-2"></div>
-                  <p className="text-sm font-semibold">Yvelines</p>
-                  <p className="text-sm font-medium text-primary">45 min</p>
-                </div>
-                <div className="text-center">
-                  <div className="inline-block w-5 h-5 bg-[#4A86E8] rounded-full mb-2"></div>
-                  <p className="text-sm font-semibold">Paris</p>
-                  <p className="text-sm font-medium text-primary">1 heure</p>
-                </div>
-                <div className="text-center">
-                  <div className="inline-block w-5 h-5 bg-[#A4C2F4] rounded-full mb-2"></div>
-                  <p className="text-sm font-semibold">Grande couronne</p>
-                  <p className="text-sm font-medium text-primary">2 heures</p>
+              {/* Délais d'intervention - Enhanced styling with colors matching the map */}
+              <div className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+                <h4 className="font-semibold text-sm mb-3 text-gray-700">Délais d'intervention garantis :</h4>
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="p-2 rounded-lg bg-red-50 border border-red-100">
+                    <div className="flex items-center mb-1">
+                      <div className="w-4 h-4 rounded-md bg-[#CC0000] mr-2"></div>
+                      <p className="text-sm font-semibold text-gray-800">Yvelines (78)</p>
+                    </div>
+                    <p className="text-xs text-[#CC0000] font-medium ml-6">45 minutes max.</p>
+                  </div>
+                  <div className="p-2 rounded-lg bg-orange-50 border border-orange-100">
+                    <div className="flex items-center mb-1">
+                      <div className="w-4 h-4 rounded-md bg-[#FF9900] mr-2"></div>
+                      <p className="text-sm font-semibold text-gray-800">Paris & PC</p>
+                    </div>
+                    <p className="text-xs text-[#FF9900] font-medium ml-6">1 heure max.</p>
+                  </div>
+                  <div className="p-2 rounded-lg bg-blue-50 border border-blue-100">
+                    <div className="flex items-center mb-1">
+                      <div className="w-4 h-4 rounded-md bg-[#0B5394] mr-2"></div>
+                      <p className="text-sm font-semibold text-gray-800">Grande couronne</p>
+                    </div>
+                    <p className="text-xs text-[#0B5394] font-medium ml-6">2 heures max.</p>
+                  </div>
                 </div>
               </div>
               
