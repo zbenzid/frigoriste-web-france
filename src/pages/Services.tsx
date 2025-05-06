@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, BarChart3, Check, Lightbulb, Phone, Info, Award, Shield, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -13,7 +14,7 @@ const Services = () => {
       <div className="relative bg-primary overflow-hidden py-20 md:py-32 md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
         {/* Background image with proper overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-80 z-0"></div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581093588401-fbb62a02f120?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80')] bg-cover bg-center mix-blend-multiply"></div>
+        <div className="absolute inset-0 bg-[url('/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png')] bg-cover bg-center mix-blend-multiply"></div>
         
         {/* Decorative elements */}
         <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-white/10 blur-3xl"></div>
