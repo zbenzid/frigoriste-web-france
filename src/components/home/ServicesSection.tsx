@@ -120,10 +120,12 @@ const ServicesSection = () => {
           <div className="px-4">
             <Carousel
               opts={{
-                align: "start",
+                align: "center",
                 loop: true,
-                dragFree: true,
-                duration: 60, // Slower, smoother animation (milliseconds)
+                dragFree: false,
+                containScroll: "trimSnaps",
+                duration: 30, // Even smoother animation with faster response
+                skipSnaps: false, // Don't skip snaps for precise slide-by-slide navigation
               }}
               className="w-full"
               setApi={(api) => {
