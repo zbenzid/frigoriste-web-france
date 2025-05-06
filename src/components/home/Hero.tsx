@@ -8,7 +8,6 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import { useCarousel } from '@/components/ui/carousel';
 
 const Hero = () => {
   const videoContainerRef = useRef<HTMLDivElement>(null);
@@ -162,7 +161,7 @@ const Hero = () => {
                       <svg width="120" height="40" viewBox="0 0 120 40" className="w-auto h-10 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition">
                         <path d="M12.5,20 C12.5,15.8578644 15.8578644,12.5 20,12.5 L100,12.5 C104.142136,12.5 107.5,15.8578644 107.5,20 C107.5,24.1421356 104.142136,27.5 100,27.5 L20,27.5 C15.8578644,27.5 12.5,24.1421356 12.5,20 Z" fill="#E73931"/>
                         <path d="M35,20 C35,16.1340068 38.1340068,13 42,13 C45.8659932,13 49,16.1340068 49,20 C49,23.8659932 45.8659932,27 42,27 C38.1340068,27 35,23.8659932 35,20 Z" fill="white"/>
-                        <text x="60" y="24" font-family="Arial" font-size="12" font-weight="bold" text-anchor="middle" fill="white">MONOPRIX</text>
+                        <text x="60" y="24" fontFamily="Arial" fontSize="12" fontWeight="bold" textAnchor="middle" fill="white">MONOPRIX</text>
                       </svg>
                     </div>
                   </CarouselItem>
@@ -172,7 +171,7 @@ const Hero = () => {
                     <div className="flex items-center justify-center p-2 h-10">
                       <svg width="120" height="40" viewBox="0 0 120 40" className="w-auto h-10 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition">
                         <path d="M15,13 L105,13 C107.761424,13 110,15.2385763 110,18 L110,22 C110,24.7614237 107.761424,27 105,27 L15,27 C12.2385763,27 10,24.7614237 10,22 L10,18 C10,15.2385763 12.2385763,13 15,13 Z" fill="#E73931"/>
-                        <text x="60" y="23" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="white">LA MIE CÂLINE</text>
+                        <text x="60" y="23" fontFamily="Arial" fontSize="11" fontWeight="bold" textAnchor="middle" fill="white">LA MIE CÂLINE</text>
                       </svg>
                     </div>
                   </CarouselItem>
@@ -182,7 +181,7 @@ const Hero = () => {
                     <div className="flex items-center justify-center p-2 h-10">
                       <svg width="120" height="40" viewBox="0 0 120 40" className="w-auto h-10 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition">
                         <path d="M15,13 L105,13 C107.761424,13 110,15.2385763 110,18 L110,22 C110,24.7614237 107.761424,27 105,27 L15,27 C12.2385763,27 10,24.7614237 10,22 L10,18 C10,15.2385763 12.2385763,13 15,13 Z" fill="#2C6BB0"/>
-                        <text x="60" y="23" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="white">CARREFOUR CITY</text>
+                        <text x="60" y="23" fontFamily="Arial" fontSize="11" fontWeight="bold" textAnchor="middle" fill="white">CARREFOUR CITY</text>
                       </svg>
                     </div>
                   </CarouselItem>
@@ -192,7 +191,7 @@ const Hero = () => {
                     <div className="flex items-center justify-center p-2 h-10">
                       <svg width="120" height="40" viewBox="0 0 120 40" className="w-auto h-10 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition">
                         <path d="M15,13 L105,13 C107.761424,13 110,15.2385763 110,18 L110,22 C110,24.7614237 107.761424,27 105,27 L15,27 C12.2385763,27 10,24.7614237 10,22 L10,18 C10,15.2385763 12.2385763,13 15,13 Z" fill="#F7B334"/>
-                        <text x="60" y="23" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="#5A2D0C">BRIOCHE DORÉE</text>
+                        <text x="60" y="23" fontFamily="Arial" fontSize="11" fontWeight="bold" textAnchor="middle" fill="#5A2D0C">BRIOCHE DORÉE</text>
                       </svg>
                     </div>
                   </CarouselItem>
@@ -202,7 +201,7 @@ const Hero = () => {
                     <div className="flex items-center justify-center p-2 h-10">
                       <svg width="120" height="40" viewBox="0 0 120 40" className="w-auto h-10 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition">
                         <path d="M15,13 L105,13 C107.761424,13 110,15.2385763 110,18 L110,22 C110,24.7614237 107.761424,27 105,27 L15,27 C12.2385763,27 10,24.7614237 10,22 L10,18 C10,15.2385763 12.2385763,13 15,13 Z" fill="#1A9E51"/>
-                        <text x="60" y="23" font-family="Arial" font-size="11" font-weight="bold" text-anchor="middle" fill="white">CASINO</text>
+                        <text x="60" y="23" fontFamily="Arial" fontSize="11" fontWeight="bold" textAnchor="middle" fill="white">CASINO</text>
                       </svg>
                     </div>
                   </CarouselItem>
@@ -254,24 +253,21 @@ const Hero = () => {
         tabIndex={0}
         onClick={handleScrollToServices}
         onKeyDown={handleKeyDown}
-        style={{
-          "@media (max-height: 400px)": {
-            display: "none"
-          }
-        }}
       >
         <span className="text-sm mb-1">Découvrir nos services</span>
         <ChevronDown className="animate-bounce" size={24} />
       </div>
 
       {/* Custom CSS for height-based media query */}
-      <style jsx>{`
-        @media (max-height: 400px) {
-          [role="link"] {
-            display: none !important;
+      <style>
+        {`
+          @media (max-height: 400px) {
+            [role="link"] {
+              display: none !important;
+            }
           }
-        }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };
