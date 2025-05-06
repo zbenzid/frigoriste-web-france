@@ -1,8 +1,11 @@
+
 import React from 'react';
 import ServiceCard from './ServiceCard';
 import { Snowflake, Wind, Hammer, Wrench } from 'lucide-react';
+
 const ServicesSection = () => {
-  return <section className="py-20 relative overflow-hidden">
+  return (
+    <section className="py-20 relative overflow-hidden">
       {/* Fond moderne avec dégradé sophistiqué */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/30 z-0">
         {/* Effet glacé avec motifs subtils */}
@@ -20,12 +23,12 @@ const ServicesSection = () => {
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">NOS SERVICES</span>
-          <h2 className="text-3xl md:text-4xl font-bold font-montserrat mb-5 leading-tight">
-            <span className="relative">
-              Solutions complètes 
-              <span className="text-primary"> en réfrigération</span>
-            </span>
+          <span className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
+            NOS SERVICES
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold font-montserrat mb-5 leading-tight text-[#212121]">
+            Solutions complètes 
+            <span className="text-primary"> en réfrigération</span>
           </h2>
           <p className="text-gray-600 font-opensans max-w-2xl mx-auto">
             Nous proposons une gamme complète de services en réfrigération et climatisation pour répondre à tous vos besoins professionnels.
@@ -33,15 +36,41 @@ const ServicesSection = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <ServiceCard title="Dépannage frigorifique" description="Intervention rapide 24h/24 et 7j/7 pour tous vos équipements frigorifiques en panne." icon={Snowflake} link="/services#depannage" color="emergency" />
+          <ServiceCard 
+            title="Dépannage frigorifique" 
+            description="Intervention rapide 24h/24 et 7j/7 pour tous vos équipements frigorifiques en panne." 
+            icon={Snowflake} 
+            link="/services#depannage" 
+            color="emergency" 
+          />
           
-          <ServiceCard title="Installation climatisation" description="Installation sur-mesure de systèmes de climatisation pour tous types de locaux professionnels." icon={Wind} link="/services#climatisation" color="secondary" />
+          <ServiceCard 
+            title="Installation climatisation" 
+            description="Installation sur-mesure de systèmes de climatisation pour tous types de locaux professionnels." 
+            icon={Wind} 
+            link="/services#climatisation" 
+            color="secondary" 
+          />
           
-          <ServiceCard title="Installation chambres froides" description="Conception et installation de chambres froides adaptées à vos besoins spécifiques." icon={Hammer} link="/services#chambres-froides" color="primary" />
+          <ServiceCard 
+            title="Installation chambres froides" 
+            description="Conception et installation de chambres froides adaptées à vos besoins spécifiques." 
+            icon={Hammer} 
+            link="/services#chambres-froides" 
+            color="primary" 
+          />
           
-          <ServiceCard title="Maintenance préventive" description="Contrats de maintenance pour garantir la longévité et l'efficacité de vos installations." icon={Wrench} link="/services#maintenance" color="maintenance" />
+          <ServiceCard 
+            title="Maintenance préventive" 
+            description="Contrats de maintenance pour garantir la longévité et l'efficacité de vos installations." 
+            icon={Wrench} 
+            link="/services#maintenance" 
+            color="maintenance" 
+          />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default ServicesSection;
