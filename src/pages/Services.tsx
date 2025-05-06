@@ -3,10 +3,8 @@ import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, B
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-
 const Services = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       {/* Services Hero Banner - Modernized with glassmorphism and rounded corners */}
       <div className="relative bg-primary overflow-hidden py-20 md:py-32 md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
         {/* Background image with proper overlay */}
@@ -149,11 +147,7 @@ const Services = () => {
             </div>
             
             <div className="order-1 lg:order-2 overflow-hidden rounded-2xl shadow-xl">
-              <img 
-                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1738&q=80" 
-                alt="Technicien réparant un équipement frigorifique" 
-                className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-              />
+              <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1738&q=80" alt="Technicien réparant un équipement frigorifique" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
             </div>
           </div>
         </div>
@@ -164,11 +158,7 @@ const Services = () => {
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="overflow-hidden rounded-2xl shadow-xl">
-              <img 
-                src="https://images.unsplash.com/photo-1631646100842-13a6506abdbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1664&q=80" 
-                alt="Installation de système de climatisation" 
-                className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-              />
+              <img src="https://images.unsplash.com/photo-1631646100842-13a6506abdbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1664&q=80" alt="Installation de système de climatisation" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
             </div>
             
             <div>
@@ -418,11 +408,7 @@ const Services = () => {
             </div>
             
             <div className="order-1 lg:order-2 overflow-hidden rounded-2xl shadow-xl">
-              <img 
-                src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" 
-                alt="Chambre froide professionnelle" 
-                className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-              />
+              <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Chambre froide professionnelle" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
             </div>
           </div>
         </div>
@@ -433,11 +419,7 @@ const Services = () => {
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="overflow-hidden rounded-2xl shadow-xl">
-              <img 
-                src="https://images.unsplash.com/photo-1616244013240-227c94d067e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" 
-                alt="Maintenance préventive d'équipement frigorifique" 
-                className="w-full h-full object-cover transition-transform hover:scale-105 duration-500"
-              />
+              <img src="https://images.unsplash.com/photo-1616244013240-227c94d067e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Maintenance préventive d'équipement frigorifique" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
             </div>
             
             <div>
@@ -621,7 +603,7 @@ const Services = () => {
               </ul>
             </div>
             
-            <div className="bg-white p-10 rounded-xl shadow-lg border border-gray-100 relative">
+            <div className="bg-white p-10 rounded-xl shadow-lg border border-gray-100 relative px-[20px] py-[20px]">
               <div className="absolute -top-5 -right-5 w-20 h-20 rounded-full bg-secondary/10 blur-xl"></div>
               <div className="absolute -bottom-5 -left-5 w-24 h-24 rounded-full bg-primary/10 blur-xl"></div>
               
@@ -635,7 +617,7 @@ const Services = () => {
                         <Phone size={24} />
                       </div>
                       <div>
-                        <h4 className="text-lg font-bold text-gray-800 mb-1">Besoin d'une intervention urgente ?</h4>
+                        <h4 className="font-bold text-gray-800 mb-1 text-lg">Besoin d'une intervention urgente ?</h4>
                         <p className="text-gray-600 mb-4">Notre équipe est disponible 24/7 pour toutes vos urgences</p>
                         <Link to="tel:0185500284" className="btn-emergency inline-flex">
                           <Phone size={20} className="mr-2" />
@@ -666,8 +648,6 @@ const Services = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default Services;
