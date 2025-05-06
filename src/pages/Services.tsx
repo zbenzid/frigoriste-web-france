@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, BarChart3, Check, Lightbulb, Phone, Info, Award, Shield, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -46,18 +45,12 @@ const Services = () => {
             <div className="relative">
               {/* Conteneur de l'image avec cadre esthétique */}
               <div className="overflow-hidden rounded-2xl shadow-xl relative aspect-[4/3] md:aspect-[16/9] h-full">
-                {/* Fond dégradé pour l'effet premium */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black/50 to-primary/60 mix-blend-multiply z-10"></div>
-                
-                {/* Image principale */}
+                {/* Image principale - sans gradient d'assombrissement */}
                 <img 
                   src="/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png" 
                   alt="Nos services de réfrigération" 
                   className="w-full h-full object-cover"
                 />
-                
-                {/* Léger vignettage pour aspect premium */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/20 z-20"></div>
                 
                 {/* Élément décoratif - Badge ou indication de service 24/7 */}
                 <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white font-bold text-sm border border-white/20 shadow-lg z-30 flex items-center">
