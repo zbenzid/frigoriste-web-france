@@ -26,13 +26,13 @@ const Services = () => {
               
               {/* Premium call-to-action */}
               <div className="flex flex-wrap gap-4 mt-10">
-                <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl">
+                <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl hover:translate-y-[-2px]">
                   <span className="relative flex items-center justify-center">
                     <Phone size={20} className="mr-2" />
                     01 85 50 02 84
                   </span>
                 </a>
-                <Link to="/contact" className="group relative overflow-hidden rounded-full bg-primary hover:bg-primary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl">
+                <Link to="/contact" className="group relative overflow-hidden rounded-full bg-primary hover:bg-primary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl hover:translate-y-[-2px]">
                   <span className="relative flex items-center justify-center">
                     Demander un devis
                     <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -109,13 +109,16 @@ const Services = () => {
               </div>
               
               <div className="flex flex-wrap gap-4">
-                <a href="tel:0185500284" className="btn-emergency inline-flex items-center">
-                  Dépannage urgent : 01 85 50 02 84 <ArrowRight size={18} className="ml-2" />
+                <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl hover:translate-y-[-2px]">
+                  <span className="relative flex items-center justify-center">
+                    <Phone size={20} className="mr-2" />
+                    Dépannage urgent : 01 85 50 02 84
+                  </span>
                 </a>
                 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="info" className="flex items-center">
+                    <Button variant="info" className="rounded-full text-lg hover:translate-y-[-2px] shadow-lg hover:shadow-primary/30 hover:shadow-xl">
                       <Info size={18} className="mr-1" />
                       En savoir plus
                     </Button>
@@ -340,13 +343,16 @@ const Services = () => {
               </div>
               
               <div className="flex flex-wrap gap-4">
-                <Link to="/contact" className="btn-primary inline-flex items-center">
-                  Étudier votre projet <ArrowRight size={18} className="ml-2" />
+                <Link to="/contact" className="group relative overflow-hidden rounded-full bg-primary hover:bg-primary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl hover:translate-y-[-2px]">
+                  <span className="relative flex items-center justify-center">
+                    Étudier votre projet
+                    <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Link>
                 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="info" className="flex items-center">
+                    <Button variant="info" className="rounded-full text-lg hover:translate-y-[-2px] shadow-lg hover:shadow-primary/30 hover:shadow-xl">
                       <Info size={18} className="mr-1" />
                       En savoir plus
                     </Button>
