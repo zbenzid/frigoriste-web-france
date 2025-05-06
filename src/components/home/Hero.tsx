@@ -21,7 +21,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative bg-gray-900 overflow-hidden min-h-[400px] md:aspect-video md:mx-0 lg:mx-6 xl:mx-12 2xl:mx-auto 2xl:max-w-screen-2xl 2xl:rounded-xl">
+    <section className="relative isolate overflow-hidden md:aspect-video min-h-[400px] mx-auto lg:mx-6 xl:mx-12 2xl:mx-auto 2xl:max-w-screen-2xl 2xl:rounded-xl">
       {/* Video background with overlay */}
       <div 
         ref={videoContainerRef} 
@@ -75,7 +75,6 @@ const Hero = () => {
               title="Le Frigoriste Background Video" 
               frameBorder="0" 
               aria-label="Vidéo d'atelier LeFrigoriste.fr"
-              preload="none"
             />
           </div>
         )}
