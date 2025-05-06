@@ -80,11 +80,11 @@ const Testimonials = () => {
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-12">
-          <span className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
+          <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
             AVIS CLIENTS
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-montserrat leading-tight">
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Nos clients témoignent</span>
+          </div>
+          <h2 className="text-3xl font-montserrat font-bold mb-4 text-[#212121] md:text-4xl">
+            Nos clients <span className="text-primary">témoignent</span>
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto font-opensans">
             Découvrez pourquoi nos clients professionnels nous font confiance pour leurs équipements de réfrigération et climatisation.
