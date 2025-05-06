@@ -1,6 +1,5 @@
 import React from 'react';
 import { Star, MessageSquare } from 'lucide-react';
-
 interface Testimonial {
   id: number;
   name: string;
@@ -9,37 +8,30 @@ interface Testimonial {
   testimonial: string;
   rating: number;
 }
-
 const Testimonials = () => {
-  const testimonials: Testimonial[] = [
-    {
-      id: 1,
-      name: "Michel Dupont",
-      business: "Boulangerie Les Délices",
-      position: "Propriétaire",
-      testimonial: "Suite à une panne de notre chambre froide un dimanche soir, LeFrigoriste.fr est intervenu en moins d'une heure. Grâce à leur réactivité, nous avons pu sauver notre stock. Un grand merci !",
-      rating: 5
-    },
-    {
-      id: 2,
-      name: "Sophie Martin",
-      business: "Restaurant Le Gourmet",
-      position: "Gérante",
-      testimonial: "Nous travaillons avec LeFrigoriste.fr depuis deux ans pour la maintenance de nos équipements frigorifiques. Service professionnel et de qualité. Très satisfaits !",
-      rating: 5
-    },
-    {
-      id: 3,
-      name: "Jean Moreau",
-      business: "Supermarché Proxim",
-      position: "Directeur",
-      testimonial: "Installation d'une nouvelle chambre froide réalisée dans les délais et le budget prévus. Équipe compétente et à l'écoute de nos besoins spécifiques.",
-      rating: 4
-    }
-  ];
-
-  return (
-    <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-white via-gray-50/50 to-blue-50/20">
+  const testimonials: Testimonial[] = [{
+    id: 1,
+    name: "Michel Dupont",
+    business: "Boulangerie Les Délices",
+    position: "Propriétaire",
+    testimonial: "Suite à une panne de notre chambre froide un dimanche soir, LeFrigoriste.fr est intervenu en moins d'une heure. Grâce à leur réactivité, nous avons pu sauver notre stock. Un grand merci !",
+    rating: 5
+  }, {
+    id: 2,
+    name: "Sophie Martin",
+    business: "Restaurant Le Gourmet",
+    position: "Gérante",
+    testimonial: "Nous travaillons avec LeFrigoriste.fr depuis deux ans pour la maintenance de nos équipements frigorifiques. Service professionnel et de qualité. Très satisfaits !",
+    rating: 5
+  }, {
+    id: 3,
+    name: "Jean Moreau",
+    business: "Supermarché Proxim",
+    position: "Directeur",
+    testimonial: "Installation d'une nouvelle chambre froide réalisée dans les délais et le budget prévus. Équipe compétente et à l'écoute de nos besoins spécifiques.",
+    rating: 4
+  }];
+  return <section className="py-16 md:py-24 relative overflow-hidden bg-gradient-to-b from-white via-gray-50/50 to-blue-50/20">
       {/* Fond avec subtils dégradés */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-50/30 via-transparent to-transparent"></div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-secondary/5 via-transparent to-transparent"></div>
@@ -50,7 +42,7 @@ const Testimonials = () => {
       
       {/* Éléments de citation stylisés */}
       <MessageSquare className="absolute top-20 right-[15%] w-16 h-16 text-secondary/10" strokeWidth={0.5} />
-      <MessageSquare className="absolute bottom-32 left-[10%] w-12 h-12 text-primary/10" strokeWidth={0.5} />
+      
       <MessageSquare className="absolute top-1/2 left-1/4 w-8 h-8 text-secondary/5" strokeWidth={0.5} />
       
       <div className="container-custom relative z-10">
@@ -67,17 +59,10 @@ const Testimonials = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((testimonial) => (
-            <div key={testimonial.id} className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden group hover:-translate-y-1 border border-gray-100/50">
+          {testimonials.map(testimonial => <div key={testimonial.id} className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl overflow-hidden group hover:-translate-y-1 border border-gray-100/50">
               <div className="p-6">
                 <div className="flex mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star 
-                      key={i} 
-                      size={20} 
-                      className={i < testimonial.rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"} 
-                    />
-                  ))}
+                  {[...Array(5)].map((_, i) => <Star key={i} size={20} className={i < testimonial.rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"} />)}
                 </div>
                 <p className="text-gray-600 italic mb-6">"{testimonial.testimonial}"</p>
                 <div className="flex items-center">
@@ -91,12 +76,9 @@ const Testimonials = () => {
                 </div>
               </div>
               <div className="h-1 w-full bg-gradient-to-r from-primary via-secondary to-blue-100 opacity-80 transform origin-left transition-all duration-300 group-hover:opacity-100"></div>
-            </div>
-          ))}
+            </div>)}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Testimonials;
