@@ -33,7 +33,7 @@ const Index = () => {
               <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-2">
                 À VOTRE SERVICE 24/7
               </div>
-              <h2 className="text-3xl md:text-4xl font-bold text-primary">Besoin d'une intervention ou d'un devis ?</h2>
+              <h2 className="md:text-4xl font-bold text-primary text-2xl">Besoin d'une intervention ou d'un devis ?</h2>
               <p className="text-gray-600 text-lg">Notre équipe de techniciens certifiés réponds à toutes vos urgences frigorifiques et besoins en climatisation dans toute l'Île-de-France.</p>
               
               <ul className="space-y-4 mx-0">
@@ -41,7 +41,7 @@ const Index = () => {
                   <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
                     <Clock size={20} strokeWidth={1.5} />
                   </div>
-                  <span className="text-lg px-0">Intervention rapide garantie : 45 min Yvelines • 1h Paris</span>
+                  <span className="text-lg px-0">Intervention rapide garantie : 45min Yvelines • 1h Paris</span>
                 </li>
                 <li className="flex items-center">
                   <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
