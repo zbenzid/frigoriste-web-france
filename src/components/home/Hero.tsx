@@ -1,3 +1,4 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import { Phone, ArrowRight, ArrowDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -65,7 +66,8 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [emblaApi]);
 
-  return <div className="relative bg-gray-900 overflow-hidden min-h-[80vh]">
+  return (
+    <div className="relative bg-gray-900 overflow-hidden min-h-[80vh]">
       {/* Video background with overlay */}
       <div ref={videoContainerRef} className="absolute inset-0 z-0 bg-black">
         {isMobile ? (
@@ -224,4 +226,43 @@ const Hero = () => {
                         <path d="M27.9 12.4H21.2C20.2 12.4 19.3 12.8 18.6 13.5C17.9 14.2 17.5 15.1 17.5 16.1V26.5C17.5 27.5 17.9 28.4 18.6 29.1C19.3 29.8 20.2 30.2 21.2 30.2H27.9C28.9 30.2 29.8 29.8 30.5 29.1C31.2 28.4 31.6 27.5 31.6 26.5V16.1C31.6 15.1 31.2 14.2 30.5 13.5C29.8 12.7 29 12.4 27.9 12.4Z" fill="currentColor"/>
                         <path d="M47.3 12.4H40.6C39.6 12.4 38.7 12.8 38 13.5C37.3 14.2 36.9 15.1 36.9 16.1V26.5C36.9 27.5 37.3 28.4 38 29.1C38.7 29.8 39.6 30.2 40.6 30.2H47.3C48.3 30.2 49.2 29.8 49.9 29.1C50.6 28.4 51 27.5 51 26.5V16.1C51 15.1 50.6 14.2 49.9 13.5C49.2 12.7 48.4 12.4 47.3 12.4Z" fill="currentColor"/>
                         <path d="M66.7 12.4H60C59 12.4 58.1 12.8 57.4 13.5C56.7 14.2 56.3 15.1 56.3 16.1V26.5C56.3 27.5 56.7 28.4 57.4 29.1C58.1 29.8 59 30.2 60 30.2H66.7C67.7 30.2 68.6 29.8 69.3 29.1C70 28.4 70.4 27.5 70.4 26.5V16.1C70.4 15.1 70 14.2 69.3 13.5C68.6 12.7 67.8 12.4 66.7 12.4Z" fill="currentColor"/>
-                        <path d="M86.1 12.4H79.4C78.4 12.4 77.5
+                      </svg>
+                    </div>
+                    <span className="sr-only">Client — Picard logo</span>
+                  </CarouselItem>
+                </CarouselContent>
+              </Carousel>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Floating mobile CTA button */}
+      {!isMainCtaVisible && (
+        <Button 
+          size="icon" 
+          variant="destructive" 
+          asChild 
+          className="fixed bottom-6 right-6 lg:hidden z-40 shadow-lg animate-pulse delay-[10000ms]"
+        >
+          <a href="tel:0185500284" aria-label="Appeler LeFrigoriste.fr">
+            <Phone className="h-6 w-6" />
+          </a>
+        </Button>
+      )}
+
+      {/* Scroll cue */}
+      <Link 
+        to="#services" 
+        aria-label="Découvrir nos services"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 animate-bounce z-20"
+      >
+        <Button variant="ghost" size="icon" className="rounded-full bg-white/10 backdrop-blur-sm">
+          <ArrowDown className="h-5 w-5 text-white" />
+        </Button>
+      </Link>
+    </div>
+  );
+};
+
+export default Hero;
