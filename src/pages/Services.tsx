@@ -227,13 +227,16 @@ const Services = () => {
               </div>
               
               <div className="flex flex-wrap gap-4">
-                <Link to="/contact" className="btn-secondary inline-flex items-center">
-                  Demander un devis gratuit <ArrowRight size={18} className="ml-2" />
+                <Link to="/contact" className="group relative overflow-hidden rounded-full bg-secondary hover:bg-secondary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-secondary/30 hover:shadow-xl hover:translate-y-[-2px]">
+                  <span className="relative flex items-center justify-center">
+                    Demander un devis gratuit
+                    <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Link>
                 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="info" className="flex items-center">
+                    <Button variant="info" className="rounded-full text-lg hover:translate-y-[-2px] shadow-lg hover:shadow-secondary/30 hover:shadow-xl">
                       <Info size={18} className="mr-1" />
                       En savoir plus
                     </Button>
@@ -491,13 +494,16 @@ const Services = () => {
               </div>
               
               <div className="flex flex-wrap gap-4">
-                <Link to="/contact" className="btn-maintenance inline-flex items-center">
-                  Souscrire à un contrat <ArrowRight size={18} className="ml-2" />
+                <Link to="/contact" className="group relative overflow-hidden rounded-full bg-maintenance hover:bg-maintenance/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-maintenance/30 hover:shadow-xl hover:translate-y-[-2px]">
+                  <span className="relative flex items-center justify-center">
+                    Souscrire à un contrat
+                    <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Link>
                 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="info" className="flex items-center">
+                    <Button variant="info" className="rounded-full text-lg hover:translate-y-[-2px] shadow-lg hover:shadow-maintenance/30 hover:shadow-xl">
                       <Info size={18} className="mr-1" />
                       En savoir plus
                     </Button>
