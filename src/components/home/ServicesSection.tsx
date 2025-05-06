@@ -23,8 +23,8 @@ const ServicesSection = () => {
       
       <div className="container-custom relative z-10">
         <div className="text-center mb-16">
-          <span className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary font-montserrat text-sm font-semibold mb-4">
-            Nos services
+          <span className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
+            POURQUOI NOUS CHOISIR
           </span>
           <h2 className="text-3xl md:text-4xl font-bold font-montserrat mb-5 leading-tight">
             <span className="relative">
