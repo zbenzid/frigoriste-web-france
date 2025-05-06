@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Clock, Award, Wrench, Shield, MapPin } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -6,10 +5,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const WhyChooseUs = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     if (!mapContainer.current || map.current) return;
@@ -285,6 +286,66 @@ const WhyChooseUs = () => {
     }
   ];
 
+  // Legend component for mobile rendering
+  const MobileLegend = () => (
+    <div className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+      <h4 className="font-semibold text-sm mb-3 text-gray-700">Délais d'intervention garantis :</h4>
+      <div className="flex flex-col space-y-2.5">
+        <div className="p-3 rounded-xl bg-red-50/80 border border-red-100 flex items-center justify-between">
+          <div className="flex items-center">
+            <div className="w-3 h-3 rounded-md bg-[#CC0000] mr-2"></div>
+            <p className="text-xs font-semibold text-gray-800">Yvelines (78)</p>
+          </div>
+          <p className="text-xs font-bold text-[#CC0000]">45 min max.</p>
+        </div>
+        <div className="p-3 rounded-xl bg-orange-50/80 border border-orange-100 flex items-center justify-between">
+          <div className="flex items-center">
+            <div className="w-3 h-3 rounded-md bg-[#FF9900] mr-2"></div>
+            <p className="text-xs font-semibold text-gray-800">Paris & PC</p>
+          </div>
+          <p className="text-xs font-bold text-[#FF9900]">1h max.</p>
+        </div>
+        <div className="p-3 rounded-xl bg-blue-50/80 border border-blue-100 flex items-center justify-between">
+          <div className="flex items-center">
+            <div className="w-3 h-3 rounded-md bg-[#0B5394] mr-2"></div>
+            <p className="text-xs font-semibold text-gray-800">Grande couronne</p>
+          </div>
+          <p className="text-xs font-bold text-[#0B5394]">2h max.</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  // Desktop legend
+  const DesktopLegend = () => (
+    <div className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
+      <h4 className="font-semibold text-sm mb-3 text-gray-700">Délais d'intervention garantis :</h4>
+      <div className="grid grid-cols-3 gap-4">
+        <div className="p-2 rounded-lg bg-red-50 border border-red-100">
+          <div className="flex items-center mb-1">
+            <div className="w-4 h-4 rounded-md bg-[#CC0000] mr-2"></div>
+            <p className="text-sm font-semibold text-gray-800">Yvelines (78)</p>
+          </div>
+          <p className="text-xs text-[#CC0000] font-medium ml-6">45 minutes max.</p>
+        </div>
+        <div className="p-2 rounded-lg bg-orange-50 border border-orange-100">
+          <div className="flex items-center mb-1">
+            <div className="w-4 h-4 rounded-md bg-[#FF9900] mr-2"></div>
+            <p className="text-sm font-semibold text-gray-800">Paris & PC</p>
+          </div>
+          <p className="text-xs text-[#FF9900] font-medium ml-6">1 heure max.</p>
+        </div>
+        <div className="p-2 rounded-lg bg-blue-50 border border-blue-100">
+          <div className="flex items-center mb-1">
+            <div className="w-4 h-4 rounded-md bg-[#0B5394] mr-2"></div>
+            <p className="text-sm font-semibold text-gray-800">Grande couronne</p>
+          </div>
+          <p className="text-xs text-[#0B5394] font-medium ml-6">2 heures max.</p>
+        </div>
+      </div>
+    </div>
+  );
+
   return <section className="py-20 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 z-0">
@@ -336,33 +397,8 @@ const WhyChooseUs = () => {
                 <div ref={mapContainer} className="absolute inset-0"></div>
               </div>
               
-              {/* Délais d'intervention - Enhanced styling with colors matching the map */}
-              <div className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm">
-                <h4 className="font-semibold text-sm mb-3 text-gray-700">Délais d'intervention garantis :</h4>
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="p-2 rounded-lg bg-red-50 border border-red-100">
-                    <div className="flex items-center mb-1">
-                      <div className="w-4 h-4 rounded-md bg-[#CC0000] mr-2"></div>
-                      <p className="text-sm font-semibold text-gray-800">Yvelines (78)</p>
-                    </div>
-                    <p className="text-xs text-[#CC0000] font-medium ml-6">45 minutes max.</p>
-                  </div>
-                  <div className="p-2 rounded-lg bg-orange-50 border border-orange-100">
-                    <div className="flex items-center mb-1">
-                      <div className="w-4 h-4 rounded-md bg-[#FF9900] mr-2"></div>
-                      <p className="text-sm font-semibold text-gray-800">Paris & PC</p>
-                    </div>
-                    <p className="text-xs text-[#FF9900] font-medium ml-6">1 heure max.</p>
-                  </div>
-                  <div className="p-2 rounded-lg bg-blue-50 border border-blue-100">
-                    <div className="flex items-center mb-1">
-                      <div className="w-4 h-4 rounded-md bg-[#0B5394] mr-2"></div>
-                      <p className="text-sm font-semibold text-gray-800">Grande couronne</p>
-                    </div>
-                    <p className="text-xs text-[#0B5394] font-medium ml-6">2 heures max.</p>
-                  </div>
-                </div>
-              </div>
+              {/* Conditional rendering based on screen size */}
+              {isMobile ? <MobileLegend /> : <DesktopLegend />}
               
               <div className="flex justify-center mt-6">
                 <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white rounded-full">
