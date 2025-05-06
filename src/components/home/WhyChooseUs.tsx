@@ -30,19 +30,15 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden">
-      {/* Fond décoratif subtil */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50/30 to-white z-0 pointer-events-none"></div>
-      
-      <div className="container-custom relative z-10">
+    <section className="py-20 bg-[#F1F1F1]">
+      <div className="container-custom">
         {/* En-tête de section */}
         <div className="mb-12 text-center">
           <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
             POURQUOI NOUS CHOISIR
           </div>
-          <h2 className="text-3xl md:text-4xl font-montserrat font-bold mb-4 text-[#212121] relative inline-block">
+          <h2 className="text-3xl md:text-4xl font-montserrat font-bold mb-4 text-[#212121]">
             Pourquoi <span className="text-primary">LeFrigoriste.fr</span> est le choix idéal pour vous
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-70"></div>
           </h2>
         </div>
         
@@ -65,8 +61,7 @@ const WhyChooseUs = () => {
 
           {/* Carte centrale plus grande avec un accent bleu profond */}
           <Card className="border-0 bg-primary text-white col-span-1 md:col-span-2 rounded-xl overflow-hidden">
-            <CardContent className="p-8 relative">
-              <div className="absolute top-0 right-0 left-0 h-1 bg-blue-300/30"></div>
+            <CardContent className="p-8">
               <div className="mb-6 flex items-center justify-center">
                 <div className="w-16 h-16 rounded-full border-2 border-white flex items-center justify-center">
                   <Wrench size={36} className="text-white" />
@@ -100,11 +95,11 @@ const WhyChooseUs = () => {
           ))}
         </div>
 
-        {/* Citation Google Reviews avec étoiles améliorées */}
+        {/* Citation Google Reviews */}
         <div className="mt-12 text-center">
           <div className="inline-flex items-center">
             <div className="text-yellow-400 flex">
-              {'★★★★★'}
+              {'★'.repeat(5)}
             </div>
             <span className="ml-2 text-gray-700 font-opensans">4.9/5 basé sur plus de 50 avis clients Google</span>
           </div>
