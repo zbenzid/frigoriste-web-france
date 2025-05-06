@@ -108,7 +108,7 @@ const Testimonials = () => {
             <div className="text-amber-500 flex mb-2 md:mb-0">
               {'★'.repeat(5).split('').map((star, index) => <span key={index} className="text-2xl">★</span>)}
             </div>
-            <span className="md:ml-2 text-gray-700 font-opensans">4.9/5 basé sur plus de 50 avis clients Google</span>
+            <span className="md:ml-2 text-gray-700 font-opensans">4.9/5 sur +50 avis clients Google</span>
           </div>
         </div>
       </div>
