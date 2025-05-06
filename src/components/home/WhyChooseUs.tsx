@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Clock, Award, Wrench, Shield, MapPin } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
@@ -35,13 +34,13 @@ const WhyChooseUs = () => {
           <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
             POURQUOI NOUS CHOISIR
           </div>
-          <h2 className="text-3xl font-montserrat font-bold mb-4 text-[#212121] md:text-4xl">
+          <h2 className="font-montserrat font-bold mb-4 text-[#212121] text-2xl md:text-4xl">
             Pourquoi <span className="text-primary">LeFrigoriste.fr</span> est le choix idéal pour vous
           </h2>
         </div>
         
         {/* Disposition des cartes en grille */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-[16px]">
           {/* Première rangée de cartes */}
           {reasons.slice(0, 2).map((reason, index) => <Card key={index} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
               <CardContent className="p-6">
@@ -66,7 +65,7 @@ const WhyChooseUs = () => {
                   <Wrench size={36} className="text-white" />
                 </div>
               </div>
-              <h3 className="font-montserrat font-bold text-2xl mb-4 text-center relative z-10">Solutions Sur-Mesure</h3>
+              <h3 className="font-montserrat font-bold mb-4 text-center relative z-10 text-xl">Solutions Sur-Mesure</h3>
               <p className="mb-6 text-center font-opensans relative z-10">
                 Chez LeFrigoriste.fr, nous comprenons l'importance vitale de vos équipements frigorifiques pour votre activité. C'est pourquoi notre équipe propose des solutions adaptées à vos besoins spécifiques.
               </p>

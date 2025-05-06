@@ -6,7 +6,7 @@ const ServicesSection = () => {
       {/* Fond moderne avec dégradé sophistiqué */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/30 z-0">
         {/* Effet glacé avec motifs subtils */}
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwQjUzOTQiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NEgwdjJoNHY0aDJWNmg0VjRoLTR6TTYgMzR2LTRINHY0SDB2Mmg0djRoMnYtNGg0di0ySDZ6TTYgNFYwSDR2NEgwdjJoNHY0aDJWNmg0VjRINnoiLz48L2c+PC9nPjwvc3ZnPg==')] z-10"></div>
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwQjUzOTQiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NEgwdjJoNHY0aDJWNmg0VjRoLTR6TTYgMzR2LTRINHY0SDB2Mmg0djRoMnYtNGg0di0ySDZ6TTYgNFYwSDR2NEgwdjJoNHY0aDJWNmg0VjRINnoiLz48L2c+PC9nPjwvc3ZnPg==')] z-10 px-0"></div>
       </div>
       
       {/* Éléments décoratifs glacés */}
@@ -23,7 +23,7 @@ const ServicesSection = () => {
           <span className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
             NOS SERVICES
           </span>
-          <h2 className="text-3xl font-bold font-montserrat mb-5 leading-tight text-[#212121] md:text-4xl">
+          <h2 className="font-bold font-montserrat mb-5 leading-tight text-[#212121] md:text-4xl text-2xl">
             Solutions complètes 
             <span className="text-primary"> en réfrigération</span>
           </h2>
@@ -32,7 +32,7 @@ const ServicesSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-[16px]">
           <ServiceCard title="Dépannage frigorifique" description="Intervention rapide 24h/24 et 7j/7 pour tous vos équipements frigorifiques en panne." icon={Snowflake} link="/services#depannage" color="emergency" />
           
           <ServiceCard title="Installation climatisation" description="Installation sur-mesure de systèmes de climatisation pour tous types de locaux professionnels." icon={Wind} link="/services#climatisation" color="secondary" />
