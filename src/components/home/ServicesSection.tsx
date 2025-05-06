@@ -1,8 +1,46 @@
 import React from 'react';
 import ServiceCard from './ServiceCard';
 import { Snowflake, Wind, Hammer, Wrench } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+
 const ServicesSection = () => {
-  return <section className="py-20 relative overflow-hidden">
+  const isMobile = useIsMobile();
+  
+  // Service card data
+  const services = [
+    {
+      title: "Dépannage frigorifique",
+      description: "Intervention rapide 24h/24 et 7j/7 pour tous vos équipements frigorifiques en panne.",
+      icon: Snowflake,
+      link: "/services#depannage",
+      color: "emergency" as const
+    },
+    {
+      title: "Installation climatisation",
+      description: "Installation sur-mesure de systèmes de climatisation pour tous types de locaux professionnels.",
+      icon: Wind,
+      link: "/services#climatisation",
+      color: "secondary" as const
+    },
+    {
+      title: "Installation chambres froides",
+      description: "Conception et installation de chambres froides adaptées à vos besoins spécifiques.",
+      icon: Hammer,
+      link: "/services#chambres-froides",
+      color: "primary" as const
+    },
+    {
+      title: "Maintenance préventive",
+      description: "Contrats de maintenance pour garantir la longévité et l'efficacité de vos installations.",
+      icon: Wrench,
+      link: "/services#maintenance",
+      color: "maintenance" as const
+    }
+  ];
+
+  return (
+    <section id="services" className="py-20 relative overflow-hidden">
       {/* Fond moderne avec dégradé sophistiqué */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/30 z-0">
         {/* Effet glacé avec motifs subtils */}
@@ -32,16 +70,52 @@ const ServicesSection = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-[16px]">
-          <ServiceCard title="Dépannage frigorifique" description="Intervention rapide 24h/24 et 7j/7 pour tous vos équipements frigorifiques en panne." icon={Snowflake} link="/services#depannage" color="emergency" />
-          
-          <ServiceCard title="Installation climatisation" description="Installation sur-mesure de systèmes de climatisation pour tous types de locaux professionnels." icon={Wind} link="/services#climatisation" color="secondary" />
-          
-          <ServiceCard title="Installation chambres froides" description="Conception et installation de chambres froides adaptées à vos besoins spécifiques." icon={Hammer} link="/services#chambres-froides" color="primary" />
-          
-          <ServiceCard title="Maintenance préventive" description="Contrats de maintenance pour garantir la longévité et l'efficacité de vos installations." icon={Wrench} link="/services#maintenance" color="maintenance" />
-        </div>
+        {/* Render carousel for mobile view and grid for desktop */}
+        {isMobile ? (
+          <div className="px-4">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent>
+                {services.map((service, index) => (
+                  <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                    <ServiceCard 
+                      title={service.title}
+                      description={service.description}
+                      icon={service.icon}
+                      link={service.link}
+                      color={service.color}
+                    />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <div className="flex justify-center gap-2 mt-6">
+                <CarouselPrevious className="relative static left-0 right-auto translate-y-0" />
+                <CarouselNext className="relative static right-0 left-auto translate-y-0" />
+              </div>
+            </Carousel>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-[16px]">
+            {services.map((service, index) => (
+              <ServiceCard
+                key={index}
+                title={service.title}
+                description={service.description}
+                icon={service.icon}
+                link={service.link}
+                color={service.color}
+              />
+            ))}
+          </div>
+        )}
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default ServicesSection;
