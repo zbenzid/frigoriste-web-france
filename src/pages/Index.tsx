@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
@@ -6,7 +5,6 @@ import WhyChooseUs from '@/components/home/WhyChooseUs';
 import Testimonials from '@/components/home/Testimonials';
 import { ArrowRight, Phone, Mail, Clock, Shield, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const Index = () => {
   return <div className="min-h-screen">
       {/* Hero Section */}
@@ -31,21 +29,19 @@ const Index = () => {
         
         <div className="container-custom relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+            <div className="space-y-6 mx-[16px]">
               <div className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-2">
                 À VOTRE SERVICE 24/7
               </div>
               <h2 className="text-3xl md:text-4xl font-bold text-primary">Besoin d'une intervention ou d'un devis ?</h2>
-              <p className="text-gray-600 text-lg">
-                Notre équipe de techniciens certifiés est disponible pour répondre à toutes vos urgences frigorifiques et besoins en climatisation dans toute l'Île-de-France.
-              </p>
+              <p className="text-gray-600 text-lg">Notre équipe de techniciens certifiés réponds à toutes vos urgences frigorifiques et besoins en climatisation dans toute l'Île-de-France.</p>
               
-              <ul className="space-y-4">
+              <ul className="space-y-4 mx-0">
                 <li className="flex items-center">
                   <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
                     <Clock size={20} strokeWidth={1.5} />
                   </div>
-                  <span className="text-lg">Intervention rapide garantie : 45 min Yvelines • 1h Paris</span>
+                  <span className="text-lg px-0">Intervention rapide garantie : 45 min Yvelines • 1h Paris</span>
                 </li>
                 <li className="flex items-center">
                   <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
