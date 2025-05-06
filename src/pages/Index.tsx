@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
@@ -5,8 +6,9 @@ import WhyChooseUs from '@/components/home/WhyChooseUs';
 import Testimonials from '@/components/home/Testimonials';
 import { ArrowRight, Phone, Mail, Clock, Shield, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
+
 const Index = () => {
-  return <div className="min-h-screen mx-[100px]">
+  return <div className="min-h-screen">
       {/* Hero Section */}
       <Hero />
       
