@@ -4,7 +4,7 @@ import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
 import Testimonials from '@/components/home/Testimonials';
-import { ArrowRight, Phone, Mail } from 'lucide-react';
+import { ArrowRight, Phone, Mail, Clock, Shield, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Index = () => {
@@ -42,15 +42,21 @@ const Index = () => {
               
               <ul className="space-y-4">
                 <li className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-maintenance text-white flex items-center justify-center mr-3">✓</div>
+                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
+                    <Clock size={20} strokeWidth={1.5} />
+                  </div>
                   <span className="text-lg">Intervention rapide garantie : 45 min Yvelines • 1h Paris</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-maintenance text-white flex items-center justify-center mr-3">✓</div>
+                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
+                    <Award size={20} strokeWidth={1.5} />
+                  </div>
                   <span className="text-lg">Techniciens certifiés RGE et QualiPAC</span>
                 </li>
                 <li className="flex items-center">
-                  <div className="w-6 h-6 rounded-full bg-maintenance text-white flex items-center justify-center mr-3">✓</div>
+                  <div className="w-10 h-10 rounded-full bg-primary/10 text-primary flex items-center justify-center mr-3">
+                    <Shield size={20} strokeWidth={1.5} />
+                  </div>
                   <span className="text-lg">Service client noté ★ 4.9/5 sur Google</span>
                 </li>
               </ul>
