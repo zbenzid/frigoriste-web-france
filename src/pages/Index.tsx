@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
@@ -6,7 +5,6 @@ import WhyChooseUs from '@/components/home/WhyChooseUs';
 import Testimonials from '@/components/home/Testimonials';
 import { ArrowRight, Phone, Mail, Users } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const Index = () => {
   return <div className="min-h-screen">
       {/* Hero Section */}
@@ -41,7 +39,7 @@ const Index = () => {
                 </div>
               </div>
               
-              <h2 className="text-3xl md:text-4xl font-bold text-primary">Une équipe d'experts à votre écoute</h2>
+              <h2 className="text-3xl font-bold text-primary md:text-3xl">Une équipe d'experts à votre écoute</h2>
               <p className="text-gray-600 text-lg">
                 Notre équipe de techniciens certifiés est disponible pour répondre à toutes vos urgences frigorifiques et besoins en climatisation dans toute l'Île-de-France.
               </p>
@@ -49,25 +47,13 @@ const Index = () => {
               {/* Team image grid */}
               <div className="grid grid-cols-3 gap-2 mt-6">
                 <div className="relative h-20 overflow-hidden rounded-lg">
-                  <img 
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a" 
-                    alt="Technicien expert" 
-                    className="w-full h-full object-cover"
-                  />
+                  <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Technicien expert" className="w-full h-full object-cover" />
                 </div>
                 <div className="relative h-20 overflow-hidden rounded-lg">
-                  <img 
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a" 
-                    alt="Équipe d'intervention" 
-                    className="w-full h-full object-cover"
-                  />
+                  <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Équipe d'intervention" className="w-full h-full object-cover" />
                 </div>
                 <div className="relative h-20 overflow-hidden rounded-lg">
-                  <img 
-                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a" 
-                    alt="Support client" 
-                    className="w-full h-full object-cover"
-                  />
+                  <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a" alt="Support client" className="w-full h-full object-cover" />
                 </div>
               </div>
               
@@ -134,11 +120,7 @@ const Index = () => {
               {/* Team member image overlapping with card */}
               <div className="hidden lg:block absolute -bottom-10 -right-10 w-40 h-40 z-20">
                 <div className="relative w-full h-full">
-                  <img 
-                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" 
-                    alt="Expert frigoriste" 
-                    className="w-full h-full object-cover rounded-full border-4 border-white shadow-lg"
-                  />
+                  <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158" alt="Expert frigoriste" className="w-full h-full object-cover rounded-full border-4 border-white shadow-lg" />
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-emergency rounded-full flex items-center justify-center text-white">
                     <Phone size={14} />
                   </div>
