@@ -1,36 +1,27 @@
-
 import React from 'react';
 import { Clock, Award, Wrench, Shield, MapPin } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-
 const WhyChooseUs = () => {
-  const reasons = [
-    {
-      icon: <Clock size={36} className="text-primary" />,
-      title: "Intervention Express 24/7",
-      description: "Notre équipe est disponible jour et nuit pour intervenir en urgence sur vos équipements frigorifiques avec des délais garantis par zone."
-    },
-    {
-      icon: <Award size={36} className="text-primary" />,
-      title: "Techniciens Certifiés",
-      description: "Nos experts sont certifiés RGE et QualiPAC avec plus de 15 ans d'expérience dans le domaine du froid commercial et de la climatisation."
-    },
-    {
-      icon: <Shield size={36} className="text-primary" />,
-      title: "Garantie Satisfaction",
-      description: "Service client exceptionnel avec une note Google de 4.9/5, nous nous engageons à résoudre vos problèmes dès la première intervention."
-    },
-    {
-      icon: <MapPin size={36} className="text-primary" />,
-      title: "Couverture Île-de-France",
-      description: "Notre service couvre toute l'Île-de-France avec des délais d'intervention optimisés : 45 min Yvelines, 1h Paris, 2h grande couronne."
-    }
-  ];
-
-  return (
-    <section className="py-20 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
+  const reasons = [{
+    icon: <Clock size={36} className="text-primary" />,
+    title: "Intervention Express 24/7",
+    description: "Notre équipe est disponible jour et nuit pour intervenir en urgence sur vos équipements frigorifiques avec des délais garantis par zone."
+  }, {
+    icon: <Award size={36} className="text-primary" />,
+    title: "Techniciens Certifiés",
+    description: "Nos experts sont certifiés RGE et QualiPAC avec plus de 15 ans d'expérience dans le domaine du froid commercial et de la climatisation."
+  }, {
+    icon: <Shield size={36} className="text-primary" />,
+    title: "Garantie Satisfaction",
+    description: "Service client exceptionnel avec une note Google de 4.9/5, nous nous engageons à résoudre vos problèmes dès la première intervention."
+  }, {
+    icon: <MapPin size={36} className="text-primary" />,
+    title: "Couverture Île-de-France",
+    description: "Notre service couvre toute l'Île-de-France avec des délais d'intervention optimisés : 45 min Yvelines, 1h Paris, 2h grande couronne."
+  }];
+  return <section className="py-20 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-20 left-10 w-64 h-64 rounded-full bg-blue-100/30 blur-3xl"></div>
@@ -51,19 +42,17 @@ const WhyChooseUs = () => {
         {/* Disposition des cartes en grille */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {/* Première rangée de cartes */}
-          {reasons.slice(0, 2).map((reason, index) => (
-            <Card key={index} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
+          {reasons.slice(0, 2).map((reason, index) => <Card key={index} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="mb-4 flex items-center justify-center">
                   <div className="w-14 h-14 rounded-full border-2 border-primary flex items-center justify-center">
                     {reason.icon}
                   </div>
                 </div>
-                <h3 className="font-montserrat font-semibold text-lg mb-3 text-center">{reason.title}</h3>
+                <h3 className="font-montserrat font-semibold text-lg mb-3 text-center text-gray-800">{reason.title}</h3>
                 <p className="text-gray-600 font-opensans text-center">{reason.description}</p>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
 
           {/* Carte centrale plus grande avec un accent bleu profond */}
           <Card className="border-0 bg-primary text-white col-span-1 md:col-span-2 rounded-xl overflow-hidden shadow-lg">
@@ -89,8 +78,7 @@ const WhyChooseUs = () => {
           </Card>
 
           {/* Dernière rangée de cartes */}
-          {reasons.slice(2, 4).map((reason, index) => (
-            <Card key={index + 2} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
+          {reasons.slice(2, 4).map((reason, index) => <Card key={index + 2} className="border border-gray-100 bg-white hover:shadow-lg transition-all duration-300 rounded-xl overflow-hidden">
               <CardContent className="p-6">
                 <div className="mb-4 flex items-center justify-center">
                   <div className="w-14 h-14 rounded-full border-2 border-primary flex items-center justify-center">
@@ -100,8 +88,7 @@ const WhyChooseUs = () => {
                 <h3 className="font-montserrat font-semibold text-lg mb-3 text-center">{reason.title}</h3>
                 <p className="text-gray-600 font-opensans text-center">{reason.description}</p>
               </CardContent>
-            </Card>
-          ))}
+            </Card>)}
         </div>
 
         {/* Citation Google Reviews */}
@@ -114,8 +101,6 @@ const WhyChooseUs = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default WhyChooseUs;
