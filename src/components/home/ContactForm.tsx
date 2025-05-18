@@ -27,9 +27,13 @@ const ContactForm = () => {
     setIsLoading(true);
     
     try {
+      console.log("Envoi des données:", formData);
+      
       const { data, error } = await supabase.functions.invoke('submit-contact', {
         body: formData
       });
+
+      console.log("Réponse:", data, error);
 
       if (error) {
         console.error('Error submitting form:', error);

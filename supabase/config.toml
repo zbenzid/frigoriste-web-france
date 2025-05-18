@@ -3,3 +3,4 @@ project_id = "lmuoctyoldoeemavuuhi"
 
 [functions.submit-contact]
 verify_jwt = false
+

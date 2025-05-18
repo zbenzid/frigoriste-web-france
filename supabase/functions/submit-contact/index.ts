@@ -14,7 +14,8 @@ const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 // Initialiser le client Supabase
 const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
 const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY") || "";
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
+const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
 interface ContactFormData {
   name: string;
@@ -50,6 +51,8 @@ serve(async (req) => {
       );
     }
 
+    console.log("Données du formulaire reçues:", formData);
+
     // Insérer les données dans la base de données
     const { data: submissionData, error: submissionError } = await supabase
       .from("contact_submissions")
@@ -72,6 +75,7 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({
           error: "Erreur lors de l'enregistrement du formulaire",
+          details: submissionError,
         }),
         {
           status: 500,
@@ -79,6 +83,8 @@ serve(async (req) => {
         }
       );
     }
+
+    console.log("Données enregistrées avec succès:", submissionData);
 
     // Formater le corps de l'email
     const getRequestTypeLabel = (type: string | undefined) => {
@@ -109,25 +115,67 @@ serve(async (req) => {
       <p>${formData.message.replace(/\n/g, '<br>')}</p>
     `;
 
-    // Envoyer l'email via Resend
-    const { data: emailData, error: emailError } = await resend.emails.send({
-      from: "Formulaire de Contact <onboarding@resend.dev>",
-      to: ["contact@lefrigoriste.fr"],
-      subject: `Nouvelle demande de contact - ${requestType} - ${formData.name}`,
-      html: emailBody,
-      reply_to: formData.email,
-    });
+    try {
+      // Envoyer l'email via Resend
+      const { data: emailData, error: emailError } = await resend.emails.send({
+        from: "Formulaire de Contact <onboarding@resend.dev>",
+        to: ["contact@lefrigoriste.fr"],
+        subject: `Nouvelle demande de contact - ${requestType} - ${formData.name}`,
+        html: emailBody,
+        reply_to: formData.email,
+      });
 
-    if (emailError) {
-      console.error("Erreur lors de l'envoi de l'email:", emailError);
-      
-      // Mise à jour du statut en cas d'échec d'envoi de mail
+      if (emailError) {
+        console.error("Erreur lors de l'envoi de l'email:", emailError);
+        
+        // Mise à jour du statut en cas d'échec d'envoi de mail
+        await supabase
+          .from("contact_submissions")
+          .update({ status: "email_failed" })
+          .eq("id", submissionData[0].id);
+        
+        // On retourne quand même un succès à l'utilisateur car les données sont enregistrées
+        return new Response(
+          JSON.stringify({
+            success: true,
+            message: "Votre demande a été enregistrée mais l'email n'a pas pu être envoyé",
+          }),
+          {
+            status: 200,
+            headers: { ...corsHeaders, "Content-Type": "application/json" },
+          }
+        );
+      }
+
+      console.log("Email envoyé avec succès:", emailData);
+
+      // Mettre à jour le statut de la soumission
       await supabase
         .from("contact_submissions")
-        .update({ status: "email_failed" })
+        .update({ status: "email_sent" })
+        .eq("id", submissionData[0].id);
+
+      // Répondre avec succès
+      return new Response(
+        JSON.stringify({
+          success: true,
+          message: "Votre demande a été envoyée avec succès",
+        }),
+        {
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    } catch (emailSendingError) {
+      console.error("Exception lors de l'envoi de l'email:", emailSendingError);
+      
+      // Mise à jour du statut en cas d'exception d'envoi de mail
+      await supabase
+        .from("contact_submissions")
+        .update({ status: "email_exception" })
         .eq("id", submissionData[0].id);
       
-      // On retourne quand même un succès à l'utilisateur car les données sont enregistrées
+      // On retourne quand même un succès à l'utilisateur
       return new Response(
         JSON.stringify({
           success: true,
@@ -139,29 +187,12 @@ serve(async (req) => {
         }
       );
     }
-
-    // Mettre à jour le statut de la soumission
-    await supabase
-      .from("contact_submissions")
-      .update({ status: "email_sent" })
-      .eq("id", submissionData[0].id);
-
-    // Répondre avec succès
-    return new Response(
-      JSON.stringify({
-        success: true,
-        message: "Votre demande a été envoyée avec succès",
-      }),
-      {
-        status: 200,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
-    );
   } catch (error) {
     console.error("Erreur lors du traitement de la demande:", error);
     return new Response(
       JSON.stringify({
         error: "Une erreur est survenue lors du traitement de la demande",
+        details: error.message,
       }),
       {
         status: 500,
