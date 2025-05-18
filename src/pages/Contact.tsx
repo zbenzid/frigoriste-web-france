@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, AlertCircle, Facebook, Instagram, Linkedin, Send, FileText, Info, CreditCard } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -10,6 +11,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+
+// Types de demandes qui nécessitent une adresse
+const requestTypesNeedingAddress = ['urgence', 'depannage', 'installation', 'maintenance'];
 
 const Contact = () => {
   const { toast } = useToast();
@@ -25,6 +29,9 @@ const Contact = () => {
     message: '',
     gdprConsent: false
   });
+
+  // Vérifier si le type de demande nécessite une adresse
+  const needsAddress = requestTypesNeedingAddress.includes(formData.requestType);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -69,9 +76,9 @@ const Contact = () => {
           email: formData.email,
           phone: formData.phone,
           requestType: formData.requestType,
-          address: formData.address,
-          postalCode: formData.postalCode,
-          city: formData.city,
+          address: needsAddress ? formData.address : '',
+          postalCode: needsAddress ? formData.postalCode : '',
+          city: needsAddress ? formData.city : '',
           message: formData.message
         }
       });
@@ -288,50 +295,58 @@ const Contact = () => {
                       </Select>
                     </div>
                     
-                    {/* Adresse */}
-                    <div>
-                      <label htmlFor="address" className="block text-sm font-medium mb-1">
-                        Adresse d'intervention
-                      </label>
-                      <Input 
-                        id="address" 
-                        name="address" 
-                        value={formData.address} 
-                        onChange={handleChange} 
-                        placeholder="Numéro et nom de rue" 
-                        disabled={isSubmitting}
-                      />
-                    </div>
-                    
-                    {/* Code postal et ville */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label htmlFor="postalCode" className="block text-sm font-medium mb-1">
-                          Code postal
-                        </label>
-                        <Input 
-                          id="postalCode" 
-                          name="postalCode" 
-                          value={formData.postalCode} 
-                          onChange={handleChange} 
-                          placeholder="Code postal" 
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="city" className="block text-sm font-medium mb-1">
-                          Ville
-                        </label>
-                        <Input 
-                          id="city" 
-                          name="city" 
-                          value={formData.city} 
-                          onChange={handleChange} 
-                          placeholder="Votre ville" 
-                          disabled={isSubmitting}
-                        />
-                      </div>
-                    </div>
+                    {/* Champs d'adresse conditionnels */}
+                    {needsAddress && (
+                      <>
+                        {/* Adresse */}
+                        <div>
+                          <label htmlFor="address" className="block text-sm font-medium mb-1">
+                            Adresse d'intervention *
+                          </label>
+                          <Input 
+                            id="address" 
+                            name="address" 
+                            value={formData.address} 
+                            onChange={handleChange} 
+                            placeholder="Numéro et nom de rue" 
+                            required={needsAddress}
+                            disabled={isSubmitting}
+                          />
+                        </div>
+                        
+                        {/* Code postal et ville */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <label htmlFor="postalCode" className="block text-sm font-medium mb-1">
+                              Code postal *
+                            </label>
+                            <Input 
+                              id="postalCode" 
+                              name="postalCode" 
+                              value={formData.postalCode} 
+                              onChange={handleChange} 
+                              placeholder="Code postal" 
+                              required={needsAddress}
+                              disabled={isSubmitting}
+                            />
+                          </div>
+                          <div>
+                            <label htmlFor="city" className="block text-sm font-medium mb-1">
+                              Ville *
+                            </label>
+                            <Input 
+                              id="city" 
+                              name="city" 
+                              value={formData.city} 
+                              onChange={handleChange} 
+                              placeholder="Votre ville" 
+                              required={needsAddress}
+                              disabled={isSubmitting}
+                            />
+                          </div>
+                        </div>
+                      </>
+                    )}
                     
                     {/* Message */}
                     <div>
