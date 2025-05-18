@@ -9,10 +9,11 @@ import { Separator } from '@/components/ui/separator';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
+
 const Contact = () => {
-  const {
-    toast
-  } = useToast();
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,30 +25,32 @@ const Contact = () => {
     message: '',
     gdprConsent: false
   });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const {
-      name,
-      value
-    } = e.target;
+    const { name, value } = e.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
   };
+
   const handleSelectChange = (value: string) => {
     setFormData(prev => ({
       ...prev,
       requestType: value
     }));
   };
+
   const handleCheckboxChange = (checked: boolean) => {
     setFormData(prev => ({
       ...prev,
       gdprConsent: checked
     }));
   };
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (!formData.gdprConsent) {
       toast({
         title: "Consentement requis",
@@ -57,26 +60,61 @@ const Contact = () => {
       return;
     }
 
-    // Simulate form submission
-    console.log('Form submitted:', formData);
-    toast({
-      title: "Message envoyé",
-      description: "Nous vous contacterons dans les plus brefs délais."
-    });
+    setIsSubmitting(true);
 
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      requestType: '',
-      address: '',
-      postalCode: '',
-      city: '',
-      message: '',
-      gdprConsent: false
-    });
+    try {
+      const { data, error } = await supabase.functions.invoke('submit-contact', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          requestType: formData.requestType,
+          address: formData.address,
+          postalCode: formData.postalCode,
+          city: formData.city,
+          message: formData.message
+        }
+      });
+
+      if (error) {
+        console.error('Error submitting form:', error);
+        toast({
+          title: "Erreur",
+          description: "Une erreur est survenue. Veuillez réessayer.",
+          variant: "destructive"
+        });
+        return;
+      }
+
+      toast({
+        title: "Message envoyé",
+        description: "Nous vous contacterons dans les plus brefs délais."
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        requestType: '',
+        address: '',
+        postalCode: '',
+        city: '',
+        message: '',
+        gdprConsent: false
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue. Veuillez réessayer.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
   return <div className="min-h-screen">
       {/* Bannière */}
       <div className="bg-primary text-white py-16 px-4">
@@ -181,7 +219,15 @@ const Contact = () => {
                       <label htmlFor="name" className="block text-sm font-medium mb-1">
                         Nom et prénom *
                       </label>
-                      <Input id="name" name="name" value={formData.name} onChange={handleChange} placeholder="Votre nom complet" required />
+                      <Input 
+                        id="name" 
+                        name="name" 
+                        value={formData.name} 
+                        onChange={handleChange} 
+                        placeholder="Votre nom complet" 
+                        required 
+                        disabled={isSubmitting}
+                      />
                     </div>
                     
                     {/* Email et téléphone */}
@@ -190,13 +236,31 @@ const Contact = () => {
                         <label htmlFor="email" className="block text-sm font-medium mb-1">
                           Email *
                         </label>
-                        <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} placeholder="votre-email@exemple.com" required />
+                        <Input 
+                          id="email" 
+                          name="email" 
+                          type="email" 
+                          value={formData.email} 
+                          onChange={handleChange} 
+                          placeholder="votre-email@exemple.com" 
+                          required 
+                          disabled={isSubmitting}
+                        />
                       </div>
                       <div>
                         <label htmlFor="phone" className="block text-sm font-medium mb-1">
                           Téléphone *
                         </label>
-                        <Input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} placeholder="01 XX XX XX XX" required />
+                        <Input 
+                          id="phone" 
+                          name="phone" 
+                          type="tel" 
+                          value={formData.phone} 
+                          onChange={handleChange} 
+                          placeholder="01 XX XX XX XX" 
+                          required 
+                          disabled={isSubmitting}
+                        />
                       </div>
                     </div>
                     
@@ -205,7 +269,11 @@ const Contact = () => {
                       <label htmlFor="requestType" className="block text-sm font-medium mb-1">
                         Type de demande *
                       </label>
-                      <Select onValueChange={handleSelectChange} value={formData.requestType}>
+                      <Select 
+                        onValueChange={handleSelectChange} 
+                        value={formData.requestType}
+                        disabled={isSubmitting}
+                      >
                         <SelectTrigger>
                           <SelectValue placeholder="Sélectionnez le type de demande" />
                         </SelectTrigger>
@@ -225,7 +293,14 @@ const Contact = () => {
                       <label htmlFor="address" className="block text-sm font-medium mb-1">
                         Adresse d'intervention
                       </label>
-                      <Input id="address" name="address" value={formData.address} onChange={handleChange} placeholder="Numéro et nom de rue" />
+                      <Input 
+                        id="address" 
+                        name="address" 
+                        value={formData.address} 
+                        onChange={handleChange} 
+                        placeholder="Numéro et nom de rue" 
+                        disabled={isSubmitting}
+                      />
                     </div>
                     
                     {/* Code postal et ville */}
@@ -234,13 +309,27 @@ const Contact = () => {
                         <label htmlFor="postalCode" className="block text-sm font-medium mb-1">
                           Code postal
                         </label>
-                        <Input id="postalCode" name="postalCode" value={formData.postalCode} onChange={handleChange} placeholder="Code postal" />
+                        <Input 
+                          id="postalCode" 
+                          name="postalCode" 
+                          value={formData.postalCode} 
+                          onChange={handleChange} 
+                          placeholder="Code postal" 
+                          disabled={isSubmitting}
+                        />
                       </div>
                       <div>
                         <label htmlFor="city" className="block text-sm font-medium mb-1">
                           Ville
                         </label>
-                        <Input id="city" name="city" value={formData.city} onChange={handleChange} placeholder="Votre ville" />
+                        <Input 
+                          id="city" 
+                          name="city" 
+                          value={formData.city} 
+                          onChange={handleChange} 
+                          placeholder="Votre ville" 
+                          disabled={isSubmitting}
+                        />
                       </div>
                     </div>
                     
@@ -249,21 +338,51 @@ const Contact = () => {
                       <label htmlFor="message" className="block text-sm font-medium mb-1">
                         Message détaillé *
                       </label>
-                      <Textarea id="message" name="message" value={formData.message} onChange={handleChange} placeholder="Décrivez votre besoin, équipement concerné, problème rencontré..." rows={5} required />
+                      <Textarea 
+                        id="message" 
+                        name="message" 
+                        value={formData.message} 
+                        onChange={handleChange} 
+                        placeholder="Décrivez votre besoin, équipement concerné, problème rencontré..." 
+                        rows={5} 
+                        required
+                        disabled={isSubmitting}
+                      />
                     </div>
                     
                     {/* RGPD */}
                     <div className="flex items-start space-x-2">
-                      <Checkbox id="gdprConsent" checked={formData.gdprConsent} onCheckedChange={handleCheckboxChange} />
+                      <Checkbox 
+                        id="gdprConsent" 
+                        checked={formData.gdprConsent} 
+                        onCheckedChange={handleCheckboxChange}
+                        disabled={isSubmitting}
+                      />
                       <label htmlFor="gdprConsent" className="text-sm text-gray-600">
                         J'accepte que mes informations soient utilisées pour me recontacter. Pour en savoir plus sur la gestion de vos données et vos droits, consultez notre politique de confidentialité. *
                       </label>
                     </div>
                     
                     {/* Bouton envoi */}
-                    <Button type="submit" className="w-full btn-primary">
-                      <Send className="h-4 w-4 mr-2" />
-                      Envoyer ma demande
+                    <Button 
+                      type="submit" 
+                      className="w-full btn-primary" 
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Envoi en cours...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="h-4 w-4 mr-2" />
+                          Envoyer ma demande
+                        </>
+                      )}
                     </Button>
                     
                     <p className="text-xs text-gray-500 mt-2">* Champs obligatoires</p>
@@ -421,4 +540,5 @@ const Contact = () => {
       </div>
     </div>;
 };
+
 export default Contact;
