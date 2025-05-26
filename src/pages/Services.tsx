@@ -29,7 +29,7 @@ const Services = () => {
                 </div>
               </div>
               
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-montserrat">Nos Services</h1>
+              <h1 className="text-4xl font-bold text-gray-800 mb-6 font-montserrat md:text-3xl">Nos Services</h1>
               <p className="text-lg text-gray-600 mb-8 font-opensans">
                 Solutions complètes en réfrigération et climatisation pour tous vos besoins professionnels, avec une garantie d'intervention rapide 24h/7j.
               </p>
