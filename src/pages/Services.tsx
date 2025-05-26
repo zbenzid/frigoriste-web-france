@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, BarChart3, Check, Lightbulb, Phone, Info, Award, Shield, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -116,7 +117,7 @@ const Services = () => {
               
               <div className="flex flex-wrap gap-4">
                 <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl hover:translate-y-[-2px]">
-                  <span className="relative flex items-center justify-center font-normal">
+                  <span className="relative flex items-center justify-center">
                     <Phone size={20} className="mr-2" />
                     Dépannage urgent : 01 85 50 02 84
                   </span>
