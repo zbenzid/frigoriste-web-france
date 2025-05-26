@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+
 const TopInfoBar = () => {
   return <div className="bg-primary text-white py-2 hidden md:block">
       <div className="container-custom flex items-center justify-between">
@@ -27,6 +28,7 @@ const TopInfoBar = () => {
       </div>
     </div>;
 };
+
 const MainNav = ({
   className,
   isMobile = false
@@ -64,9 +66,11 @@ const MainNav = ({
     })}
     </nav>;
 };
+
 const Header = () => {
   const isMobile = useIsMobile();
   const [isScrolled, setIsScrolled] = useState(false);
+
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
@@ -75,7 +79,9 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-  return <header role="banner" className="w-full">
+
+  return (
+    <header role="banner" className="w-full">
       <TopInfoBar />
       
       <div className={cn("fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300", isScrolled ? isMobile ? "bg-white/75 shadow-sm" : "bg-white/90 shadow-sm" : isMobile ? "bg-white/65" : "bg-white/80")}>
@@ -118,9 +124,8 @@ const Header = () => {
           </div>
         </div>
       </div>
-      
-      {/* Spacer to prevent content from being hidden under the fixed header */}
-      <div className={`h-20 lg:h-24 ${!isMobile && "mt-2"}`}></div>
-    </header>;
+    </header>
+  );
 };
+
 export default Header;
