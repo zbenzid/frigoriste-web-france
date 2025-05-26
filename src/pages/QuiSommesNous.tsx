@@ -4,7 +4,6 @@ import HeroSection from '@/components/about/HeroSection';
 import LeadershipDuo from '@/components/about/LeadershipDuo';
 import TechTeamCarousel from '@/components/about/TechTeamCarousel';
 import DifferentiationGrid from '@/components/about/DifferentiationGrid';
-import CoverageMap from '@/components/about/CoverageMap';
 import CertificationsSection from '@/components/about/CertificationsSection';
 import TestimonialsSlider from '@/components/about/TestimonialsSlider';
 import CtaBanner from '@/components/about/CtaBanner';
@@ -16,7 +15,6 @@ const QuiSommesNous = () => {
       <LeadershipDuo />
       <TechTeamCarousel />
       <DifferentiationGrid />
-      <CoverageMap />
       <CertificationsSection />
       <TestimonialsSlider />
       <CtaBanner />
