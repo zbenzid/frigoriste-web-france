@@ -165,7 +165,7 @@ const Services = () => {
             </div>
             
             <div className="order-1 lg:order-2 overflow-hidden rounded-2xl shadow-xl">
-              <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1738&q=80" alt="Technicien réparant un équipement frigorifique" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
+              <img alt="Technicien réparant un équipement frigorifique" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" src="/lovable-uploads/60f53530-9859-481f-b5a8-1c08c347c7d3.jpg" />
             </div>
           </div>
         </div>
@@ -443,7 +443,7 @@ const Services = () => {
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="overflow-hidden rounded-2xl shadow-xl">
-              <img src="https://images.unsplash.com/photo-1616244013240-227c94d067e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80" alt="Maintenance préventive d'équipement frigorifique" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
+              <img alt="Maintenance préventive d'équipement frigorifique" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" src="/lovable-uploads/389c5417-1b95-45b7-8500-d3472ab995fd.jpg" />
             </div>
             
             <div>
