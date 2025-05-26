@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, AlertCircle, Facebook, Instagram, Linkedin, Send, FileText, Info, CreditCard } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -123,11 +124,57 @@ const Contact = () => {
   };
 
   return <div className="min-h-screen">
-      {/* Bannière */}
-      <div className="bg-primary text-white py-16 px-4">
-        <div className="container-custom">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contactez notre équipe de frigoristes</h1>
-          <p className="text-xl md:text-2xl font-light">À votre service 24h/24 et 7j/7 en Île-de-France</p>
+      {/* Hero moderne et minimaliste */}
+      <div className="relative bg-gradient-to-br from-primary via-primary/95 to-secondary overflow-hidden">
+        {/* Éléments décoratifs subtils */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="4"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+        
+        <div className="container-custom relative z-10 py-24 md:py-32">
+          <div className="max-w-4xl mx-auto text-center">
+            {/* Badge de service */}
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium mb-8">
+              <Clock className="h-4 w-4 mr-2" />
+              Service disponible 24h/24 et 7j/7
+            </div>
+            
+            {/* Titre principal */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
+              Contactez-nous
+            </h1>
+            
+            {/* Sous-titre */}
+            <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
+              Une question ? Un dépannage urgent ? Notre équipe d'experts est à votre écoute pour vous accompagner.
+            </p>
+            
+            {/* CTA rapide */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="tel:0185500284" 
+                className="group inline-flex items-center px-8 py-4 bg-emergency hover:bg-emergency/90 text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105"
+              >
+                <Phone className="h-5 w-5 mr-3" />
+                01 85 50 02 84
+                <span className="ml-3 text-sm opacity-80">Urgence</span>
+              </a>
+              
+              <div className="flex items-center text-white/80 text-sm">
+                <span className="hidden sm:block">ou</span>
+              </div>
+              
+              <div className="text-white/90 text-center sm:text-left">
+                <p className="font-medium">Utilisez le formulaire ci-dessous</p>
+                <p className="text-sm text-white/70">Réponse sous 24h</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Forme géométrique décorative */}
+        <div className="absolute bottom-0 left-0 right-0">
+          <svg className="w-full h-12 md:h-16 fill-white" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+          </svg>
         </div>
       </div>
 
