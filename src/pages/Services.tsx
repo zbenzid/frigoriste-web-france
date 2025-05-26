@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useIsMobile } from '@/hooks/use-mobile';
-
 const Services = () => {
   const isMobile = useIsMobile();
-  
   return <div className="min-h-screen">
       {/* Services Hero Banner - Design premium à deux colonnes */}
       <div className="relative overflow-hidden md:py-16 md:my-6">
@@ -46,11 +44,7 @@ const Services = () => {
               {/* Conteneur de l'image avec cadre esthétique */}
               <div className="overflow-hidden rounded-2xl shadow-xl relative aspect-[4/3] md:aspect-[16/9] h-full">
                 {/* Image principale - sans gradient d'assombrissement */}
-                <img 
-                  src="/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png" 
-                  alt="Nos services de réfrigération" 
-                  className="w-full h-full object-cover"
-                />
+                <img src="/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png" alt="Nos services de réfrigération" className="w-full h-full object-cover" />
                 
                 {/* Élément décoratif - Badge ou indication de service 24/7 */}
                 <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white font-bold text-sm border border-white/20 shadow-lg z-30 flex items-center">
@@ -182,7 +176,7 @@ const Services = () => {
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="overflow-hidden rounded-2xl shadow-xl">
-              <img src="https://images.unsplash.com/photo-1631646100842-13a6506abdbb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1664&q=80" alt="Installation de système de climatisation" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
+              <img alt="Installation de système de climatisation" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" src="/lovable-uploads/a9d1af8f-d398-46a6-a44e-c67b09e7fa0d.png" />
             </div>
             
             <div>
@@ -438,7 +432,7 @@ const Services = () => {
             </div>
             
             <div className="order-1 lg:order-2 overflow-hidden rounded-2xl shadow-xl">
-              <img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1738&q=80" alt="Chambre froide professionnelle" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" />
+              <img alt="Chambre froide professionnelle" className="w-full h-full object-cover transition-transform hover:scale-105 duration-500" src="/lovable-uploads/09e82722-e1bb-4962-b57a-082af8bb0eda.jpg" />
             </div>
           </div>
         </div>
@@ -683,5 +677,4 @@ const Services = () => {
       </section>
     </div>;
 };
-
 export default Services;
