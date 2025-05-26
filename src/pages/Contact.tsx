@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, AlertCircle, Facebook, Instagram, Linkedin, Send, FileText, Info, CreditCard } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -122,14 +123,52 @@ const Contact = () => {
     }
   };
 
-  return <div className="min-h-screen">
-      {/* Bannière */}
-      <div className="bg-primary text-white py-16 px-4">
-        <div className="container-custom">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Contactez notre équipe de frigoristes</h1>
-          <p className="text-xl md:text-2xl font-light">À votre service 24h/24 et 7j/7 en Île-de-France</p>
+  return (
+    <div className="min-h-screen">
+      {/* Hero moderne et stylé comme Services */}
+      <section className="py-20 relative overflow-hidden">
+        {/* Fond moderne avec dégradé sophistiqué */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/30 z-0">
+          {/* Effet glacé avec motifs subtils */}
+          <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMwQjUzOTQiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0di00aC0ydjRoLTR2Mmg0djRoMnYtNGg0di0yaC00em0wLTMwVjBoLTJ2NEgwdjJoNHY0aDJWNmg0VjRoLTR6TTYgMzR2LTRINHY0SDB2Mmg0djRoMnYtNGg0di0ySDZ6TTYgNFYwSDR2NEgwdjJoNHY0aDJWNmg0VjRINnoiLz48L2c+PC9nPjwvc3ZnPg==')] z-10 px-0"></div>
         </div>
-      </div>
+        
+        {/* Éléments décoratifs glacés */}
+        <div className="absolute -top-10 left-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-blue-100/20 to-transparent opacity-30 blur-3xl"></div>
+        <div className="absolute top-1/3 right-20 w-80 h-80 rounded-full bg-gradient-to-bl from-blue-200/20 to-transparent opacity-20 blur-3xl"></div>
+        <div className="absolute bottom-0 left-1/3 w-96 h-80 rounded-full bg-gradient-to-tr from-blue-100/20 to-transparent opacity-30 blur-3xl"></div>
+        
+        <div className="container-custom relative z-10">
+          <div className="text-center mb-16">
+            <span className="inline-block px-4 py-1 rounded-full bg-blue-50 text-primary font-medium text-sm mb-4">
+              CONTACTEZ-NOUS
+            </span>
+            <h1 className="font-bold font-montserrat mb-5 leading-tight text-[#212121] md:text-4xl text-2xl px-[8px]">
+              Besoin d'un frigoriste
+              <span className="text-primary"> professionnel ?</span>
+            </h1>
+            <p className="text-gray-600 font-opensans max-w-2xl mx-auto mb-8">
+              Notre équipe d'experts est disponible 24h/24 et 7j/7 pour répondre à toutes vos urgences et besoins en réfrigération.
+            </p>
+            
+            {/* CTA rapide urgence */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="tel:0185500284" 
+                className="group inline-flex items-center px-8 py-4 bg-emergency hover:bg-emergency/90 text-white font-bold rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105"
+              >
+                <Phone className="h-5 w-5 mr-3" />
+                01 85 50 02 84
+                <span className="ml-3 text-sm bg-white/20 px-2 py-1 rounded">Urgence 24/7</span>
+              </a>
+              
+              <div className="flex items-center text-gray-500 text-sm">
+                <span className="hidden sm:block">ou utilisez le formulaire ci-dessous</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Section Recrutement */}
       <RecruitmentBanner />
@@ -553,7 +592,8 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default Contact;
