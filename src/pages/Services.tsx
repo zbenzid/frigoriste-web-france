@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, BarChart3, Check, Lightbulb, Phone, Info, Award, Shield, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -117,7 +116,7 @@ const Services = () => {
               
               <div className="flex flex-wrap gap-4">
                 <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl hover:translate-y-[-2px]">
-                  <span className="relative flex items-center justify-center">
+                  <span className="relative flex items-center justify-center text-sm">
                     <Phone size={20} className="mr-2" />
                     Dépannage urgent : 01 85 50 02 84
                   </span>
@@ -125,7 +124,7 @@ const Services = () => {
                 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="info" className="rounded-full text-lg hover:translate-y-[-2px] shadow-lg hover:shadow-primary/30 hover:shadow-xl">
+                    <Button variant="info" className="rounded-full hover:translate-y-[-2px] shadow-lg hover:shadow-primary/30 hover:shadow-xl text-sm">
                       <Info size={18} className="mr-1" />
                       En savoir plus
                     </Button>
@@ -235,7 +234,7 @@ const Services = () => {
               
               <div className="flex flex-wrap gap-4">
                 <Link to="/contact" className="group relative overflow-hidden rounded-full bg-secondary hover:bg-secondary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-secondary/30 hover:shadow-xl hover:translate-y-[-2px]">
-                  <span className="relative flex items-center justify-center">
+                  <span className="relative flex items-center justify-center text-sm">
                     Demander un devis gratuit
                     <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -243,7 +242,7 @@ const Services = () => {
                 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="info" className="rounded-full text-lg hover:translate-y-[-2px] shadow-lg hover:shadow-secondary/30 hover:shadow-xl">
+                    <Button variant="info" className="rounded-full hover:translate-y-[-2px] shadow-lg hover:shadow-secondary/30 hover:shadow-xl font-normal text-sm">
                       <Info size={18} className="mr-1" />
                       En savoir plus
                     </Button>
@@ -354,7 +353,7 @@ const Services = () => {
               
               <div className="flex flex-wrap gap-4">
                 <Link to="/contact" className="group relative overflow-hidden rounded-full bg-primary hover:bg-primary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl hover:translate-y-[-2px]">
-                  <span className="relative flex items-center justify-center">
+                  <span className="relative flex items-center justify-center text-sm">
                     Étudier votre projet
                     <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -362,7 +361,7 @@ const Services = () => {
                 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="info" className="rounded-full text-lg hover:translate-y-[-2px] shadow-lg hover:shadow-primary/30 hover:shadow-xl">
+                    <Button variant="info" className="rounded-full hover:translate-y-[-2px] shadow-lg hover:shadow-primary/30 hover:shadow-xl text-sm">
                       <Info size={18} className="mr-1" />
                       En savoir plus
                     </Button>
@@ -502,7 +501,7 @@ const Services = () => {
               
               <div className="flex flex-wrap gap-4">
                 <Link to="/contact" className="group relative overflow-hidden rounded-full bg-maintenance hover:bg-maintenance/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-maintenance/30 hover:shadow-xl hover:translate-y-[-2px]">
-                  <span className="relative flex items-center justify-center">
+                  <span className="relative flex items-center justify-center text-sm">
                     Souscrire à un contrat
                     <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
                   </span>
@@ -510,7 +509,7 @@ const Services = () => {
                 
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button variant="info" className="rounded-full text-lg hover:translate-y-[-2px] shadow-lg hover:shadow-maintenance/30 hover:shadow-xl">
+                    <Button variant="info" className="rounded-full hover:translate-y-[-2px] shadow-lg hover:shadow-maintenance/30 hover:shadow-xl text-sm">
                       <Info size={18} className="mr-1" />
                       En savoir plus
                     </Button>
