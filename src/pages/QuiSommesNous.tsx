@@ -1,7 +1,6 @@
 
 import React from 'react';
 import HeroSection from '@/components/about/HeroSection';
-import KeyMetricsStrip from '@/components/about/KeyMetricsStrip';
 import LeadershipDuo from '@/components/about/LeadershipDuo';
 import TechTeamCarousel from '@/components/about/TechTeamCarousel';
 import DifferentiationGrid from '@/components/about/DifferentiationGrid';
@@ -14,7 +13,6 @@ const QuiSommesNous = () => {
   return (
     <div className="min-h-screen">
       <HeroSection />
-      <KeyMetricsStrip />
       <LeadershipDuo />
       <TechTeamCarousel />
       <DifferentiationGrid />
