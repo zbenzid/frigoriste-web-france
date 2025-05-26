@@ -1,12 +1,9 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
 const HeroSection = () => {
-  return (
-    <div className="relative overflow-hidden md:py-16 md:my-6">
+  return <div className="relative overflow-hidden md:my-6 md:py-[24px]">
       {/* Conteneur de la section hero à deux colonnes */}
       <div className="container-custom px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -42,11 +39,7 @@ const HeroSection = () => {
             {/* Conteneur de l'image avec cadre esthétique */}
             <div className="overflow-hidden rounded-2xl shadow-xl relative aspect-[4/3] md:aspect-[16/9] h-full">
               {/* Image principale */}
-              <img 
-                src="/lovable-uploads/84505439-0fa2-4c70-867b-9f949bcbdb1f.png" 
-                alt="L'équipe LeFrigoriste devant nos véhicules d'intervention" 
-                className="w-full h-full object-cover"
-              />
+              <img src="/lovable-uploads/84505439-0fa2-4c70-867b-9f949bcbdb1f.png" alt="L'équipe LeFrigoriste devant nos véhicules d'intervention" className="w-full h-full object-cover" />
               
               {/* Élément décoratif - Badge de service 24/7 */}
               <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white font-bold text-sm border border-white/20 shadow-lg z-30 flex items-center">
@@ -57,8 +50,6 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default HeroSection;
