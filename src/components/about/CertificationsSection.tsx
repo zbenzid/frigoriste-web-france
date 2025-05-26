@@ -65,10 +65,10 @@ const CertificationsSection = () => {
   ];
 
   const partners = [
-    { name: "Daikin", logo: "https://via.placeholder.com/150x50?text=Daikin" },
-    { name: "Carrier", logo: "https://via.placeholder.com/150x50?text=Carrier" },
-    { name: "Trane", logo: "https://via.placeholder.com/150x50?text=Trane" },
-    { name: "Mitsubishi Electric", logo: "https://via.placeholder.com/150x50?text=Mitsubishi" }
+    { name: "SB Cuisines", logo: "/lovable-uploads/d19dfc58-f05f-4c9f-8d1a-69ae2cdbfae7.png" },
+    { name: "Häagen-Dazs", logo: "/lovable-uploads/e5812325-1d4c-4272-8b67-2ba93eba5de7.png" },
+    { name: "Elior", logo: "/lovable-uploads/9cfc97b8-ba93-4352-a37d-301a222e615a.png" },
+    { name: "Sodexo", logo: "/lovable-uploads/bde21e13-4efc-4dd8-b16e-9fc11f8160a3.png" }
   ];
 
   return (
@@ -92,7 +92,7 @@ const CertificationsSection = () => {
         </div>
         
         <div className="pt-6 border-t border-gray-200">
-          <h3 className="text-xl font-semibold text-center mb-6">Nos partenaires fabricants</h3>
+          <h3 className="text-xl font-semibold text-center mb-6">Ils nous font confiance</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {partners.map((partner, index) => (
               <div key={index} className="flex justify-center">
