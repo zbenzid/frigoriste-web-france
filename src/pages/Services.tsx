@@ -8,7 +8,7 @@ const Services = () => {
   const isMobile = useIsMobile();
   return <div className="min-h-screen">
       {/* Services Hero Banner - Design premium à deux colonnes */}
-      <div className="relative overflow-hidden md:py-16 md:my-6">
+      <div className="relative overflow-hidden md:my-6 md:py-[24px]">
         {/* Conteneur de la section hero à deux colonnes */}
         <div className="container-custom px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
