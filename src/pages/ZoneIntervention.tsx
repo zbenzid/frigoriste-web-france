@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -9,25 +8,20 @@ import InterventionMap from "@/components/intervention/InterventionMap";
 
 // Carte stylisée d'Île-de-France
 const IleDeFranceMap = () => {
-  return (
-    <div className="relative w-full max-w-2xl mx-auto h-96 bg-gray-100 rounded-lg overflow-hidden shadow-md">
+  return <div className="relative w-full max-w-2xl mx-auto h-96 bg-gray-100 rounded-lg overflow-hidden shadow-md">
       <div className="absolute inset-0 bg-white">
         <svg viewBox="0 0 400 300" className="w-full h-full">
           {/* Fond de carte simplifié */}
-          <path d="M100,150 L120,100 L180,80 L250,90 L300,130 L280,200 L220,220 L150,210 L100,150" 
-                fill="#f1f1f1" stroke="#e0e0e0" strokeWidth="2" />
+          <path d="M100,150 L120,100 L180,80 L250,90 L300,130 L280,200 L220,220 L150,210 L100,150" fill="#f1f1f1" stroke="#e0e0e0" strokeWidth="2" />
                 
           {/* Grande couronne (bleu) */}
-          <path d="M100,150 L120,100 L180,80 L250,90 L300,130 L280,200 L220,220 L150,210 L100,150" 
-                fill="rgba(11, 83, 148, 0.3)" stroke="#0B5394" strokeWidth="2" />
+          <path d="M100,150 L120,100 L180,80 L250,90 L300,130 L280,200 L220,220 L150,210 L100,150" fill="rgba(11, 83, 148, 0.3)" stroke="#0B5394" strokeWidth="2" />
                 
           {/* Petite couronne (orange) */}
-          <path d="M140,150 L160,120 L200,110 L230,120 L250,150 L230,180 L200,190 L160,180 L140,150" 
-                fill="rgba(255, 153, 0, 0.6)" stroke="#FF9900" strokeWidth="2" />
+          <path d="M140,150 L160,120 L200,110 L230,120 L250,150 L230,180 L200,190 L160,180 L140,150" fill="rgba(255, 153, 0, 0.6)" stroke="#FF9900" strokeWidth="2" />
                 
           {/* Yvelines/zone prioritaire (rouge) */}
-          <path d="M120,140 L140,120 L165,130 L170,150 L150,170 L130,160 L120,140" 
-                fill="rgba(204, 0, 0, 0.6)" stroke="#CC0000" strokeWidth="2" />
+          <path d="M120,140 L140,120 L165,130 L170,150 L150,170 L130,160 L120,140" fill="rgba(204, 0, 0, 0.6)" stroke="#CC0000" strokeWidth="2" />
                 
           {/* Point pour Les Mureaux */}
           <circle cx="140" cy="145" r="5" fill="#CC0000" />
@@ -57,74 +51,71 @@ const IleDeFranceMap = () => {
           <text x="30" y="62" fontSize="9" fill="#000000">Grande couronne (2h)</text>
         </svg>
       </div>
-    </div>
-  );
+    </div>;
 };
 
 // Zone d'éligibilité
 const CodePostalChecker = () => {
   const [codePostal, setCodePostal] = useState('');
-  const [result, setResult] = useState<{eligible: boolean, zone?: string, delai?: string} | null>(null);
-  
+  const [result, setResult] = useState<{
+    eligible: boolean;
+    zone?: string;
+    delai?: string;
+  } | null>(null);
   const checkEligibility = () => {
     // Vérification simple basée sur les 2 premiers chiffres du code postal
     const prefix = codePostal.substring(0, 2);
-    
     if (prefix === '78') {
-      setResult({eligible: true, zone: 'Zone prioritaire (Yvelines)', delai: '45 minutes maximum'});
+      setResult({
+        eligible: true,
+        zone: 'Zone prioritaire (Yvelines)',
+        delai: '45 minutes maximum'
+      });
     } else if (['75', '92', '93', '94'].includes(prefix)) {
-      setResult({eligible: true, zone: 'Paris et petite couronne', delai: '1 heure maximum'});
+      setResult({
+        eligible: true,
+        zone: 'Paris et petite couronne',
+        delai: '1 heure maximum'
+      });
     } else if (['77', '91', '95'].includes(prefix)) {
-      setResult({eligible: true, zone: 'Grande couronne', delai: '2 heures maximum'});
+      setResult({
+        eligible: true,
+        zone: 'Grande couronne',
+        delai: '2 heures maximum'
+      });
     } else {
-      setResult({eligible: false});
+      setResult({
+        eligible: false
+      });
     }
   };
-  
-  return (
-    <Card className="w-full max-w-md mx-auto">
+  return <Card className="w-full max-w-md mx-auto">
       <CardContent className="pt-6">
         <h3 className="text-xl font-bold mb-4 text-primary">Vérifier votre éligibilité</h3>
         <p className="mb-4 text-gray-600">Entrez votre code postal pour connaître notre délai d'intervention dans votre secteur.</p>
         <div className="flex gap-2">
-          <Input 
-            type="text" 
-            placeholder="Code postal" 
-            value={codePostal} 
-            onChange={(e) => setCodePostal(e.target.value)}
-            maxLength={5}
-            className="flex-1"
-          />
+          <Input type="text" placeholder="Code postal" value={codePostal} onChange={e => setCodePostal(e.target.value)} maxLength={5} className="flex-1" />
           <Button onClick={checkEligibility}>Vérifier</Button>
         </div>
         
-        {result && (
-          <div className="mt-4 p-4 rounded-md border-2 bg-gray-50">
-            {result.eligible ? (
-              <>
+        {result && <div className="mt-4 p-4 rounded-md border-2 bg-gray-50">
+            {result.eligible ? <>
                 <div className="flex items-center mb-2 text-maintenance">
                   <CheckCircle className="mr-2" size={20} />
                   <span className="font-semibold">Zone couverte</span>
                 </div>
                 <p className="text-gray-700"><span className="font-medium">{result.zone}</span></p>
                 <p className="text-gray-700 mt-2">Délai d'intervention : <span className="font-medium">{result.delai}</span></p>
-              </>
-            ) : (
-              <div className="flex items-center text-emergency">
+              </> : <div className="flex items-center text-emergency">
                 <AlertCircle className="mr-2" size={20} />
                 <span>Zone hors secteur d'intervention. Contactez-nous pour plus d'informations.</span>
-              </div>
-            )}
-          </div>
-        )}
+              </div>}
+          </div>}
       </CardContent>
-    </Card>
-  );
+    </Card>;
 };
-
 const ZoneIntervention = () => {
-  return (
-    <div className="min-h-screen">
+  return <div className="min-h-screen">
       {/* Hero Banner - Design premium à deux colonnes */}
       <div className="relative overflow-hidden md:my-6 md:py-[24px]">
         {/* Conteneur de la section hero à deux colonnes */}
@@ -135,7 +126,7 @@ const ZoneIntervention = () => {
               <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
                 Couverture Île-de-France
               </span>
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-montserrat">Notre zone d'intervention en Île-de-France</h1>
+              <h1 className="text-4xl font-bold text-gray-800 mb-6 font-montserrat md:text-3xl">Notre zone d'intervention en Île-de-France</h1>
               <p className="text-lg text-gray-600 mb-8 font-opensans">
                 Service rapide et efficace dans toute la région parisienne avec des délais d'intervention garantis selon votre localisation.
               </p>
@@ -556,8 +547,6 @@ const ZoneIntervention = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default ZoneIntervention;
