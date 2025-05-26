@@ -3,6 +3,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
+
 type LeaderProps = {
   name: string;
   role: string;
@@ -11,6 +12,7 @@ type LeaderProps = {
   initials: string;
   linkedin?: string;
 };
+
 const LeaderCard = ({
   name,
   role,
@@ -43,8 +45,10 @@ const LeaderCard = ({
       </CardContent>
     </Card>;
 };
+
 const LeadershipDuo = () => {
-  return <section className="section-padding bg-white">
+  return (
+    <section className="section-padding bg-white">
       <div className="container-custom">
         <h2 className="text-2xl md:text-3xl font-bold text-center text-primary mb-4 px-0">
           Notre Leadership
@@ -55,10 +59,26 @@ const LeadershipDuo = () => {
         </p>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <LeaderCard name="Hassan Maach" role="Fondateur & Président" bio="Entrepreneur visionnaire qui a fondé LeFrigoriste.fr avec une passion pour les services de réfrigération de qualité. Son approche orientée client et sa vision stratégique ont permis à l'entreprise de devenir une référence en Île-de-France." image="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" initials="HM" linkedin="https://www.linkedin.com/" />
-          <LeaderCard name="Mory Sangaré" role="Associé & Directeur Technique" bio="Technicien expérimenté qui a rejoint LeFrigoriste.fr pour renforcer l'excellence technique et les capacités d'intervention 24h/24. Sa connaissance approfondie des systèmes frigorifiques garantit des solutions efficaces pour chaque client." image="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" initials="MS" linkedin="https://www.linkedin.com/" />
+          <LeaderCard 
+            name="Hassan Maach" 
+            role="Fondateur & Président" 
+            bio="Entrepreneur visionnaire qui a fondé LeFrigoriste.fr avec une passion pour les services de réfrigération de qualité. Son approche orientée client et sa vision stratégique ont permis à l'entreprise de devenir une référence en Île-de-France." 
+            image="/lovable-uploads/8983f9a1-94c0-4e8c-b7d5-ea47fcc6bb04.png" 
+            initials="HM" 
+            linkedin="https://www.linkedin.com/" 
+          />
+          <LeaderCard 
+            name="Mory Sangaré" 
+            role="Associé & Directeur Technique" 
+            bio="Technicien expérimenté qui a rejoint LeFrigoriste.fr pour renforcer l'excellence technique et les capacités d'intervention 24h/24. Sa connaissance approfondie des systèmes frigorifiques garantit des solutions efficaces pour chaque client." 
+            image="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+            initials="MS" 
+            linkedin="https://www.linkedin.com/" 
+          />
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default LeadershipDuo;
