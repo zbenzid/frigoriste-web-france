@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -65,7 +66,7 @@ const LeadershipDuo = () => {
             bio="Entrepreneur visionnaire qui a fondé LeFrigoriste.fr avec une passion pour les services de réfrigération de qualité. Son approche orientée client et sa vision stratégique ont permis à l'entreprise de devenir une référence en Île-de-France." 
             image="/lovable-uploads/8983f9a1-94c0-4e8c-b7d5-ea47fcc6bb04.png" 
             initials="HM" 
-            linkedin="https://www.linkedin.com/" 
+            linkedin="https://www.linkedin.com/in/hassan-maach-59109516b/" 
           />
           <LeaderCard 
             name="Mory Sangaré" 
@@ -73,7 +74,7 @@ const LeadershipDuo = () => {
             bio="Technicien expérimenté qui a rejoint LeFrigoriste.fr pour renforcer l'excellence technique et les capacités d'intervention 24h/24. Sa connaissance approfondie des systèmes frigorifiques garantit des solutions efficaces pour chaque client." 
             image="/lovable-uploads/e242b745-4125-4454-bad9-b8c79338b4fc.png" 
             initials="MS" 
-            linkedin="https://www.linkedin.com/" 
+            linkedin="https://www.linkedin.com/in/mory-sangar%C3%A9-1b45a31a1/" 
           />
         </div>
       </div>
