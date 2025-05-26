@@ -1,54 +1,63 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Phone, FileText } from 'lucide-react';
+import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-[80vh] overflow-hidden">
-      {/* Image de fond avec overlay optimisé */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40 z-10"></div>
-        <img 
-          src="/lovable-uploads/84505439-0fa2-4c70-867b-9f949bcbdb1f.png"
-          alt="Technicien LeFrigoriste devant nos véhicules d'intervention" 
-          className="object-cover h-full w-full" // Removed animate-ken-burns
-        />
-      </div>
-      
-      {/* Contenu du hero avec nouvelle mise en page */}
-      <div className="container-custom relative z-20 h-full flex flex-col justify-center text-white py-24">
-        <div className="max-w-3xl">
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/20 text-white font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
-            Service d'urgence 24/7
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-            Le spécialiste du froid<br />en Île-de-France
-          </h1>
-          <p className="text-xl mb-8 text-white/90 max-w-2xl leading-relaxed">
-            Intervention garantie en 45 minutes dans les Yvelines, 1h à Paris et 2h en grande couronne pour tous vos besoins en réfrigération.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg" className="bg-emergency hover:bg-emergency/90 text-white">
-              <Link to="tel:0185500284" className="flex items-center gap-2">
-                <Phone className="h-5 w-5" />
-                Appeler l'urgence 01 85 50 02 84
+    <div className="relative overflow-hidden md:py-16 md:my-6">
+      {/* Conteneur de la section hero à deux colonnes */}
+      <div className="container-custom px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          {/* Colonne de gauche - Contenu textuel */}
+          <div className="relative z-10 py-12 md:py-0">
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
+              Notre expertise depuis 2018
+            </span>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-montserrat">Qui Sommes-Nous</h1>
+            <p className="text-lg text-gray-600 mb-8 font-opensans">
+              LeFrigoriste.fr, votre partenaire de confiance en réfrigération et climatisation en Île-de-France. Une équipe d'experts dédiée à votre tranquillité d'esprit avec une garantie d'intervention rapide 24h/7j.
+            </p>
+            
+            {/* Premium call-to-action */}
+            <div className="flex flex-wrap gap-4 mt-10">
+              <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl hover:translate-y-[-2px]">
+                <span className="relative flex items-center justify-center">
+                  <Phone size={20} className="mr-2" />
+                  01 85 50 02 84
+                </span>
+              </a>
+              <Link to="/contact" className="group relative overflow-hidden rounded-full bg-primary hover:bg-primary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl hover:translate-y-[-2px]">
+                <span className="relative flex items-center justify-center">
+                  Nous contacter
+                  <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </span>
               </Link>
-            </Button>
-            <Button asChild variant="secondary" size="lg" className="bg-white/10 hover:bg-white/20 backdrop-blur-sm">
-              <Link to="/contact" className="flex items-center gap-2">
-                <FileText className="h-5 w-5" />
-                Demander un devis
-              </Link>
-            </Button>
+            </div>
+          </div>
+          
+          {/* Colonne de droite - Image mise en valeur */}
+          <div className="relative">
+            {/* Conteneur de l'image avec cadre esthétique */}
+            <div className="overflow-hidden rounded-2xl shadow-xl relative aspect-[4/3] md:aspect-[16/9] h-full">
+              {/* Image principale */}
+              <img 
+                src="/lovable-uploads/84505439-0fa2-4c70-867b-9f949bcbdb1f.png" 
+                alt="L'équipe LeFrigoriste devant nos véhicules d'intervention" 
+                className="w-full h-full object-cover"
+              />
+              
+              {/* Élément décoratif - Badge de service 24/7 */}
+              <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white font-bold text-sm border border-white/20 shadow-lg z-30 flex items-center">
+                <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                Service 24/7
+              </div>
+            </div>
           </div>
         </div>
       </div>
-
-      {/* Ajout d'un effet de dégradé en bas */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
-    </section>
+    </div>
   );
 };
 
