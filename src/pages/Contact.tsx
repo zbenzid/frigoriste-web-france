@@ -123,11 +123,16 @@ const Contact = () => {
     }
   };
 
-  return <div className="min-h-screen">
+  return (
+    <div className="min-h-screen">
       {/* Hero moderne et minimaliste */}
       <div className="relative bg-gradient-to-br from-primary via-primary/95 to-secondary overflow-hidden">
         {/* Éléments décoratifs subtils */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23ffffff" fill-opacity="0.03"%3E%3Ccircle cx="30" cy="30" r="4"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-50"></div>
+        <div className="absolute inset-0 opacity-50">
+          <div className="w-full h-full" style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+          }}></div>
+        </div>
         
         <div className="container-custom relative z-10 py-24 md:py-32">
           <div className="max-w-4xl mx-auto text-center">
@@ -144,7 +149,7 @@ const Contact = () => {
             
             {/* Sous-titre */}
             <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-              Une question ? Un dépannage urgent ? Notre équipe d'experts est à votre écoute pour vous accompagner.
+              Une question ? Un dépannage urgent ? Notre équipe d&apos;experts est à votre écoute pour vous accompagner.
             </p>
             
             {/* CTA rapide */}
@@ -348,7 +353,7 @@ const Contact = () => {
                         {/* Adresse */}
                         <div>
                           <label htmlFor="address" className="block text-sm font-medium mb-1">
-                            Adresse d'intervention *
+                            Adresse d&apos;intervention *
                           </label>
                           <Input 
                             id="address" 
@@ -421,7 +426,7 @@ const Contact = () => {
                         disabled={isSubmitting}
                       />
                       <label htmlFor="gdprConsent" className="text-sm text-gray-600">
-                        J'accepte que mes informations soient utilisées pour me recontacter. Pour en savoir plus sur la gestion de vos données et vos droits, consultez notre politique de confidentialité. *
+                        J&apos;accepte que mes informations soient utilisées pour me recontacter. Pour en savoir plus sur la gestion de vos données et vos droits, consultez notre politique de confidentialité. *
                       </label>
                     </div>
                     
@@ -482,7 +487,7 @@ const Contact = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-600">
-                  Pour obtenir un devis rapide, vous pouvez nous contacter par téléphone au 01 85 50 02 84 ou remplir le formulaire de contact en précisant votre besoin. Nous vous demandons de fournir un maximum d'informations sur votre équipement (marque, modèle, puissance) et vos besoins pour vous répondre avec précision sous 24h à 48h.
+                  Pour obtenir un devis rapide, vous pouvez nous contacter par téléphone au 01 85 50 02 84 ou remplir le formulaire de contact en précisant votre besoin. Nous vous demandons de fournir un maximum d&apos;informations sur votre équipement (marque, modèle, puissance) et vos besoins pour vous répondre avec précision sous 24h à 48h.
                 </AccordionContent>
               </AccordionItem>
               
@@ -490,11 +495,11 @@ const Contact = () => {
                 <AccordionTrigger className="text-left">
                   <div className="flex items-center">
                     <AlertCircle className="h-5 w-5 mr-2 text-primary" />
-                    Quels délais d'intervention en cas d'urgence ?
+                    Quels délais d&apos;intervention en cas d&apos;urgence ?
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-600">
-                  Nos délais d'intervention en cas d'urgence varient selon votre localisation : dans les Yvelines (78), nous intervenons en 45 minutes maximum. À Paris et en petite couronne, comptez 1h maximum. Pour la grande couronne, notre délai est de 2h maximum. Notre service d'urgence est disponible 24h/24 et 7j/7, même les jours fériés.
+                  Nos délais d&apos;intervention en cas d&apos;urgence varient selon votre localisation : dans les Yvelines (78), nous intervenons en 45 minutes maximum. À Paris et en petite couronne, comptez 1h maximum. Pour la grande couronne, notre délai est de 2h maximum. Notre service d&apos;urgence est disponible 24h/24 et 7j/7, même les jours fériés.
                 </AccordionContent>
               </AccordionItem>
               
@@ -502,11 +507,11 @@ const Contact = () => {
                 <AccordionTrigger className="text-left">
                   <div className="flex items-center">
                     <Info className="h-5 w-5 mr-2 text-primary" />
-                    Quelles informations préparer avant d'appeler ?
+                    Quelles informations préparer avant d&apos;appeler ?
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-600">
-                  Avant de nous appeler, préparez les informations suivantes : type d'équipement (chambre froide, vitrine réfrigérée, climatisation...), marque et modèle si possible, nature du problème rencontré (fuite, bruit anormal, ne refroidit plus...), adresse précise d'intervention et vos coordonnées complètes. Ces informations nous permettront d'intervenir plus efficacement.
+                  Avant de nous appeler, préparez les informations suivantes : type d&apos;équipement (chambre froide, vitrine réfrigérée, climatisation...), marque et modèle si possible, nature du problème rencontré (fuite, bruit anormal, ne refroidit plus...), adresse précise d&apos;intervention et vos coordonnées complètes. Ces informations nous permettront d&apos;intervenir plus efficacement.
                 </AccordionContent>
               </AccordionItem>
               
@@ -518,7 +523,7 @@ const Contact = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-600">
-                  Lors d'une première intervention, notre technicien commence par un diagnostic complet de votre installation. Il identifie la panne ou le dysfonctionnement, vous explique le problème et vous propose une solution adaptée. Si la réparation peut être effectuée immédiatement, il vous soumet un devis verbal pour accord avant l'intervention. Pour les interventions plus complexes, un devis écrit vous sera envoyé.
+                  Lors d&apos;une première intervention, notre technicien commence par un diagnostic complet de votre installation. Il identifie la panne ou le dysfonctionnement, vous explique le problème et vous propose une solution adaptée. Si la réparation peut être effectuée immédiatement, il vous soumet un devis verbal pour accord avant l&apos;intervention. Pour les interventions plus complexes, un devis écrit vous sera envoyé.
                 </AccordionContent>
               </AccordionItem>
               
@@ -530,7 +535,7 @@ const Contact = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="text-gray-600">
-                  Nous acceptons plusieurs moyens de paiement : carte bancaire, chèque, virement bancaire et espèces. Pour les professionnels, nous proposons des facilités de paiement avec possibilité de régler à 30 jours. Les interventions d'urgence nécessitent généralement un règlement immédiat, sauf pour nos clients sous contrat de maintenance.
+                  Nous acceptons plusieurs moyens de paiement : carte bancaire, chèque, virement bancaire et espèces. Pour les professionnels, nous proposons des facilités de paiement avec possibilité de régler à 30 jours. Les interventions d&apos;urgence nécessitent généralement un règlement immédiat, sauf pour nos clients sous contrat de maintenance.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -541,7 +546,7 @@ const Contact = () => {
       {/* Zones d'intervention */}
       <div className="section-padding">
         <div className="container-custom">
-          <h2 className="text-3xl font-bold text-primary mb-2 text-center">Nos secteurs d'intervention</h2>
+          <h2 className="text-3xl font-bold text-primary mb-2 text-center">Nos secteurs d&apos;intervention</h2>
           <p className="text-gray-600 mb-8 text-center">Intervention rapide garantie en Île-de-France</p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -585,7 +590,7 @@ const Contact = () => {
               <CardContent>
                 <p className="font-medium">Grande Couronne</p>
                 <p className="text-sm text-gray-600 mt-2">
-                  Val-d'Oise (95), Seine-et-Marne (77, ouest), Essonne (91, nord).
+                  Val-d&apos;Oise (95), Seine-et-Marne (77, ouest), Essonne (91, nord).
                 </p>
               </CardContent>
             </Card>
@@ -594,13 +599,14 @@ const Contact = () => {
           <div className="text-center mt-8">
             <Button asChild variant="secondary" className="mx-auto">
               <a href="/zone-intervention">
-                Voir toutes nos zones d'intervention
+                Voir toutes nos zones d&apos;intervention
               </a>
             </Button>
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
 
 export default Contact;
