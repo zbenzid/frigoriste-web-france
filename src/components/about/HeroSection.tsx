@@ -12,7 +12,7 @@ const HeroSection = () => {
             <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
               Notre expertise depuis 2018
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-montserrat">Qui Sommes-Nous</h1>
+            <h1 className="text-4xl font-bold text-gray-800 mb-6 font-montserrat md:text-3xl">Qui Sommes-Nous</h1>
             <p className="text-lg text-gray-600 mb-8 font-opensans">
               LeFrigoriste.fr, votre partenaire de confiance en réfrigération et climatisation en Île-de-France. Une équipe d'experts dédiée à votre tranquillité d'esprit avec une garantie d'intervention rapide 24h/7j.
             </p>
