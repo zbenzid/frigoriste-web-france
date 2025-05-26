@@ -2,7 +2,6 @@
 import React from 'react';
 import HeroSection from '@/components/about/HeroSection';
 import KeyMetricsStrip from '@/components/about/KeyMetricsStrip';
-import CompanyTimeline from '@/components/about/CompanyTimeline';
 import LeadershipDuo from '@/components/about/LeadershipDuo';
 import TechTeamCarousel from '@/components/about/TechTeamCarousel';
 import DifferentiationGrid from '@/components/about/DifferentiationGrid';
@@ -16,7 +15,6 @@ const QuiSommesNous = () => {
     <div className="min-h-screen">
       <HeroSection />
       <KeyMetricsStrip />
-      <CompanyTimeline />
       <LeadershipDuo />
       <TechTeamCarousel />
       <DifferentiationGrid />
