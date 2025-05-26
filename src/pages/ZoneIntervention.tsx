@@ -1,8 +1,10 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, CheckCircle, AlertCircle, Building, Store, ShoppingCart, Phone } from 'lucide-react';
+import { MapPin, Clock, CheckCircle, AlertCircle, Building, Store, ShoppingCart, Phone, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import InterventionMap from "@/components/intervention/InterventionMap";
 
 // Carte stylisée d'Île-de-France
@@ -123,15 +125,55 @@ const CodePostalChecker = () => {
 const ZoneIntervention = () => {
   return (
     <div className="min-h-screen">
-      {/* Bannière */}
-      <section className="bg-primary bg-opacity-5 py-20 px-4">
-        <div className="container-custom text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">Notre zone d'intervention en Île-de-France</h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Service rapide et efficace dans toute la région parisienne
-          </p>
+      {/* Hero Banner - Design premium à deux colonnes */}
+      <div className="relative overflow-hidden md:my-6 md:py-[24px]">
+        {/* Conteneur de la section hero à deux colonnes */}
+        <div className="container-custom px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            {/* Colonne de gauche - Contenu textuel */}
+            <div className="relative z-10 py-12 md:py-0">
+              <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
+                Couverture Île-de-France
+              </span>
+              <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-montserrat">Notre zone d'intervention en Île-de-France</h1>
+              <p className="text-lg text-gray-600 mb-8 font-opensans">
+                Service rapide et efficace dans toute la région parisienne avec des délais d'intervention garantis selon votre localisation.
+              </p>
+              
+              {/* Premium call-to-action */}
+              <div className="flex flex-wrap gap-4 mt-10">
+                <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-emergency hover:bg-emergency/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl hover:translate-y-[-2px]">
+                  <span className="relative flex items-center justify-center">
+                    <Phone size={20} className="mr-2" />
+                    01 85 50 02 84
+                  </span>
+                </a>
+                <Link to="/contact" className="group relative overflow-hidden rounded-full bg-primary hover:bg-primary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl hover:translate-y-[-2px]">
+                  <span className="relative flex items-center justify-center">
+                    Demander un devis
+                    <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+            
+            {/* Colonne de droite - Image mise en valeur */}
+            <div className="relative">
+              {/* Conteneur de l'image avec cadre esthétique */}
+              <div className="overflow-hidden rounded-2xl shadow-xl relative aspect-[4/3] md:aspect-[16/9] h-full">
+                {/* Image principale */}
+                <img src="/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png" alt="Zone d'intervention Île-de-France" className="w-full h-full object-cover" />
+                
+                {/* Élément décoratif - Badge de délai d'intervention */}
+                <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white font-bold text-sm border border-white/20 shadow-lg z-30 flex items-center">
+                  <Clock size={16} className="mr-2" />
+                  45 min Yvelines
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </section>
+      </div>
       
       {/* Carte et explication */}
       <section className="section-padding bg-white">
