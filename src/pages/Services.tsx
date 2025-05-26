@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { ArrowRight, Snowflake, Wind, Thermometer, Wrench, Clock, ShieldCheck, BarChart3, Check, Lightbulb, Phone, Info, Award, Shield, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -17,6 +18,18 @@ const Services = () => {
               <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-6 backdrop-blur-sm border border-white/10">
                 Expertise professionnelle
               </span>
+              
+              {/* Image mobile - positioned after the blue pill */}
+              <div className="md:hidden relative mb-6">
+                <div className="overflow-hidden rounded-2xl shadow-xl relative aspect-[4/3] h-full">
+                  <img src="/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png" alt="Nos services de réfrigération" className="w-full h-full object-cover" />
+                  <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white font-bold text-sm border border-white/20 shadow-lg z-30 flex items-center">
+                    <Clock size={16} className="mr-2" />
+                    Service 24/7
+                  </div>
+                </div>
+              </div>
+              
               <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 font-montserrat">Nos Services</h1>
               <p className="text-lg text-gray-600 mb-8 font-opensans">
                 Solutions complètes en réfrigération et climatisation pour tous vos besoins professionnels, avec une garantie d'intervention rapide 24h/7j.
@@ -39,8 +52,8 @@ const Services = () => {
               </div>
             </div>
             
-            {/* Colonne de droite - Image mise en valeur */}
-            <div className="relative">
+            {/* Colonne de droite - Image mise en valeur (desktop only) */}
+            <div className="relative hidden md:block">
               {/* Conteneur de l'image avec cadre esthétique */}
               <div className="overflow-hidden rounded-2xl shadow-xl relative aspect-[4/3] md:aspect-[16/9] h-full">
                 {/* Image principale - sans gradient d'assombrissement */}
