@@ -480,7 +480,7 @@ const ZoneIntervention = () => {
                 <div className="w-8 h-8 rounded-full bg-emergency text-white flex items-center justify-center mr-4 mt-1 flex-shrink-0">4</div>
                 <div>
                   <h4 className="font-bold mb-1">Suivi et rapport</h4>
-                  <p className="text-gray-600">Compte-rendu d��taillé de l'intervention et recommandations pour éviter de futures pannes.</p>
+                  <p className="text-gray-600">Compte-rendu détaillé de l'intervention et recommandations pour éviter de futures pannes.</p>
                 </div>
               </div>
             </div>
