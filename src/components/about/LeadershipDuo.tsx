@@ -71,7 +71,7 @@ const LeadershipDuo = () => {
             name="Mory Sangaré" 
             role="Associé & Directeur Technique" 
             bio="Technicien expérimenté qui a rejoint LeFrigoriste.fr pour renforcer l'excellence technique et les capacités d'intervention 24h/24. Sa connaissance approfondie des systèmes frigorifiques garantit des solutions efficaces pour chaque client." 
-            image="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+            image="/lovable-uploads/e242b745-4125-4454-bad9-b8c79338b4fc.png" 
             initials="MS" 
             linkedin="https://www.linkedin.com/" 
           />
