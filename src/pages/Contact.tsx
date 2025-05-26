@@ -14,6 +14,7 @@ import { RecruitmentBanner } from '@/components/recruitment';
 
 // Types de demandes qui nécessitent une adresse
 const requestTypesNeedingAddress = ['urgence', 'depannage', 'installation', 'maintenance'];
+
 const Contact = () => {
   const {
     toast
@@ -122,12 +123,6 @@ const Contact = () => {
   return <div className="min-h-screen">
       {/* Hero moderne et stylé comme Services */}
       <section className="py-20 relative overflow-hidden">
-        {/* Fond moderne avec dégradé sophistiqué */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/30 z-0">
-          {/* Effet glacé avec motifs subtils */}
-          <div className=""></div>
-        </div>
-        
         {/* Éléments décoratifs glacés */}
         <div className="absolute -top-10 left-1/4 w-64 h-64 rounded-full bg-gradient-to-br from-blue-100/20 to-transparent opacity-30 blur-3xl"></div>
         <div className="absolute top-1/3 right-20 w-80 h-80 rounded-full bg-gradient-to-bl from-blue-200/20 to-transparent opacity-20 blur-3xl"></div>
@@ -508,4 +503,5 @@ const Contact = () => {
       </div>
     </div>;
 };
+
 export default Contact;
