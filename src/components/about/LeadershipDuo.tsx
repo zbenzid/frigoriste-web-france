@@ -25,7 +25,7 @@ const LeaderCard = ({
         <div className="flex flex-col md:flex-row">
           <div className="md:w-1/3 flex items-center justify-center p-6 relative">
             <Avatar className="h-32 w-32 border-4 border-white shadow-md">
-              <AvatarImage src={image} alt={name} />
+              <AvatarImage src={image} alt={name} className="object-cover" />
               <AvatarFallback className="bg-primary text-primary-foreground text-xl font-bold">
                 {initials}
               </AvatarFallback>
