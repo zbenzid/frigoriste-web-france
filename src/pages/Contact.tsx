@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, AlertCircle, Facebook, Instagram, Linkedin, Send, FileText, Info, CreditCard } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -11,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import { RecruitmentBanner } from '@/components/recruitment';
 
 // Types de demandes qui nécessitent une adresse
 const requestTypesNeedingAddress = ['urgence', 'depannage', 'installation', 'maintenance'];
@@ -131,6 +131,9 @@ const Contact = () => {
         </div>
       </div>
 
+      {/* Section Recrutement */}
+      <RecruitmentBanner />
+
       {/* Section principale (coordonnées + formulaire) */}
       <div className="section-padding bg-gray-50">
         <div className="container-custom">
@@ -164,9 +167,6 @@ const Contact = () => {
                       </a>
                     </div>
                   </div>
-                  
-                  {/* Téléphone urgence */}
-                  
                   
                   {/* Email */}
                   <div className="flex items-start space-x-3">

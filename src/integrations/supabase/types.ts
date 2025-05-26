@@ -51,6 +51,45 @@ export type Database = {
         }
         Relationships: []
       }
+      recruitment_submissions: {
+        Row: {
+          cover_letter_file_path: string | null
+          created_at: string
+          cv_file_path: string | null
+          desired_position: string
+          email: string
+          id: string
+          motivation: string | null
+          name: string
+          phone: string
+          status: string
+        }
+        Insert: {
+          cover_letter_file_path?: string | null
+          created_at?: string
+          cv_file_path?: string | null
+          desired_position: string
+          email: string
+          id?: string
+          motivation?: string | null
+          name: string
+          phone: string
+          status?: string
+        }
+        Update: {
+          cover_letter_file_path?: string | null
+          created_at?: string
+          cv_file_path?: string | null
+          desired_position?: string
+          email?: string
+          id?: string
+          motivation?: string | null
+          name?: string
+          phone?: string
+          status?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
