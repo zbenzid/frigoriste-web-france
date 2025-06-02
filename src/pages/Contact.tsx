@@ -121,7 +121,7 @@ const Contact = () => {
   };
   return <div className="min-h-screen">
       {/* Hero moderne et stylé comme Services */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-12 md:py-20 relative overflow-hidden">
         {/* Fond moderne avec dégradé sophistiqué */}
         <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/30 z-0">
           {/* Effet glacé avec motifs subtils */}
