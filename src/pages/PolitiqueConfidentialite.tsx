@@ -1,19 +1,13 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Shield, Database, Users, Eye, Settings, Mail } from 'lucide-react';
-
 const PolitiqueConfidentialite = () => {
-  return (
-    <div className="min-h-screen bg-gray-50">
+  return <div className="min-h-screen bg-gray-50">
       <div className="container-custom py-20">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <Link 
-              to="/" 
-              className="inline-flex items-center text-primary hover:text-secondary transition-colors mb-6"
-            >
+            <Link to="/" className="inline-flex items-center text-primary hover:text-secondary transition-colors mb-6">
               <ArrowLeft size={20} className="mr-2" />
               Retour à l'accueil
             </Link>
@@ -147,7 +141,7 @@ const PolitiqueConfidentialite = () => {
                     Les sous-traitants suivants ont également accès à notre administration pour des raisons de maintenance :
                   </p>
                   <ul className="mt-2 ml-4 text-gray-600">
-                    <li>• L'agence web Energiedin basée au Maroc, à Agadir.</li>
+                    <li>• L'agence digitale Social Leap, à Mantes-la-jolie, France.</li>
                   </ul>
                 </div>
                 
@@ -192,18 +186,12 @@ const PolitiqueConfidentialite = () => {
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <a 
-                    href="mailto:info@lefrigoriste.fr" 
-                    className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
-                  >
+                  <a href="mailto:info@lefrigoriste.fr" className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
                     <Mail size={20} className="mr-2" />
                     info@lefrigoriste.fr
                   </a>
                   
-                  <Link 
-                    to="/contact" 
-                    className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary/5 transition-colors"
-                  >
+                  <Link to="/contact" className="inline-flex items-center justify-center px-6 py-3 border border-primary text-primary rounded-lg hover:bg-primary/5 transition-colors">
                     Formulaire de contact
                   </Link>
                 </div>
@@ -212,8 +200,6 @@ const PolitiqueConfidentialite = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PolitiqueConfidentialite;
