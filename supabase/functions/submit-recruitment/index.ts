@@ -161,9 +161,17 @@ serve(async (req) => {
       <p><em>Candidature soumise le ${new Date().toLocaleString('fr-FR')}</em></p>
     `;
 
+    console.log("Tentative d'envoi d'email de candidature avec Resend...");
+    console.log("Configuration email candidature:", {
+      from: "Candidatures LeFrigoriste <contact@lefrigoriste.fr>",
+      to: ["contact@lefrigoriste.fr"],
+      subject: `Nouvelle candidature - ${submissionData.desiredPosition} - ${submissionData.name}`,
+      reply_to: submissionData.email,
+    });
+
     try {
       const { data: emailData, error: emailError } = await resend.emails.send({
-        from: "Candidatures LeFrigoriste <onboarding@resend.dev>",
+        from: "Candidatures LeFrigoriste <contact@lefrigoriste.fr>",
         to: ["contact@lefrigoriste.fr"],
         subject: `Nouvelle candidature - ${submissionData.desiredPosition} - ${submissionData.name}`,
         html: emailBody,
@@ -171,7 +179,7 @@ serve(async (req) => {
       });
 
       if (emailError) {
-        console.error("Erreur envoi email:", emailError);
+        console.error("Erreur envoi email candidature:", emailError);
         
         await supabase
           .from("recruitment_submissions")
@@ -182,12 +190,13 @@ serve(async (req) => {
           JSON.stringify({
             success: true,
             message: "Candidature enregistrée mais email non envoyé",
+            emailError: emailError,
           }),
           { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
 
-      console.log("Email envoyé:", emailData);
+      console.log("Email candidature envoyé avec succès:", emailData);
 
       await supabase
         .from("recruitment_submissions")
@@ -198,12 +207,13 @@ serve(async (req) => {
         JSON.stringify({
           success: true,
           message: "Candidature envoyée avec succès",
+          emailData: emailData,
         }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
 
     } catch (emailException) {
-      console.error("Exception email:", emailException);
+      console.error("Exception email candidature:", emailException);
       
       await supabase
         .from("recruitment_submissions")
@@ -214,6 +224,7 @@ serve(async (req) => {
         JSON.stringify({
           success: true,
           message: "Candidature enregistrée mais email non envoyé",
+          error: emailException.message,
         }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
