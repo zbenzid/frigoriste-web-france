@@ -14,6 +14,7 @@ import QuiSommesNous from "./pages/QuiSommesNous";
 import ZoneIntervention from "./pages/ZoneIntervention";
 import Contact from "./pages/Contact";
 import MentionsLegales from "./pages/MentionsLegales";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
               <Route path="/zone-intervention" element={<ZoneIntervention />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/mentions-legales" element={<MentionsLegales />} />
+              <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

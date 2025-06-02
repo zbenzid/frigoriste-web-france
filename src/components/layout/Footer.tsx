@@ -98,12 +98,20 @@ const Footer = () => {
         <div className="mt-12 pt-6 border-t border-white/20 text-center">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
             <p>© {currentYear} LeFrigoriste.fr - Tous droits réservés</p>
-            <Link 
-              to="/mentions-legales" 
-              className="hover:text-secondary transition-colors text-sm"
-            >
-              Mentions légales
-            </Link>
+            <div className="flex space-x-4 text-sm">
+              <Link 
+                to="/mentions-legales" 
+                className="hover:text-secondary transition-colors"
+              >
+                Mentions légales
+              </Link>
+              <Link 
+                to="/politique-confidentialite" 
+                className="hover:text-secondary transition-colors"
+              >
+                Politique de confidentialité
+              </Link>
+            </div>
           </div>
         </div>
       </div>
