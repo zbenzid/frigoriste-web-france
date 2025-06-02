@@ -115,10 +115,18 @@ serve(async (req) => {
       <p>${formData.message.replace(/\n/g, '<br>')}</p>
     `;
 
+    console.log("Tentative d'envoi d'email avec Resend...");
+    console.log("Configuration email:", {
+      from: "Formulaire de Contact <contact@lefrigoriste.fr>",
+      to: ["contact@lefrigoriste.fr"],
+      subject: `Nouvelle demande de contact - ${requestType} - ${formData.name}`,
+      reply_to: formData.email,
+    });
+
     try {
-      // Envoyer l'email via Resend
+      // Envoyer l'email via Resend avec la nouvelle adresse
       const { data: emailData, error: emailError } = await resend.emails.send({
-        from: "Formulaire de Contact <onboarding@resend.dev>",
+        from: "Formulaire de Contact <contact@lefrigoriste.fr>",
         to: ["contact@lefrigoriste.fr"],
         subject: `Nouvelle demande de contact - ${requestType} - ${formData.name}`,
         html: emailBody,
@@ -139,6 +147,7 @@ serve(async (req) => {
           JSON.stringify({
             success: true,
             message: "Votre demande a été enregistrée mais l'email n'a pas pu être envoyé",
+            emailError: emailError,
           }),
           {
             status: 200,
@@ -160,6 +169,7 @@ serve(async (req) => {
         JSON.stringify({
           success: true,
           message: "Votre demande a été envoyée avec succès",
+          emailData: emailData,
         }),
         {
           status: 200,
@@ -180,6 +190,7 @@ serve(async (req) => {
         JSON.stringify({
           success: true,
           message: "Votre demande a été enregistrée mais l'email n'a pas pu être envoyé",
+          error: emailSendingError.message,
         }),
         {
           status: 200,
