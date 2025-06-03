@@ -1,11 +1,8 @@
-
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { Resend } from "npm:resend@1.0.0";
 
-import { corsHeaders, MAX_CONTENT_LENGTH } from "../submit-contact/utils/constants.ts";
-import { getClientIP, isRateLimited } from "../submit-contact/utils/rate-limiting.ts";
-import { sanitizeInput } from "../submit-contact/utils/sanitization.ts";
+import { corsHeaders, MAX_CONTENT_LENGTH } from "./utils/constants.ts";
 import { validateRecruitmentFormData } from "./utils/recruitment-validation.ts";
 import { uploadFileToStorage, createSignedUrl } from "./utils/file-handling.ts";
 import { generateRecruitmentEmailBody } from "./utils/email-templates.ts";
@@ -19,6 +16,12 @@ const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 const recruitmentRequestCounts = new Map<string, { count: number; resetTime: number }>();
 const RECRUITMENT_RATE_LIMIT = 3;
 const RECRUITMENT_RATE_WINDOW = 24 * 60 * 60 * 1000; // 24 hours
+
+function getClientIP(req: Request): string {
+  return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || 
+         req.headers.get("x-real-ip") || 
+         "unknown";
+}
 
 function isRecruitmentRateLimited(clientIP: string): boolean {
   const now = Date.now();
@@ -35,6 +38,10 @@ function isRecruitmentRateLimited(clientIP: string): boolean {
   
   clientData.count++;
   return false;
+}
+
+function sanitizeInput(input: string): string {
+  return input.trim().replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, "");
 }
 
 interface RecruitmentSubmissionData {

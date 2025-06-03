@@ -1,5 +1,5 @@
 
-import { escapeHtml } from "../../submit-contact/utils/sanitization.ts";
+import { escapeHtml } from "./sanitization.ts";
 
 export function generateRecruitmentEmailBody(
   submissionData: any,
