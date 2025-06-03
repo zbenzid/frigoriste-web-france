@@ -75,9 +75,16 @@ function sanitizeInput(input: string): string {
 }
 
 function escapeHtml(text: string): string {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
+  const htmlEscapes: Record<string, string> = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#x27;',
+    '/': '&#x2F;'
+  };
+  
+  return text.replace(/[&<>"'/]/g, (match) => htmlEscapes[match] || match);
 }
 
 function validateFormData(data: any): { isValid: boolean; errors: string[] } {
