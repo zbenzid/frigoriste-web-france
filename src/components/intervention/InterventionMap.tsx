@@ -32,248 +32,260 @@ const InterventionMap = () => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
+  const [isInitialized, setIsInitialized] = useState(false);
   
   // Set the Mapbox API key directly
   const mapboxKey = "pk.eyJ1IjoiemFra3ZpZSIsImEiOiJjbTlnMjI1d2wwb2xlMnFzY2dnYTU0cDNzIn0.QORR16K0VOfDEhaO4xaMAw";
 
   // Function to initialize the map
   const initializeMap = () => {
-    if (!mapContainer.current) return;
+    if (!mapContainer.current || map.current || isInitialized) return;
     
-    mapboxgl.accessToken = mapboxKey;
-    
-    if (map.current) return;
-    
-    map.current = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/light-v11',
-      center: [2.35, 48.85], // Paris coordinates
-      zoom: 8.5,
-    });
-
-    map.current.on('load', () => {
-      setMapLoaded(true);
+    try {
+      mapboxgl.accessToken = mapboxKey;
       
-      if (!map.current) return;
+      setIsInitialized(true);
       
-      // Add data for Paris and Île-de-France departments
-      // These are simplified GeoJSON data for demonstration
-      
-      // Zone prioritaire - Yvelines (78)
-      map.current.addSource('yvelines', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'Polygon',
-            coordinates: [[
-              [1.5, 48.9], [1.6, 48.7], [1.9, 48.6], 
-              [2.2, 48.65], [2.3, 48.8], [2.1, 49.0], 
-              [1.8, 49.05], [1.5, 48.9]
-            ]]
-          }
-        }
-      });
-      
-      map.current.addLayer({
-        id: 'yvelines-fill',
-        type: 'fill',
-        source: 'yvelines',
-        layout: {},
-        paint: {
-          'fill-color': '#CC0000',
-          'fill-opacity': 0.5
-        }
-      });
-      
-      map.current.addLayer({
-        id: 'yvelines-border',
-        type: 'line',
-        source: 'yvelines',
-        layout: {},
-        paint: {
-          'line-color': '#CC0000',
-          'line-width': 1
-        }
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/light-v11',
+        center: [2.35, 48.85], // Paris coordinates
+        zoom: 8.5,
       });
 
-      // Paris and petite couronne
-      map.current.addSource('petite-couronne', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'Polygon',
-            coordinates: [[
-              [2.2, 48.95], [2.5, 48.9], [2.6, 48.8],
-              [2.5, 48.7], [2.2, 48.6], [2.0, 48.7],
-              [1.9, 48.8], [2.0, 48.9], [2.2, 48.95]
-            ]]
-          }
-        }
-      });
-      
-      map.current.addLayer({
-        id: 'petite-couronne-fill',
-        type: 'fill',
-        source: 'petite-couronne',
-        layout: {},
-        paint: {
-          'fill-color': '#FF9900',
-          'fill-opacity': 0.5
-        }
-      });
-      
-      map.current.addLayer({
-        id: 'petite-couronne-border',
-        type: 'line',
-        source: 'petite-couronne',
-        layout: {},
-        paint: {
-          'line-color': '#FF9900',
-          'line-width': 1
-        }
-      });
-
-      // Grande couronne
-      map.current.addSource('grande-couronne', {
-        type: 'geojson',
-        data: {
-          type: 'Feature',
-          properties: {},
-          geometry: {
-            type: 'Polygon',
-            coordinates: [[
-              [1.4, 49.1], [2.1, 49.2], [2.8, 49.0],
-              [3.0, 48.7], [2.9, 48.3], [2.5, 48.2],
-              [1.9, 48.3], [1.5, 48.5], [1.3, 48.8],
-              [1.4, 49.1]
-            ]]
-          }
-        }
-      });
-      
-      map.current.addLayer({
-        id: 'grande-couronne-fill',
-        type: 'fill',
-        source: 'grande-couronne',
-        layout: {},
-        paint: {
-          'fill-color': '#0B5394',
-          'fill-opacity': 0.3
-        }
-      });
-      
-      map.current.addLayer({
-        id: 'grande-couronne-border',
-        type: 'line',
-        source: 'grande-couronne',
-        layout: {},
-        paint: {
-          'line-color': '#0B5394',
-          'line-width': 1
-        }
-      });
-
-      // Add Les Mureaux marker
-      const lesMureauxMarker = document.createElement('div');
-      lesMureauxMarker.className = 'flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md';
-      lesMureauxMarker.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="1"/><path d="M9 18v3"/><path d="M15 18v3"/><path d="M9 6V3"/><path d="M15 6V3"/><path d="M14 10h2"/><path d="M14 14h2"/><path d="M8 10h2"/><path d="M8 14h2"/></svg>';
-      
-      new mapboxgl.Marker(lesMureauxMarker)
-        .setLngLat([1.91, 48.98]) // Les Mureaux coordinates
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h3 class="font-bold">Les Mureaux</h3><p>Siège social</p>'))
-        .addTo(map.current);
-      
-      // Add city markers
-      const cities = [
-        { name: 'Paris', coords: [2.35, 48.85], zone: 'petite' },
-        { name: 'Versailles', coords: [2.13, 48.80], zone: 'prioritaire' },
-        { name: 'Mantes-la-Jolie', coords: [1.70, 48.99], zone: 'prioritaire' },
-        { name: 'Saint-Germain', coords: [2.08, 48.90], zone: 'prioritaire' },
-        { name: 'Poissy', coords: [2.05, 48.93], zone: 'prioritaire' },
-        { name: 'Cergy', coords: [2.07, 49.03], zone: 'grande' },
-        { name: 'Évry', coords: [2.45, 48.63], zone: 'grande' },
-        { name: 'Créteil', coords: [2.47, 48.78], zone: 'petite' },
-        { name: 'Nanterre', coords: [2.20, 48.89], zone: 'petite' }
-      ];
-      
-      cities.forEach(city => {
-        const el = document.createElement('div');
-        el.className = 'flex items-center justify-center';
+      map.current.on('load', () => {
+        setMapLoaded(true);
         
-        let color;
-        switch(city.zone) {
-          case 'prioritaire':
-            color = '#CC0000';
-            break;
-          case 'petite':
-            color = '#FF9900';
-            break;
-          case 'grande':
-            color = '#0B5394';
-            break;
-          default:
-            color = '#333333';
-        }
+        if (!map.current) return;
         
-        el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${color}" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`;
+        // Add data for Paris and Île-de-France departments
+        // These are simplified GeoJSON data for demonstration
         
-        new mapboxgl.Marker(el)
-          .setLngLat(city.coords as [number, number]) // Fixed the TypeScript error by type assertion
-          .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3 class="font-bold">${city.name}</h3>`))
-          .addTo(map.current);
-      });
-      
-      // Add department labels
-      const departments = [
-        { name: '75', coords: [2.35, 48.86] },
-        { name: '78', coords: [1.85, 48.82] },
-        { name: '91', coords: [2.25, 48.52] },
-        { name: '92', coords: [2.23, 48.83] },
-        { name: '93', coords: [2.45, 48.91] },
-        { name: '94', coords: [2.47, 48.77] },
-        { name: '95', coords: [2.15, 49.05] },
-        { name: '77', coords: [2.95, 48.60] }
-      ];
-      
-      departments.forEach(dept => {
-        map.current?.addSource(`dept-${dept.name}`, {
+        // Zone prioritaire - Yvelines (78)
+        map.current.addSource('yvelines', {
           type: 'geojson',
           data: {
             type: 'Feature',
-            properties: { name: dept.name },
+            properties: {},
             geometry: {
-              type: 'Point',
-              coordinates: dept.coords
+              type: 'Polygon',
+              coordinates: [[
+                [1.5, 48.9], [1.6, 48.7], [1.9, 48.6], 
+                [2.2, 48.65], [2.3, 48.8], [2.1, 49.0], 
+                [1.8, 49.05], [1.5, 48.9]
+              ]]
             }
           }
         });
         
-        map.current?.addLayer({
-          id: `dept-${dept.name}`,
-          type: 'symbol',
-          source: `dept-${dept.name}`,
-          layout: {
-            'text-field': dept.name,
-            'text-size': 16,
-            'text-font': ['Open Sans Bold'],
-            'text-offset': [0, 0],
-            'text-anchor': 'center'
-          },
+        map.current.addLayer({
+          id: 'yvelines-fill',
+          type: 'fill',
+          source: 'yvelines',
+          layout: {},
           paint: {
-            'text-color': '#333',
-            'text-halo-color': '#fff',
-            'text-halo-width': 1.5
+            'fill-color': '#CC0000',
+            'fill-opacity': 0.5
           }
         });
+        
+        map.current.addLayer({
+          id: 'yvelines-border',
+          type: 'line',
+          source: 'yvelines',
+          layout: {},
+          paint: {
+            'line-color': '#CC0000',
+            'line-width': 1
+          }
+        });
+
+        // Paris and petite couronne
+        map.current.addSource('petite-couronne', {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'Polygon',
+              coordinates: [[
+                [2.2, 48.95], [2.5, 48.9], [2.6, 48.8],
+                [2.5, 48.7], [2.2, 48.6], [2.0, 48.7],
+                [1.9, 48.8], [2.0, 48.9], [2.2, 48.95]
+              ]]
+            }
+          }
+        });
+        
+        map.current.addLayer({
+          id: 'petite-couronne-fill',
+          type: 'fill',
+          source: 'petite-couronne',
+          layout: {},
+          paint: {
+            'fill-color': '#FF9900',
+            'fill-opacity': 0.5
+          }
+        });
+        
+        map.current.addLayer({
+          id: 'petite-couronne-border',
+          type: 'line',
+          source: 'petite-couronne',
+          layout: {},
+          paint: {
+            'line-color': '#FF9900',
+            'line-width': 1
+          }
+        });
+
+        // Grande couronne
+        map.current.addSource('grande-couronne', {
+          type: 'geojson',
+          data: {
+            type: 'Feature',
+            properties: {},
+            geometry: {
+              type: 'Polygon',
+              coordinates: [[
+                [1.4, 49.1], [2.1, 49.2], [2.8, 49.0],
+                [3.0, 48.7], [2.9, 48.3], [2.5, 48.2],
+                [1.9, 48.3], [1.5, 48.5], [1.3, 48.8],
+                [1.4, 49.1]
+              ]]
+            }
+          }
+        });
+        
+        map.current.addLayer({
+          id: 'grande-couronne-fill',
+          type: 'fill',
+          source: 'grande-couronne',
+          layout: {},
+          paint: {
+            'fill-color': '#0B5394',
+            'fill-opacity': 0.3
+          }
+        });
+        
+        map.current.addLayer({
+          id: 'grande-couronne-border',
+          type: 'line',
+          source: 'grande-couronne',
+          layout: {},
+          paint: {
+            'line-color': '#0B5394',
+            'line-width': 1
+          }
+        });
+
+        // Add Les Mureaux marker
+        const lesMureauxMarker = document.createElement('div');
+        lesMureauxMarker.className = 'flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md';
+        lesMureauxMarker.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#CC0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="1"/><path d="M9 18v3"/><path d="M15 18v3"/><path d="M9 6V3"/><path d="M15 6V3"/><path d="M14 10h2"/><path d="M14 14h2"/><path d="M8 10h2"/><path d="M8 14h2"/></svg>';
+        
+        new mapboxgl.Marker(lesMureauxMarker)
+          .setLngLat([1.91, 48.98]) // Les Mureaux coordinates
+          .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML('<h3 class="font-bold">Les Mureaux</h3><p>Siège social</p>'))
+          .addTo(map.current);
+        
+        // Add city markers
+        const cities = [
+          { name: 'Paris', coords: [2.35, 48.85], zone: 'petite' },
+          { name: 'Versailles', coords: [2.13, 48.80], zone: 'prioritaire' },
+          { name: 'Mantes-la-Jolie', coords: [1.70, 48.99], zone: 'prioritaire' },
+          { name: 'Saint-Germain', coords: [2.08, 48.90], zone: 'prioritaire' },
+          { name: 'Poissy', coords: [2.05, 48.93], zone: 'prioritaire' },
+          { name: 'Cergy', coords: [2.07, 49.03], zone: 'grande' },
+          { name: 'Évry', coords: [2.45, 48.63], zone: 'grande' },
+          { name: 'Créteil', coords: [2.47, 48.78], zone: 'petite' },
+          { name: 'Nanterre', coords: [2.20, 48.89], zone: 'petite' }
+        ];
+        
+        cities.forEach(city => {
+          const el = document.createElement('div');
+          el.className = 'flex items-center justify-center';
+          
+          let color;
+          switch(city.zone) {
+            case 'prioritaire':
+              color = '#CC0000';
+              break;
+            case 'petite':
+              color = '#FF9900';
+              break;
+            case 'grande':
+              color = '#0B5394';
+              break;
+            default:
+              color = '#333333';
+          }
+          
+          el.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="${color}" stroke="${color}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`;
+          
+          new mapboxgl.Marker(el)
+            .setLngLat(city.coords as [number, number]) // Fixed the TypeScript error by type assertion
+            .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<h3 class="font-bold">${city.name}</h3>`))
+            .addTo(map.current);
+        });
+        
+        // Add department labels
+        const departments = [
+          { name: '75', coords: [2.35, 48.86] },
+          { name: '78', coords: [1.85, 48.82] },
+          { name: '91', coords: [2.25, 48.52] },
+          { name: '92', coords: [2.23, 48.83] },
+          { name: '93', coords: [2.45, 48.91] },
+          { name: '94', coords: [2.47, 48.77] },
+          { name: '95', coords: [2.15, 49.05] },
+          { name: '77', coords: [2.95, 48.60] }
+        ];
+        
+        departments.forEach(dept => {
+          map.current?.addSource(`dept-${dept.name}`, {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: { name: dept.name },
+              geometry: {
+                type: 'Point',
+                coordinates: dept.coords
+              }
+            }
+          });
+          
+          map.current?.addLayer({
+            id: `dept-${dept.name}`,
+            type: 'symbol',
+            source: `dept-${dept.name}`,
+            layout: {
+              'text-field': dept.name,
+              'text-size': 16,
+              'text-font': ['Open Sans Bold'],
+              'text-offset': [0, 0],
+              'text-anchor': 'center'
+            },
+            paint: {
+              'text-color': '#333',
+              'text-halo-color': '#fff',
+              'text-halo-width': 1.5
+            }
+          });
+        });
+
+        // Add navigation control
+        map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
       });
 
-      // Add navigation control
-      map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
-    });
+      // Handle map errors
+      map.current.on('error', (e) => {
+        console.error('Map error:', e);
+      });
+
+    } catch (error) {
+      console.error('Error initializing map:', error);
+      setIsInitialized(false);
+    }
   };
 
   useEffect(() => {
@@ -281,7 +293,24 @@ const InterventionMap = () => {
     initializeMap();
     
     return () => {
-      map.current?.remove();
+      // Properly cleanup the map with additional safety checks
+      if (map.current) {
+        try {
+          // Check if map is loaded and has the required methods
+          if (map.current.loaded && map.current.loaded() && typeof map.current.remove === 'function') {
+            map.current.remove();
+          } else if (typeof map.current.remove === 'function') {
+            // Fallback cleanup even if not fully loaded
+            map.current.remove();
+          }
+        } catch (error) {
+          console.warn('Map cleanup error (non-critical):', error);
+        } finally {
+          map.current = null;
+          setIsInitialized(false);
+          setMapLoaded(false);
+        }
+      }
     };
   }, []);
 
