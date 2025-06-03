@@ -6,12 +6,28 @@ import { Resend } from "npm:resend@1.0.0";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "X-XSS-Protection": "1; mode=block",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
 };
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
 const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
+
+const requestCounts = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 3; // 3 recruitment submissions per day
+const RATE_WINDOW = 24 * 60 * 60 * 1000; // 24 hours
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const ALLOWED_FILE_TYPES = [
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'text/plain'
+];
 
 interface RecruitmentFormData {
   name: string;
@@ -23,33 +39,160 @@ interface RecruitmentFormData {
   coverLetterFile?: File;
 }
 
+function getClientIP(request: Request): string {
+  return request.headers.get("x-forwarded-for")?.split(",")[0] || 
+         request.headers.get("x-real-ip") || 
+         "unknown";
+}
+
+function isRateLimited(clientIP: string): boolean {
+  const now = Date.now();
+  const clientData = requestCounts.get(clientIP);
+  
+  if (!clientData || now > clientData.resetTime) {
+    requestCounts.set(clientIP, { count: 1, resetTime: now + RATE_WINDOW });
+    return false;
+  }
+  
+  if (clientData.count >= RATE_LIMIT) {
+    return true;
+  }
+  
+  clientData.count++;
+  return false;
+}
+
+function validateEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && email.length <= 254;
+}
+
+function validatePhone(phone: string): boolean {
+  const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,20}$/;
+  return phoneRegex.test(phone.trim());
+}
+
+function sanitizeInput(input: string): string {
+  return input
+    .trim()
+    .replace(/[<>]/g, '')
+    .substring(0, 1000);
+}
+
+function escapeHtml(text: string): string {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function validateFile(file: File): { isValid: boolean; error?: string } {
+  if (file.size > MAX_FILE_SIZE) {
+    return { isValid: false, error: "Le fichier est trop volumineux (max 5MB)" };
+  }
+  
+  if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+    return { isValid: false, error: "Type de fichier non autorisé (PDF, DOC, DOCX, TXT uniquement)" };
+  }
+  
+  return { isValid: true };
+}
+
+function validateFormData(formData: FormData): { isValid: boolean; errors: string[] } {
+  const errors: string[] = [];
+  
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const phone = formData.get("phone") as string;
+  const desiredPosition = formData.get("desiredPosition") as string;
+  const cvFile = formData.get("cvFile") as File;
+  const coverLetterFile = formData.get("coverLetterFile") as File;
+  
+  if (!name || name.trim().length < 2) {
+    errors.push("Le nom doit contenir au moins 2 caractères");
+  }
+  
+  if (!email || !validateEmail(email)) {
+    errors.push("Adresse email invalide");
+  }
+  
+  if (!phone || !validatePhone(phone)) {
+    errors.push("Numéro de téléphone invalide");
+  }
+  
+  if (!desiredPosition || desiredPosition.trim().length < 2) {
+    errors.push("Le poste souhaité doit être spécifié");
+  }
+  
+  if (cvFile && cvFile.size > 0) {
+    const fileValidation = validateFile(cvFile);
+    if (!fileValidation.isValid) {
+      errors.push(`CV: ${fileValidation.error}`);
+    }
+  }
+  
+  if (coverLetterFile && coverLetterFile.size > 0) {
+    const fileValidation = validateFile(coverLetterFile);
+    if (!fileValidation.isValid) {
+      errors.push(`Lettre de motivation: ${fileValidation.error}`);
+    }
+  }
+  
+  return { isValid: errors.length === 0, errors };
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
-  try {
-    const formData = await req.formData();
-    
-    const submissionData: RecruitmentFormData = {
-      name: formData.get("name") as string,
-      email: formData.get("email") as string,
-      phone: formData.get("phone") as string,
-      desiredPosition: formData.get("desiredPosition") as string,
-      motivation: formData.get("motivation") as string || undefined,
-      cvFile: formData.get("cvFile") as File || undefined,
-      coverLetterFile: formData.get("coverLetterFile") as File || undefined,
-    };
+  if (req.method !== "POST") {
+    return new Response(
+      JSON.stringify({ error: "Méthode non autorisée" }),
+      { status: 405, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  }
 
-    // Validate required fields
-    if (!submissionData.name || !submissionData.email || !submissionData.phone || !submissionData.desiredPosition) {
+  try {
+    const clientIP = getClientIP(req);
+    
+    if (isRateLimited(clientIP)) {
+      console.log(`Rate limit exceeded for recruitment from IP: ${clientIP}`);
       return new Response(
-        JSON.stringify({ error: "Tous les champs obligatoires doivent être remplis" }),
+        JSON.stringify({ error: "Limite de candidatures atteinte. Veuillez réessayer demain." }),
+        { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const contentLength = req.headers.get("content-length");
+    if (contentLength && parseInt(contentLength) > 10 * 1024 * 1024) { // 10MB total limit
+      return new Response(
+        JSON.stringify({ error: "Données trop volumineuses" }),
+        { status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const formData = await req.formData();
+    const validation = validateFormData(formData);
+    
+    if (!validation.isValid) {
+      console.log("Validation errors:", validation.errors);
+      return new Response(
+        JSON.stringify({ error: "Données invalides", details: validation.errors }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    console.log("Données de candidature reçues:", submissionData);
+    const submissionData: RecruitmentFormData = {
+      name: sanitizeInput(formData.get("name") as string),
+      email: sanitizeInput((formData.get("email") as string).toLowerCase()),
+      phone: sanitizeInput(formData.get("phone") as string),
+      desiredPosition: sanitizeInput(formData.get("desiredPosition") as string),
+      motivation: formData.get("motivation") ? sanitizeInput(formData.get("motivation") as string) : undefined,
+      cvFile: formData.get("cvFile") as File || undefined,
+      coverLetterFile: formData.get("coverLetterFile") as File || undefined,
+    };
+
+    console.log("Processing validated recruitment data");
 
     const submissionId = crypto.randomUUID();
     let cvFilePath = null;
@@ -57,17 +200,20 @@ serve(async (req) => {
 
     // Upload CV file if provided
     if (submissionData.cvFile && submissionData.cvFile.size > 0) {
-      const cvFileName = `${submissionId}/cv_${submissionData.cvFile.name}`;
+      const sanitizedFileName = submissionData.cvFile.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+      const cvFileName = `${submissionId}/cv_${sanitizedFileName}`;
       const cvArrayBuffer = await submissionData.cvFile.arrayBuffer();
       
       const { error: cvUploadError } = await supabase.storage
         .from("recruitment-uploads")
         .upload(cvFileName, cvArrayBuffer, {
           contentType: submissionData.cvFile.type,
+          cacheControl: '3600',
+          upsert: false
         });
 
       if (cvUploadError) {
-        console.error("Erreur upload CV:", cvUploadError);
+        console.error("CV upload error:", cvUploadError);
         return new Response(
           JSON.stringify({ error: "Erreur lors de l'upload du CV" }),
           { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -79,17 +225,20 @@ serve(async (req) => {
 
     // Upload cover letter file if provided
     if (submissionData.coverLetterFile && submissionData.coverLetterFile.size > 0) {
-      const coverLetterFileName = `${submissionId}/lettre_motivation_${submissionData.coverLetterFile.name}`;
+      const sanitizedFileName = submissionData.coverLetterFile.name.replace(/[^a-zA-Z0-9.-]/g, '_');
+      const coverLetterFileName = `${submissionId}/lettre_motivation_${sanitizedFileName}`;
       const coverLetterArrayBuffer = await submissionData.coverLetterFile.arrayBuffer();
       
       const { error: coverLetterUploadError } = await supabase.storage
         .from("recruitment-uploads")
         .upload(coverLetterFileName, coverLetterArrayBuffer, {
           contentType: submissionData.coverLetterFile.type,
+          cacheControl: '3600',
+          upsert: false
         });
 
       if (coverLetterUploadError) {
-        console.error("Erreur upload lettre de motivation:", coverLetterUploadError);
+        console.error("Cover letter upload error:", coverLetterUploadError);
         return new Response(
           JSON.stringify({ error: "Erreur lors de l'upload de la lettre de motivation" }),
           { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -99,7 +248,6 @@ serve(async (req) => {
       coverLetterFilePath = coverLetterFileName;
     }
 
-    // Insert recruitment submission into database
     const { data: dbSubmission, error: dbError } = await supabase
       .from("recruitment_submissions")
       .insert([{
@@ -114,14 +262,12 @@ serve(async (req) => {
       .select();
 
     if (dbError) {
-      console.error("Erreur base de données:", dbError);
+      console.error("Database error:", dbError);
       return new Response(
         JSON.stringify({ error: "Erreur lors de l'enregistrement de la candidature" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
-
-    console.log("Candidature enregistrée:", dbSubmission);
 
     // Generate file download URLs for email
     let cvUrl = "";
@@ -141,33 +287,24 @@ serve(async (req) => {
       coverLetterUrl = coverLetterSignedUrl?.signedUrl || "";
     }
 
-    // Prepare email content
     const emailBody = `
       <h2>Nouvelle candidature reçue</h2>
-      <p><strong>Candidat:</strong> ${submissionData.name}</p>
-      <p><strong>Email:</strong> ${submissionData.email}</p>
-      <p><strong>Téléphone:</strong> ${submissionData.phone}</p>
-      <p><strong>Poste souhaité:</strong> ${submissionData.desiredPosition}</p>
+      <p><strong>Candidat:</strong> ${escapeHtml(submissionData.name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(submissionData.email)}</p>
+      <p><strong>Téléphone:</strong> ${escapeHtml(submissionData.phone)}</p>
+      <p><strong>Poste souhaité:</strong> ${escapeHtml(submissionData.desiredPosition)}</p>
       
       ${submissionData.motivation ? `
         <h3>Motivation:</h3>
-        <p>${submissionData.motivation.replace(/\n/g, '<br>')}</p>
+        <p>${escapeHtml(submissionData.motivation).replace(/\n/g, '<br>')}</p>
       ` : ''}
       
       ${cvUrl ? `<p><strong>CV:</strong> <a href="${cvUrl}">Télécharger le CV</a></p>` : ''}
       ${coverLetterUrl ? `<p><strong>Lettre de motivation:</strong> <a href="${coverLetterUrl}">Télécharger la lettre</a></p>` : ''}
       
       <hr>
-      <p><em>Candidature soumise le ${new Date().toLocaleString('fr-FR')}</em></p>
+      <p><small>Candidature soumise le ${new Date().toLocaleString('fr-FR')} depuis l'IP: ${clientIP}</small></p>
     `;
-
-    console.log("Tentative d'envoi d'email de candidature avec Resend...");
-    console.log("Configuration email candidature:", {
-      from: "Candidatures LeFrigoriste <contact@lefrigoriste.fr>",
-      to: ["contact@lefrigoriste.fr"],
-      subject: `Nouvelle candidature - ${submissionData.desiredPosition} - ${submissionData.name}`,
-      reply_to: submissionData.email,
-    });
 
     try {
       const { data: emailData, error: emailError } = await resend.emails.send({
@@ -179,8 +316,7 @@ serve(async (req) => {
       });
 
       if (emailError) {
-        console.error("Erreur envoi email candidature:", emailError);
-        
+        console.error("Email error:", emailError);
         await supabase
           .from("recruitment_submissions")
           .update({ status: "email_failed" })
@@ -190,14 +326,12 @@ serve(async (req) => {
           JSON.stringify({
             success: true,
             message: "Candidature enregistrée mais email non envoyé",
-            emailError: emailError,
           }),
           { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
 
-      console.log("Email candidature envoyé avec succès:", emailData);
-
+      console.log("Recruitment email sent successfully");
       await supabase
         .from("recruitment_submissions")
         .update({ status: "email_sent" })
@@ -207,14 +341,12 @@ serve(async (req) => {
         JSON.stringify({
           success: true,
           message: "Candidature envoyée avec succès",
-          emailData: emailData,
         }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
 
     } catch (emailException) {
-      console.error("Exception email candidature:", emailException);
-      
+      console.error("Email exception:", emailException);
       await supabase
         .from("recruitment_submissions")
         .update({ status: "email_exception" })
@@ -223,20 +355,16 @@ serve(async (req) => {
       return new Response(
         JSON.stringify({
           success: true,
-          message: "Candidature enregistrée mais email non envoyé",
-          error: emailException.message,
+          message: "Candidature enregistrée",
         }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
   } catch (error) {
-    console.error("Erreur traitement candidature:", error);
+    console.error("Unexpected error:", error);
     return new Response(
-      JSON.stringify({
-        error: "Une erreur est survenue lors du traitement de la candidature",
-        details: error.message,
-      }),
+      JSON.stringify({ error: "Une erreur inattendue s'est produite" }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }

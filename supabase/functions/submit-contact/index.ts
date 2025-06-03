@@ -6,16 +6,22 @@ import { Resend } from "npm:resend@1.0.0";
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Methods": "POST, OPTIONS",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "X-XSS-Protection": "1; mode=block",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
 };
 
-// Initialiser le client Resend avec votre clé API
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
-
-// Initialiser le client Supabase
 const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
-const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY") || "";
 const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
+
+// Rate limiting storage (in production, use Redis or similar)
+const requestCounts = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT = 5; // 5 requests per hour
+const RATE_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
 
 interface ContactFormData {
   name: string;
@@ -28,32 +34,133 @@ interface ContactFormData {
   message: string;
 }
 
+function getClientIP(request: Request): string {
+  return request.headers.get("x-forwarded-for")?.split(",")[0] || 
+         request.headers.get("x-real-ip") || 
+         "unknown";
+}
+
+function isRateLimited(clientIP: string): boolean {
+  const now = Date.now();
+  const clientData = requestCounts.get(clientIP);
+  
+  if (!clientData || now > clientData.resetTime) {
+    requestCounts.set(clientIP, { count: 1, resetTime: now + RATE_WINDOW });
+    return false;
+  }
+  
+  if (clientData.count >= RATE_LIMIT) {
+    return true;
+  }
+  
+  clientData.count++;
+  return false;
+}
+
+function validateEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email) && email.length <= 254;
+}
+
+function validatePhone(phone: string): boolean {
+  const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,20}$/;
+  return phoneRegex.test(phone.trim());
+}
+
+function sanitizeInput(input: string): string {
+  return input
+    .trim()
+    .replace(/[<>]/g, '')
+    .substring(0, 1000); // Limit length
+}
+
+function escapeHtml(text: string): string {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function validateFormData(data: any): { isValid: boolean; errors: string[] } {
+  const errors: string[] = [];
+  
+  if (!data.name || typeof data.name !== 'string' || data.name.trim().length < 2) {
+    errors.push("Le nom doit contenir au moins 2 caractères");
+  }
+  
+  if (!data.email || typeof data.email !== 'string' || !validateEmail(data.email)) {
+    errors.push("Adresse email invalide");
+  }
+  
+  if (!data.phone || typeof data.phone !== 'string' || !validatePhone(data.phone)) {
+    errors.push("Numéro de téléphone invalide");
+  }
+  
+  if (!data.message || typeof data.message !== 'string' || data.message.trim().length < 10) {
+    errors.push("Le message doit contenir au moins 10 caractères");
+  }
+  
+  if (data.requestType && typeof data.requestType !== 'string') {
+    errors.push("Type de demande invalide");
+  }
+  
+  return { isValid: errors.length === 0, errors };
+}
+
 serve(async (req) => {
-  // Gérer les requêtes OPTIONS pour CORS
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
-  try {
-    // Récupérer les données du formulaire
-    const formData: ContactFormData = await req.json();
+  if (req.method !== "POST") {
+    return new Response(
+      JSON.stringify({ error: "Méthode non autorisée" }),
+      { status: 405, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
+  }
 
-    // Valider les données requises
-    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+  try {
+    const clientIP = getClientIP(req);
+    
+    if (isRateLimited(clientIP)) {
+      console.log(`Rate limit exceeded for IP: ${clientIP}`);
       return new Response(
-        JSON.stringify({
-          error: "Tous les champs obligatoires doivent être remplis",
-        }),
-        {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        JSON.stringify({ error: "Trop de demandes. Veuillez réessayer plus tard." }),
+        { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    console.log("Données du formulaire reçues:", formData);
+    const contentLength = req.headers.get("content-length");
+    if (contentLength && parseInt(contentLength) > 10000) { // 10KB limit
+      return new Response(
+        JSON.stringify({ error: "Données trop volumineuses" }),
+        { status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
 
-    // Insérer les données dans la base de données
+    const rawData = await req.json();
+    const validation = validateFormData(rawData);
+    
+    if (!validation.isValid) {
+      console.log("Validation errors:", validation.errors);
+      return new Response(
+        JSON.stringify({ error: "Données invalides", details: validation.errors }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const formData: ContactFormData = {
+      name: sanitizeInput(rawData.name),
+      email: sanitizeInput(rawData.email.toLowerCase()),
+      phone: sanitizeInput(rawData.phone),
+      requestType: rawData.requestType ? sanitizeInput(rawData.requestType) : undefined,
+      address: rawData.address ? sanitizeInput(rawData.address) : undefined,
+      postalCode: rawData.postalCode ? sanitizeInput(rawData.postalCode) : undefined,
+      city: rawData.city ? sanitizeInput(rawData.city) : undefined,
+      message: sanitizeInput(rawData.message),
+    };
+
+    console.log("Processing validated form data");
+
     const { data: submissionData, error: submissionError } = await supabase
       .from("contact_submissions")
       .insert([
@@ -71,22 +178,13 @@ serve(async (req) => {
       .select();
 
     if (submissionError) {
-      console.error("Erreur lors de l'enregistrement du formulaire:", submissionError);
+      console.error("Database error:", submissionError);
       return new Response(
-        JSON.stringify({
-          error: "Erreur lors de l'enregistrement du formulaire",
-          details: submissionError,
-        }),
-        {
-          status: 500,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        JSON.stringify({ error: "Erreur lors de l'enregistrement" }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
-    console.log("Données enregistrées avec succès:", submissionData);
-
-    // Formater le corps de l'email
     const getRequestTypeLabel = (type: string | undefined) => {
       const types: Record<string, string> = {
         urgence: "Urgence",
@@ -106,25 +204,18 @@ serve(async (req) => {
 
     const emailBody = `
       <h2>Nouvelle demande de contact</h2>
-      <p><strong>De:</strong> ${formData.name}</p>
-      <p><strong>Email:</strong> ${formData.email}</p>
-      <p><strong>Téléphone:</strong> ${formData.phone}</p>
-      <p><strong>Type de demande:</strong> ${requestType}</p>
-      ${addressInfo ? `<p><strong>Adresse:</strong> ${formData.address}, ${formData.postalCode || ''} ${formData.city || ''}</p>` : ''}
+      <p><strong>De:</strong> ${escapeHtml(formData.name)}</p>
+      <p><strong>Email:</strong> ${escapeHtml(formData.email)}</p>
+      <p><strong>Téléphone:</strong> ${escapeHtml(formData.phone)}</p>
+      <p><strong>Type de demande:</strong> ${escapeHtml(requestType)}</p>
+      ${addressInfo ? `<p><strong>Adresse:</strong> ${escapeHtml(formData.address!)}, ${escapeHtml(formData.postalCode || '')} ${escapeHtml(formData.city || '')}</p>` : ''}
       <h3>Message:</h3>
-      <p>${formData.message.replace(/\n/g, '<br>')}</p>
+      <p>${escapeHtml(formData.message).replace(/\n/g, '<br>')}</p>
+      <hr>
+      <p><small>Soumis le ${new Date().toLocaleString('fr-FR')} depuis l'IP: ${clientIP}</small></p>
     `;
 
-    console.log("Tentative d'envoi d'email avec Resend...");
-    console.log("Configuration email:", {
-      from: "Formulaire de Contact <contact@lefrigoriste.fr>",
-      to: ["contact@lefrigoriste.fr"],
-      subject: `Nouvelle demande de contact - ${requestType} - ${formData.name}`,
-      reply_to: formData.email,
-    });
-
     try {
-      // Envoyer l'email via Resend avec la nouvelle adresse
       const { data: emailData, error: emailError } = await resend.emails.send({
         from: "Formulaire de Contact <contact@lefrigoriste.fr>",
         to: ["contact@lefrigoriste.fr"],
@@ -134,81 +225,55 @@ serve(async (req) => {
       });
 
       if (emailError) {
-        console.error("Erreur lors de l'envoi de l'email:", emailError);
-        
-        // Mise à jour du statut en cas d'échec d'envoi de mail
+        console.error("Email error:", emailError);
         await supabase
           .from("contact_submissions")
           .update({ status: "email_failed" })
           .eq("id", submissionData[0].id);
         
-        // On retourne quand même un succès à l'utilisateur car les données sont enregistrées
         return new Response(
           JSON.stringify({
             success: true,
             message: "Votre demande a été enregistrée mais l'email n'a pas pu être envoyé",
-            emailError: emailError,
           }),
-          {
-            status: 200,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          }
+          { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
 
-      console.log("Email envoyé avec succès:", emailData);
-
-      // Mettre à jour le statut de la soumission
+      console.log("Email sent successfully");
       await supabase
         .from("contact_submissions")
         .update({ status: "email_sent" })
         .eq("id", submissionData[0].id);
 
-      // Répondre avec succès
       return new Response(
         JSON.stringify({
           success: true,
           message: "Votre demande a été envoyée avec succès",
-          emailData: emailData,
         }),
-        {
-          status: 200,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
-    } catch (emailSendingError) {
-      console.error("Exception lors de l'envoi de l'email:", emailSendingError);
-      
-      // Mise à jour du statut en cas d'exception d'envoi de mail
+
+    } catch (emailException) {
+      console.error("Email exception:", emailException);
       await supabase
         .from("contact_submissions")
         .update({ status: "email_exception" })
         .eq("id", submissionData[0].id);
       
-      // On retourne quand même un succès à l'utilisateur
       return new Response(
         JSON.stringify({
           success: true,
-          message: "Votre demande a été enregistrée mais l'email n'a pas pu être envoyé",
-          error: emailSendingError.message,
+          message: "Votre demande a été enregistrée",
         }),
-        {
-          status: 200,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        }
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
   } catch (error) {
-    console.error("Erreur lors du traitement de la demande:", error);
+    console.error("Unexpected error:", error);
     return new Response(
-      JSON.stringify({
-        error: "Une erreur est survenue lors du traitement de la demande",
-        details: error.message,
-      }),
-      {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      }
+      JSON.stringify({ error: "Une erreur inattendue s'est produite" }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
   }
 });
