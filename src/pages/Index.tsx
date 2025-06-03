@@ -1,12 +1,30 @@
+
 import React from 'react';
 import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
 import Testimonials from '@/components/home/Testimonials';
+import SEOHead from '@/components/seo/SEOHead';
 import { ArrowRight, Phone, Mail, Clock, Shield, Award } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useAnalytics } from '@/hooks/use-analytics';
+
 const Index = () => {
-  return <div className="min-h-screen">
+  const { trackPhoneCall } = useAnalytics();
+
+  const handleEmergencyCall = () => {
+    trackPhoneCall();
+  };
+
+  return (
+    <div className="min-h-screen">
+      <SEOHead 
+        title="LeFrigoriste.fr - Dépannage frigorifique et climatisation 24h/24 en Île-de-France"
+        description="Spécialiste en réfrigération commerciale et climatisation. Dépannage frigorifique d'urgence 24h/24, 7j/7 en Île-de-France. Intervention rapide garantie : 45min Yvelines, 1h Paris. Devis gratuit."
+        keywords="frigoriste Île-de-France, dépannage frigorifique d'urgence, réparation chambre froide, installation climatisation professionnelle, maintenance équipement frigorifique, contrat entretien froid commercial, intervention 24h/24, frigoriste Yvelines, service froid alimentaire, frigoriste 78"
+        canonicalUrl="https://lefrigoriste.fr/"
+      />
+      
       {/* Hero Section */}
       <Hero />
       
@@ -34,7 +52,7 @@ const Index = () => {
                 À VOTRE SERVICE 24/7
               </div>
               <h2 className="md:text-4xl font-bold text-primary text-2xl">Besoin d'une intervention ou d'un devis ?</h2>
-              <p className="text-gray-600 text-lg">Notre équipe de techniciens certifiés réponds à toutes vos urgences frigorifiques et besoins en climatisation dans toute l'Île-de-France.</p>
+              <p className="text-gray-600 text-lg">Notre équipe de techniciens certifiés répond à toutes vos urgences frigorifiques et besoins en climatisation dans toute l'Île-de-France.</p>
               
               <ul className="space-y-4 mx-0">
                 <li className="flex items-center">
@@ -74,7 +92,11 @@ const Index = () => {
                       <div>
                         <h4 className="text-lg font-bold text-gray-800 mb-1">Besoin d'une intervention urgente ?</h4>
                         <p className="text-gray-600 mb-4">Notre équipe est disponible 24/7 pour toutes vos urgences</p>
-                        <Link to="tel:0185500284" className="btn-emergency inline-flex">
+                        <Link 
+                          to="tel:0185500284" 
+                          className="btn-emergency inline-flex"
+                          onClick={handleEmergencyCall}
+                        >
                           <Phone size={20} className="mr-2" />
                           Appel d'urgence
                         </Link>
@@ -103,6 +125,8 @@ const Index = () => {
           </div>
         </div>
       </section>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
