@@ -3,115 +3,16 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { Resend } from "npm:resend@1.0.0";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "X-Content-Type-Options": "nosniff",
-  "X-Frame-Options": "DENY",
-  "X-XSS-Protection": "1; mode=block",
-  "Referrer-Policy": "strict-origin-when-cross-origin",
-};
+import { corsHeaders, MAX_CONTENT_LENGTH } from './utils/constants.ts';
+import { getClientIP, isRateLimited } from './utils/rate-limiting.ts';
+import { validateFormData, type ContactFormData } from './utils/validation.ts';
+import { sanitizeInput } from './utils/sanitization.ts';
+import { formatEmailBody, formatEmailSubject } from './utils/email-formatter.ts';
 
 const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 const supabaseUrl = Deno.env.get("SUPABASE_URL") || "";
 const supabaseServiceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
 const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
-
-// Rate limiting storage (in production, use Redis or similar)
-const requestCounts = new Map<string, { count: number; resetTime: number }>();
-const RATE_LIMIT = 5; // 5 requests per hour
-const RATE_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  phone: string;
-  requestType?: string;
-  address?: string;
-  postalCode?: string;
-  city?: string;
-  message: string;
-}
-
-function getClientIP(request: Request): string {
-  return request.headers.get("x-forwarded-for")?.split(",")[0] || 
-         request.headers.get("x-real-ip") || 
-         "unknown";
-}
-
-function isRateLimited(clientIP: string): boolean {
-  const now = Date.now();
-  const clientData = requestCounts.get(clientIP);
-  
-  if (!clientData || now > clientData.resetTime) {
-    requestCounts.set(clientIP, { count: 1, resetTime: now + RATE_WINDOW });
-    return false;
-  }
-  
-  if (clientData.count >= RATE_LIMIT) {
-    return true;
-  }
-  
-  clientData.count++;
-  return false;
-}
-
-function validateEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email) && email.length <= 254;
-}
-
-function validatePhone(phone: string): boolean {
-  const phoneRegex = /^[\+]?[0-9\s\-\(\)]{8,20}$/;
-  return phoneRegex.test(phone.trim());
-}
-
-function sanitizeInput(input: string): string {
-  return input
-    .trim()
-    .replace(/[<>]/g, '')
-    .substring(0, 1000); // Limit length
-}
-
-function escapeHtml(text: string): string {
-  const htmlEscapes: Record<string, string> = {
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#x27;',
-    '/': '&#x2F;'
-  };
-  
-  return text.replace(/[&<>"'/]/g, (match) => htmlEscapes[match] || match);
-}
-
-function validateFormData(data: any): { isValid: boolean; errors: string[] } {
-  const errors: string[] = [];
-  
-  if (!data.name || typeof data.name !== 'string' || data.name.trim().length < 2) {
-    errors.push("Le nom doit contenir au moins 2 caractères");
-  }
-  
-  if (!data.email || typeof data.email !== 'string' || !validateEmail(data.email)) {
-    errors.push("Adresse email invalide");
-  }
-  
-  if (!data.phone || typeof data.phone !== 'string' || !validatePhone(data.phone)) {
-    errors.push("Numéro de téléphone invalide");
-  }
-  
-  if (!data.message || typeof data.message !== 'string' || data.message.trim().length < 10) {
-    errors.push("Le message doit contenir au moins 10 caractères");
-  }
-  
-  if (data.requestType && typeof data.requestType !== 'string') {
-    errors.push("Type de demande invalide");
-  }
-  
-  return { isValid: errors.length === 0, errors };
-}
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -137,7 +38,7 @@ serve(async (req) => {
     }
 
     const contentLength = req.headers.get("content-length");
-    if (contentLength && parseInt(contentLength) > 10000) { // 10KB limit
+    if (contentLength && parseInt(contentLength) > MAX_CONTENT_LENGTH) {
       return new Response(
         JSON.stringify({ error: "Données trop volumineuses" }),
         { status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" } }
@@ -192,41 +93,14 @@ serve(async (req) => {
       );
     }
 
-    const getRequestTypeLabel = (type: string | undefined) => {
-      const types: Record<string, string> = {
-        urgence: "Urgence",
-        depannage: "Dépannage",
-        installation: "Installation",
-        maintenance: "Maintenance",
-        devis: "Devis",
-        autre: "Autre",
-      };
-      return type ? types[type] || type : "Non spécifié";
-    };
-
-    const requestType = getRequestTypeLabel(formData.requestType);
-    const addressInfo = formData.address 
-      ? `\n\nAdresse: ${formData.address}${formData.postalCode ? ', ' + formData.postalCode : ''}${formData.city ? ' ' + formData.city : ''}`
-      : '';
-
-    const emailBody = `
-      <h2>Nouvelle demande de contact</h2>
-      <p><strong>De:</strong> ${escapeHtml(formData.name)}</p>
-      <p><strong>Email:</strong> ${escapeHtml(formData.email)}</p>
-      <p><strong>Téléphone:</strong> ${escapeHtml(formData.phone)}</p>
-      <p><strong>Type de demande:</strong> ${escapeHtml(requestType)}</p>
-      ${addressInfo ? `<p><strong>Adresse:</strong> ${escapeHtml(formData.address!)}, ${escapeHtml(formData.postalCode || '')} ${escapeHtml(formData.city || '')}</p>` : ''}
-      <h3>Message:</h3>
-      <p>${escapeHtml(formData.message).replace(/\n/g, '<br>')}</p>
-      <hr>
-      <p><small>Soumis le ${new Date().toLocaleString('fr-FR')} depuis l'IP: ${clientIP}</small></p>
-    `;
+    const emailBody = formatEmailBody(formData, clientIP);
+    const emailSubject = formatEmailSubject(formData);
 
     try {
       const { data: emailData, error: emailError } = await resend.emails.send({
         from: "Formulaire de Contact <contact@lefrigoriste.fr>",
         to: ["contact@lefrigoriste.fr"],
-        subject: `Nouvelle demande de contact - ${requestType} - ${formData.name}`,
+        subject: emailSubject,
         html: emailBody,
         reply_to: formData.email,
       });
