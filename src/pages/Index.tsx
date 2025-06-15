@@ -97,15 +97,36 @@ const Index = () => {
       {/* Video Section */}
       <section className="bg-white py-[40px]">
         <div className="container-custom">
-          <div className="text-center mb-12">
-            <h2 className="font-bold font-montserrat text-3xl md:text-4xl mb-4 text-[#212121]">
-              Découvrez LeFrigoriste.fr en action
+          <div className="text-center mb-12 relative">
+            {/* Decorative top accent line */}
+            <div className="w-16 h-1 bg-gradient-to-r from-primary to-secondary mx-auto mb-6 rounded-full"></div>
+            
+            {/* Badge tag */}
+            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-primary/5 border border-primary/10 mb-6">
+              <span className="text-sm font-semibold text-primary tracking-wide uppercase">En action</span>
+            </div>
+            
+            {/* Main heading with gradient */}
+            <h2 className="font-bold font-montserrat text-3xl md:text-4xl lg:text-5xl mb-4 text-transparent bg-clip-text bg-gradient-to-r from-[#0B5394] via-[#4A86E8] to-[#0B5394] leading-tight">
+              Découvrez LeFrigoriste.fr
+              <span className="block text-[#212121] mt-2">en action</span>
             </h2>
-            <p className="text-lg text-gray-600 font-opensans max-w-2xl mx-auto">
-              Plongez dans l'univers de nos interventions d'urgence et découvrez comment nous assurons la continuité de votre activité 24h/24.
+            
+            {/* Subtitle with refined typography */}
+            <p className="text-lg md:text-xl text-gray-600 font-opensans max-w-3xl mx-auto leading-relaxed">
+              Plongez dans l'univers de nos interventions d'urgence et découvrez comment nous assurons la continuité de votre activité 
+              <span className="font-semibold text-primary"> 24h/24</span>.
             </p>
+            
+            {/* Bottom decorative element */}
+            <div className="flex items-center justify-center mt-8">
+              <div className="w-8 h-[1px] bg-gradient-to-r from-transparent to-gray-300"></div>
+              <div className="w-2 h-2 bg-primary rounded-full mx-3"></div>
+              <div className="w-8 h-[1px] bg-gradient-to-l from-transparent to-gray-300"></div>
+            </div>
           </div>
           
+          {/* Video player container */}
           <div className="max-w-4xl mx-auto">
             <div className="relative rounded-xl overflow-hidden shadow-2xl bg-gray-900">
               <div className="aspect-video relative">
