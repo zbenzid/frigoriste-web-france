@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Menu, Clock, MapPin, Mail } from 'lucide-react';
@@ -127,9 +126,16 @@ const Header = () => {
               aria-label="Appeler en urgence : 01 85 50 02 84"
               onClick={handleEmergencyCall}
             >
-              <Button variant="destructive" className="bg-[#CC0000] hover:bg-[#CC0000]/90">
-                <Phone className="mr-2 h-4 w-4" />
-                <span className="hidden sm:inline">01 85 50 02 84</span>
+              <Button 
+                variant="destructive" 
+                className="bg-emergency hover:bg-emergency/90 text-white font-bold border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-3 sm:px-4 lg:px-6 py-2 lg:py-3 text-sm lg:text-base"
+                size={isMobile ? "sm" : "default"}
+              >
+                <Phone className="mr-1 sm:mr-2 h-4 w-4 lg:h-5 lg:w-5 flex-shrink-0" />
+                <span className="hidden xs:inline text-white font-bold">
+                  {isMobile ? "Urgence" : "01 85 50 02 84"}
+                </span>
+                <span className="inline xs:hidden text-white font-bold">SOS</span>
               </Button>
             </a>
 
