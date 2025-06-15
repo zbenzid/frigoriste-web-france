@@ -9,7 +9,10 @@ import { useEffect } from 'react';
 
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import CookieBanner from "@/components/cookies/CookieBanner";
+import CookiePreferences from "@/components/cookies/CookiePreferences";
 import { useAnalytics } from "@/hooks/use-analytics";
+import { useCookies } from "@/hooks/use-cookies";
 
 import Index from "./pages/Index";
 import Services from "./pages/Services";
@@ -32,6 +35,37 @@ const AnalyticsWrapper = ({ children }: { children: React.ReactNode }) => {
   }, [location, trackPageView]);
   
   return <>{children}</>;
+};
+
+const CookieManager = () => {
+  const {
+    showBanner,
+    showPreferences,
+    setShowPreferences,
+    acceptAll,
+    rejectAll,
+    saveConsent,
+    preferences,
+  } = useCookies();
+
+  return (
+    <>
+      {showBanner && (
+        <CookieBanner
+          onAcceptAll={acceptAll}
+          onRejectAll={rejectAll}
+          onShowPreferences={() => setShowPreferences(true)}
+        />
+      )}
+      
+      <CookiePreferences
+        isOpen={showPreferences}
+        onClose={() => setShowPreferences(false)}
+        currentPreferences={preferences}
+        onSave={saveConsent}
+      />
+    </>
+  );
 };
 
 const App = () => (
@@ -57,6 +91,7 @@ const App = () => (
                 </Routes>
               </main>
               <Footer />
+              <CookieManager />
             </div>
           </AnalyticsWrapper>
         </BrowserRouter>

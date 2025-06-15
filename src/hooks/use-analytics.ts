@@ -33,7 +33,7 @@ export const useAnalytics = () => {
 
   const trackPageView = useCallback((pagePath: string, pageTitle: string) => {
     if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', 'GA_MEASUREMENT_ID', {
+      window.gtag('config', 'G-343731918', {
         page_path: pagePath,
         page_title: pageTitle,
       });

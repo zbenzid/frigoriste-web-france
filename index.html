@@ -36,33 +36,66 @@
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     
-    <!-- Google Tag Manager -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-    <script>
+    <!-- Google Tag Manager (loaded conditionally based on cookie consent) -->
+    <script id="gtag-init">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'GA_MEASUREMENT_ID', {
-        page_title: document.title,
-        page_location: window.location.href
+      
+      // Initialize GA only if analytics cookies are accepted
+      function initializeGA() {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-343731918';
+        document.head.appendChild(script);
+        
+        gtag('js', new Date());
+        gtag('config', 'G-343731918', {
+          page_title: document.title,
+          page_location: window.location.href
+        });
+      }
+      
+      // Check if analytics cookies are accepted
+      function checkCookieConsent() {
+        const consent = localStorage.getItem('cookie-consent');
+        if (consent) {
+          const preferences = JSON.parse(consent);
+          if (preferences.analytics) {
+            initializeGA();
+          }
+        }
+      }
+      
+      // Initialize on page load if consent exists
+      document.addEventListener('DOMContentLoaded', checkCookieConsent);
+      
+      // Listen for consent changes
+      window.addEventListener('cookie-consent-changed', function(event) {
+        if (event.detail.analytics) {
+          initializeGA();
+        }
       });
       
       // Track phone calls
       function trackPhoneCall() {
-        gtag('event', 'phone_call', {
-          event_category: 'engagement',
-          event_label: 'emergency_call',
-          value: 1
-        });
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'phone_call', {
+            event_category: 'engagement',
+            event_label: 'emergency_call',
+            value: 1
+          });
+        }
       }
       
       // Track form submissions
       function trackFormSubmission(formType) {
-        gtag('event', 'form_submission', {
-          event_category: 'lead',
-          event_label: formType,
-          value: 1
-        });
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'form_submission', {
+            event_category: 'lead',
+            event_label: formType,
+            value: 1
+          });
+        }
       }
     </script>
     

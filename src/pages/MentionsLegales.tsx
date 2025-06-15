@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Building, User, MapPin, Phone, Mail, Globe, Clock } from 'lucide-react';
+import { ArrowLeft, Building, User, MapPin, Phone, Mail, Globe, Clock, Cookie } from 'lucide-react';
 
 const MentionsLegales = () => {
   return (
@@ -153,6 +153,43 @@ const MentionsLegales = () => {
               </p>
             </section>
 
+            {/* Cookies */}
+            <section>
+              <h2 className="text-2xl font-bold text-primary mb-6 flex items-center">
+                <Cookie className="mr-3" size={24} />
+                Utilisation des cookies
+              </h2>
+              <div className="space-y-4">
+                <p className="text-gray-600">
+                  Notre site utilise des cookies pour améliorer votre expérience de navigation et analyser notre trafic. 
+                  Nous utilisons les types de cookies suivants :
+                </p>
+                
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="font-semibold text-gray-800">Cookies nécessaires</h4>
+                    <p className="text-sm text-gray-600">
+                      Indispensables au fonctionnement du site, ils permettent notamment de mémoriser vos préférences 
+                      et d'assurer la sécurité de votre navigation.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-semibold text-gray-800">Cookies analytiques (Google Analytics)</h4>
+                    <p className="text-sm text-gray-600">
+                      Nous utilisons Google Analytics (ID: G-343731918) pour comprendre comment vous utilisez notre site 
+                      et l'améliorer en conséquence. Ces cookies sont anonymes et ne permettent pas de vous identifier.
+                    </p>
+                  </div>
+                </div>
+                
+                <p className="text-gray-600">
+                  Vous pouvez à tout moment modifier vos préférences de cookies en utilisant le bouton de gestion 
+                  des cookies présent sur notre site ou en nous contactant directement.
+                </p>
+              </div>
+            </section>
+
             {/* Propriété intellectuelle */}
             <section>
               <h2 className="text-2xl font-bold text-primary mb-6">Propriété intellectuelle</h2>
@@ -174,10 +211,13 @@ const MentionsLegales = () => {
                 vous disposez d'un droit d'accès, de rectification, de suppression et d'opposition aux données personnelles vous concernant.
               </p>
               <p className="text-gray-600">
-                Pour exercer ces droits, vous pouvez nous contacter à l'adresse : 
+                Pour exercer ces droits ou pour plus d'informations sur notre politique de confidentialité, vous pouvez nous contacter à l'adresse : 
                 <a href="mailto:contact@lefrigoriste.fr" className="text-primary hover:text-secondary transition-colors ml-1">
                   contact@lefrigoriste.fr
-                </a>
+                </a> ou consulter notre 
+                <Link to="/politique-confidentialite" className="text-primary hover:text-secondary transition-colors ml-1">
+                  politique de confidentialité
+                </Link>.
               </p>
             </section>
           </div>
