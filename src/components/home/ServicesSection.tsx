@@ -114,7 +114,7 @@ const ServicesSection = () => {
           </p>
         </div>
         
-        {/* Render carousel for mobile view and grid for desktop */}
+        {/* Render carousel for mobile view and improved grid for desktop */}
         {isMobile ? <div className="px-4">
             <Carousel opts={{
           align: "center",
@@ -148,9 +148,26 @@ const ServicesSection = () => {
                 </div>
               </div>
             </Carousel>
-          </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 px-[16px]">
-            {services.map((service, index) => <ServiceCard key={index} title={service.title} description={service.description} icon={service.icon} link={service.link} color={service.color} />)}
-          </div>}
+          </div> : 
+          /* Modern desktop grid with better spacing and responsive breakpoints */
+          <div className="max-w-6xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-6 lg:gap-8">
+              {services.map((service, index) => (
+                <div key={index} className="flex justify-center">
+                  <div className="w-full max-w-sm">
+                    <ServiceCard 
+                      title={service.title} 
+                      description={service.description} 
+                      icon={service.icon} 
+                      link={service.link} 
+                      color={service.color} 
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        }
       </div>
     </section>;
 };
