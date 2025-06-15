@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   Carousel,
@@ -105,7 +106,7 @@ const TechTeamCarousel = () => {
           </div>
         </div>
 
-        <div className="px-10 relative">
+        <div className="px-2 md:px-10 relative">
           <Carousel opts={{ loop: true }}>
             <CarouselContent>
               {technicians.map((tech, index) => (
@@ -114,8 +115,8 @@ const TechTeamCarousel = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="left-0" />
-            <CarouselNext className="right-0" />
+            <CarouselPrevious className="-left-8 md:left-0" />
+            <CarouselNext className="-right-8 md:right-0" />
           </Carousel>
         </div>
       </div>
