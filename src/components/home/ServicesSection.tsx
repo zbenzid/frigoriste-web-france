@@ -13,37 +13,42 @@ const ServicesSection = () => {
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const carouselApiRef = useRef<any>(null);
 
-  // Service card data
+  // Service card data with images
   const services = [{
     title: "Dépannage frigorifique",
     description: "Intervention rapide 24h/24 et 7j/7 pour tous vos équipements frigorifiques en panne.",
     icon: Snowflake,
     link: "/services#depannage",
-    color: "emergency" as const
+    color: "emergency" as const,
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop&q=80"
   }, {
     title: "Installation climatisation",
     description: "Installation sur-mesure de systèmes de climatisation pour tous types de locaux professionnels.",
     icon: Wind,
     link: "/services#climatisation",
-    color: "secondary" as const
+    color: "secondary" as const,
+    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=400&h=300&fit=crop&q=80"
   }, {
     title: "Installation chambres froides",
     description: "Conception et installation de chambres froides adaptées à vos besoins spécifiques.",
     icon: Hammer,
     link: "/services#chambres-froides",
-    color: "primary" as const
+    color: "primary" as const,
+    image: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?w=400&h=300&fit=crop&q=80"
   }, {
     title: "Maintenance préventive",
     description: "Contrats de maintenance pour garantir la longévité et l'efficacité de vos installations.",
     icon: Wrench,
     link: "/services#maintenance",
-    color: "maintenance" as const
+    color: "maintenance" as const,
+    image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=400&h=300&fit=crop&q=80"
   }, {
     title: "Matériels de cuisines professionnelles",
     description: "Vente, installation et maintenance d'équipements de cuisines et laveries professionnelles.",
     icon: ChefHat,
     link: "/services#cuisine",
-    color: "secondary" as const
+    color: "secondary" as const,
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop&q=80"
   }];
 
   // Handle auto sliding with timer
@@ -138,7 +143,7 @@ const ServicesSection = () => {
         }}>
               <CarouselContent>
                 {services.map((service, index) => <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
-                    <ServiceCard title={service.title} description={service.description} icon={service.icon} link={service.link} color={service.color} />
+                    <ServiceCard title={service.title} description={service.description} icon={service.icon} link={service.link} color={service.color} image={service.image} />
                   </CarouselItem>)}
               </CarouselContent>
               <div className="flex flex-col items-center mt-6 gap-2">
@@ -148,8 +153,15 @@ const ServicesSection = () => {
                 </div>
               </div>
             </Carousel>
-          </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 px-[16px]">
-            {services.map((service, index) => <ServiceCard key={index} title={service.title} description={service.description} icon={service.icon} link={service.link} color={service.color} />)}
+          </div> : <div className="max-w-6xl mx-auto px-4">
+            {/* Première rangée - 3 services principaux */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+              {services.slice(0, 3).map((service, index) => <ServiceCard key={index} title={service.title} description={service.description} icon={service.icon} link={service.link} color={service.color} image={service.image} />)}
+            </div>
+            {/* Deuxième rangée - 2 services centrés */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {services.slice(3).map((service, index) => <ServiceCard key={index + 3} title={service.title} description={service.description} icon={service.icon} link={service.link} color={service.color} image={service.image} />)}
+            </div>
           </div>}
       </div>
     </section>;
