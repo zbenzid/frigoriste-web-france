@@ -25,61 +25,36 @@ const Hero = () => {
 
   return (
     <div className="relative bg-gray-900 overflow-hidden md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
-      {/* Video background avec optimisations */}
+      {/* Video background avec optimisations - utilise la même vidéo mobile pour tous les écrans */}
       <div 
         ref={videoContainerRef} 
         className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform"
       >
-        {isMobile ? (
-          // Mobile vertical video optimisé
-          <div style={{
-            padding: '75% 0 0 0',
-            position: 'relative',
-            height: '100%',
-            overflow: 'hidden'
-          }}>
-            <iframe 
-              src="https://player.vimeo.com/video/1075119337?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                width: '100vw',
-                height: '100%',
-                transform: 'translate(-50%, -50%) scale(1.2)',
-                objectFit: 'cover'
-              }} 
-              title="Le Frigoriste Background Video Mobile" 
-              frameBorder="0"
-              loading="lazy"
-            />
-          </div>
-        ) : (
-          // Desktop landscape video optimisé
-          <div style={{
-            padding: '56.25% 0 0 0',
-            position: 'relative',
-            height: '100%',
-            overflow: 'hidden'
-          }}>
-            <iframe 
-              src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                borderRadius: 'inherit'
-              }} 
-              title="Le Frigoriste Background Video" 
-              frameBorder="0"
-              loading="lazy"
-            />
-          </div>
-        )}
+        <div style={{
+          padding: '75% 0 0 0',
+          position: 'relative',
+          height: '100%',
+          overflow: 'hidden'
+        }}>
+          <iframe 
+            src="https://player.vimeo.com/video/1075119337?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+            style={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              width: '100vw',
+              height: '100vh',
+              transform: 'translate(-50%, -50%) scale(1.5)',
+              objectFit: 'cover',
+              minWidth: '100%',
+              minHeight: '100%'
+            }} 
+            title="Le Frigoriste Background Video" 
+            frameBorder="0"
+            loading="lazy"
+          />
+        </div>
       </div>
       
       {/* Dark overlay optimisé */}
