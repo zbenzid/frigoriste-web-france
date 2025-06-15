@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { SEOHead, BreadcrumbSchema, ServiceSchema, FAQSection } from '@/components/seo';
-import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone } from 'lucide-react';
+import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone, ChefHat } from 'lucide-react';
 
 const Services = () => {
   const breadcrumbItems = [
@@ -51,6 +51,18 @@ const Services = () => {
         telephone: "+33123456789",
         address: "8-10 rue Levassor, 78130 Les Mureaux"
       }
+    },
+    {
+      name: "Vente, installation & maintenance de matériels de cuisines professionnelles",
+      description: "Solutions complètes pour équipements de cuisines et laveries professionnelles : vente, installation et maintenance pour restaurants, traiteurs, boulangeries et hôtels.",
+      url: "https://lefrigoriste.fr/services#cuisine",
+      serviceType: "Équipements de cuisines professionnelles",
+      areaServed: ["Île-de-France"],
+      provider: {
+        name: "LeFrigoriste.fr",
+        telephone: "+33123456789",
+        address: "8-10 rue Levassor, 78130 Les Mureaux"
+      }
     }
   ];
 
@@ -78,6 +90,10 @@ const Services = () => {
     {
       question: "Comment obtenir un devis pour une installation ?",
       answer: "Pour une installation, nous nous engageons à vous fournir un devis détaillé sous 24h. Contactez-nous par téléphone ou via notre formulaire en ligne. Un technicien se déplacera gratuitement pour étudier votre projet."
+    },
+    {
+      question: "Quels équipements de cuisine professionnelle proposez-vous ?",
+      answer: "Nous proposons une gamme complète d'équipements : fours professionnels, planchas, friteuses, lave-vaisselle industriels, machines à café, équipements de laverie, et bien plus. Nous travaillons avec les meilleures marques du marché."
     }
   ];
 
@@ -85,8 +101,8 @@ const Services = () => {
     <>
       <SEOHead
         title="Services de réfrigération et climatisation - LeFrigoriste.fr"
-        description="Découvrez nos services : dépannage frigorifique 24h/24, installation climatisation, maintenance préventive. Intervention rapide en Île-de-France. Devis gratuit."
-        keywords="services frigoriste, dépannage frigorifique, installation climatisation, maintenance froid, réparation chambre froide, contrat entretien"
+        description="Découvrez nos services : dépannage frigorifique 24h/24, installation climatisation, maintenance préventive, équipements de cuisines professionnelles. Intervention rapide en Île-de-France. Devis gratuit."
+        keywords="services frigoriste, dépannage frigorifique, installation climatisation, maintenance froid, réparation chambre froide, contrat entretien, équipements cuisine professionnelle"
         canonicalUrl="https://lefrigoriste.fr/services"
       />
       
@@ -231,6 +247,56 @@ const Services = () => {
                     Priorité d'intervention
                   </li>
                 </ul>
+              </div>
+
+              {/* Nouveau service : Équipements de cuisine */}
+              <div id="cuisine" className="bg-white rounded-xl p-8 shadow-lg border border-gray-100 md:col-span-2">
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mr-4">
+                    <ChefHat className="w-8 h-8 text-orange-600" />
+                  </div>
+                  <h2 className="font-bold font-montserrat text-2xl text-[#212121]">
+                    Matériels de cuisines / laveries professionnelles
+                  </h2>
+                </div>
+                <p className="text-gray-600 mb-6">
+                  Vente, installation et maintenance d'équipements de cuisines et laveries professionnelles pour restaurants, traiteurs, boulangeries et hôtels.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-600">
+                      <Shield className="w-5 h-5 text-primary mr-3" />
+                      Fours professionnels et planchas
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <Clock className="w-5 h-5 text-primary mr-3" />
+                      Lave-vaisselle industriels
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <MapPin className="w-5 h-5 text-primary mr-3" />
+                      Machines à café professionnelles
+                    </li>
+                  </ul>
+                  <ul className="space-y-3">
+                    <li className="flex items-center text-gray-600">
+                      <Shield className="w-5 h-5 text-primary mr-3" />
+                      Équipements de laverie
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <Clock className="w-5 h-5 text-primary mr-3" />
+                      Installation et mise en service
+                    </li>
+                    <li className="flex items-center text-gray-600">
+                      <Phone className="w-5 h-5 text-primary mr-3" />
+                      SAV et maintenance préventive
+                    </li>
+                  </ul>
+                </div>
+                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                  <p className="text-orange-800 font-medium text-sm">
+                    <strong>Cible :</strong> Restaurants, traiteurs, boulangeries, hôtels et tous professionnels de la restauration
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -12,9 +12,10 @@ const ContactForm = () => {
     email: '',
     phone: '',
     message: '',
+    service: '', // Nouveau champ pour tracker le service demandé
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -28,6 +29,12 @@ const ContactForm = () => {
     
     try {
       console.log("Envoi des données:", formData);
+      
+      // Track kitchen equipment requests specifically
+      if (formData.service === 'cuisine') {
+        console.log("Kitchen equipment quote request tracked");
+        // Add analytics tracking here if needed
+      }
       
       const { data, error } = await supabase.functions.invoke('submit-contact', {
         body: formData
@@ -57,6 +64,7 @@ const ContactForm = () => {
         email: '',
         phone: '',
         message: '',
+        service: '',
       });
     } catch (error) {
       console.error('Error submitting form:', error);
@@ -111,6 +119,22 @@ const ContactForm = () => {
               disabled={isLoading}
             />
           </div>
+        </div>
+        <div>
+          <select
+            name="service"
+            value={formData.service}
+            onChange={handleChange}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-secondary"
+            disabled={isLoading}
+          >
+            <option value="">Sélectionnez un service (optionnel)</option>
+            <option value="depannage">Dépannage frigorifique</option>
+            <option value="climatisation">Installation climatisation</option>
+            <option value="chambres-froides">Installation chambres froides</option>
+            <option value="maintenance">Maintenance préventive</option>
+            <option value="cuisine">Équipements de cuisines professionnelles</option>
+          </select>
         </div>
         <div>
           <textarea

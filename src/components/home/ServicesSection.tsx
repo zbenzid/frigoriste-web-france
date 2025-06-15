@@ -1,9 +1,11 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import ServiceCard from './ServiceCard';
-import { Snowflake, Wind, Hammer, Wrench } from 'lucide-react';
+import { Snowflake, Wind, Hammer, Wrench, ChefHat } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { Progress } from "@/components/ui/progress";
+
 const ServicesSection = () => {
   const isMobile = useIsMobile();
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -36,6 +38,12 @@ const ServicesSection = () => {
     icon: Wrench,
     link: "/services#maintenance",
     color: "maintenance" as const
+  }, {
+    title: "Matériels de cuisines professionnelles",
+    description: "Vente, installation et maintenance d'équipements de cuisines et laveries professionnelles.",
+    icon: ChefHat,
+    link: "/services#cuisine",
+    color: "secondary" as const
   }];
 
   // Handle auto sliding with timer
@@ -75,6 +83,7 @@ const ServicesSection = () => {
       };
     }
   }, [isMobile, currentSlide, services.length]);
+
   return <section id="services" className="py-20 relative overflow-hidden">
       {/* Fond moderne avec dégradé sophistiqué */}
       <div className="absolute inset-0 bg-gradient-to-b from-white via-blue-50 to-blue-100/30 z-0">
@@ -139,10 +148,11 @@ const ServicesSection = () => {
                 </div>
               </div>
             </Carousel>
-          </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 px-[16px]">
+          </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 px-[16px]">
             {services.map((service, index) => <ServiceCard key={index} title={service.title} description={service.description} icon={service.icon} link={service.link} color={service.color} />)}
           </div>}
       </div>
     </section>;
 };
+
 export default ServicesSection;
