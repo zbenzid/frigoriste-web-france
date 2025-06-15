@@ -11,7 +11,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
 import { RecruitmentBanner } from '@/components/recruitment';
-import { SEOHead, BreadcrumbSchema } from '@/components/seo';
 
 // Types de demandes qui nécessitent une adresse
 const requestTypesNeedingAddress = ['urgence', 'depannage', 'installation', 'maintenance'];
@@ -183,21 +182,8 @@ const Contact = () => {
   const messageLength = formData.message.trim().length;
   const isMessageValid = messageLength >= 10;
 
-  const breadcrumbItems = [
-    { label: "Contact" }
-  ];
-
   return (
     <div className="min-h-screen">
-      <SEOHead
-        title="Contact LeFrigoriste.fr - Devis gratuit | Dépannage urgent 01 85 50 02 84"
-        description="Contactez LeFrigoriste.fr pour un dépannage urgent ou un devis gratuit. Téléphone d'urgence 24h/24 : 01 85 50 02 84. Intervention rapide en Île-de-France."
-        keywords="contact frigoriste, devis gratuit réfrigération, urgence frigorifique, téléphone dépannage"
-        canonicalUrl="https://lefrigoriste.fr/contact"
-      />
-      
-      <BreadcrumbSchema items={breadcrumbItems} className="bg-gray-50" />
-      
       {/* Hero moderne et stylé comme Services */}
       <section className="py-12 md:py-20 relative overflow-hidden">
         {/* Fond moderne avec dégradé sophistiqué */}
