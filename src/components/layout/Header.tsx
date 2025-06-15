@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Menu, Clock, MapPin, Mail } from 'lucide-react';
@@ -34,10 +35,12 @@ const TopInfoBar = () => {
 
 const MainNav = ({
   className,
-  isMobile = false
+  isMobile = false,
+  onLinkClick
 }: {
   className?: string;
   isMobile?: boolean;
+  onLinkClick?: () => void;
 }) => {
   const location = useLocation();
   const navItems = [
@@ -59,6 +62,7 @@ const MainNav = ({
             key={href}
             to={href}
             aria-current={isActive ? "page" : undefined}
+            onClick={onLinkClick}
             className={cn(
               "text-primary hover:text-secondary relative transition-all",
               "after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary hover:after:w-full after:transition-all",
@@ -77,6 +81,7 @@ const MainNav = ({
 const Header = () => {
   const isMobile = useIsMobile();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
   const { trackPhoneCall } = useAnalytics();
 
   useEffect(() => {
@@ -91,6 +96,10 @@ const Header = () => {
 
   const handleEmergencyCall = () => {
     trackPhoneCall();
+  };
+
+  const handleLinkClick = () => {
+    setIsSheetOpen(false);
   };
 
   return (
@@ -140,7 +149,7 @@ const Header = () => {
             </a>
 
             {/* Mobile Menu */}
-            <Sheet>
+            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="lg:hidden" aria-label="Menu principal">
                   <Menu className="h-6 w-6" />
@@ -151,7 +160,7 @@ const Header = () => {
                   <SheetTitle>Menu</SheetTitle>
                 </SheetHeader>
                 <div className="mt-8">
-                  <MainNav isMobile />
+                  <MainNav isMobile onLinkClick={handleLinkClick} />
                 </div>
               </SheetContent>
             </Sheet>
