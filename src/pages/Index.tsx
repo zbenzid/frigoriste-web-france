@@ -98,35 +98,9 @@ const Index = () => {
       <section className="bg-white py-[40px]">
         <div className="container-custom">
           <div className="text-center mb-12">
-            {/* Enhanced heading with logo and modern styling */}
-            <div className="flex flex-col items-center justify-center mb-6">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
-                  <img 
-                    src="/lovable-uploads/75510e1c-4e18-4dde-8913-2caa6d23f37f.png" 
-                    alt="LeFrigoriste.fr" 
-                    className="h-8 w-auto"
-                  />
-                </div>
-                <div className="h-px w-16 bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-                <div className="px-3 py-1 rounded-full bg-primary/5 border border-primary/10">
-                  <span className="text-xs font-medium text-primary tracking-wider uppercase">En action</span>
-                </div>
-                <div className="h-px w-16 bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
-              </div>
-              
-              <h2 className="font-bold font-montserrat text-3xl md:text-4xl lg:text-5xl mb-4 text-[#212121] relative">
-                <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
-                  Découvrez LeFrigoriste.fr
-                </span>
-                <br />
-                <span className="text-gray-700">en action</span>
-                
-                {/* Subtle accent line */}
-                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-gradient-to-r from-primary to-secondary rounded-full"></div>
-              </h2>
-            </div>
-            
+            <h2 className="font-bold font-montserrat text-3xl md:text-4xl mb-4 text-[#212121]">
+              Découvrez LeFrigoriste.fr en action
+            </h2>
             <p className="text-lg text-gray-600 font-opensans max-w-2xl mx-auto">
               Plongez dans l'univers de nos interventions d'urgence et découvrez comment nous assurons la continuité de votre activité 24h/24.
             </p>
