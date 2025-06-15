@@ -205,8 +205,7 @@ const Services = () => {
                 <div className="aspect-video relative">
                   <div
                     ref={playerRef}
-                    className="absolute inset-0 w-full h-full cursor-pointer"
-                    onClick={togglePlay}
+                    className="absolute inset-0 w-full h-full"
                     style={{ 
                       background: 'transparent',
                       position: 'absolute',
@@ -217,17 +216,20 @@ const Services = () => {
                     }}
                   ></div>
                   
-                  {/* Overlay avec bouton play - ne s'affiche que quand la vidéo n'est pas en lecture */}
-                  {!isPlaying && (
-                    <div 
-                      className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black bg-opacity-30 transition-opacity duration-300 hover:bg-opacity-40 z-10"
-                      onClick={togglePlay}
-                    >
-                      <div className="w-20 h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-100 transition-all duration-300 hover:scale-110">
-                        <Play className="w-8 h-8 text-primary ml-1" />
+                  {/* Overlay clickable pour toggle play/pause */}
+                  <div 
+                    className="absolute inset-0 cursor-pointer z-10"
+                    onClick={togglePlay}
+                  >
+                    {/* Bouton play visible seulement quand la vidéo n'est pas en lecture */}
+                    {!isPlaying && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 transition-opacity duration-300 hover:bg-opacity-40">
+                        <div className="w-20 h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-100 transition-all duration-300 hover:scale-110">
+                          <Play className="w-8 h-8 text-primary ml-1" />
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
               </div>
               
