@@ -24,6 +24,7 @@ interface VimeoPlayer {
   ready(): Promise<void>;
   play(): Promise<void>;
   pause(): Promise<void>;
+  setCurrentTime(seconds: number): Promise<number>;
   on(event: string, callback: () => void): void;
 }
 
