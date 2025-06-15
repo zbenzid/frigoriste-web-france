@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { SEOHead, BreadcrumbSchema, ServiceSchema, FAQSection } from '@/components/seo';
-import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone, ChefHat } from 'lucide-react';
+import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone, ChefHat, Play } from 'lucide-react';
 
 const Services = () => {
   const breadcrumbItems = [
@@ -125,6 +125,42 @@ const Services = () => {
               <p className="text-xl text-gray-600 font-opensans max-w-3xl mx-auto">
                 Solutions professionnelles de dépannage, installation et maintenance pour tous vos équipements frigorifiques et de climatisation.
               </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Video Section */}
+        <section className="py-20 bg-white">
+          <div className="container-custom">
+            <div className="text-center mb-12">
+              <h2 className="font-bold font-montserrat text-3xl md:text-4xl mb-4 text-[#212121]">
+                Découvrez LeFrigoriste.fr en action
+              </h2>
+              <p className="text-lg text-gray-600 font-opensans max-w-2xl mx-auto">
+                Plongez dans l'univers de nos interventions d'urgence et découvrez comment nous assurons la continuité de votre activité 24h/24.
+              </p>
+            </div>
+            
+            <div className="max-w-4xl mx-auto">
+              <div className="relative rounded-xl overflow-hidden shadow-2xl bg-gray-900">
+                <div className="aspect-video">
+                  <iframe
+                    src="https://player.vimeo.com/video/1040209456?badge=0&autopause=0&player_id=0&app_id=58479&allowfullscreen=0"
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    allow="autoplay; encrypted-media"
+                    title="LeFrigoriste.fr - Présentation de nos services"
+                    className="w-full h-full"
+                  ></iframe>
+                </div>
+              </div>
+              
+              <div className="text-center mt-8">
+                <p className="text-sm text-gray-500 font-opensans">
+                  Intervention d'urgence • Dépannage 24h/24 • Île-de-France
+                </p>
+              </div>
             </div>
           </div>
         </section>
