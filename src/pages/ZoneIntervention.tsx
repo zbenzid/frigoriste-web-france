@@ -153,7 +153,7 @@ const ZoneIntervention = () => {
               {/* Conteneur de l'image avec cadre esthétique */}
               <div className="overflow-hidden rounded-2xl shadow-xl relative aspect-[4/3] md:aspect-[16/9] h-full">
                 {/* Image principale */}
-                <img src="/lovable-uploads/7775ab7a-fc75-4650-902c-934e05a1b900.png" alt="Zone d'intervention Île-de-France" className="w-full h-full object-cover" />
+                <img src="/lovable-uploads/21bac999-bf5e-4a08-bc1b-17d058d65498.png" alt="Technicien LeFrigoriste intervenant sur équipement de climatisation" className="w-full h-full object-cover" />
                 
                 {/* Élément décoratif - Badge de délai d'intervention */}
                 <div className="absolute bottom-4 right-4 bg-white/20 backdrop-blur-md px-4 py-2 rounded-full text-white font-bold text-sm border border-white/20 shadow-lg z-30 flex items-center">
