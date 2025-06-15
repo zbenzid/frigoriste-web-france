@@ -39,6 +39,8 @@ const Services = () => {
 
         player.on('ended', () => {
           setIsPlaying(false);
+          // Remettre la vidéo au début pour revenir à l'état initial
+          player.setCurrentTime(0);
         });
 
         playerRef.current.player = player;
