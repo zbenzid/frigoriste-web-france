@@ -11,7 +11,7 @@ const WebVitalsTracker = () => {
   useEffect(() => {
     const trackWebVitals = async () => {
       try {
-        const { onCLS, onFID, onFCP, onLCP, onTTFB } = await import('web-vitals');
+        const { onCLS, onINP, onFCP, onLCP, onTTFB } = await import('web-vitals');
         
         const sendToAnalytics = (metric: WebVitalsMetric) => {
           console.log('Web Vital:', metric);
@@ -28,7 +28,7 @@ const WebVitalsTracker = () => {
 
         // Mesurer les Core Web Vitals
         onCLS(sendToAnalytics);
-        onFID(sendToAnalytics);
+        onINP(sendToAnalytics); // INP remplace FID dans web-vitals v5
         onFCP(sendToAnalytics);
         onLCP(sendToAnalytics);
         onTTFB(sendToAnalytics);
