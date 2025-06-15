@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { SEOHead, BreadcrumbSchema, ServiceSchema, FAQSection } from '@/components/seo';
 import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone, ChefHat, Play, Pause } from 'lucide-react';
@@ -21,8 +22,7 @@ const Services = () => {
           byline: false,
           portrait: false,
           autopause: false,
-          background: false,
-          muted: false
+          background: false
         });
 
         player.ready().then(() => {
