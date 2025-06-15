@@ -86,21 +86,21 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black opacity-60 z-1 md:rounded-2xl will-change-opacity md:hidden lg:block"></div>
 
       {/* Gradient background pour tablette uniquement */}
-      <div className="hidden md:block lg:hidden absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary/80 md:rounded-2xl"></div>
+      <div className="hidden md:block lg:hidden absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-gray-50 md:rounded-2xl"></div>
 
       <div className="container-custom relative z-10 md:py-16 lg:py-32 sm:px-6 lg:px-8 px-[15px] py-[50px]">
         <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="text-white">
-            <span className="inline-block px-4 py-2 rounded-full bg-emergency/20 text-white font-semibold text-sm mb-6 backdrop-blur-sm">
+          <div className="text-white md:text-gray-900 lg:text-white text-center md:text-center lg:text-left">
+            <span className="inline-block px-4 py-2 rounded-full bg-emergency/20 md:bg-primary/10 lg:bg-emergency/20 text-white md:text-primary lg:text-white font-semibold text-sm mb-6 backdrop-blur-sm">
               Service d'urgence 24/7
             </span>
             <h1 className="sm:text-4xl font-extrabold mb-6 leading-tight md:text-5xl lg:text-6xl text-4xl">
               Dépannage frigorifique et climatisation professionnel
             </h1>
-            <p className="text-xl mb-8 opacity-90 max-w-xl">
+            <p className="text-xl mb-8 opacity-90 md:opacity-100 max-w-xl mx-auto md:mx-auto lg:mx-0">
               Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
             </p>
-            <div className="flex flex-col sm:flex-row gap-5">
+            <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-center lg:justify-start">
               <a 
                 href="tel:0185500284" 
                 className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emergency to-emergency/80 hover:from-emergency/90 hover:to-emergency text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl will-change-transform"
@@ -155,7 +155,7 @@ const Hero = () => {
 
         {/* Section vidéo dédiée pour tablette */}
         <div className="hidden md:block lg:hidden mt-12">
-          <div className="bg-black/20 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+          <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-gray-200/30 shadow-lg">
             <div style={{
               padding: '56.25% 0 0 0',
               position: 'relative',
@@ -183,30 +183,30 @@ const Hero = () => {
 
         {/* Info box pour tablette */}
         <div className="hidden md:block lg:hidden mt-8">
-          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/20">
-            <div className="text-white">
-              <h2 className="text-2xl font-bold mb-6 text-center">Intervention express</h2>
-              <div className="grid grid-cols-3 gap-4">
+          <div className="bg-white backdrop-blur-sm p-8 rounded-xl shadow-lg border border-gray-200 text-center">
+            <div className="text-gray-900">
+              <h2 className="text-3xl font-bold mb-8 text-primary">Intervention express</h2>
+              <div className="grid grid-cols-3 gap-6">
                 <div className="text-center">
-                  <div className="bg-emergency/80 text-white px-4 py-3 rounded-lg font-bold text-lg mb-2">
+                  <div className="bg-primary text-white px-6 py-4 rounded-xl font-bold text-xl mb-3 shadow-md">
                     1h
                   </div>
-                  <span className="font-semibold text-sm">Paris & petite couronne</span>
+                  <span className="font-semibold text-gray-700">Paris & petite couronne</span>
                 </div>
                 <div className="text-center">
-                  <div className="bg-emergency/80 text-white px-4 py-3 rounded-lg font-bold text-lg mb-2">
+                  <div className="bg-emergency text-white px-6 py-4 rounded-xl font-bold text-xl mb-3 shadow-md">
                     45min
                   </div>
-                  <span className="font-semibold text-sm">Yvelines (78)</span>
+                  <span className="font-semibold text-gray-700">Yvelines (78)</span>
                 </div>
                 <div className="text-center">
-                  <div className="bg-emergency/80 text-white px-4 py-3 rounded-lg font-bold text-lg mb-2">
+                  <div className="bg-secondary text-white px-6 py-4 rounded-xl font-bold text-xl mb-3 shadow-md">
                     2h
                   </div>
-                  <span className="font-semibold text-sm">Grande couronne</span>
+                  <span className="font-semibold text-gray-700">Grande couronne</span>
                 </div>
               </div>
-              <p className="text-center italic text-sm pt-4">
+              <p className="text-center italic text-gray-600 pt-6 text-sm">
                 Délais moyens d'intervention en urgence
               </p>
             </div>
