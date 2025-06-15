@@ -217,7 +217,7 @@ const Services = () => {
                     }}
                   ></div>
                   
-                  {/* Overlay avec bouton play/pause - ne s'affiche que quand la vidéo n'est pas en lecture */}
+                  {/* Overlay avec bouton play - ne s'affiche que quand la vidéo n'est pas en lecture */}
                   {!isPlaying && (
                     <div 
                       className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black bg-opacity-30 transition-opacity duration-300 hover:bg-opacity-40 z-10"
