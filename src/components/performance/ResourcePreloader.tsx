@@ -10,13 +10,13 @@ const ResourcePreloader = () => {
         rel="preload" 
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" 
         as="style" 
-        onload="this.onload=null;this.rel='stylesheet'" 
+        onLoad="this.onload=null;this.rel='stylesheet'" 
       />
       <link 
         rel="preload" 
         href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" 
         as="style" 
-        onload="this.onload=null;this.rel='stylesheet'" 
+        onLoad="this.onload=null;this.rel='stylesheet'" 
       />
       
       {/* DNS prefetch pour les domaines externes */}

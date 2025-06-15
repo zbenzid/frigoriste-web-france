@@ -11,7 +11,7 @@ const WebVitalsTracker = () => {
   useEffect(() => {
     const trackWebVitals = async () => {
       try {
-        const { getCLS, getFID, getFCP, getLCP, getTTFB } = await import('web-vitals');
+        const { onCLS, onFID, onFCP, onLCP, onTTFB } = await import('web-vitals');
         
         const sendToAnalytics = (metric: WebVitalsMetric) => {
           console.log('Web Vital:', metric);
@@ -27,11 +27,11 @@ const WebVitalsTracker = () => {
         };
 
         // Mesurer les Core Web Vitals
-        getCLS(sendToAnalytics);
-        getFID(sendToAnalytics);
-        getFCP(sendToAnalytics);
-        getLCP(sendToAnalytics);
-        getTTFB(sendToAnalytics);
+        onCLS(sendToAnalytics);
+        onFID(sendToAnalytics);
+        onFCP(sendToAnalytics);
+        onLCP(sendToAnalytics);
+        onTTFB(sendToAnalytics);
         
       } catch (error) {
         console.warn('Web Vitals library not available:', error);
