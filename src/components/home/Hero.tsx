@@ -25,10 +25,10 @@ const Hero = () => {
 
   return (
     <div className="relative bg-gray-900 overflow-hidden md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
-      {/* Video background avec optimisations */}
+      {/* Video background pour mobile et desktop - cachée sur tablette */}
       <div 
         ref={videoContainerRef} 
-        className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform"
+        className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform md:hidden lg:block"
       >
         {isMobile ? (
           // Mobile vertical video optimisé
@@ -82,16 +82,19 @@ const Hero = () => {
         )}
       </div>
       
-      {/* Dark overlay optimisé */}
-      <div className="absolute inset-0 bg-black opacity-60 z-1 md:rounded-2xl will-change-opacity"></div>
+      {/* Dark overlay - cachée sur tablette */}
+      <div className="absolute inset-0 bg-black opacity-60 z-1 md:rounded-2xl will-change-opacity md:hidden lg:block"></div>
 
-      <div className="container-custom relative z-10 md:py-32 sm:px-6 lg:px-8 px-[15px] py-[50px]">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      {/* Gradient background pour tablette uniquement */}
+      <div className="hidden md:block lg:hidden absolute inset-0 bg-gradient-to-br from-primary via-secondary to-primary/80 md:rounded-2xl"></div>
+
+      <div className="container-custom relative z-10 md:py-16 lg:py-32 sm:px-6 lg:px-8 px-[15px] py-[50px]">
+        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="text-white">
             <span className="inline-block px-4 py-2 rounded-full bg-emergency/20 text-white font-semibold text-sm mb-6 backdrop-blur-sm">
               Service d'urgence 24/7
             </span>
-            <h1 className="sm:text-4xl font-extrabold mb-6 leading-tight md:text-6xl text-4xl">
+            <h1 className="sm:text-4xl font-extrabold mb-6 leading-tight md:text-5xl lg:text-6xl text-4xl">
               Dépannage frigorifique et climatisation professionnel
             </h1>
             <p className="text-xl mb-8 opacity-90 max-w-xl">
@@ -119,7 +122,8 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="backdrop-blur-sm bg-white/10 p-6 md:p-8 rounded-xl shadow-lg hidden md:block lg:block border border-white/20 will-change-transform">
+          {/* Info box - visible sur desktop uniquement */}
+          <div className="backdrop-blur-sm bg-white/10 p-6 md:p-8 rounded-xl shadow-lg hidden lg:block border border-white/20 will-change-transform">
             <div className="text-white">
               <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center">Intervention express</h2>
               <div className="space-y-3 md:space-y-5">
@@ -145,6 +149,66 @@ const Hero = () => {
                   Délais moyens d'intervention en urgence
                 </p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Section vidéo dédiée pour tablette */}
+        <div className="hidden md:block lg:hidden mt-12">
+          <div className="bg-black/20 backdrop-blur-sm rounded-xl p-4 border border-white/10">
+            <div style={{
+              padding: '56.25% 0 0 0',
+              position: 'relative',
+              overflow: 'hidden',
+              borderRadius: '0.5rem'
+            }}>
+              <iframe 
+                src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '0.5rem'
+                }} 
+                title="Le Frigoriste - Nos Services" 
+                frameBorder="0"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Info box pour tablette */}
+        <div className="hidden md:block lg:hidden mt-8">
+          <div className="bg-white/10 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-white/20">
+            <div className="text-white">
+              <h2 className="text-2xl font-bold mb-6 text-center">Intervention express</h2>
+              <div className="grid grid-cols-3 gap-4">
+                <div className="text-center">
+                  <div className="bg-emergency/80 text-white px-4 py-3 rounded-lg font-bold text-lg mb-2">
+                    1h
+                  </div>
+                  <span className="font-semibold text-sm">Paris & petite couronne</span>
+                </div>
+                <div className="text-center">
+                  <div className="bg-emergency/80 text-white px-4 py-3 rounded-lg font-bold text-lg mb-2">
+                    45min
+                  </div>
+                  <span className="font-semibold text-sm">Yvelines (78)</span>
+                </div>
+                <div className="text-center">
+                  <div className="bg-emergency/80 text-white px-4 py-3 rounded-lg font-bold text-lg mb-2">
+                    2h
+                  </div>
+                  <span className="font-semibold text-sm">Grande couronne</span>
+                </div>
+              </div>
+              <p className="text-center italic text-sm pt-4">
+                Délais moyens d'intervention en urgence
+              </p>
             </div>
           </div>
         </div>
