@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, Menu, Clock, MapPin, Mail } from 'lucide-react';
@@ -119,10 +118,12 @@ const Header = () => {
         <div className="container-custom h-20 lg:h-24">
           <div className="flex items-center justify-between h-full px-[16px]">
             {/* Logo */}
-            <Link to="/" className="text-2xl font-bold text-primary" aria-label="LeFrigoriste.fr - Retour à l'accueil">
-              <span className="text-secondary">Le</span>
-              Frigoriste
-              <span className="text-secondary">.fr</span>
+            <Link to="/" className="flex-shrink-0" aria-label="LeFrigoriste.fr - Retour à l'accueil">
+              <img 
+                src="/lovable-uploads/75510e1c-4e18-4dde-8913-2caa6d23f37f.png" 
+                alt="LeFrigoriste.fr" 
+                className="h-8 lg:h-10 w-auto"
+              />
             </Link>
 
             {/* Desktop Navigation */}
