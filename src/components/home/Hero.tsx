@@ -86,7 +86,7 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black opacity-60 z-1 md:rounded-2xl will-change-opacity"></div>
 
       <div className="container-custom relative z-10 md:py-32 sm:px-6 lg:px-8 px-[15px] py-[50px]">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="text-white">
             <span className="inline-block px-4 py-2 rounded-full bg-emergency/20 text-white font-semibold text-sm mb-6 backdrop-blur-sm">
               Service d'urgence 24/7
@@ -119,29 +119,29 @@ const Hero = () => {
             </div>
           </div>
           
-          <div className="backdrop-blur-sm bg-white/10 p-8 rounded-xl shadow-lg hidden md:block border border-white/20 will-change-transform">
+          <div className="backdrop-blur-sm bg-white/10 p-6 md:p-8 rounded-xl shadow-lg hidden md:block lg:block border border-white/20 will-change-transform">
             <div className="text-white">
-              <h2 className="text-2xl font-bold mb-6 text-center">Intervention express</h2>
-              <div className="space-y-5">
-                <div className="flex items-center justify-between border-b border-white/20 pb-4">
-                  <span className="font-semibold">Paris & petite couronne</span>
-                  <span className="bg-emergency/80 text-white px-4 py-2 rounded-lg text-sm font-bold">
+              <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center">Intervention express</h2>
+              <div className="space-y-3 md:space-y-5">
+                <div className="flex items-center justify-between border-b border-white/20 pb-3 md:pb-4">
+                  <span className="font-semibold text-sm md:text-base">Paris & petite couronne</span>
+                  <span className="bg-emergency/80 text-white px-3 md:px-4 py-1 md:py-2 rounded-lg text-xs md:text-sm font-bold">
                     1h
                   </span>
                 </div>
-                <div className="flex items-center justify-between border-b border-white/20 pb-4">
-                  <span className="font-semibold">Yvelines (78)</span>
-                  <span className="bg-emergency/80 text-white px-4 py-2 rounded-lg text-sm font-bold">
+                <div className="flex items-center justify-between border-b border-white/20 pb-3 md:pb-4">
+                  <span className="font-semibold text-sm md:text-base">Yvelines (78)</span>
+                  <span className="bg-emergency/80 text-white px-3 md:px-4 py-1 md:py-2 rounded-lg text-xs md:text-sm font-bold">
                     45min
                   </span>
                 </div>
-                <div className="flex items-center justify-between border-b border-white/20 pb-4">
-                  <span className="font-semibold">Grande couronne</span>
-                  <span className="bg-emergency/80 text-white px-4 py-2 rounded-lg text-sm font-bold">
+                <div className="flex items-center justify-between border-b border-white/20 pb-3 md:pb-4">
+                  <span className="font-semibold text-sm md:text-base">Grande couronne</span>
+                  <span className="bg-emergency/80 text-white px-3 md:px-4 py-1 md:py-2 rounded-lg text-xs md:text-sm font-bold">
                     2h
                   </span>
                 </div>
-                <p className="text-center italic text-sm pt-3">
+                <p className="text-center italic text-xs md:text-sm pt-2 md:pt-3">
                   Délais moyens d'intervention en urgence
                 </p>
               </div>
