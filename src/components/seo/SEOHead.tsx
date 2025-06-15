@@ -15,7 +15,7 @@ const SEOHead = ({
   description = "Spécialiste en réfrigération commerciale et climatisation. Dépannage frigorifique d'urgence 24h/24, 7j/7 en Île-de-France. Intervention rapide garantie : 45min Yvelines, 1h Paris.",
   keywords = "frigoriste Île-de-France, dépannage frigorifique d'urgence, réparation chambre froide, installation climatisation professionnelle",
   canonicalUrl,
-  ogImage = "https://lovable.dev/opengraph-image-p98pqg.png",
+  ogImage = "public/lovable-uploads/opengraph-image.png",
   noIndex = false
 }: SEOHeadProps) => {
   const currentUrl = canonicalUrl || window.location.href;
