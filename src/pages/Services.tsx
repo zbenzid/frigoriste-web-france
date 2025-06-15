@@ -1,3 +1,4 @@
+
 import React, { useRef, useEffect, useState } from 'react';
 import { SEOHead, BreadcrumbSchema, ServiceSchema, FAQSection } from '@/components/seo';
 import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone, ChefHat, Play, Pause } from 'lucide-react';
@@ -15,8 +16,7 @@ const Services = () => {
       if (window.Vimeo && playerRef.current) {
         const player = new window.Vimeo.Player(playerRef.current, {
           id: 1093559944,
-          width: '100%',
-          height: '100%',
+          responsive: true,
           controls: false,
           title: false,
           byline: false,
@@ -201,13 +201,21 @@ const Services = () => {
                 <div className="aspect-video relative">
                   <div
                     ref={playerRef}
-                    className="w-full h-full cursor-pointer"
+                    className="absolute inset-0 w-full h-full cursor-pointer"
                     onClick={togglePlay}
+                    style={{ 
+                      background: 'transparent',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%'
+                    }}
                   ></div>
                   
                   {/* Overlay avec bouton play/pause */}
                   <div 
-                    className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black bg-opacity-30 transition-opacity duration-300 hover:bg-opacity-40"
+                    className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black bg-opacity-30 transition-opacity duration-300 hover:bg-opacity-40 z-10"
                     onClick={togglePlay}
                   >
                     <div className="w-20 h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-100 transition-all duration-300 hover:scale-110">

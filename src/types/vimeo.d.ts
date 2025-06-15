@@ -11,6 +11,7 @@ interface VimeoPlayerOptions {
   id: number;
   width?: string | number;
   height?: string | number;
+  responsive?: boolean;
   controls?: boolean;
   title?: boolean;
   byline?: boolean;
