@@ -1,9 +1,64 @@
-
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { SEOHead, BreadcrumbSchema, ServiceSchema, FAQSection } from '@/components/seo';
-import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone, ChefHat, Play } from 'lucide-react';
+import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone, ChefHat, Play, Pause } from 'lucide-react';
 
 const Services = () => {
+  const playerRef = useRef<any>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playerReady, setPlayerReady] = useState(false);
+
+  useEffect(() => {
+    // Charger l'API Vimeo Player
+    const script = document.createElement('script');
+    script.src = 'https://player.vimeo.com/api/player.js';
+    script.onload = () => {
+      if (window.Vimeo && playerRef.current) {
+        const player = new window.Vimeo.Player(playerRef.current, {
+          id: 1093559944,
+          width: '100%',
+          height: '100%',
+          controls: false,
+          title: false,
+          byline: false,
+          portrait: false,
+          autopause: false,
+          background: true
+        });
+
+        player.ready().then(() => {
+          setPlayerReady(true);
+        });
+
+        player.on('play', () => {
+          setIsPlaying(true);
+        });
+
+        player.on('pause', () => {
+          setIsPlaying(false);
+        });
+
+        playerRef.current.player = player;
+      }
+    };
+    document.head.appendChild(script);
+
+    return () => {
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
+    };
+  }, []);
+
+  const togglePlay = () => {
+    if (playerRef.current?.player && playerReady) {
+      if (isPlaying) {
+        playerRef.current.player.pause();
+      } else {
+        playerRef.current.player.play();
+      }
+    }
+  };
+
   const breadcrumbItems = [
     { name: "Nos Services" }
   ];
@@ -143,16 +198,26 @@ const Services = () => {
             
             <div className="max-w-4xl mx-auto">
               <div className="relative rounded-xl overflow-hidden shadow-2xl bg-gray-900">
-                <div className="aspect-video">
-                  <iframe
-                    src="https://player.vimeo.com/video/1093559944?badge=0&autopause=0&player_id=0&app_id=58479"
-                    width="100%"
-                    height="100%"
-                    frameBorder="0"
-                    allow="autoplay; encrypted-media"
-                    title="LeFrigoriste.fr - Présentation de nos services"
-                    className="w-full h-full"
-                  ></iframe>
+                <div className="aspect-video relative">
+                  <div
+                    ref={playerRef}
+                    className="w-full h-full cursor-pointer"
+                    onClick={togglePlay}
+                  ></div>
+                  
+                  {/* Overlay avec bouton play/pause */}
+                  <div 
+                    className="absolute inset-0 flex items-center justify-center cursor-pointer bg-black bg-opacity-30 transition-opacity duration-300 hover:bg-opacity-40"
+                    onClick={togglePlay}
+                  >
+                    <div className="w-20 h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-100 transition-all duration-300 hover:scale-110">
+                      {isPlaying ? (
+                        <Pause className="w-8 h-8 text-primary ml-0" />
+                      ) : (
+                        <Play className="w-8 h-8 text-primary ml-1" />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
               
