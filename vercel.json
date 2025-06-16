@@ -1,18 +1,22 @@
 {
   "routes": [
+    { "handle": "filesystem" },   // ← indispensable, toujours en premier
+
     {
       "src": "/sitemap.xml",
-      "dest": "/public/sitemap.xml",
+      "dest": "/sitemap.xml",
       "headers": { "Content-Type": "application/xml" }
     },
     {
       "src": "/robots.txt",
-      "dest": "/public/robots.txt",
+      "dest": "/robots.txt",
       "headers": { "Content-Type": "text/plain" }
     },
     {
       "src": "/favicon.ico",
-      "dest": "/public/favicon.ico"
+      "dest": "/favicon.ico"
     }
+
+    /* tes éventuelles autres rewrites / redirects viennent ensuite */
   ]
 }
