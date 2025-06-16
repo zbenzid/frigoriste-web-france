@@ -3,9 +3,6 @@ import { useEffect } from 'react';
 
 const RobotsTXT = () => {
   useEffect(() => {
-    // Définir le type de contenu comme text/plain
-    document.contentType = 'text/plain';
-    
     // Créer le contenu robots.txt
     const robotsContent = `User-agent: *
 Allow: /
@@ -38,8 +35,14 @@ Sitemap: https://lefrigoriste.fr/sitemap.xml
 # /frigoriste-en-yvelines-78
 # /zone-intervention`;
 
-    // Remplacer le contenu de la page par le texte
-    document.documentElement.innerHTML = `<pre>${robotsContent}</pre>`;
+    // Remplacer le contenu du body par le texte
+    document.body.innerHTML = `<pre style="margin: 0; padding: 0; font-family: monospace; white-space: pre-wrap;">${robotsContent}</pre>`;
+    
+    // Masquer le header et footer
+    const header = document.querySelector('header');
+    const footer = document.querySelector('footer');
+    if (header) header.style.display = 'none';
+    if (footer) footer.style.display = 'none';
   }, []);
 
   return null;
