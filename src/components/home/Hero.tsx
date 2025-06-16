@@ -25,13 +25,13 @@ const Hero = () => {
 
   return (
     <div className="relative bg-gray-900 overflow-hidden md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
-      {/* Video background - affichage conditionnel amélioré */}
-      {isMobile ? (
-        // Mobile vertical video - affiché uniquement sur mobile
-        <div 
-          ref={videoContainerRef} 
-          className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform block md:hidden"
-        >
+      {/* Video background pour mobile et desktop - cachée sur tablette */}
+      <div 
+        ref={videoContainerRef} 
+        className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform md:hidden lg:block"
+      >
+        {isMobile ? (
+          // Mobile vertical video optimisé
           <div style={{
             padding: '75% 0 0 0',
             position: 'relative',
@@ -55,13 +55,8 @@ const Hero = () => {
               loading="lazy"
             />
           </div>
-        </div>
-      ) : (
-        // Desktop landscape video - caché sur mobile, visible sur tablette et desktop
-        <div 
-          ref={videoContainerRef} 
-          className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform hidden md:block"
-        >
+        ) : (
+          // Desktop landscape video optimisé
           <div style={{
             padding: '56.25% 0 0 0',
             position: 'relative',
@@ -84,11 +79,11 @@ const Hero = () => {
               loading="lazy"
             />
           </div>
-        </div>
-      )}
+        )}
+      </div>
       
-      {/* Dark overlay - conditionnel selon le type d'écran */}
-      <div className={`absolute inset-0 bg-black opacity-60 z-1 md:rounded-2xl will-change-opacity ${isMobile ? 'block md:hidden' : 'hidden md:block lg:block'}`}></div>
+      {/* Dark overlay - cachée sur tablette */}
+      <div className="absolute inset-0 bg-black opacity-60 z-1 md:rounded-2xl will-change-opacity md:hidden lg:block"></div>
 
       {/* Gradient background pour tablette uniquement */}
       <div className="hidden md:block lg:hidden absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-gray-50 md:rounded-2xl"></div>
