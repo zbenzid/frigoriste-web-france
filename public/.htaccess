@@ -38,6 +38,7 @@ RewriteRule ^quel-type-de-climatisation-choisir/?$ /installation-climatisation-p
 RewriteRule ^comment-installer-une-climatisation/?$ /installation-climatisation-paris [L,R=301]
 RewriteRule ^probleme-de-climatisation/?$ /depannage-climatisation-paris [L,R=301]
 RewriteRule ^frigoriste-mantes-la-jolie/?$ /frigoriste-en-yvelines-78 [R=301,L]
+RewriteRule ^mantes-la-jolie/?$ /frigoriste-en-yvelines-78 [R=301,L]
 
 # Gestion des erreurs 404
 ErrorDocument 404 /index.html
