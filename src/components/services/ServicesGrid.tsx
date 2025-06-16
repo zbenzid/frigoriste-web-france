@@ -1,8 +1,16 @@
 
 import React from 'react';
 import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone, ChefHat } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 const ServicesGrid = () => {
+  const navigate = useNavigate();
+
+  const handleContactClick = (service: string) => {
+    navigate(`/contact?service=${service}`);
+  };
+
   return (
     <section className="py-20">
       <div className="container-custom">
@@ -34,6 +42,12 @@ const ServicesGrid = () => {
                 Hotline d'urgence dédiée
               </li>
             </ul>
+            <Button 
+              onClick={() => handleContactClick('depannage')} 
+              className="w-full"
+            >
+              Demander une intervention
+            </Button>
           </div>
 
           {/* Installation climatisation */}
@@ -63,6 +77,12 @@ const ServicesGrid = () => {
                 Déplacement gratuit en Île-de-France
               </li>
             </ul>
+            <Button 
+              onClick={() => handleContactClick('climatisation')} 
+              className="w-full"
+            >
+              Demander un devis
+            </Button>
           </div>
 
           {/* Chambres froides */}
@@ -92,6 +112,12 @@ const ServicesGrid = () => {
                 Respect des normes alimentaires
               </li>
             </ul>
+            <Button 
+              onClick={() => handleContactClick('chambres-froides')} 
+              className="w-full"
+            >
+              Demander un devis
+            </Button>
           </div>
 
           {/* Maintenance */}
@@ -121,6 +147,12 @@ const ServicesGrid = () => {
                 Priorité d'intervention
               </li>
             </ul>
+            <Button 
+              onClick={() => handleContactClick('maintenance')} 
+              className="w-full"
+            >
+              Demander un contrat
+            </Button>
           </div>
 
           {/* Nouveau service : Équipements de cuisine */}
@@ -166,10 +198,18 @@ const ServicesGrid = () => {
                 </li>
               </ul>
             </div>
-            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4 mb-6">
               <p className="text-orange-800 font-medium text-sm">
                 <strong>Cible :</strong> Restaurants, traiteurs, boulangeries, hôtels et tous professionnels de la restauration
               </p>
+            </div>
+            <div className="flex justify-center">
+              <Button 
+                onClick={() => handleContactClick('cuisine')} 
+                className="px-8"
+              >
+                Demander un devis équipements
+              </Button>
             </div>
           </div>
         </div>
