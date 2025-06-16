@@ -24,12 +24,24 @@ import InstallationCuisineProfessionnelleParis from "./pages/InstallationCuisine
 import FrigoristeYvelines from "./pages/FrigoristeYvelines";
 
 import CookieBanner from "./components/cookies/CookieBanner";
+import CookiePreferences from "./components/cookies/CookiePreferences";
+import { useCookies } from "./hooks/use-cookies";
 import { ResourcePreloader } from "./components/performance";
 import { WebVitalsTracker } from "./components/performance";
 
 const queryClient = new QueryClient();
 
 function App() {
+  const {
+    showBanner,
+    showPreferences,
+    setShowPreferences,
+    acceptAll,
+    rejectAll,
+    preferences,
+    saveConsent,
+  } = useCookies();
+
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
@@ -68,7 +80,23 @@ function App() {
                 </Routes>
               </main>
               <Footer />
-              <CookieBanner />
+              
+              {/* Cookie Banner */}
+              {showBanner && (
+                <CookieBanner
+                  onAcceptAll={acceptAll}
+                  onRejectAll={rejectAll}
+                  onShowPreferences={() => setShowPreferences(true)}
+                />
+              )}
+
+              {/* Cookie Preferences Modal */}
+              <CookiePreferences
+                isOpen={showPreferences}
+                onClose={() => setShowPreferences(false)}
+                currentPreferences={preferences}
+                onSave={saveConsent}
+              />
             </div>
             <Toaster />
           </BrowserRouter>
