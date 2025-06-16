@@ -23,7 +23,7 @@ import InstallationChambreFroideParis from "./pages/InstallationChambreFroidePar
 import InstallationCuisineProfessionnelleParis from "./pages/InstallationCuisineProfessionnelleParis";
 import FrigoristeYvelines from "./pages/FrigoristeYvelines";
 
-import { CookieBanner } from "./components/cookies/CookieBanner";
+import CookieBanner from "./components/cookies/CookieBanner";
 import { ResourcePreloader } from "./components/performance";
 import { WebVitalsTracker } from "./components/performance";
 
