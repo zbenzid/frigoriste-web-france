@@ -4,12 +4,28 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 Disallow: /*.json$
+Disallow: /lovable-uploads/
 
-Sitemap: https://lefrigoriste.fr/sitemap.xml
-
-# Spécifique pour les moteurs de recherche français
+# Priorité pour les moteurs de recherche français
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
+
+# Sitemap
+Sitemap: https://lefrigoriste.fr/sitemap.xml
+
+# Pages importantes pour le référencement
+# Services principaux
+# /services
+# /depannage-froid
+# /depannage-climatisation-paris
+# /installation-climatisation-paris
+# /installation-chambre-froide-paris
+
+# Zone géographique
+# /frigoriste-en-yvelines-78
+# /zone-intervention

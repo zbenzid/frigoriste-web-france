@@ -12,6 +12,12 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://lefrigoriste.fr" />
     
+    <!-- Geo tags -->
+    <meta name="geo.region" content="FR-78" />
+    <meta name="geo.placename" content="Les Mureaux, Yvelines" />
+    <meta name="geo.position" content="49.0167;1.9167" />
+    <meta name="ICBM" content="49.0167, 1.9167" />
+    
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="LeFrigoriste.fr - Dépannage frigorifique 24h/24" />
     <meta property="og:description" content="Spécialiste en réfrigération commerciale et climatisation. Dépannage frigorifique d'urgence 24h/24, 7j/7 en Île-de-France." />
@@ -37,6 +43,10 @@
     
     <!-- Sitemap -->
     <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" as="style" />
     
     <!-- Google Tag Manager (loaded conditionally based on cookie consent) -->
     <script id="gtag-init">
@@ -126,15 +136,13 @@
         "latitude": "49.0167",
         "longitude": "1.9167"
       },
-      "openingHours": [
-        "Mo-Fr 08:30-18:00"
-      ],
+      "openingHours": "Mo-Su 00:00-23:59",
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "08:30",
-          "closes": "18:00"
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "00:00",
+          "closes": "23:59"
         }
       ],
       "hasOfferCatalog": {
@@ -146,11 +154,7 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Dépannage frigorifique d'urgence",
-              "description": "Service d'urgence 24h/24 pour réparation d'équipements frigorifiques",
-              "provider": {
-                "@type": "LocalBusiness",
-                "name": "LeFrigoriste.fr"
-              }
+              "description": "Service d'urgence 24h/24 pour réparation d'équipements frigorifiques"
             }
           },
           {
@@ -158,11 +162,15 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Installation climatisation",
-              "description": "Installation de systèmes de climatisation pour professionnels",
-              "provider": {
-                "@type": "LocalBusiness",
-                "name": "LeFrigoriste.fr"
-              }
+              "description": "Installation de systèmes de climatisation pour professionnels"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Installation chambre froide",
+              "description": "Installation de chambres froides sur mesure"
             }
           }
         ]
