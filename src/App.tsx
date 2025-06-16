@@ -23,6 +23,10 @@ import InstallationChambreFroideParis from "./pages/InstallationChambreFroidePar
 import InstallationCuisineProfessionnelleParis from "./pages/InstallationCuisineProfessionnelleParis";
 import FrigoristeYvelines from "./pages/FrigoristeYvelines";
 
+// Composants SEO pour sitemap et robots
+import SitemapXML from "./components/seo/SitemapXML";
+import RobotsTXT from "./components/seo/RobotsTXT";
+
 import CookieBanner from "./components/cookies/CookieBanner";
 import CookiePreferences from "./components/cookies/CookiePreferences";
 import { useCookies } from "./hooks/use-cookies";
@@ -53,6 +57,11 @@ function App() {
               <Header />
               <main>
                 <Routes>
+                  {/* Routes SEO spéciales */}
+                  <Route path="/sitemap.xml" element={<SitemapXML />} />
+                  <Route path="/robots.txt" element={<RobotsTXT />} />
+                  
+                  {/* Routes principales */}
                   <Route path="/" element={<Index />} />
                   <Route path="/services" element={<Services />} />
                   <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
