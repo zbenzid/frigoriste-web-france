@@ -2,11 +2,9 @@
 import React, { useEffect, useRef } from 'react';
 import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useIsMobile } from '@/hooks/use-mobile';
 
 const Hero = () => {
   const videoContainerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
   
   useEffect(() => {
     // Load Vimeo Player API script avec preload
@@ -24,111 +22,75 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative bg-gray-900 overflow-hidden md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
-      {/* Video background - affichage conditionnel amélioré */}
-      {isMobile ? (
-        // Mobile vertical video - affiché uniquement sur mobile
-        <div 
-          ref={videoContainerRef} 
-          className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform block md:hidden"
-        >
-          <div style={{
-            padding: '75% 0 0 0',
-            position: 'relative',
-            height: '100%',
-            overflow: 'hidden'
-          }}>
-            <iframe 
-              src="https://player.vimeo.com/video/1075119337?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                width: '100vw',
-                height: '100%',
-                transform: 'translate(-50%, -50%) scale(1.2)',
-                objectFit: 'cover'
-              }} 
-              title="Le Frigoriste Background Video Mobile" 
-              frameBorder="0"
-              loading="lazy"
-            />
-          </div>
+    <div className="relative bg-gradient-to-br from-slate-50 via-white to-gray-50 overflow-hidden md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
+      {/* Video background - visible uniquement sur tablette et desktop */}
+      <div 
+        ref={videoContainerRef} 
+        className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform hidden md:block"
+      >
+        <div style={{
+          padding: '56.25% 0 0 0',
+          position: 'relative',
+          height: '100%',
+          overflow: 'hidden'
+        }}>
+          <iframe 
+            src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
+            allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              borderRadius: 'inherit'
+            }} 
+            title="Le Frigoriste Background Video" 
+            frameBorder="0"
+            loading="lazy"
+          />
         </div>
-      ) : (
-        // Desktop landscape video - caché sur mobile, visible sur tablette et desktop
-        <div 
-          ref={videoContainerRef} 
-          className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform hidden md:block"
-        >
-          <div style={{
-            padding: '56.25% 0 0 0',
-            position: 'relative',
-            height: '100%',
-            overflow: 'hidden'
-          }}>
-            <iframe 
-              src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
-              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
-              style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
-                borderRadius: 'inherit'
-              }} 
-              title="Le Frigoriste Background Video" 
-              frameBorder="0"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      )}
+      </div>
       
-      {/* Dark overlay - conditionnel selon le type d'écran */}
-      <div className={`absolute inset-0 bg-black opacity-60 z-1 md:rounded-2xl will-change-opacity ${isMobile ? 'block md:hidden' : 'hidden md:block lg:block'}`}></div>
+      {/* Dark overlay pour tablette et desktop uniquement */}
+      <div className="hidden md:block absolute inset-0 bg-black opacity-60 z-1 md:rounded-2xl will-change-opacity"></div>
 
-      {/* Gradient background pour tablette uniquement */}
-      <div className="hidden md:block lg:hidden absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-gray-50 md:rounded-2xl"></div>
-
-      <div className="container-custom relative z-10 md:py-16 lg:py-32 sm:px-6 lg:px-8 px-[15px] py-[50px]">
-        <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="text-white md:text-gray-900 lg:text-white text-center md:text-center lg:text-left">
-            <span className="inline-block px-4 py-2 rounded-full bg-emergency/20 md:bg-primary/10 lg:bg-emergency/20 text-white md:text-primary lg:text-white font-semibold text-sm mb-6 backdrop-blur-sm">
+      <div className="container-custom relative z-10 py-12 md:py-16 lg:py-32 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="text-gray-900 md:text-white text-center lg:text-left">
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 md:bg-emergency/20 text-primary md:text-white font-semibold text-sm mb-6 backdrop-blur-sm">
               Service d'urgence 24/7
             </span>
-            <h1 className="sm:text-4xl font-extrabold mb-6 leading-tight md:text-5xl lg:text-6xl text-4xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-primary md:text-white">
               Dépannage frigorifique et climatisation professionnel
             </h1>
-            <p className="text-xl mb-8 opacity-90 md:opacity-100 max-w-xl mx-auto md:mx-auto lg:mx-0">
+            <p className="text-lg sm:text-xl mb-8 text-gray-700 md:text-white/90 max-w-xl mx-auto lg:mx-0">
               Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
             </p>
-            <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start">
               <a 
                 href="tel:0185500284" 
-                className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emergency to-emergency/80 hover:from-emergency/90 hover:to-emergency text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl will-change-transform"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emergency to-emergency/80 hover:from-emergency/90 hover:to-emergency text-base sm:text-lg font-bold py-3 sm:py-4 px-6 sm:px-8 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl will-change-transform"
               >
                 <span className="relative flex items-center justify-center">
-                  <Phone size={24} className="mr-2" />
+                  <Phone size={20} className="mr-2" />
                   01 85 50 02 84
                 </span>
               </a>
               <Link 
                 to="/contact" 
-                className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl will-change-transform"
+                className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-base sm:text-lg font-bold py-3 sm:py-4 px-6 sm:px-8 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl will-change-transform"
               >
                 <span className="relative flex items-center justify-center">
                   Demander un devis
-                  <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={18} className="ml-2 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Link>
             </div>
           </div>
           
           {/* Info box - visible sur desktop uniquement */}
-          <div className="backdrop-blur-sm bg-white/10 p-6 md:p-8 rounded-xl shadow-lg hidden lg:block border border-white/20 will-change-transform">
+          <div className="backdrop-blur-sm bg-white/10 md:bg-white/10 p-6 md:p-8 rounded-xl shadow-lg hidden lg:block border border-white/20 will-change-transform">
             <div className="text-white">
               <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-center">Intervention express</h2>
               <div className="space-y-3 md:space-y-5">
@@ -215,6 +177,36 @@ const Hero = () => {
                 Délais moyens d'intervention en urgence
               </p>
             </div>
+          </div>
+        </div>
+
+        {/* Section info mobile - visible uniquement sur mobile */}
+        <div className="block md:hidden mt-12">
+          <div className="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
+            <h2 className="text-2xl font-bold mb-6 text-center text-primary">Intervention express</h2>
+            <div className="space-y-4">
+              <div className="flex items-center justify-between bg-gray-50 p-4 rounded-xl">
+                <span className="font-semibold text-gray-800">Yvelines (78)</span>
+                <span className="bg-emergency text-white px-4 py-2 rounded-lg text-sm font-bold">
+                  45min
+                </span>
+              </div>
+              <div className="flex items-center justify-between bg-gray-50 p-4 rounded-xl">
+                <span className="font-semibold text-gray-800">Paris & PC</span>
+                <span className="bg-primary text-white px-4 py-2 rounded-lg text-sm font-bold">
+                  1h
+                </span>
+              </div>
+              <div className="flex items-center justify-between bg-gray-50 p-4 rounded-xl">
+                <span className="font-semibold text-gray-800">Grande couronne</span>
+                <span className="bg-secondary text-white px-4 py-2 rounded-lg text-sm font-bold">
+                  2h
+                </span>
+              </div>
+            </div>
+            <p className="text-center italic text-gray-600 text-sm mt-6">
+              Délais moyens d'intervention en urgence
+            </p>
           </div>
         </div>
       </div>
