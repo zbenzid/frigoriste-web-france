@@ -1,72 +1,15 @@
-import React, { useRef, useEffect, useState } from 'react';
+
+import React from 'react';
 import { SEOHead, BreadcrumbSchema, ServiceSchema, FAQSection } from '@/components/seo';
-import { Snowflake, Wind, Hammer, Wrench, Clock, Shield, MapPin, Phone, ChefHat, Play, Pause } from 'lucide-react';
+import ServicesHero from '@/components/services/ServicesHero';
+import ServicesGrid from '@/components/services/ServicesGrid';
+import ServicesVideoSection from '@/components/services/ServicesVideoSection';
 
 const Services = () => {
-  const playerRef = useRef<any>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [playerReady, setPlayerReady] = useState(false);
-
-  useEffect(() => {
-    // Charger l'API Vimeo Player
-    const script = document.createElement('script');
-    script.src = 'https://player.vimeo.com/api/player.js';
-    script.onload = () => {
-      if (window.Vimeo && playerRef.current) {
-        const player = new window.Vimeo.Player(playerRef.current, {
-          id: 1093559944,
-          responsive: true,
-          controls: false,
-          title: false,
-          byline: false,
-          portrait: false,
-          autopause: false,
-          background: false
-        });
-
-        player.ready().then(() => {
-          setPlayerReady(true);
-        });
-
-        player.on('play', () => {
-          setIsPlaying(true);
-        });
-
-        player.on('pause', () => {
-          setIsPlaying(false);
-        });
-
-        player.on('ended', () => {
-          setIsPlaying(false);
-          // Remettre la vidéo au début pour revenir à l'état initial
-          player.setCurrentTime(0);
-        });
-
-        playerRef.current.player = player;
-      }
-    };
-    document.head.appendChild(script);
-
-    return () => {
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
-      }
-    };
-  }, []);
-
-  const togglePlay = () => {
-    if (playerRef.current?.player && playerReady) {
-      if (isPlaying) {
-        playerRef.current.player.pause();
-      } else {
-        playerRef.current.player.play();
-      }
-    }
-  };
-
   const breadcrumbItems = [{
     name: "Nos Services"
   }];
+
   const serviceData = [{
     name: "Dépannage frigorifique d'urgence",
     description: "Service de dépannage frigorifique disponible 24h/24 et 7j/7 en Île-de-France avec intervention garantie en moins d'1 heure à Paris.",
@@ -117,6 +60,7 @@ const Services = () => {
       address: "8-10 rue Levassor, 78130 Les Mureaux"
     }
   }];
+
   const faqData = [{
     question: "Quels sont vos délais d'intervention pour un dépannage frigorifique ?",
     answer: "Nous garantissons une intervention en moins de 45 minutes dans les Yvelines, 1 heure à Paris et 2 heures en grande couronne. Notre service d'urgence est disponible 24h/24 et 7j/7."
@@ -139,6 +83,7 @@ const Services = () => {
     question: "Quels équipements de cuisine professionnelle proposez-vous ?",
     answer: "Nous proposons une gamme complète d'équipements : fours professionnels, planchas, friteuses, lave-vaisselle industriels, machines à café, équipements de laverie, et bien plus. Nous travaillons avec les meilleures marques du marché."
   }];
+
   return (
     <>
       <SEOHead
@@ -154,246 +99,13 @@ const Services = () => {
         <BreadcrumbSchema items={breadcrumbItems} />
         
         {/* Hero Section */}
-        <section className="bg-gradient-to-b from-blue-50 to-white py-[40px]">
-          <div className="container-custom">
-            <div className="text-center mb-16">
-              <span className="inline-block px-4 py-1 rounded-full bg-blue-100 text-primary font-medium text-sm mb-4">
-                NOS SERVICES
-              </span>
-              <h1 className="font-bold font-montserrat text-4xl md:text-5xl mb-6 text-[#212121]">
-                Services complets en
-                <span className="text-primary"> réfrigération</span>
-              </h1>
-              <p className="text-xl text-gray-600 font-opensans max-w-3xl mx-auto">
-                Solutions professionnelles de dépannage, installation et maintenance pour tous vos équipements frigorifiques et de climatisation.
-              </p>
-            </div>
-          </div>
-        </section>
+        <ServicesHero />
 
         {/* Services Grid */}
-        <section className="py-20">
-          <div className="container-custom">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {/* Dépannage d'urgence */}
-              <div id="depannage" className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-red-100 rounded-xl flex items-center justify-center mr-4">
-                    <Snowflake className="w-8 h-8 text-red-600" />
-                  </div>
-                  <h2 className="font-bold font-montserrat text-2xl text-[#212121]">
-                    Dépannage frigorifique
-                  </h2>
-                </div>
-                <p className="text-gray-600 mb-6">
-                  Service d'urgence 24h/24 et 7j/7 pour tous vos équipements frigorifiques en panne.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center text-gray-600">
-                    <Clock className="w-5 h-5 text-primary mr-3" />
-                    45min Yvelines • 1h Paris • 2h Grande Couronne
-                  </li>
-                  <li className="flex items-center text-gray-600">
-                    <Shield className="w-5 h-5 text-primary mr-3" />
-                    Intervention garantie 24h/24
-                  </li>
-                  <li className="flex items-center text-gray-600">
-                    <Phone className="w-5 h-5 text-primary mr-3" />
-                    Hotline d'urgence dédiée
-                  </li>
-                </ul>
-              </div>
+        <ServicesGrid />
 
-              {/* Installation climatisation */}
-              <div id="climatisation" className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                    <Wind className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <h2 className="font-bold font-montserrat text-2xl text-[#212121]">
-                    Installation climatisation
-                  </h2>
-                </div>
-                <p className="text-gray-600 mb-6">
-                  Installation sur-mesure de systèmes de climatisation pour tous types de locaux professionnels.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center text-gray-600">
-                    <Shield className="w-5 h-5 text-primary mr-3" />
-                    Certification RGE et QualiPAC
-                  </li>
-                  <li className="flex items-center text-gray-600">
-                    <Clock className="w-5 h-5 text-primary mr-3" />
-                    Devis sous 24h
-                  </li>
-                  <li className="flex items-center text-gray-600">
-                    <MapPin className="w-5 h-5 text-primary mr-3" />
-                    Déplacement gratuit en Île-de-France
-                  </li>
-                </ul>
-              </div>
-
-              {/* Chambres froides */}
-              <div id="chambres-froides" className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center mr-4">
-                    <Hammer className="w-8 h-8 text-primary" />
-                  </div>
-                  <h2 className="font-bold font-montserrat text-2xl text-[#212121]">
-                    Installation chambres froides
-                  </h2>
-                </div>
-                <p className="text-gray-600 mb-6">
-                  Conception et installation de chambres froides adaptées à vos besoins spécifiques.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center text-gray-600">
-                    <Shield className="w-5 h-5 text-primary mr-3" />
-                    Solutions sur-mesure
-                  </li>
-                  <li className="flex items-center text-gray-600">
-                    <Clock className="w-5 h-5 text-primary mr-3" />
-                    Installation rapide
-                  </li>
-                  <li className="flex items-center text-gray-600">
-                    <MapPin className="w-5 h-5 text-primary mr-3" />
-                    Respect des normes alimentaires
-                  </li>
-                </ul>
-              </div>
-
-              {/* Maintenance */}
-              <div id="maintenance" className="bg-white rounded-xl p-8 shadow-lg border border-gray-100">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-green-100 rounded-xl flex items-center justify-center mr-4">
-                    <Wrench className="w-8 h-8 text-green-600" />
-                  </div>
-                  <h2 className="font-bold font-montserrat text-2xl text-[#212121]">
-                    Maintenance préventive
-                  </h2>
-                </div>
-                <p className="text-gray-600 mb-6">
-                  Contrats de maintenance pour garantir la longévité et l'efficacité de vos installations.
-                </p>
-                <ul className="space-y-3 mb-6">
-                  <li className="flex items-center text-gray-600">
-                    <Shield className="w-5 h-5 text-primary mr-3" />
-                    3 formules : Essentiel, Confort, Premium
-                  </li>
-                  <li className="flex items-center text-gray-600">
-                    <Clock className="w-5 h-5 text-primary mr-3" />
-                    Visites préventives programmées
-                  </li>
-                  <li className="flex items-center text-gray-600">
-                    <Phone className="w-5 h-5 text-primary mr-3" />
-                    Priorité d'intervention
-                  </li>
-                </ul>
-              </div>
-
-              {/* Nouveau service : Équipements de cuisine */}
-              <div id="cuisine" className="bg-white rounded-xl p-8 shadow-lg border border-gray-100 md:col-span-2">
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 bg-orange-100 rounded-xl flex items-center justify-center mr-4">
-                    <ChefHat className="w-8 h-8 text-orange-600" />
-                  </div>
-                  <h2 className="font-bold font-montserrat text-2xl text-[#212121]">
-                    Matériels de cuisines / laveries professionnelles
-                  </h2>
-                </div>
-                <p className="text-gray-600 mb-6">
-                  Vente, installation et maintenance d'équipements de cuisines et laveries professionnelles pour restaurants, traiteurs, boulangeries et hôtels.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                  <ul className="space-y-3">
-                    <li className="flex items-center text-gray-600">
-                      <Shield className="w-5 h-5 text-primary mr-3" />
-                      Fours professionnels et planchas
-                    </li>
-                    <li className="flex items-center text-gray-600">
-                      <Clock className="w-5 h-5 text-primary mr-3" />
-                      Lave-vaisselle industriels
-                    </li>
-                    <li className="flex items-center text-gray-600">
-                      <MapPin className="w-5 h-5 text-primary mr-3" />
-                      Machines à café professionnelles
-                    </li>
-                  </ul>
-                  <ul className="space-y-3">
-                    <li className="flex items-center text-gray-600">
-                      <Shield className="w-5 h-5 text-primary mr-3" />
-                      Équipements de laverie
-                    </li>
-                    <li className="flex items-center text-gray-600">
-                      <Clock className="w-5 h-5 text-primary mr-3" />
-                      Installation et mise en service
-                    </li>
-                    <li className="flex items-center text-gray-600">
-                      <Phone className="w-5 h-5 text-primary mr-3" />
-                      SAV et maintenance préventive
-                    </li>
-                  </ul>
-                </div>
-                <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
-                  <p className="text-orange-800 font-medium text-sm">
-                    <strong>Cible :</strong> Restaurants, traiteurs, boulangeries, hôtels et tous professionnels de la restauration
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Video Section - Moved after Services Grid */}
-        <section className="bg-white py-[40px]">
-          <div className="container-custom">
-            <div className="text-center mb-12">
-              <h2 className="font-bold font-montserrat text-3xl md:text-4xl mb-4 text-[#212121]">
-                Découvrez LeFrigoriste.fr en action
-              </h2>
-              <p className="text-lg text-gray-600 font-opensans max-w-2xl mx-auto">
-                Plongez dans l'univers de nos interventions d'urgence et découvrez comment nous assurons la continuité de votre activité 24h/24.
-              </p>
-            </div>
-            
-            <div className="max-w-4xl mx-auto">
-              <div className="relative rounded-xl overflow-hidden shadow-2xl bg-gray-900">
-                <div className="aspect-video relative">
-                  <div
-                    ref={playerRef}
-                    className="absolute inset-0 w-full h-full"
-                    style={{
-                      background: 'transparent',
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      width: '100%',
-                      height: '100%'
-                    }}
-                  ></div>
-                  
-                  {/* Overlay clickable pour toggle play/pause */}
-                  <div className="absolute inset-0 cursor-pointer z-10" onClick={togglePlay}>
-                    {/* Bouton play visible seulement quand la vidéo n'est pas en lecture */}
-                    {!isPlaying && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30 transition-opacity duration-300 hover:bg-opacity-40">
-                        <div className="w-20 h-20 bg-white bg-opacity-90 rounded-full flex items-center justify-center shadow-lg hover:bg-opacity-100 transition-all duration-300 hover:scale-110">
-                          <Play className="w-8 h-8 text-primary ml-1" />
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              </div>
-              
-              <div className="text-center mt-8">
-                <p className="text-sm text-gray-500 font-opensans">
-                  Intervention d'urgence • Dépannage 24h/24 • Île-de-France
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Video Section */}
+        <ServicesVideoSection />
 
         <FAQSection faqs={faqData} />
       </div>
