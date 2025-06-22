@@ -64,6 +64,34 @@ const Hero = () => {
               </Link>
             </div>
 
+            {/* Section vidéo dédiée pour mobile */}
+            <div className="mb-8 sm:mb-12">
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-gray-200/30 shadow-lg">
+                <div style={{
+                  padding: '56.25% 0 0 0',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  borderRadius: '0.5rem'
+                }}>
+                  <iframe 
+                    src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '0.5rem'
+                    }} 
+                    title="Le Frigoriste - Nos Services" 
+                    frameBorder="0"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            </div>
+
             {/* Info box mobile - responsive */}
             <div className="bg-white backdrop-blur-sm p-4 sm:p-6 md:p-8 rounded-xl shadow-lg border border-gray-200 text-center mx-2">
               <div className="text-gray-900">
