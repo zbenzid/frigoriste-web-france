@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Phone, Mail, Clock, Shield, Award } from 'lucide-react';
 import { useAnalytics } from '@/hooks/use-analytics';
 
@@ -67,7 +67,7 @@ const ContactCTASection = () => {
                       <h4 className="text-lg font-bold text-gray-800 mb-1">Besoin d'une intervention urgente ?</h4>
                       <p className="text-gray-600 mb-4">Notre équipe est disponible 24/7 pour toutes vos urgences</p>
                       <Link 
-                        href="tel:0185500284" 
+                        to="tel:0185500284" 
                         className="btn-emergency inline-flex"
                         onClick={handleEmergencyCall}
                       >
@@ -86,7 +86,7 @@ const ContactCTASection = () => {
                     <div>
                       <h4 className="text-lg font-bold text-gray-800 mb-1">Besoin d'un devis ou d'informations ?</h4>
                       <p className="text-gray-600 mb-4">Contactez-nous pour une réponse sous 24h</p>
-                      <Link href="/contact" className="btn-primary inline-flex">
+                      <Link to="/contact" className="btn-primary inline-flex">
                         <Mail size={20} className="mr-2" />
                         Nous contacter
                       </Link>

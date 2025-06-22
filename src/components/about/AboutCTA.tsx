@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Link from 'next/link';
+import { Link } from 'react-router-dom';
 import { Phone, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -16,13 +16,13 @@ const AboutCTA = () => {
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button asChild size="lg" variant="default" className="bg-white text-primary hover:bg-white/90">
-            <Link href="/contact">
+            <Link to="/contact">
               <Phone size={18} />
               Nous contacter
             </Link>
           </Button>
           <Button asChild size="lg" variant="secondary">
-            <Link href="/contact">
+            <Link to="/contact">
               <FileText size={18} />
               Demander un devis
             </Link>
