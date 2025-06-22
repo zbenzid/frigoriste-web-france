@@ -4,6 +4,7 @@ import { Montserrat, Open_Sans } from 'next/font/google';
 import { Toaster } from '@/components/ui/sonner';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import { Providers } from '@/components/providers';
 import '@/index.css';
 
 // Configuration des polices avec next/font pour la performance
@@ -33,12 +34,14 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${montserrat.variable} ${openSans.variable}`}>
       <body>
-        <div className="min-h-screen bg-background font-sans antialiased">
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </div>
-        <Toaster />
+        <Providers>
+          <div className="min-h-screen bg-background font-sans antialiased">
+            <Header />
+            <main>{children}</main>
+            <Footer />
+          </div>
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );
