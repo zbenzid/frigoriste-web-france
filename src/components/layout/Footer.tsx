@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Linkedin } from 'lucide-react';
 
 const Footer = () => {
@@ -32,19 +32,19 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Liens rapides</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="hover:text-secondary transition-colors">Accueil</Link>
+                <Link href="/" className="hover:text-secondary transition-colors">Accueil</Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-secondary transition-colors">Services</Link>
+                <Link href="/services" className="hover:text-secondary transition-colors">Services</Link>
               </li>
               <li>
-                <Link to="/qui-sommes-nous" className="hover:text-secondary transition-colors">Qui sommes-nous</Link>
+                <Link href="/qui-sommes-nous" className="hover:text-secondary transition-colors">Qui sommes-nous</Link>
               </li>
               <li>
-                <Link to="/zone-intervention" className="hover:text-secondary transition-colors">Zone d'intervention</Link>
+                <Link href="/zone-intervention" className="hover:text-secondary transition-colors">Zone d'intervention</Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-secondary transition-colors">Contact</Link>
+                <Link href="/contact" className="hover:text-secondary transition-colors">Contact</Link>
               </li>
             </ul>
           </div>
@@ -54,16 +54,16 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Nos services</h3>
             <ul className="space-y-2">
               <li>
-                <Link to="/services#depannage" className="hover:text-secondary transition-colors">Dépannage frigorifique</Link>
+                <Link href="/services#depannage" className="hover:text-secondary transition-colors">Dépannage frigorifique</Link>
               </li>
               <li>
-                <Link to="/services#climatisation" className="hover:text-secondary transition-colors">Installation climatisation</Link>
+                <Link href="/services#climatisation" className="hover:text-secondary transition-colors">Installation climatisation</Link>
               </li>
               <li>
-                <Link to="/services#chambres-froides" className="hover:text-secondary transition-colors">Installation chambres froides</Link>
+                <Link href="/services#chambres-froides" className="hover:text-secondary transition-colors">Installation chambres froides</Link>
               </li>
               <li>
-                <Link to="/services#maintenance" className="hover:text-secondary transition-colors">Maintenance préventive</Link>
+                <Link href="/services#maintenance" className="hover:text-secondary transition-colors">Maintenance préventive</Link>
               </li>
             </ul>
           </div>
@@ -100,13 +100,13 @@ const Footer = () => {
             <p>© {currentYear} LeFrigoriste.fr - Tous droits réservés</p>
             <div className="flex space-x-4 text-sm">
               <Link 
-                to="/mentions-legales" 
+                href="/mentions-legales" 
                 className="hover:text-secondary transition-colors"
               >
                 Mentions légales
               </Link>
               <Link 
-                to="/politique-confidentialite" 
+                href="/politique-confidentialite" 
                 className="hover:text-secondary transition-colors"
               >
                 Politique de confidentialité

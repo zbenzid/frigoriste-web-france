@@ -1,7 +1,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Phone, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const Hero = () => {
@@ -54,7 +54,7 @@ const Hero = () => {
                 </span>
               </a>
               <Link 
-                to="/contact" 
+                href="/contact" 
                 className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-base sm:text-lg font-bold py-3 sm:py-4 px-4 sm:px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl will-change-transform"
               >
                 <span className="relative flex items-center justify-center">
@@ -186,7 +186,7 @@ const Hero = () => {
                   </span>
                 </a>
                 <Link 
-                  to="/contact" 
+                  href="/contact" 
                   className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl will-change-transform"
                 >
                   <span className="relative flex items-center justify-center">

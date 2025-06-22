@@ -1,5 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Phone, Menu, Clock, MapPin, Mail } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
@@ -41,7 +43,7 @@ const MainNav = ({
   isMobile?: boolean;
   onLinkClick?: () => void;
 }) => {
-  const location = useLocation();
+  const pathname = usePathname();
   const navItems = [
     { href: '/', label: 'Accueil' },
     { href: '/services', label: 'Services' },
@@ -55,11 +57,11 @@ const MainNav = ({
   return (
     <nav role="navigation" aria-label="Main" className={cn(baseStyles, className)}>
       {navItems.map(({ href, label }) => {
-        const isActive = location.pathname === href;
+        const isActive = pathname === href;
         return (
           <Link
             key={href}
-            to={href}
+            href={href}
             aria-current={isActive ? "page" : undefined}
             onClick={onLinkClick}
             className={cn(
@@ -118,7 +120,7 @@ const Header = () => {
         <div className="container-custom h-20 lg:h-24">
           <div className="flex items-center justify-between h-full px-[16px]">
             {/* Logo */}
-            <Link to="/" className="flex-shrink-0" aria-label="LeFrigoriste.fr - Retour à l'accueil">
+            <Link href="/" className="flex-shrink-0" aria-label="LeFrigoriste.fr - Retour à l'accueil">
               <img 
                 src="/lovable-uploads/75510e1c-4e18-4dde-8913-2caa6d23f37f.png" 
                 alt="LeFrigoriste.fr" 
