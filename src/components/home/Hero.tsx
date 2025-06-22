@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -34,8 +33,10 @@ const Hero = () => {
               <span className="inline-block px-3 py-2 rounded-full bg-primary/10 text-primary font-semibold text-xs sm:text-sm mb-4 sm:mb-6">
                 Service d'urgence 24/7
               </span>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 sm:mb-6 leading-tight text-gray-900 px-2">
-                Dépannage frigorifique et climatisation professionnel
+              <h1 className="font-montserrat text-2xl sm:text-3xl font-black mb-4 sm:mb-6 leading-[1.15] text-gray-900 px-2 tracking-tight">
+                <span className="block text-primary">Dépannage frigorifique</span>
+                <span className="block text-gray-900">& climatisation</span>
+                <span className="block text-secondary font-bold">professionnel</span>
               </h1>
               <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-700 max-w-xl mx-auto px-2">
                 Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
@@ -169,8 +170,10 @@ const Hero = () => {
               <span className="inline-block px-4 py-2 rounded-full bg-emergency/20 md:bg-primary/10 lg:bg-emergency/20 text-white md:text-primary lg:text-white font-semibold text-sm mb-6 backdrop-blur-sm">
                 Service d'urgence 24/7
               </span>
-              <h1 className="sm:text-4xl font-extrabold mb-6 leading-tight md:text-5xl lg:text-6xl text-4xl">
-                Dépannage frigorifique et climatisation professionnel
+              <h1 className="font-montserrat text-3xl md:text-4xl lg:text-6xl font-black mb-6 leading-[1.15] md:leading-tight lg:leading-tight tracking-tight">
+                <span className="block text-primary md:text-primary lg:text-white">Dépannage frigorifique</span>
+                <span className="block md:text-gray-900 lg:text-white">& climatisation</span>
+                <span className="block text-secondary md:text-secondary lg:text-white font-bold">professionnel</span>
               </h1>
               <p className="text-xl mb-8 opacity-90 md:opacity-100 max-w-xl mx-auto md:mx-auto lg:mx-0">
                 Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
