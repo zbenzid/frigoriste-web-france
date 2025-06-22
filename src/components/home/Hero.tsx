@@ -2,9 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
+
 const Hero = () => {
   const videoContainerRef = useRef<HTMLDivElement>(null);
   const isMobile = useIsMobile();
+  
   useEffect(() => {
     // Load Vimeo Player API script avec preload
     const script = document.createElement('script');
@@ -12,13 +14,16 @@ const Hero = () => {
     script.async = true;
     script.defer = true;
     document.body.appendChild(script);
+    
     return () => {
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
     };
   }, []);
-  return <div className="relative bg-gray-900 overflow-hidden md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
+
+  return (
+    <div className="relative bg-gray-900 overflow-hidden md:mx-8 lg:mx-12 xl:mx-20 md:my-6 md:rounded-2xl">
       {/* Version mobile avec design adapté */}
       <div className="block md:hidden">
         <div className="bg-white">
@@ -31,7 +36,7 @@ const Hero = () => {
               <h1 className="font-montserrat text-2xl sm:text-3xl font-black mb-4 sm:mb-6 leading-[1.15] text-gray-900 px-2 tracking-tight">
                 <span className="block text-primary">Dépannage frigorifique</span>
                 <span className="block text-gray-900">& climatisation</span>
-                <span className="block font-bold text-[#0b5394]">professionnel</span>
+                <span className="block text-secondary font-bold">professionnel</span>
               </h1>
               <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-700 max-w-xl mx-auto px-2">
                 Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
@@ -40,13 +45,19 @@ const Hero = () => {
 
             {/* Boutons d'action mobile */}
             <div className="flex flex-col gap-3 sm:gap-4 mb-8 sm:mb-12 px-2">
-              <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emergency to-emergency/80 hover:from-emergency/90 hover:to-emergency text-base sm:text-lg font-bold py-3 sm:py-4 px-4 sm:px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl will-change-transform">
+              <a 
+                href="tel:0185500284" 
+                className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emergency to-emergency/80 hover:from-emergency/90 hover:to-emergency text-base sm:text-lg font-bold py-3 sm:py-4 px-4 sm:px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl will-change-transform"
+              >
                 <span className="relative flex items-center justify-center">
                   <Phone size={20} className="mr-2 sm:mr-3" />
                   01 85 50 02 84
                 </span>
               </a>
-              <Link to="/contact" className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-base sm:text-lg font-bold py-3 sm:py-4 px-4 sm:px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl will-change-transform">
+              <Link 
+                to="/contact" 
+                className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-base sm:text-lg font-bold py-3 sm:py-4 px-4 sm:px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl will-change-transform"
+              >
                 <span className="relative flex items-center justify-center">
                   Demander un devis
                   <ArrowRight size={18} className="ml-2 sm:ml-3 group-hover:translate-x-1 transition-transform" />
@@ -58,19 +69,26 @@ const Hero = () => {
             <div className="mb-8 sm:mb-12">
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-gray-200/30 shadow-lg">
                 <div style={{
-                padding: '56.25% 0 0 0',
-                position: 'relative',
-                overflow: 'hidden',
-                borderRadius: '0.5rem'
-              }}>
-                  <iframe src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
+                  padding: '56.25% 0 0 0',
+                  position: 'relative',
+                  overflow: 'hidden',
                   borderRadius: '0.5rem'
-                }} title="Le Frigoriste - Nos Services" frameBorder="0" loading="lazy" />
+                }}>
+                  <iframe 
+                    src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
+                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                    style={{
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      borderRadius: '0.5rem'
+                    }} 
+                    title="Le Frigoriste - Nos Services" 
+                    frameBorder="0"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>
@@ -111,22 +129,32 @@ const Hero = () => {
       {/* Version tablette et desktop - code existant inchangé */}
       <div className="hidden md:block">
         {/* Video background pour desktop - cachée sur tablette */}
-        <div ref={videoContainerRef} className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform md:hidden lg:block">
+        <div 
+          ref={videoContainerRef} 
+          className="absolute inset-0 z-0 bg-black md:rounded-2xl overflow-hidden will-change-transform md:hidden lg:block"
+        >
           {/* Desktop landscape video optimisé */}
           <div style={{
-          padding: '56.25% 0 0 0',
-          position: 'relative',
-          height: '100%',
-          overflow: 'hidden'
-        }}>
-            <iframe src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
+            padding: '56.25% 0 0 0',
+            position: 'relative',
             height: '100%',
-            borderRadius: 'inherit'
-          }} title="Le Frigoriste Background Video" frameBorder="0" loading="lazy" />
+            overflow: 'hidden'
+          }}>
+            <iframe 
+              src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
+              allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                borderRadius: 'inherit'
+              }} 
+              title="Le Frigoriste Background Video" 
+              frameBorder="0"
+              loading="lazy"
+            />
           </div>
         </div>
         
@@ -151,13 +179,19 @@ const Hero = () => {
                 Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
               </p>
               <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-center lg:justify-start">
-                <a href="tel:0185500284" className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emergency to-emergency/80 hover:from-emergency/90 hover:to-emergency text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl will-change-transform">
+                <a 
+                  href="tel:0185500284" 
+                  className="group relative overflow-hidden rounded-full bg-gradient-to-r from-emergency to-emergency/80 hover:from-emergency/90 hover:to-emergency text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-emergency/30 hover:shadow-xl will-change-transform"
+                >
                   <span className="relative flex items-center justify-center">
                     <Phone size={24} className="mr-2" />
                     01 85 50 02 84
                   </span>
                 </a>
-                <Link to="/contact" className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl will-change-transform">
+                <Link 
+                  to="/contact" 
+                  className="group relative overflow-hidden rounded-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-lg font-bold py-3 px-6 text-white shadow-lg transition-all duration-300 hover:shadow-primary/30 hover:shadow-xl will-change-transform"
+                >
                   <span className="relative flex items-center justify-center">
                     Demander un devis
                     <ArrowRight size={20} className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -201,19 +235,26 @@ const Hero = () => {
           <div className="hidden md:block lg:hidden mt-12">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-gray-200/30 shadow-lg">
               <div style={{
-              padding: '56.25% 0 0 0',
-              position: 'relative',
-              overflow: 'hidden',
-              borderRadius: '0.5rem'
-            }}>
-                <iframe src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" style={{
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: '100%',
-                height: '100%',
+                padding: '56.25% 0 0 0',
+                position: 'relative',
+                overflow: 'hidden',
                 borderRadius: '0.5rem'
-              }} title="Le Frigoriste - Nos Services" frameBorder="0" loading="lazy" />
+              }}>
+                <iframe 
+                  src="https://player.vimeo.com/video/1075112216?badge=0&autopause=0&player_id=0&app_id=58479&background=1&muted=1&loop=1&transparent=0&dnt=1" 
+                  allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media" 
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    borderRadius: '0.5rem'
+                  }} 
+                  title="Le Frigoriste - Nos Services" 
+                  frameBorder="0"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
@@ -251,6 +292,8 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default Hero;
