@@ -34,10 +34,13 @@ const Hero = () => {
               <span className="inline-block px-3 py-2 rounded-full bg-primary/10 text-primary font-semibold text-xs sm:text-sm mb-4 sm:mb-6">
                 Service d'urgence 24/7
               </span>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-4 sm:mb-6 leading-tight text-gray-900 px-2">
-                Dépannage frigorifique et climatisation professionnel
+              <h1 className="text-3xl sm:text-4xl font-black mb-4 sm:mb-6 leading-[1.1] text-gray-900 tracking-tight">
+                <span className="block text-primary font-extrabold">Dépannage</span>
+                <span className="block text-gray-800 font-light text-2xl sm:text-3xl mt-1">frigorifique &</span>
+                <span className="block text-emergency font-extrabold">climatisation</span>
+                <span className="block text-gray-600 font-normal text-lg sm:text-xl mt-2">professionnel</span>
               </h1>
-              <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-700 max-w-xl mx-auto px-2">
+              <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-700 max-w-xl mx-auto px-2 font-medium">
                 Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
               </p>
             </div>
