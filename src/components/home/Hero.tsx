@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { Phone, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -172,10 +171,13 @@ const Hero = () => {
               <span className="inline-block px-4 py-2 rounded-full bg-emergency/20 md:bg-primary/10 lg:bg-emergency/20 text-white md:text-primary lg:text-white font-semibold text-sm mb-6 backdrop-blur-sm">
                 Service d'urgence 24/7
               </span>
-              <h1 className="sm:text-4xl font-extrabold mb-6 leading-tight md:text-5xl lg:text-6xl text-4xl">
-                Dépannage frigorifique et climatisation professionnel
+              <h1 className="md:text-5xl lg:text-6xl text-4xl font-black mb-6 leading-[1.1] tracking-tight">
+                <span className="block text-primary md:text-primary lg:text-white font-extrabold">Dépannage</span>
+                <span className="block text-gray-800 md:text-gray-800 lg:text-white font-light text-3xl md:text-4xl lg:text-5xl mt-1">frigorifique &</span>
+                <span className="block text-emergency md:text-emergency lg:text-white font-extrabold">climatisation</span>
+                <span className="block text-gray-600 md:text-gray-600 lg:text-white font-normal text-xl md:text-2xl lg:text-3xl mt-2">professionnel</span>
               </h1>
-              <p className="text-xl mb-8 opacity-90 md:opacity-100 max-w-xl mx-auto md:mx-auto lg:mx-0">
+              <p className="text-xl mb-8 opacity-90 md:opacity-100 max-w-xl mx-auto md:mx-auto lg:mx-0 font-medium">
                 Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
               </p>
               <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-center lg:justify-start">
