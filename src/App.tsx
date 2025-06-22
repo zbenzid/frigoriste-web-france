@@ -14,6 +14,8 @@ import { useCookies } from "@/hooks/use-cookies";
 import Index from '@/pages/Index';
 import Services from '@/pages/Services';
 import QuiSommesNous from '@/pages/QuiSommesNous';
+import Contact from '@/pages/Contact';
+import ZoneIntervention from '@/pages/ZoneIntervention';
 import DepannageFroid from '@/pages/DepannageFroid';
 import DepannageClimatisationParis from '@/pages/DepannageClimatisationParis';
 import InstallationClimatisationParis from '@/pages/InstallationClimatisationParis';
@@ -48,6 +50,8 @@ function App() {
                 <Route path="/" element={<Index />} />
                 <Route path="/services" element={<Services />} />
                 <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/zone-intervention" element={<ZoneIntervention />} />
                 <Route path="/depannage-froid" element={<DepannageFroid />} />
                 <Route path="/depannage-climatisation-paris" element={<DepannageClimatisationParis />} />
                 <Route path="/installation-climatisation-paris" element={<InstallationClimatisationParis />} />
