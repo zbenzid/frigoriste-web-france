@@ -28,7 +28,7 @@ const Hero = () => {
                 </span>
               </div>
               
-              <h1 className="md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight text-3xl">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 Dépannage <span className="text-primary">frigorifique</span> d'urgence en Île-de-France
               </h1>
               
