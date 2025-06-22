@@ -1,19 +1,16 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, CheckCircle, Clock, Award } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAnalytics } from '@/hooks/use-analytics';
-
 const Hero = () => {
-  const { trackPhoneCall } = useAnalytics();
-
+  const {
+    trackPhoneCall
+  } = useAnalytics();
   const handleEmergencyCall = () => {
     trackPhoneCall();
   };
-
-  return (
-    <section className="relative min-h-[80vh] flex items-center bg-gradient-to-b from-blue-50 to-white overflow-hidden">
+  return <section className="relative min-h-[80vh] flex items-center bg-gradient-to-b from-blue-50 to-white overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-20 right-20 w-96 h-96 rounded-full bg-blue-100/20 blur-3xl"></div>
@@ -72,11 +69,7 @@ const Hero = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild size="lg" className="bg-emergency hover:bg-emergency/90">
-                <Link 
-                  to="tel:0185500284" 
-                  className="flex items-center justify-center"
-                  onClick={handleEmergencyCall}
-                >
+                <Link to="tel:0185500284" className="flex items-center justify-center" onClick={handleEmergencyCall}>
                   <Phone className="mr-2 h-5 w-5" />
                   Appel d'urgence
                 </Link>
@@ -92,15 +85,11 @@ const Hero = () => {
           {/* Right Column - Image */}
           <div className="relative">
             <div className="relative z-10">
-              <img 
-                src="/lovable-uploads/8a8fd5fa-2d73-4cc1-967c-dba06b23ed5f.png" 
-                alt="Technicien frigoriste LeFrigoriste.fr en intervention sur chambre froide" 
-                className="w-full h-auto rounded-2xl shadow-2xl"
-              />
+              <img alt="Technicien frigoriste LeFrigoriste.fr en intervention sur chambre froide" className="w-full h-auto rounded-2xl shadow-2xl" src="/lovable-uploads/e05c77e3-b7fd-40d5-90b7-f2a430765ed0.jpg" />
             </div>
             
             {/* Floating card */}
-            <div className="absolute bottom-6 left-6 bg-white p-4 rounded-xl shadow-lg border border-gray-100 z-20">
+            <div className="absolute bottom-6 left-6 bg-white p-4 rounded-xl shadow-lg border border-gray-100 z-20 px-[10px] py-[10px]">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
                   <CheckCircle className="w-5 h-5 text-green-600" />
@@ -114,8 +103,6 @@ const Hero = () => {
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
