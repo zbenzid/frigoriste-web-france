@@ -1,12 +1,210 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LeFrigoriste.fr</title>
+    <title>LeFrigoriste.fr - Dépannage frigorifique et climatisation 24h/24 en Île-de-France</title>
+    <meta name="description" content="Spécialiste en réfrigération commerciale et climatisation. Dépannage frigorifique d'urgence 24h/24, 7j/7 en Île-de-France. Intervention rapide garantie : 45min Yvelines, 1h Paris. Devis gratuit." />
+    <meta name="author" content="LeFrigoriste.fr" />
+    <meta name="keywords" content="frigoriste Île-de-France, dépannage frigorifique d'urgence, réparation chambre froide, installation climatisation professionnelle, maintenance équipement frigorifique, contrat entretien froid commercial, intervention 24h/24, frigoriste Yvelines, service froid alimentaire, frigoriste 78" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://lefrigoriste.fr" />
+    
+    <!-- Geo tags -->
+    <meta name="geo.region" content="FR-78" />
+    <meta name="geo.placename" content="Les Mureaux, Yvelines" />
+    <meta name="geo.position" content="49.0167;1.9167" />
+    <meta name="ICBM" content="49.0167, 1.9167" />
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="LeFrigoriste.fr - Dépannage frigorifique 24h/24" />
+    <meta property="og:description" content="Spécialiste en réfrigération commerciale et climatisation. Dépannage frigorifique d'urgence 24h/24, 7j/7 en Île-de-France." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://lefrigoriste.fr" />
+    <meta property="og:image" content="https://lefrigoriste.fr/lovable-uploads/75510e1c-4e18-4dde-8913-2caa6d23f37f.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="LeFrigoriste.fr" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="LeFrigoriste.fr - Dépannage frigorifique 24h/24" />
+    <meta name="twitter:description" content="Spécialiste en réfrigération commerciale et climatisation. Dépannage frigorifique d'urgence 24h/24, 7j/7 en Île-de-France." />
+    <meta name="twitter:image" content="https://lefrigoriste.fr/lovable-uploads/75510e1c-4e18-4dde-8913-2caa6d23f37f.png" />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" as="style" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" as="style" />
+    
+    <!-- Google Tag Manager (loaded conditionally based on cookie consent) -->
+    <script id="gtag-init">
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      
+      // Initialize GA only if analytics cookies are accepted
+      function initializeGA() {
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=G-343731918';
+        document.head.appendChild(script);
+        
+        gtag('js', new Date());
+        gtag('config', 'G-343731918', {
+          page_title: document.title,
+          page_location: window.location.href
+        });
+      }
+      
+      // Check if analytics cookies are accepted
+      function checkCookieConsent() {
+        const consent = localStorage.getItem('cookie-consent');
+        if (consent) {
+          const preferences = JSON.parse(consent);
+          if (preferences.analytics) {
+            initializeGA();
+          }
+        }
+      }
+      
+      // Initialize on page load if consent exists
+      document.addEventListener('DOMContentLoaded', checkCookieConsent);
+      
+      // Listen for consent changes
+      window.addEventListener('cookie-consent-changed', function(event) {
+        if (event.detail.analytics) {
+          initializeGA();
+        }
+      });
+      
+      // Track phone calls
+      function trackPhoneCall() {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'phone_call', {
+            event_category: 'engagement',
+            event_label: 'emergency_call',
+            value: 1
+          });
+        }
+      }
+      
+      // Track form submissions
+      function trackFormSubmission(formType) {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'form_submission', {
+            event_category: 'lead',
+            event_label: formType,
+            value: 1
+          });
+        }
+      }
+    </script>
+    
+    <!-- Structured Data - LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://lefrigoriste.fr",
+      "name": "LeFrigoriste.fr",
+      "alternateName": "LE FRIGORISTE",
+      "description": "Spécialiste en réfrigération commerciale et climatisation. Dépannage frigorifique d'urgence 24h/24, 7j/7 en Île-de-France.",
+      "url": "https://lefrigoriste.fr",
+      "telephone": "+33185500284",
+      "email": "contact@lefrigoriste.fr",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "8-10 rue Levassor",
+        "addressLocality": "Les Mureaux",
+        "postalCode": "78130",
+        "addressRegion": "Yvelines",
+        "addressCountry": "FR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "49.0167",
+        "longitude": "1.9167"
+      },
+      "openingHours": "Mo-Su 00:00-23:59",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+          "opens": "00:00",
+          "closes": "23:59"
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Services de réfrigération et climatisation",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Dépannage frigorifique d'urgence",
+              "description": "Service d'urgence 24h/24 pour réparation d'équipements frigorifiques"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Installation climatisation",
+              "description": "Installation de systèmes de climatisation pour professionnels"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Installation chambre froide",
+              "description": "Installation de chambres froides sur mesure"
+            }
+          }
+        ]
+      },
+      "areaServed": [
+        {
+          "@type": "State",
+          "name": "Île-de-France"
+        },
+        {
+          "@type": "City",
+          "name": "Paris"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Yvelines"
+        }
+      ],
+      "priceRange": "€€",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "50",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
+      "sameAs": [
+        "https://www.facebook.com/lefrigoriste",
+        "https://www.linkedin.com/company/lefrigoriste"
+      ]
+    }
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
