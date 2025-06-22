@@ -1,6 +1,7 @@
 
 import { Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { HelmetProvider } from 'react-helmet-async';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Toaster } from '@/components/ui/sonner';
 import Header from '@/components/layout/Header';
@@ -37,46 +38,48 @@ function App() {
   } = useCookies();
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="min-h-screen bg-background font-sans antialiased">
-          <Header />
-          <main>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
-              <Route path="/depannage-froid" element={<DepannageFroid />} />
-              <Route path="/depannage-climatisation-paris" element={<DepannageClimatisationParis />} />
-              <Route path="/installation-climatisation-paris" element={<InstallationClimatisationParis />} />
-              <Route path="/installation-chambre-froide-paris" element={<InstallationChambreFroideParis />} />
-              <Route path="/installation-cuisine-professionnelle-paris" element={<InstallationCuisineProfessionnelleParis />} />
-              <Route path="/frigoriste-en-yvelines-78" element={<FrigoristeYvelines />} />
-              <Route path="/mentions-legales" element={<MentionsLegales />} />
-              <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
-        
-        {showBanner && (
-          <CookieBanner
-            onAcceptAll={acceptAll}
-            onRejectAll={rejectAll}
-            onShowPreferences={() => setShowPreferences(true)}
-          />
-        )}
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <div className="min-h-screen bg-background font-sans antialiased">
+            <Header />
+            <main>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
+                <Route path="/depannage-froid" element={<DepannageFroid />} />
+                <Route path="/depannage-climatisation-paris" element={<DepannageClimatisationParis />} />
+                <Route path="/installation-climatisation-paris" element={<InstallationClimatisationParis />} />
+                <Route path="/installation-chambre-froide-paris" element={<InstallationChambreFroideParis />} />
+                <Route path="/installation-cuisine-professionnelle-paris" element={<InstallationCuisineProfessionnelleParis />} />
+                <Route path="/frigoriste-en-yvelines-78" element={<FrigoristeYvelines />} />
+                <Route path="/mentions-legales" element={<MentionsLegales />} />
+                <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+          <Toaster />
+          
+          {showBanner && (
+            <CookieBanner
+              onAcceptAll={acceptAll}
+              onRejectAll={rejectAll}
+              onShowPreferences={() => setShowPreferences(true)}
+            />
+          )}
 
-        <CookiePreferences
-          isOpen={showPreferences}
-          onClose={() => setShowPreferences(false)}
-          currentPreferences={preferences}
-          onSave={saveConsent}
-        />
-      </TooltipProvider>
-    </QueryClientProvider>
+          <CookiePreferences
+            isOpen={showPreferences}
+            onClose={() => setShowPreferences(false)}
+            currentPreferences={preferences}
+            onSave={saveConsent}
+          />
+        </TooltipProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   );
 }
 
