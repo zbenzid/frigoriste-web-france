@@ -8,7 +8,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Separator } from '@/components/ui/separator';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from '@/components/ui/sonner';
 import { supabase } from '@/integrations/supabase/client';
 import { RecruitmentBanner } from '@/components/recruitment';
 
@@ -16,7 +16,6 @@ import { RecruitmentBanner } from '@/components/recruitment';
 const requestTypesNeedingAddress = ['urgence', 'depannage', 'installation', 'maintenance'];
 
 const Contact = () => {
-  const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -115,10 +114,8 @@ const Contact = () => {
     // Client-side validation
     const validationErrors = validateForm();
     if (validationErrors.length > 0) {
-      toast({
-        title: "Erreurs de validation",
-        description: validationErrors.join(', '),
-        variant: "destructive"
+      toast.error('Erreurs de validation', {
+        description: validationErrors.join(', ')
       });
       return;
     }
@@ -141,16 +138,13 @@ const Contact = () => {
 
       if (error) {
         console.error('Error submitting form:', error);
-        toast({
-          title: "Erreur",
-          description: error.message || "Une erreur est survenue. Veuillez réessayer.",
-          variant: "destructive"
+        toast.error('Erreur', {
+          description: error.message || "Une erreur est survenue. Veuillez réessayer."
         });
         return;
       }
 
-      toast({
-        title: "Message envoyé",
+      toast.success('Message envoyé', {
         description: "Nous vous contacterons dans les plus brefs délais."
       });
 
@@ -169,10 +163,8 @@ const Contact = () => {
       setMessageError('');
     } catch (error) {
       console.error('Error submitting form:', error);
-      toast({
-        title: "Erreur",
-        description: "Une erreur inattendue est survenue. Veuillez réessayer.",
-        variant: "destructive"
+      toast.error('Erreur', {
+        description: "Une erreur inattendue est survenue. Veuillez réessayer."
       });
     } finally {
       setIsSubmitting(false);
