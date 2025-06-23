@@ -145,7 +145,7 @@ const Hero = () => {
               <h1 className="font-montserrat text-3xl md:text-4xl lg:text-6xl font-black mb-6 leading-[1.15] md:leading-tight lg:leading-tight tracking-tight">
                 <span className="block text-primary md:text-primary lg:text-white">Dépannage frigorifique</span>
                 <span className="block md:text-gray-900 lg:text-white">& climatisation</span>
-                <span className="block text-secondary md:text-secondary lg:text-white font-bold">professionnel</span>
+                <span className="block text-secondary lg:text-white font-bold md:text-[#0b5394]">professionnel</span>
               </h1>
               <p className="text-xl mb-8 opacity-90 md:opacity-100 max-w-xl mx-auto md:mx-auto lg:mx-0">
                 Spécialiste en froid commercial pour les professionnels: restaurants, boulangeries, commerces alimentaires.
