@@ -1,4 +1,5 @@
 
+
 # Redirection des anciennes URLs vers le nouveau site
 RewriteEngine On
 
@@ -14,15 +15,24 @@ RewriteRule ^reparateur-frigo-professionnel-paris/?$ /depannage-froid [L,R=301]
 RewriteRule ^contact\.php/?$ /contact [L,R=301]
 RewriteRule ^politique-de-confidentialite/?$ /politique-confidentialite [L,R=301]
 
-# Redirections géographiques vers page principale Yvelines
-RewriteRule ^frigoriste-mantes-la-Jolie/?$ /frigoriste-en-yvelines-78 [L,R=301]
+# Redirections géographiques Yvelines vers page spécialisée
+RewriteRule ^frigoriste-mantes-la-jolie/?$ /frigoriste-en-yvelines-78 [L,R=301]
+RewriteRule ^frigoriste-mantes/?$ /frigoriste-en-yvelines-78 [L,R=301]
+RewriteRule ^mantes-la-jolie/?$ /frigoriste-en-yvelines-78 [R=301,L]
+RewriteRule ^frigoriste-val-oise/?$ /frigoriste-en-yvelines-78 [L,R=301]
+RewriteRule ^frigoriste-val-oise-95/?$ /frigoriste-en-yvelines-78 [L,R=301]
+RewriteRule ^depannage-frigoriste-mantes/?$ /frigoriste-en-yvelines-78 [L,R=301]
+RewriteRule ^climatisation-yvelines/?$ /frigoriste-en-yvelines-78 [L,R=301]
 
 # Redirections arrondissements Paris vers page dépannage climatisation
 RewriteRule ^frigoriste-paris-([0-9]+)/?$ /depannage-climatisation-paris [L,R=301]
 
-# Redirections départements vers services généraux
+# Redirections départements vers pages appropriées
+RewriteRule ^frigoriste-hauts-de-seine/?$ /depannage-climatisation-paris [L,R=301]
+RewriteRule ^frigoriste-seine-saint-denis/?$ /depannage-climatisation-paris [L,R=301]
+RewriteRule ^frigoriste-92/?$ /depannage-climatisation-paris [L,R=301]
+RewriteRule ^frigoriste-93/?$ /depannage-climatisation-paris [L,R=301]
 RewriteRule ^frigoriste-essonne-91/?$ /services [L,R=301]
-RewriteRule ^frigoriste-val-oise/?$ /services [L,R=301]
 RewriteRule ^frigoriste-val-de-marne-94/?$ /services [L,R=301]
 RewriteRule ^frigoriste-eure-et-loir/?$ /services [L,R=301]
 RewriteRule ^frigoriste-chartres-28000/?$ /services [L,R=301]
@@ -37,8 +47,6 @@ RewriteRule ^Quelles-sont-les-nouveaut%C3%A9s-MaPRIMERENOV-2024/?$ /installation
 RewriteRule ^quel-type-de-climatisation-choisir/?$ /installation-climatisation-paris [L,R=301]
 RewriteRule ^comment-installer-une-climatisation/?$ /installation-climatisation-paris [L,R=301]
 RewriteRule ^probleme-de-climatisation/?$ /depannage-climatisation-paris [L,R=301]
-RewriteRule ^frigoriste-mantes-la-jolie/?$ /frigoriste-en-yvelines-78 [R=301,L]
-RewriteRule ^mantes-la-jolie/?$ /frigoriste-en-yvelines-78 [R=301,L]
 
 # Gestion des erreurs 404
 ErrorDocument 404 /index.html
@@ -80,3 +88,4 @@ ErrorDocument 404 /index.html
     ExpiresByType image/x-icon "access plus 1 year"
     ExpiresDefault "access plus 2 days"
 </IfModule>
+
