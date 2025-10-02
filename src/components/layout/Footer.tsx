@@ -97,7 +97,17 @@ const Footer = () => {
 
         <div className="mt-12 pt-6 border-t border-white/20 text-center">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0">
-            <p>© {currentYear} LeFrigoriste.fr - Tous droits réservés</p>
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+              <p>© {currentYear} LeFrigoriste.fr - Tous droits réservés</p>
+              <a 
+                href="https://bysocialflow.fr/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm opacity-70 hover:opacity-100 hover:text-secondary transition-all flex items-center gap-1"
+              >
+                Fait avec <span className="text-emergency">❤️</span> par Social Flow
+              </a>
+            </div>
             <div className="flex space-x-4 text-sm">
               <Link 
                 to="/mentions-legales" 
