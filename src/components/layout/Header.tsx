@@ -6,10 +6,8 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { useAnalytics } from "@/hooks/use-analytics";
-
 const TopInfoBar = () => {
-  return (
-    <div className="bg-primary text-white py-2 hidden md:block">
+  return <div className="bg-primary text-white py-2 hidden md:block">
       <div className="container-custom flex items-center justify-between">
         <div className="flex items-center space-x-6 text-xs">
           <div className="flex items-center">
@@ -28,10 +26,8 @@ const TopInfoBar = () => {
           </a>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 const MainNav = ({
   className,
   isMobile = false,
@@ -42,110 +38,78 @@ const MainNav = ({
   onLinkClick?: () => void;
 }) => {
   const location = useLocation();
-  const navItems = [
-    { href: '/', label: 'Accueil' },
-    { href: '/services', label: 'Services' },
-    { href: '/qui-sommes-nous', label: 'Qui sommes-nous' },
-    { href: '/zone-intervention', label: 'Zone d\'intervention' },
-    { href: '/contact', label: 'Contact' }
-  ];
-  
+  const navItems = [{
+    href: '/',
+    label: 'Accueil'
+  }, {
+    href: '/services',
+    label: 'Services'
+  }, {
+    href: '/qui-sommes-nous',
+    label: 'Qui sommes-nous'
+  }, {
+    href: '/zone-intervention',
+    label: 'Zone d\'intervention'
+  }, {
+    href: '/contact',
+    label: 'Contact'
+  }];
   const baseStyles = isMobile ? "flex flex-col space-y-4" : "hidden lg:flex items-center gap-8";
-  
-  return (
-    <nav role="navigation" aria-label="Main" className={cn(baseStyles, className)}>
-      {navItems.map(({ href, label }) => {
-        const isActive = location.pathname === href;
-        return (
-          <Link
-            key={href}
-            to={href}
-            aria-current={isActive ? "page" : undefined}
-            onClick={onLinkClick}
-            className={cn(
-              "text-primary hover:text-secondary relative transition-all",
-              "after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary hover:after:w-full after:transition-all",
-              isActive && "font-semibold text-secondary after:w-full",
-              isMobile && "text-lg py-2"
-            )}
-          >
+  return <nav role="navigation" aria-label="Main" className={cn(baseStyles, className)}>
+      {navItems.map(({
+      href,
+      label
+    }) => {
+      const isActive = location.pathname === href;
+      return <Link key={href} to={href} aria-current={isActive ? "page" : undefined} onClick={onLinkClick} className={cn("text-primary hover:text-secondary relative transition-all", "after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-secondary hover:after:w-full after:transition-all", isActive && "font-semibold text-secondary after:w-full", isMobile && "text-lg py-2")}>
             {label}
-          </Link>
-        );
-      })}
-    </nav>
-  );
+          </Link>;
+    })}
+    </nav>;
 };
-
 const Header = () => {
   const isMobile = useIsMobile();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
-  const { trackPhoneCall } = useAnalytics();
-
+  const {
+    trackPhoneCall
+  } = useAnalytics();
   useEffect(() => {
     const handleScroll = () => {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 10);
     };
-    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const handleEmergencyCall = () => {
     trackPhoneCall();
   };
-
   const handleLinkClick = () => {
     setIsSheetOpen(false);
   };
-
-  return (
-    <header role="banner" className="w-full">
+  return <header role="banner" className="w-full">
       <TopInfoBar />
       
-      <div className={cn(
-        "fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300",
-        isScrolled 
-          ? isMobile 
-            ? "bg-white/75 shadow-sm" 
-            : "bg-white/90 shadow-sm"
-          : isMobile 
-            ? "bg-white/65" 
-            : "bg-white/80"
-      )}>
+      <div className={cn("fixed top-0 left-0 right-0 z-50 w-full backdrop-blur-md transition-all duration-300", isScrolled ? isMobile ? "bg-white/75 shadow-sm" : "bg-white/90 shadow-sm" : isMobile ? "bg-white/65" : "bg-white/80")}>
         <div className="container-custom h-20 lg:h-24">
           <div className="flex items-center justify-between h-full px-[16px]">
             {/* Logo */}
             <Link to="/" className="flex-shrink-0" aria-label="LeFrigoriste.fr - Retour à l'accueil">
-              <img 
-                src="/lovable-uploads/75510e1c-4e18-4dde-8913-2caa6d23f37f.png" 
-                alt="LeFrigoriste.fr" 
-                className="h-8 lg:h-10 w-auto"
-              />
+              <img src="/lovable-uploads/75510e1c-4e18-4dde-8913-2caa6d23f37f.png" alt="LeFrigoriste.fr" className="h-8 lg:h-10 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}
             <MainNav />
 
             {/* Emergency Call Button - Always Visible */}
-            <a 
-              href="tel:0185500284" 
-              className="flex-shrink-0 mx-4" 
-              aria-label="Appeler en urgence : 01 85 50 02 84"
-              onClick={handleEmergencyCall}
-            >
-              <Button 
-                variant="destructive" 
-                className="bg-emergency hover:bg-emergency/90 text-white font-bold border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-3 sm:px-4 lg:px-6 py-2 lg:py-3 text-sm lg:text-base"
-                size={isMobile ? "sm" : "default"}
-              >
+            <a href="tel:0185500284" className="flex-shrink-0 mx-4" aria-label="Appeler en urgence : 01 85 50 02 84" onClick={handleEmergencyCall}>
+              <Button variant="destructive" className="bg-emergency hover:bg-emergency/90 text-white font-bold border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 px-3 sm:px-4 lg:px-6 py-2 lg:py-3 text-sm lg:text-base" size={isMobile ? "sm" : "default"}>
                 <Phone className="mr-1 sm:mr-2 h-4 w-4 lg:h-5 lg:w-5 flex-shrink-0" />
                 <span className="hidden xs:inline text-white font-bold">
                   {isMobile ? "Urgence" : "01 85 50 02 84"}
                 </span>
-                <span className="inline xs:hidden text-white font-bold">SOS</span>
+                <span className="inline xs:hidden text-white font-bold">​01.85.50.02.84  </span>
               </Button>
             </a>
 
@@ -171,8 +135,6 @@ const Header = () => {
       
       {/* Spacer to prevent content from being hidden under the fixed header */}
       <div className={`h-20 lg:h-24 ${!isMobile && "mt-2"}`}></div>
-    </header>
-  );
+    </header>;
 };
-
 export default Header;
