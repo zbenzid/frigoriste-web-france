@@ -1,5 +1,6 @@
 
 import { Toaster } from "@/components/ui/sonner";
+import Merci from "./pages/Merci";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -69,6 +70,7 @@ function App() {
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/mentions-legales" element={<MentionsLegales />} />
                   <Route path="/politique-confidentialite" element={<PolitiqueConfidentialite />} />
+                  <Route path="/merci" element={<Merci />} />
                   
                   {/* Nouvelles pages SEO */}
                   <Route path="/depannage-froid" element={<DepannageFroid />} />
