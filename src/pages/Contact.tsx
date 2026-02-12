@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, Calendar, CheckCircle, AlertCircle, Facebook, Instagram, Linkedin, Send, FileText, Info, CreditCard } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,7 @@ const requestTypesNeedingAddress = ['urgence', 'depannage', 'installation', 'mai
 
 const Contact = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -150,8 +152,8 @@ const Contact = () => {
       }
 
       toast({
-        title: "Message envoyé",
-        description: "Nous vous contacterons dans les plus brefs délais."
+        title: "✅ Message envoyé avec succès !",
+        description: "Nous vous contacterons dans les plus brefs délais. Redirection en cours...",
       });
 
       // Reset form
@@ -167,6 +169,11 @@ const Contact = () => {
         gdprConsent: false
       });
       setMessageError('');
+
+      // Redirect to /merci after 1.5s
+      setTimeout(() => {
+        navigate('/merci');
+      }, 1500);
     } catch (error) {
       console.error('Error submitting form:', error);
       toast({
