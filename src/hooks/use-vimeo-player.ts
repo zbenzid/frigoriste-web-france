@@ -7,62 +7,49 @@ export const useVimeoPlayer = (videoId: number = 1093559944) => {
   const [playerReady, setPlayerReady] = useState(false);
 
   useEffect(() => {
-    if (!playerRef.current) return;
+    // Charger l'API Vimeo Player
+    const script = document.createElement('script');
+    script.src = 'https://player.vimeo.com/api/player.js';
+    script.onload = () => {
+      if (window.Vimeo && playerRef.current) {
+        const player = new window.Vimeo.Player(playerRef.current, {
+          id: videoId,
+          responsive: true,
+          controls: false,
+          title: false,
+          byline: false,
+          portrait: false,
+          autopause: false,
+          background: false
+        });
 
-    // Defer Vimeo loading until the player container is visible
-    const container = playerRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          observer.disconnect();
-          loadVimeo();
-        }
-      },
-      { rootMargin: '200px' }
-    );
-    observer.observe(container);
+        player.ready().then(() => {
+          setPlayerReady(true);
+        });
 
-    function loadVimeo() {
-      const script = document.createElement('script');
-      script.src = 'https://player.vimeo.com/api/player.js';
-      script.onload = () => {
-        if (window.Vimeo && playerRef.current) {
-          const player = new window.Vimeo.Player(playerRef.current, {
-            id: videoId,
-            responsive: true,
-            controls: false,
-            title: false,
-            byline: false,
-            portrait: false,
-            autopause: false,
-            background: false
-          });
+        player.on('play', () => {
+          setIsPlaying(true);
+        });
 
-          player.ready().then(() => {
-            setPlayerReady(true);
-          });
+        player.on('pause', () => {
+          setIsPlaying(false);
+        });
 
-          player.on('play', () => {
-            setIsPlaying(true);
-          });
+        player.on('ended', () => {
+          setIsPlaying(false);
+          // Remettre la vidéo au début pour revenir à l'état initial
+          player.setCurrentTime(0);
+        });
 
-          player.on('pause', () => {
-            setIsPlaying(false);
-          });
-
-          player.on('ended', () => {
-            setIsPlaying(false);
-            player.setCurrentTime(0);
-          });
-
-          playerRef.current.player = player;
-        }
-      };
-      document.head.appendChild(script);
-    }
+        playerRef.current.player = player;
+      }
+    };
+    document.head.appendChild(script);
 
     return () => {
-      observer.disconnect();
+      if (document.head.contains(script)) {
+        document.head.removeChild(script);
+      }
     };
   }, [videoId]);
 
