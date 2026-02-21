@@ -289,18 +289,26 @@ const InterventionMap = () => {
   };
 
   useEffect(() => {
-    // Initialize map on component mount
-    initializeMap();
-    
+    // Defer map init until container is visible to avoid forced reflows during page load
+    const container = mapContainer.current;
+    if (!container) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          initializeMap();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(container);
+
     return () => {
-      // Properly cleanup the map with additional safety checks
+      observer.disconnect();
       if (map.current) {
         try {
-          // Check if map is loaded and has the required methods
-          if (map.current.loaded && map.current.loaded() && typeof map.current.remove === 'function') {
-            map.current.remove();
-          } else if (typeof map.current.remove === 'function') {
-            // Fallback cleanup even if not fully loaded
+          if (typeof map.current.remove === 'function') {
             map.current.remove();
           }
         } catch (error) {
