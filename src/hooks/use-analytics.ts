@@ -1,17 +1,19 @@
-
 import { useCallback } from 'react';
 
 declare global {
   interface Window {
-    gtag: (...args: any[]) => void;
-    dataLayer: any[];
+    dataLayer: Record<string, unknown>[];
   }
 }
 
 export const useAnalytics = () => {
-  const trackEvent = useCallback((eventName: string, parameters?: Record<string, any>) => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', eventName, parameters);
+  const trackEvent = useCallback((eventName: string, parameters?: Record<string, unknown>) => {
+    if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: eventName,
+        ...parameters,
+      });
     }
   }, []);
 
@@ -19,7 +21,7 @@ export const useAnalytics = () => {
     trackEvent('phone_call', {
       event_category: 'engagement',
       event_label: 'emergency_call',
-      value: 1
+      value: 1,
     });
   }, [trackEvent]);
 
@@ -27,14 +29,16 @@ export const useAnalytics = () => {
     trackEvent('form_submission', {
       event_category: 'lead',
       event_label: formType,
-      value: 1
+      value: 1,
     });
   }, [trackEvent]);
 
   const trackPageView = useCallback((pagePath: string, pageTitle: string) => {
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('config', 'G-343731918', {
-        page_path: pagePath,
+    if (typeof window !== 'undefined') {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'pageview',
+        page: pagePath,
         page_title: pageTitle,
       });
     }
@@ -44,6 +48,6 @@ export const useAnalytics = () => {
     trackEvent,
     trackPhoneCall,
     trackFormSubmission,
-    trackPageView
+    trackPageView,
   };
 };
