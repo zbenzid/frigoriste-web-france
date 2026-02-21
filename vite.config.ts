@@ -19,27 +19,4 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor-mapbox': ['mapbox-gl'],
-          'vendor-radix': [
-            '@radix-ui/react-dialog',
-            '@radix-ui/react-navigation-menu',
-            '@radix-ui/react-accordion',
-            '@radix-ui/react-tabs',
-            '@radix-ui/react-tooltip',
-            '@radix-ui/react-popover',
-            '@radix-ui/react-select',
-            '@radix-ui/react-dropdown-menu',
-          ],
-          'vendor-recharts': ['recharts'],
-          'vendor-router': ['react-router-dom'],
-          'vendor-query': ['@tanstack/react-query'],
-          'vendor-form': ['react-hook-form', '@hookform/resolvers', 'zod'],
-        },
-      },
-    },
-  },
 }));
