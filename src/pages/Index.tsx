@@ -1,12 +1,14 @@
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import Hero from '@/components/home/Hero';
 import ServicesSection from '@/components/home/ServicesSection';
-import WhyChooseUs from '@/components/home/WhyChooseUs';
-import Testimonials from '@/components/home/Testimonials';
-import VideoSection from '@/components/home/VideoSection';
-import ContactCTASection from '@/components/home/ContactCTASection';
 import SEOHead from '@/components/seo/SEOHead';
+
+// Lazy-load below-fold sections to reduce initial JS evaluation
+const WhyChooseUs = lazy(() => import('@/components/home/WhyChooseUs'));
+const VideoSection = lazy(() => import('@/components/home/VideoSection'));
+const Testimonials = lazy(() => import('@/components/home/Testimonials'));
+const ContactCTASection = lazy(() => import('@/components/home/ContactCTASection'));
 
 const Index = () => {
   return (
@@ -18,23 +20,28 @@ const Index = () => {
         canonicalUrl="https://lefrigoriste.fr/"
       />
       
-      {/* Hero Section */}
+      {/* Hero Section - above fold, loaded eagerly */}
       <Hero />
       
-      {/* Services Section */}
+      {/* Services Section - near fold, loaded eagerly */}
       <ServicesSection />
       
-      {/* Why Choose Us Section */}
-      <WhyChooseUs />
+      {/* Below-fold sections - lazy loaded */}
+      <Suspense fallback={null}>
+        <WhyChooseUs />
+      </Suspense>
       
-      {/* Video Section */}
-      <VideoSection />
+      <Suspense fallback={null}>
+        <VideoSection />
+      </Suspense>
       
-      {/* Testimonials Section */}
-      <Testimonials />
+      <Suspense fallback={null}>
+        <Testimonials />
+      </Suspense>
       
-      {/* Contact CTA Section */}
-      <ContactCTASection />
+      <Suspense fallback={null}>
+        <ContactCTASection />
+      </Suspense>
     </div>
   );
 };
