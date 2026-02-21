@@ -13,6 +13,7 @@ import CookiePreferences from "./components/cookies/CookiePreferences";
 import { useCookies } from "./hooks/use-cookies";
 import { ResourcePreloader } from "./components/performance";
 import { WebVitalsTracker } from "./components/performance";
+import GTMPageTracker from "./components/seo/GTMPageTracker";
 
 // Lazy-loaded pages for code-splitting
 const Services = lazy(() => import("./pages/Services"));
@@ -54,6 +55,7 @@ function App() {
           <BrowserRouter>
             <ResourcePreloader />
             <WebVitalsTracker />
+            <GTMPageTracker />
             <div className="min-h-screen bg-background font-sans antialiased">
               <Header />
               <main>
