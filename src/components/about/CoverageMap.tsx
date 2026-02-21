@@ -12,7 +12,24 @@ const CoverageMap = () => {
   useEffect(() => {
     if (!mapContainer.current) return;
 
-    // Public Mapbox token - replace with your own in a production environment
+    // Defer map init until visible to avoid forced reflows
+    const container = mapContainer.current;
+    let cancelled = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !cancelled) {
+          observer.disconnect();
+          initMap();
+        }
+      },
+      { rootMargin: '200px' }
+    );
+    observer.observe(container);
+
+    function initMap() {
+      if (!container || cancelled) return;
+
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
@@ -191,7 +208,11 @@ const CoverageMap = () => {
         });
       });
     });
+    } // end initMap
+
     return () => {
+      cancelled = true;
+      observer.disconnect();
       map.current?.remove();
     };
   }, []);
